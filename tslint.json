@@ -124,9 +124,13 @@
         "check-branch",
         "check-decl",
         "check-operator",
+        "check-module",
         "check-separator",
+        "check-rest-spread",
         "check-type",
-        "check-typecast"
+        "check-typecast",
+        "check-preblock",
+        "check-postbrace"
       ]
     },
     "no-conflicting-lifecycle": true,
@@ -137,6 +141,8 @@
     "no-output-on-prefix": true,
     "no-output-rename": true,
     "no-outputs-metadata-property": true,
+    "no-trailing-whitespace": false,
+    "prefer-const": false,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
