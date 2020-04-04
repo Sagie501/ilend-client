@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ilend-client"
+    }
+  },
+  "defaultProject": "ilend-client",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
