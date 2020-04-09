@@ -3,7 +3,7 @@ sudo: false
 
 language: node_js
 node_js:
-  - "10.9"
+  - "12.4"
 
 cache:
   directories:
@@ -23,5 +23,5 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   local_dir: dist/ilend-client
-  on:
-    branch: master
+  # on:
+  #   branch: master
