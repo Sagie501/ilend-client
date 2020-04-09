@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build --prod --base-href=/ILendClient/",
+    "build": "ng build --prod --base-href=/ilend-client/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
