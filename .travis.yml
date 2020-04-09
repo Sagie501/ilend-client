@@ -23,4 +23,4 @@ deploy:
   github_token: $GITHUB_TOKEN
   local_dir: dist/ilend-client
   on:
-    branch: fix-ci
+    branch: master
