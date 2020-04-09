@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FilteringState } from '../../reducers/filter.reducer';
+import { FilteringState, PriceFilter } from '../../reducers/filter.reducer';
 import { Store } from '@ngrx/store';
 import {
   FilterBySearch,
@@ -56,9 +56,9 @@ export class MainComponent implements OnInit {
     this.filteringStore.dispatch(new FilterBySearch({ value }));
   }
 
-  filterByPrice(from: number, to: number) {
-    if (from && to) {
-      this.filteringStore.dispatch(new FilterByPrice({ from, to }));
+  filterByPrice(priceFilter: PriceFilter) {
+    if (priceFilter.from && priceFilter.to) {
+      this.filteringStore.dispatch(new FilterByPrice(priceFilter));
     }
   }
 

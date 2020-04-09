@@ -14,6 +14,7 @@ import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
 import { UserService } from '../user/user.service';
 
+// TODO: Remove this when DB is connected
 export const categories: Category[] = [
   {
     categoryID: '1',
@@ -82,6 +83,7 @@ export class FilterService {
       product.requestedPrice <= value.to;
   }
 
+  // TODO: Use the real categories from the DB
   generateFilterByCategory(value: string) {
     return value
       ? (product: Product) =>
@@ -91,6 +93,7 @@ export class FilterService {
       : alwaysTrue;
   }
 
+  // TODO: Use the real user id
   generateFilterByCity(value: string) {
     return value
       ? (product: Product) => this.userService.getFakeUser().city === value
