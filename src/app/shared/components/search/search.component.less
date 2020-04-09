@@ -1,0 +1,55 @@
+@import "../../../../styles/styles.less";
+
+.search {
+  display: table;
+  backface-visibility: hidden;
+
+  input {
+    background: none;
+    border: none;
+    outline: none;
+    width: 28px;
+    min-width: 0;
+    padding-right: 10px;
+    z-index: 1;
+    position: relative;
+    line-height: 2rem;
+    margin: 5px 0;
+    font-size: 2rem;
+    -webkit-appearance: none;
+    font-family: "Raleway";
+    transition: all 0.6s ease;
+    cursor: pointer;
+    color: @text-color;
+    & + div {
+      position: relative;
+      height: 28px;
+      width: 100%;
+      margin: -28px 0 0 0;
+      svg {
+        display: block;
+        position: absolute;
+        height: 28px;
+        width: 160px;
+        right: 0;
+        top: 0;
+        fill: none;
+        stroke: @text-color;
+        stroke-dashoffset: 212.908 + 59;
+        stroke-dasharray: 59 212.908;
+        transition: all 0.6s ease;
+      }
+    }
+    &:not(:placeholder-shown),
+    &:focus {
+      width: 156px;
+      cursor: text;
+      & + div {
+        svg {
+          stroke-dasharray: 150 212.908;
+          stroke-dashoffset: 300;
+        }
+      }
+    }
+  }
+}
