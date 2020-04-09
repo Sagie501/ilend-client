@@ -1,6 +1,11 @@
 <div class="main">
   <ile-header></ile-header>
   <ile-sidebar></ile-sidebar>
-  <ile-filter-bar></ile-filter-bar>
+  <ile-filter-bar
+    (searchFilter)="filterBySearch($event)"
+    (priceFilter)="filterByPrice($event)"
+    (categoryFilter)="filterByCategory($event)"
+    (cityFilter)="filterByCity($event)"
+  ></ile-filter-bar>
   <div class="data"></div>
 </div>
