@@ -3,7 +3,7 @@ sudo: false
 
 language: node_js
 node_js:
-  - "10.9"
+  - "12.4"
 
 cache:
   directories:
@@ -13,7 +13,6 @@ install:
   - npm install
 
 script:
-  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
   - npm run-script build
   - cd dist/ilend-client
   - cp index.html 404.html
