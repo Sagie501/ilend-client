@@ -10,9 +10,9 @@ import {
   getCategoryFilterValue,
   getCityFilterValue,
 } from '../../reducers/filter.reducer';
-import { Product } from '../../models/product.model';
-import { Category } from '../../models/category.model';
-import { UserService } from '../user/user.service';
+import { Product } from '../../../../core/models/product.model';
+import { Category } from '../../../../core/models/category.model';
+import { UserService } from '../../../../core/services/user/user.service';
 
 // TODO: Remove this when DB is connected
 export const categories: Category[] = [
