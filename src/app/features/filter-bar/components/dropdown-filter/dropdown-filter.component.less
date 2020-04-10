@@ -4,6 +4,7 @@
   border-radius: 2rem;
   border: 2px solid @secondary-color;
   background-color: @text-color;
+  transition: all 0.2s;
 
   cursor: pointer;
   overflow: hidden;
@@ -19,6 +20,14 @@
   justify-content: space-between;
 
   display: flex;
+
+  &:hover {
+    border: 2px solid darken(@secondary-color, 20%);
+  }
+
+  &:hover > .arrow {
+    fill: darken(@secondary-color, 20%);
+  }
 
   .arrow {
     width: 1.5rem;

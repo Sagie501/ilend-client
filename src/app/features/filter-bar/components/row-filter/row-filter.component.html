@@ -1,5 +1,13 @@
 <div class="row-filter">
-  <ile-checkbox [isChecked]="option.isChecked"></ile-checkbox>
+  <ile-checkbox
+    [isChecked]="option.isChecked"
+    [id]="option.id"
+    (changed)="changed.emit($event)"
+  ></ile-checkbox>
   <div class="title">{{ option.title }}</div>
-  <ile-amount *ngIf="option.amount" [amount]="option.amount"></ile-amount>
+  <ile-amount
+    *ngIf="option.amount"
+    [amount]="option.amount"
+    [id]="option.id"
+  ></ile-amount>
 </div>

@@ -5,9 +5,12 @@ import {
   ViewChild,
   Input,
   InjectionToken,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { DropdownFilterOverlayService } from '../../services/overlay/dropdown-filter-overlay.service';
 import { Option } from '../../models/options.model';
+import { DropdownFilter } from '../../models/dropdown-filter.model';
 
 @Component({
   selector: 'ile-dropdown-filter',
@@ -16,7 +19,9 @@ import { Option } from '../../models/options.model';
 })
 export class DropdownFilterComponent implements OnInit {
   @Input() title: string;
-  @Input() data: Option[];
+  @Input() values: Option[];
+
+  @Output() changed: EventEmitter<DropdownFilter> = new EventEmitter();
 
   @ViewChild('dropdown') dropdown: ElementRef;
 
@@ -29,31 +34,8 @@ export class DropdownFilterComponent implements OnInit {
   openOverlay() {
     this.dropdownFilterOverlayService.open(
       {
-        data: [
-          {
-            id: '1',
-            title: 'German',
-            isChecked: true,
-            amount: 23,
-          },
-          {
-            id: '1',
-            title: 'English',
-            isChecked: false,
-            amount: 12,
-          },
-          {
-            id: '1',
-            title: 'Italian',
-            isChecked: false,
-            amount: 5,
-          },
-          {
-            id: '1',
-            title: 'French',
-            isChecked: true,
-          },
-        ],
+        data: this.values,
+        callback: (change: DropdownFilter) => this.changed.emit(change),
       },
       this.dropdown
     );

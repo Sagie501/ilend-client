@@ -5,7 +5,6 @@ import { Store, select } from '@ngrx/store';
 import {
   FilteringState,
   getSearchFilterValue,
-  PriceFilter,
   getPriceFilterValue,
   getCategoryFilterValue,
   getCityFilterValue,
@@ -13,34 +12,7 @@ import {
 import { Product } from '../../../../core/models/product.model';
 import { Category } from '../../../../core/models/category.model';
 import { UserService } from '../../../../core/services/user/user.service';
-
-// TODO: Remove this when DB is connected
-export const categories: Category[] = [
-  {
-    categoryID: '1',
-    description: 'sdfsadf',
-    name: 'hello',
-    pictureLink: 'sfsadfd',
-  },
-  {
-    categoryID: '2',
-    description: 'sdfsadf',
-    name: 'world',
-    pictureLink: 'sfsadfd',
-  },
-  {
-    categoryID: '3',
-    description: 'sdfsadf',
-    name: 'what',
-    pictureLink: 'sfsadfd',
-  },
-  {
-    categoryID: '4',
-    description: 'sdfsadf',
-    name: 'ciao',
-    pictureLink: 'sfsadfd',
-  },
-];
+import { PriceFilter } from '../../models/price-filter.model';
 
 export const alwaysTrue = (product: Product) => true;
 
@@ -84,19 +56,17 @@ export class FilterService {
   }
 
   // TODO: Use the real categories from the DB
-  generateFilterByCategory(value: string) {
-    return value
-      ? (product: Product) =>
-          categories.find(
-            (category) => category.categoryID === product.categoryID
-          ).name === value
+  generateFilterByCategory(filteredCategories: string[]) {
+    return filteredCategories
+      ? (product: Product) => filteredCategories.includes(product.categoryID)
       : alwaysTrue;
   }
 
   // TODO: Use the real user id
-  generateFilterByCity(value: string) {
-    return value
-      ? (product: Product) => this.userService.getFakeUser().city === value
+  generateFilterByCity(filteredCities: string[]) {
+    return filteredCities
+      ? (product: Product) =>
+          filteredCities.includes(this.userService.getFakeUser().city)
       : alwaysTrue;
   }
 

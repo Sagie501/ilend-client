@@ -1,18 +1,15 @@
 import { FilterActions, FilterActionTypes } from '../actions/filter.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { PriceFilter } from '../models/price-filter.model';
+import { DropdownFilter } from '../models/dropdown-filter.model';
 
 export const filteringToken = 'filteringReducer';
-
-export type PriceFilter = {
-  from: number;
-  to: number;
-};
 
 export class FilteringState {
   searchValue: string;
   priceValue: PriceFilter;
-  categoryValue: string;
-  cityValue: string;
+  categoryValue: string[];
+  cityValue: string[];
 }
 
 export let initialState: FilteringState = {
@@ -44,14 +41,17 @@ export function filteringReducer(
     case FilterActionTypes.FILTER_BY_CATEGORY: {
       return {
         ...state,
-        categoryValue: action.payload.value,
+        categoryValue: getNewFilteredValues(
+          action.payload.value,
+          state.categoryValue
+        ),
       };
     }
 
     case FilterActionTypes.FILTER_BY_CITY: {
       return {
         ...state,
-        cityValue: action.payload.value,
+        cityValue: getNewFilteredValues(action.payload.value, state.cityValue),
       };
     }
 
@@ -59,6 +59,22 @@ export function filteringReducer(
       return state;
   }
 }
+
+const getNewFilteredValues = (
+  change: DropdownFilter,
+  currentValues: string[]
+): string[] => {
+  currentValues = currentValues ? currentValues : [];
+  let newValues = [];
+
+  if (change.isChecked) {
+    newValues = currentValues.concat(change.id);
+  } else {
+    newValues = currentValues.filter((val) => val !== change.id);
+  }
+
+  return newValues.length > 0 ? [...newValues] : undefined;
+};
 
 export const getState = createFeatureSelector(filteringToken);
 

@@ -7,14 +7,16 @@ import {
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { DropdownFilterOverlayComponent } from '../../components/dropdown-filter-overlay/dropdown-filter-overlay.component';
-import { DROPDOWN_DIALOG_DATA } from '../../consts';
+import { DROPDOWN_DIALOG_DATA, DROPDOWN_DIALOG_CALLBACK } from '../../consts';
 import { Option } from '../../models/options.model';
+import { DropdownFilter } from '../../models/dropdown-filter.model';
 
 interface DropdownFilterOverlayConfig {
   panelClass?: string;
   hasBackdrop?: boolean;
   backdropClass?: string;
   data?: Option[];
+  callback?: (change: DropdownFilter) => void;
 }
 
 const DEFAULT_CONFIG: DropdownFilterOverlayConfig = {
@@ -57,6 +59,7 @@ export class DropdownFilterOverlayService {
 
     // Set custom injection tokens
     injectionTokens.set(DROPDOWN_DIALOG_DATA, config.data);
+    injectionTokens.set(DROPDOWN_DIALOG_CALLBACK, config.callback);
 
     // Instantiate new PortalInjector
     return new PortalInjector(this.injector, injectionTokens);

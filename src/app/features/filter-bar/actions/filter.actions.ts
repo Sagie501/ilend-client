@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { DropdownFilter } from '../models/dropdown-filter.model';
 
 export enum FilterActionTypes {
   FILTER_BY_SEARCH = '[Filter] Filter by search',
@@ -22,13 +23,13 @@ export class FilterByPrice implements Action {
 export class FilterByCategory implements Action {
   readonly type = FilterActionTypes.FILTER_BY_CATEGORY;
 
-  constructor(public payload: { value: string }) {}
+  constructor(public payload: { value: DropdownFilter }) {}
 }
 
 export class FilterByCity implements Action {
   readonly type = FilterActionTypes.FILTER_BY_CITY;
 
-  constructor(public payload: { value: string }) {}
+  constructor(public payload: { value: DropdownFilter }) {}
 }
 
 export type FilterActions =
