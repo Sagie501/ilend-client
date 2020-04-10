@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FilteringState, PriceFilter } from '../../reducers/filter.reducer';
+import {
+  FilteringState,
+  PriceFilter,
+} from '../../../features/filter-bar/reducers/filter.reducer';
 import { Store } from '@ngrx/store';
 import {
   FilterBySearch,
   FilterByPrice,
   FilterByCategory,
   FilterByCity,
-} from '../../actions/filter.actions';
-import { FilterService } from '../../services/filter/filter.service';
+} from '../../../features/filter-bar/actions/filter.actions';
+import { FilterService } from '../../../features/filter-bar/services/filter/filter.service';
 
 @Component({
   selector: 'ile-main',
