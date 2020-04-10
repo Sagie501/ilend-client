@@ -105,7 +105,7 @@ export class DropdownFilterOverlayService {
       panelClass: config.panelClass,
       scrollStrategy: this.overlay.scrollStrategies.block(),
       positionStrategy,
-      width: '20rem',
+      width: '25rem',
       height: '15rem',
     });
 
