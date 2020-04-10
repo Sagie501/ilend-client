@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FilteringState,
   getCategoryFilterValue,
+  getCityFilterValue,
 } from '../../reducers/filter.reducer';
 import { DropdownFilter } from '../../models/dropdown-filter.model';
 import { Store } from '@ngrx/store';
@@ -50,6 +51,51 @@ export class FilterBarComponent implements OnInit {
     },
   ];
 
+  cities: Option[] = [
+    {
+      id: '1',
+      isChecked: false,
+      title: 'Rehovot',
+      amount: 345,
+    },
+    {
+      id: '2',
+      isChecked: false,
+      title: 'Netanya',
+      amount: 1,
+    },
+    {
+      id: '3',
+      isChecked: false,
+      title: 'Pardesiya',
+    },
+    {
+      id: '4',
+      isChecked: false,
+      title: 'Holon',
+    },
+    {
+      id: '4',
+      isChecked: false,
+      title: 'Rishon LeTsion',
+    },
+    {
+      id: '4',
+      isChecked: false,
+      title: 'Tel Aviv',
+    },
+    {
+      id: '4',
+      isChecked: false,
+      title: 'New York',
+    },
+    {
+      id: '4',
+      isChecked: false,
+      title: 'Barcelona',
+    },
+  ];
+
   categories$: Observable<Option[]> = combineLatest(
     of(this.categories),
     this.filteringStore.select(getCategoryFilterValue)
@@ -64,6 +110,23 @@ export class FilterBarComponent implements OnInit {
       });
 
       return categories;
+    })
+  );
+
+  cities$: Observable<Option[]> = combineLatest(
+    of(this.cities),
+    this.filteringStore.select(getCityFilterValue)
+  ).pipe(
+    map(([cities, selectedCities]) => {
+      cities.forEach((city) => {
+        if (selectedCities) {
+          city.isChecked = selectedCities.includes(city.id);
+        } else {
+          city.isChecked = false;
+        }
+      });
+
+      return cities;
     })
   );
 

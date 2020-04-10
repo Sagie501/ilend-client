@@ -35,7 +35,9 @@ export class FilterService {
     ),
     this.filteringStore.pipe(
       select(getCityFilterValue),
-      map(this.generateFilterByCity)
+      map((selectedCities: string[]) =>
+        this.generateFilterByCity(selectedCities)
+      )
     )
   ).pipe(map(this.generateFilteringFunction));
 

@@ -5,4 +5,9 @@
     [values]="categories$ | async"
     (changed)="categoriesChanged($event)"
   ></ile-dropdown-filter>
+  <ile-dropdown-filter
+    [title]="'City'"
+    [values]="cities$ | async"
+    (changed)="citiesChanged($event)"
+  ></ile-dropdown-filter>
 </div>
