@@ -53,44 +53,44 @@ export class FilterBarComponent implements OnInit {
 
   cities: Option[] = [
     {
-      id: '1',
+      id: 'Rehovot',
       isChecked: false,
       title: 'Rehovot',
       amount: 345,
     },
     {
-      id: '2',
+      id: 'Netanya',
       isChecked: false,
       title: 'Netanya',
       amount: 1,
     },
     {
-      id: '3',
+      id: 'Pardesiya',
       isChecked: false,
       title: 'Pardesiya',
     },
     {
-      id: '4',
+      id: 'Holon',
       isChecked: false,
       title: 'Holon',
     },
     {
-      id: '4',
+      id: 'Rishon LeTsion',
       isChecked: false,
       title: 'Rishon LeTsion',
     },
     {
-      id: '4',
+      id: 'Tel Aviv',
       isChecked: false,
       title: 'Tel Aviv',
     },
     {
-      id: '4',
+      id: 'New York',
       isChecked: false,
       title: 'New York',
     },
     {
-      id: '4',
+      id: 'Barcelona',
       isChecked: false,
       title: 'Barcelona',
     },

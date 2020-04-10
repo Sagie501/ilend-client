@@ -7,6 +7,8 @@ import { User } from '../../models/user.model';
 export class UserService {
   constructor() {}
 
+  cities = ['Rehovot', 'Netanya', 'Pardesiya'];
+
   getFakeUser(): User {
     return {
       userID: '1',
@@ -16,7 +18,7 @@ export class UserService {
       email: 'nivhindi1@gmail.com',
       gender: 'male',
       country: 'Israel',
-      city: 'Pardesiya',
+      city: this.cities[Math.floor(Math.random() * 3)],
       street: 'dont know',
       phoneNumber: '12345678932',
       zipCode: '12346',
