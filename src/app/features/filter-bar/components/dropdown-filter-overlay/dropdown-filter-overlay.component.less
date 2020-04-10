@@ -1,0 +1,18 @@
+@import "../../../../../styles/styles.less";
+
+.dropdown-overlay {
+  width: @dropdown-width;
+  height: @dropdown-height;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  background-color: @text-color;
+  box-shadow: 0px 0px 10px rgba(#000, 0.2);
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  & > *:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
