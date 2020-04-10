@@ -1,6 +1,8 @@
 @import "colors.less";
 @import "variables.less";
 
+@import "../../node_modules/@angular/cdk/overlay-prebuilt.css";
+
 *,
 *::before,
 *::after {
@@ -17,4 +19,23 @@ body {
   font-size: 1.6rem;
   box-sizing: border-box;
   font-family: "Raleway", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 22px;
+}
+
+::-webkit-scrollbar-track {
+  border: solid 8px transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 14px 14px #e1e1e1;
+  border: solid 8px transparent;
+  border-radius: 14px;
+}
+
+::selection {
+  background-color: @primary-color;
+  color: @text-color;
 }
