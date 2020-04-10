@@ -1,4 +1,4 @@
-# IlendClient
+# IlendClient [![Build Status](https://travis-ci.org/Sagie501/ilend-client.svg?branch=master)](https://travis-ci.org/Sagie501/ilend-client)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
