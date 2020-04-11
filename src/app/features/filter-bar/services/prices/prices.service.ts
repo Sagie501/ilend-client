@@ -11,6 +11,7 @@ export class PricesService {
   prices = []
 
   constructor() {
+    // TODO: Use the real products when there are products
     for (let index = 0; index < 200; index++) {
       this.prices.push(Math.random() * 1000);
     }
@@ -18,7 +19,7 @@ export class PricesService {
 
   getPricesRanges(products: Product[]): number[] {
     // Get all the prices
-    // let prices: number[] = products.map((product) => product.requestedPrice);
+    let prices: number[] = products.map((product) => product.requestedPrice);
 
     let jumpValue = this.getJumpValue(products);
 
@@ -34,6 +35,7 @@ export class PricesService {
   }
 
   getJumpValue(products: Product[]): number {
+    // TODO: Use the real products when there are products
     this.prices.sort((a, b) => a - b);
 
     return Math.floor(this.prices[this.prices.length - 1] / GROUP_NUMBER);
