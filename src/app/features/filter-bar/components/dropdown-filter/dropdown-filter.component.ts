@@ -8,7 +8,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { DropdownFilterOverlayService } from '../../services/overlay/dropdown-filter-overlay.service';
+import { DropdownFilterOverlayService } from '../../services/overlay/dropdown/dropdown-filter-overlay.service';
 import { Option } from '../../models/options.model';
 import { DropdownFilter } from '../../models/dropdown-filter.model';
 

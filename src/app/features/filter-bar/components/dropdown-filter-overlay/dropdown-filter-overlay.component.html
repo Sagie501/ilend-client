@@ -1,7 +1,3 @@
-<div class="dropdown-overlay">
-  <ile-row-filter
-    *ngFor="let option of data"
-    [option]="option"
-    (changed)="callback($event)"
-  ></ile-row-filter>
+<div class="overlay dropdown-overlay">
+  <ile-row-filter *ngFor="let option of data" [option]="option" (changed)="callback($event)"></ile-row-filter>
 </div>
