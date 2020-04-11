@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.0",
+    "@angular/cdk": "^9.2.0",
     "@angular/common": "~9.1.0",
     "@angular/compiler": "~9.1.0",
     "@angular/core": "~9.1.0",
@@ -21,6 +22,10 @@
     "@angular/router": "~9.1.0",
     "@ngrx/effects": "^9.0.0",
     "@ngrx/store": "^9.1.0",
+    "angular-histogram-slider": "0.0.1",
+    "highcharts": "^8.0.4",
+    "highcharts-angular": "^2.4.0",
+    "ng5-slider": "^1.2.4",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

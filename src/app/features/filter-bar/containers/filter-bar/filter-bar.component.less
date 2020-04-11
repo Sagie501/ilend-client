@@ -1,0 +1,28 @@
+@import "../../../../../styles/styles.less";
+
+.filter-bar {
+  background-color: @primary-color;
+  width: 100%;
+  height: 100%;
+  padding: 0 4rem;
+
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(20, 1fr);
+
+  ile-search {
+    width: 15rem;
+  }
+
+  ile-price-filter {
+    grid-column: 13 e("/") 14;
+  }
+
+  .category-filter {
+    grid-column: 16 e("/") 17;
+  }
+
+  .city-filter {
+    grid-column: 19 e("/") 20;
+  }
+}
