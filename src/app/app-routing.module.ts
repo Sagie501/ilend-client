@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
+import { LeasingHistoryComponent } from './features/user/leasing-history/containers/leasing-history/leasing-history.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,16 @@ const routes: Routes = [
       {
         path: 'products',
         component: HomeComponent,
+      },
+    ],
+  },
+  {
+    path: 'user',
+    component: MainComponent,
+    children: [
+      {
+        path: 'leasing-history',
+        component: LeasingHistoryComponent,
       },
     ],
   },
