@@ -19,7 +19,8 @@ export class PricesService {
 
   getPricesRanges(products: Product[]): number[] {
     // Get all the prices
-    let prices: number[] = products.map((product) => product.requestedPrice);
+    // TODO: User the real products when there are products
+    // let prices: number[] = products.map((product) => product.requestedPrice);
 
     let jumpValue = this.getJumpValue(products);
 
