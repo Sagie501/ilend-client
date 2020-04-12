@@ -1,0 +1,31 @@
+@import "../../../../../../styles/styles.less";
+
+.leasing-history {
+  width: calc(100vw - @sidebar-width);
+  height: calc(100vh - @header-height);
+  overflow-y: auto;
+
+  .headline {
+    margin-bottom: 1rem;
+  }
+
+  .header {
+    padding: 2rem 3rem;
+  }
+
+  .pending {
+    margin-left: 3rem;
+    padding: 1rem 0.5rem;
+    width: calc(100vw - @sidebar-width - 6rem);
+    overflow-x: auto;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(45rem, 1fr));
+    // grid-row-gap: 2rem;
+    // grid-column-gap: 2rem;
+    display: flex;
+
+    & > ile-lease-product-display {
+      margin-right: 2rem;
+    }
+  }
+}

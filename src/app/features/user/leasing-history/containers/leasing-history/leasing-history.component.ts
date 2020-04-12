@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'ile-leasing-history',
   templateUrl: './leasing-history.component.html',
-  styleUrls: ['./leasing-history.component.less']
+  styleUrls: ['./leasing-history.component.less'],
 })
 export class LeasingHistoryComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
