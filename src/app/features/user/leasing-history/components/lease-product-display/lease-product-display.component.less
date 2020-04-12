@@ -1,0 +1,50 @@
+@import "../../../../../../styles/styles.less";
+
+.lease-product-display {
+  width: 45rem;
+  height: 29rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  margin-right: 1rem;
+  box-shadow: 0 0 5px rgba(#000, 0.2);
+
+  display: grid;
+  grid-template-columns: 5rem auto 5rem;
+  grid-template-rows: 3rem 3rem auto 3rem;
+  align-items: center;
+
+  .product-price {
+    justify-self: end;
+    font-weight: 600;
+    color: @primary-color;
+  }
+
+  ile-order-status {
+    grid-row: 2 e("/") 3;
+    grid-column: 2 e("/") 3;
+  }
+
+  .images {
+    grid-row: 3 e("/") 4;
+    grid-column: 2 e("/") 3;
+
+    justify-self: center;
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+
+    & > ile-image {
+      background-color: darken(@text-color, 1%);
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-right: 1rem;
+    }
+  }
+
+  ile-button {
+    grid-row: 4 e("/") 5;
+    grid-column: 2 e("/") 4;
+
+    justify-self: end;
+  }
+}
