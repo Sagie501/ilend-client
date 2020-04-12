@@ -9,6 +9,8 @@ import { MainComponent } from './containers/main/main.component';
 import { SharedModule } from '../shared/shared.module';
 import { UserService } from './services/user/user.service';
 import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
+import { HomeComponent } from './containers/home/home.component';
+import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
     HeaderComponent,
     SidebarComponent,
     MainComponent,
+    HomeComponent,
+    DataOutletComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, FilterBarModule],
   providers: [UserService],

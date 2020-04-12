@@ -4,7 +4,7 @@
   height: 100vh;
   overflow: hidden;
   display: grid;
-  grid-template-rows: @header-height @header-height auto;
+  grid-template-rows: @header-height auto;
   grid-template-columns: @sidebar-width auto;
 
   ile-header {
@@ -13,16 +13,12 @@
   }
 
   ile-sidebar {
-    grid-row: 2 e("/") 4;
+    grid-row: 2 e("/") 3;
     grid-column: 1 e("/") 2;
   }
 
-  ile-filter-bar {
+  ile-data-outlet {
     grid-row: 2 e("/") 3;
     grid-column: 2 e("/") 3;
-  }
-
-  .data {
-    background-color: @text-color;
   }
 }
