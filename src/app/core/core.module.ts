@@ -11,6 +11,7 @@ import { UserService } from './services/user/user.service';
 import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
 import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
+import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,13 @@ import { DataOutletComponent } from './containers/data-outlet/data-outlet.compon
     HomeComponent,
     DataOutletComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, FilterBarModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    FilterBarModule,
+    LeasingHistoryModule,
+  ],
   providers: [UserService],
 })
 export class CoreModule {}
