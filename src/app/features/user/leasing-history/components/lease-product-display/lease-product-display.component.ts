@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/core/models/user.model';
+import { Leasing } from 'src/app/core/models/leasing.model';
 
 @Component({
   selector: 'ile-lease-product-display',
@@ -7,10 +8,7 @@ import { User } from 'src/app/core/models/user.model';
   styleUrls: ['./lease-product-display.component.less'],
 })
 export class LeaseProductDisplayComponent implements OnInit {
-  user: Partial<User> = {
-    firstName: 'Sagie',
-    lastName: 'Ivan',
-  };
+  @Input() leasing: Leasing;
 
   constructor() {}
 

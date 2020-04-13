@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
+import { Leasing } from 'src/app/core/models/leasing.model';
 
 @Component({
   selector: 'ile-leasing-history',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./leasing-history.component.less'],
 })
 export class LeasingHistoryComponent implements OnInit {
-  constructor() {}
+  pendingLeasings: Leasing[];
+
+  constructor(private leasingService: LeasingService) {
+    this.pendingLeasings = this.leasingService.getPendingLeasings();
+  }
 
   ngOnInit(): void {}
 }
