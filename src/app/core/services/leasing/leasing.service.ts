@@ -10,6 +10,7 @@ import * as faker from 'faker';
 })
 export class LeasingService {
   leasings: Leasing[];
+  pendingLeasings: Leasing[];
 
   constructor() {}
 
@@ -45,9 +46,58 @@ export class LeasingService {
     return leasings as Leasing[];
   }
 
+  getPendingLeasings() {
+    if (this.pendingLeasings) {
+      return this.pendingLeasings;
+    }
+
+    let amount = Math.floor(Math.random() * 4);
+    let leasings: Partial<Leasing>[] = [];
+
+    for (let index = 0; index < amount; index++) {
+      leasings.push({
+        leasingID: Math.floor(Math.random() * 95635321).toString(),
+        price: faker.commerce.price(),
+        status: LeasingStatusFromServer.WAITING_FOR_APPROVE,
+        product: {
+          name: faker.commerce.productName(),
+          pictureLink: this.getImages(),
+        } as Product,
+        startDate: faker.date.past(),
+        lessee: {
+          firstName: faker.name.firstName(),
+          lastName: faker.name.firstName(),
+        } as User,
+        lessor: {
+          firstName: faker.name.firstName(),
+          lastName: faker.name.lastName(),
+        } as User,
+      });
+    }
+
+    this.pendingLeasings = leasings as Leasing[];
+    return leasings as Leasing[];
+  }
+
   randomEnum<T>(anEnum: T): T[keyof T] {
     const enumValues = (Object.values(anEnum) as unknown) as T[keyof T][];
     const randomIndex = Math.floor(Math.random() * enumValues.length);
     return enumValues[randomIndex];
+  }
+
+  getImages() {
+    let amount = Math.floor(Math.random() * 3) + 1;
+    let images = [];
+
+    for (let index = 0; index < amount; index++) {
+      images.push(
+        `https://loremflickr.com/${(
+          Math.floor(Math.random() * 8) * 100 +
+          100
+        ).toString()}/${(Math.floor(Math.random() * 8) * 100 + 100).toString()}`
+      );
+    }
+
+    return images;
   }
 }

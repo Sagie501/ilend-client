@@ -3,7 +3,7 @@ export type Product = {
   userID: string;
   name: string;
   description: string;
-  pictureLink: string;
+  pictureLink: string[];
   requestedPrice: number;
   categoryID: string;
   rating: number;
