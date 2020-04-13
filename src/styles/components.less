@@ -44,3 +44,25 @@
   font-size: 1.8rem;
   color: rgba(@primary-color, 0.8);
 }
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1rem;
+  border-color: darken(@text-color, 10%);
+  color: darken(@text-color, 50%);
+
+  &__header > th {
+    text-align: left;
+    padding: 1rem 0.5rem 1rem 0;
+
+    border-bottom: 1px solid darken(@text-color, 10%);
+  }
+
+  td {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid darken(@text-color, 10%);
+
+    min-height: 6rem;
+  }
+}
