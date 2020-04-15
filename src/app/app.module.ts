@@ -8,6 +8,7 @@ import { AppComponent } from './core/containers/app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
 
@@ -22,6 +23,6 @@ registerLocaleData(en);
     CoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
