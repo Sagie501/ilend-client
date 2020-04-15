@@ -1,0 +1,18 @@
+@import "../../../../../styles/styles.less";
+
+.checkout {
+  height: 100vh;
+  background-color: @text-color;
+
+  display: grid;
+  grid-template-rows: @header-height auto;
+  grid-template-columns: auto @chaeckout-payment-width;
+
+  ile-header {
+    grid-column: 1 e("/") 3;
+  }
+
+  ile-payment {
+    grid-column: 2 e("/") 3;
+  }
+}
