@@ -15,7 +15,7 @@
       </td>
       <td>{{ lease.product.name }}</td>
       <td>{{ lease.leasingID }}</td>
-      <td>{{ lease.startDate.toLocaleString("he") }}</td>
+      <td>{{ lease.startDate | date: "dd / MM / yyyy" }}</td>
       <td>${{ lease.price }}</td>
       <td><ile-order-status [status]="lease.status"></ile-order-status></td>
     </tr>
