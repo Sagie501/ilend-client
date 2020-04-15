@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
+import { CheckoutComponent } from './features/checkout/containers/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
         component: HomeComponent,
       },
     ],
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
   },
   {
     path: '',
