@@ -1,21 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {
-  FilteringState,
-  getCategoryFilterValue,
-  getCityFilterValue,
-} from '../../reducers/filter.reducer';
+import { Component, OnInit } from '@angular/core';
+import { FilteringState, getCategoryFilterValue, getCityFilterValue, } from '../../reducers/filter.reducer';
 import { DropdownFilter } from '../../models/dropdown-filter.model';
 import { Store } from '@ngrx/store';
-import {
-  FilterByCategory,
-  FilterBySearch,
-  FilterByCity,
-  FilterByPrice,
-} from '../../actions/filter.actions';
+import { filterByCategory, filterByCity, filterByPrice, filterBySearch, } from '../../actions/filter.actions';
 import { PriceFilter } from '../../models/price-filter.model';
-import { Category } from 'src/app/core/models/category.model';
 import { Option } from '../../models/options.model';
-import { combineLatest, of, Observable } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -96,9 +86,10 @@ export class FilterBarComponent implements OnInit {
     },
   ];
 
-  categories$: Observable<Option[]> = combineLatest(
-    of(this.categories),
-    this.filteringStore.select(getCategoryFilterValue)
+  categories$: Observable<Option[]> = combineLatest([
+      of(this.categories),
+      this.filteringStore.select(getCategoryFilterValue)
+    ]
   ).pipe(
     map(([categories, selectedCategories]) => {
       categories.forEach((category) => {
@@ -130,23 +121,25 @@ export class FilterBarComponent implements OnInit {
     })
   );
 
-  constructor(private filteringStore: Store<FilteringState>) {}
+  constructor(private filteringStore: Store<FilteringState>) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   search(value: string) {
-    this.filteringStore.dispatch(new FilterBySearch({ value }));
+    this.filteringStore.dispatch(filterBySearch({ value }));
   }
 
   priceChanged(change: PriceFilter) {
-    this.filteringStore.dispatch(new FilterByPrice(change));
+    this.filteringStore.dispatch(filterByPrice(change));
   }
 
   categoriesChanged(change: DropdownFilter) {
-    this.filteringStore.dispatch(new FilterByCategory({ value: change }));
+    this.filteringStore.dispatch(filterByCategory({ value: change }));
   }
 
   citiesChanged(change: DropdownFilter) {
-    this.filteringStore.dispatch(new FilterByCity({ value: change }));
+    this.filteringStore.dispatch(filterByCity({ value: change }));
   }
 }

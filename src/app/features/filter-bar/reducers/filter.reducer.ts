@@ -1,5 +1,5 @@
-import { FilterActions, FilterActionTypes } from '../actions/filter.actions';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { filterByCategory, filterByCity, filterByPrice, filterBySearch } from '../actions/filter.actions';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { PriceFilter } from '../models/price-filter.model';
 import { DropdownFilter } from '../models/dropdown-filter.model';
 
@@ -19,46 +19,25 @@ export let initialState: FilteringState = {
   cityValue: undefined,
 };
 
-export function filteringReducer(
-  state: FilteringState = initialState,
-  action: FilterActions
-): FilteringState {
-  switch (action.type) {
-    case FilterActionTypes.FILTER_BY_SEARCH: {
-      return {
-        ...state,
-        searchValue: action.payload.value,
-      };
-    }
-
-    case FilterActionTypes.FILTER_BY_PRICE: {
-      return {
-        ...state,
-        priceValue: { from: action.payload.from, to: action.payload.to },
-      };
-    }
-
-    case FilterActionTypes.FILTER_BY_CATEGORY: {
-      return {
-        ...state,
-        categoryValue: getNewFilteredValues(
-          action.payload.value,
-          state.categoryValue
-        ),
-      };
-    }
-
-    case FilterActionTypes.FILTER_BY_CITY: {
-      return {
-        ...state,
-        cityValue: getNewFilteredValues(action.payload.value, state.cityValue),
-      };
-    }
-
-    default:
-      return state;
-  }
-}
+export const filteringReducer = createReducer(
+  initialState,
+  on(filterBySearch, (state, action) => ({
+    ...state,
+    searchValue: action.value
+  })),
+  on(filterByPrice, (state, action) => ({
+    ...state,
+    priceValue: { from: action.from, to: action.to }
+  })),
+  on(filterByCategory, (state, action) => ({
+    ...state,
+    categoryValue: getNewFilteredValues(action.value, state.categoryValue)
+  })),
+  on(filterByCity, (state, action) => ({
+    ...state,
+    categoryValue: getNewFilteredValues(action.value, state.cityValue)
+  }))
+);
 
 const getNewFilteredValues = (
   change: DropdownFilter,
