@@ -1,39 +1,22 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { DropdownFilter } from '../models/dropdown-filter.model';
 
-export enum FilterActionTypes {
-  FILTER_BY_SEARCH = '[Filter] Filter by search',
-  FILTER_BY_PRICE = '[Filter] Filter by price',
-  FILTER_BY_CATEGORY = '[Filter] Filter by category',
-  FILTER_BY_CITY = '[Filter] Filter by city',
-}
+export const filterBySearch = createAction(
+  '[Filter] Filter by search',
+  props<{ value: string }>()
+);
 
-export class FilterBySearch implements Action {
-  readonly type = FilterActionTypes.FILTER_BY_SEARCH;
+export const filterByPrice = createAction(
+  '[Filter] Filter by price',
+  props<{ from: number; to: number }>()
+);
 
-  constructor(public payload: { value: string }) {}
-}
+export const filterByCategory = createAction(
+  '[Filter] Filter by category',
+  props<{ value: DropdownFilter }>()
+);
 
-export class FilterByPrice implements Action {
-  readonly type = FilterActionTypes.FILTER_BY_PRICE;
-
-  constructor(public payload: { from: number; to: number }) {}
-}
-
-export class FilterByCategory implements Action {
-  readonly type = FilterActionTypes.FILTER_BY_CATEGORY;
-
-  constructor(public payload: { value: DropdownFilter }) {}
-}
-
-export class FilterByCity implements Action {
-  readonly type = FilterActionTypes.FILTER_BY_CITY;
-
-  constructor(public payload: { value: DropdownFilter }) {}
-}
-
-export type FilterActions =
-  | FilterBySearch
-  | FilterByPrice
-  | FilterByCategory
-  | FilterByCity;
+export const filterByCity = createAction(
+  '[Filter] Filter by city',
+  props<{ value: DropdownFilter }>()
+);

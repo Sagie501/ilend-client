@@ -5,7 +5,9 @@ import { User } from '../../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  constructor() {}
+
+  constructor() {
+  }
 
   cities = ['Rehovot', 'Netanya', 'Pardesiya'];
 
@@ -14,7 +16,7 @@ export class UserService {
       userID: '1',
       firstName: 'Niv',
       lastName: 'Hindi',
-      birthDate: new Date(Date.UTC(1996, 1, 14)),
+      birthDate: new Date(Date.UTC(1997, 1, 14)),
       email: 'nivhindi1@gmail.com',
       gender: 'male',
       country: 'Israel',
