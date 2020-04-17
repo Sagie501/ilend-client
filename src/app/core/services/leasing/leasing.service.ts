@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Leasing } from '../../models/leasing.model';
-import { LeasingStatusFromServer } from 'src/app/shared/components/order-status/order-status.component';
 import { Product } from '../../models/product.model';
 import { User } from '../../models/user.model';
 import * as faker from 'faker';
+import { LeasingStatusFromServer } from 'src/app/shared/helpers/order-status.helper';
 
 @Injectable({
   providedIn: 'root',

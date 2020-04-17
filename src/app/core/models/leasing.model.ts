@@ -1,6 +1,6 @@
 import { User } from './user.model';
 import { Product } from './product.model';
-import { LeasingStatusFromServer } from 'src/app/shared/components/order-status/order-status.component';
+import { LeasingStatusFromServer } from 'src/app/shared/helpers/order-status.helper';
 
 export type Leasing = {
   leasingID: string;
