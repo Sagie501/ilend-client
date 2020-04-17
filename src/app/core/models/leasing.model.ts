@@ -3,8 +3,8 @@ import { Product } from './product.model';
 import { LeasingStatusFromServer } from 'src/app/shared/helpers/order-status.helper';
 
 export type Leasing = {
-  leasingID: string;
-  transactionID: string;
+  id: string;
+  transactionId: string;
   lessor: User;
   lessee: User;
   product: Product;

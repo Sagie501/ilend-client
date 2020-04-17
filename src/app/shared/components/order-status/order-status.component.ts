@@ -14,7 +14,8 @@ export class OrderStatusComponent implements OnInit {
   statusText: string;
   statusColor: string;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.statusText = getStatusForClient(this.status);

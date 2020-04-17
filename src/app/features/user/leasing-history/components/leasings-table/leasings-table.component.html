@@ -14,7 +14,7 @@
         {{ lease.lessor.firstName }}
       </td>
       <td>{{ lease.product.name }}</td>
-      <td>{{ lease.leasingID }}</td>
+      <td>{{ lease.id }}</td>
       <td>{{ lease.startDate | date: "dd / MM / yyyy" }}</td>
       <td>${{ lease.product.requestedPrice }}</td>
       <td><ile-order-status [status]="lease.status"></ile-order-status></td>

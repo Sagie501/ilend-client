@@ -17,23 +17,17 @@ export class MainComponent implements OnInit {
       {
         name: 'abcdefg',
         description: 'hijklmn',
-        requestedPrice: 25,
-        categoryID: '1',
-        userID: '1',
+        requestedPrice: 25
       },
       {
         name: 'hijklmn',
         description: 'opqrs',
-        requestedPrice: 12.5,
-        categoryID: '2',
-        userID: '1',
+        requestedPrice: 12.5
       },
       {
         name: 'opqrs',
         description: 'tuvwxyz',
-        requestedPrice: 3.333,
-        categoryID: '3',
-        userID: '1',
+        requestedPrice: 3.333
       },
     ];
 
