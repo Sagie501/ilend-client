@@ -1,14 +1,13 @@
-import { User } from './user.model';
-import { Category } from './category.model';
+import { Comment } from './comment.model';
 
 export type Product = {
   id: string;
-  owner: User;
+  ownerId: string;
   name: string;
   description: string;
   pictureLinks: string[];
   requestedPrice: number;
-  category: Category;
+  categoryId: string;
   rating: number;
-  comments: any[];
+  comments: Comment[];
 };
