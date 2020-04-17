@@ -20,16 +20,17 @@ import { PriceFilterComponent } from './components/price-filter/price-filter.com
     DropdownFilterOverlayComponent,
     RowFilterComponent,
     PriceFilterOverlayComponent,
-    PriceFilterComponent,
+    PriceFilterComponent
   ],
   imports: [
     BrowserModule,
     OverlayModule,
     StoreModule.forFeature(filteringToken, filteringReducer),
     SharedModule,
-    AngularHistogramSliderModule,
+    AngularHistogramSliderModule
   ],
   providers: [FilterService],
-  exports: [FilterBarComponent],
+  exports: [FilterBarComponent]
 })
-export class FilterBarModule {}
+export class FilterBarModule {
+}
