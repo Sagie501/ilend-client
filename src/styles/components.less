@@ -1,5 +1,5 @@
 .overlay {
-    padding: 1.5rem;
+  padding: 1.5rem;
   border-radius: 2rem;
   background-color: @text-color;
   box-shadow: 0px 0px 10px rgba(#000, 0.2);
@@ -7,7 +7,7 @@
 }
 
 .filter {
-    border-radius: 2rem;
+  border-radius: 2rem;
   border: 2px solid @secondary-color;
   background-color: @text-color;
   transition: all 0.2s;
@@ -30,5 +30,39 @@
 
   &:hover > .arrow {
     fill: darken(@secondary-color, 20%);
+  }
+}
+
+.headline {
+  font-weight: 300;
+  font-size: 2.4rem;
+  color: @primary-color;
+}
+
+.sub-headline {
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: rgba(@primary-color, 0.8);
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1rem;
+  border-color: darken(@text-color, 10%);
+  color: darken(@text-color, 50%);
+
+  &__header > th {
+    text-align: left;
+    padding: 1rem 0.5rem 1rem 0;
+
+    border-bottom: 1px solid darken(@text-color, 10%);
+  }
+
+  td {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid darken(@text-color, 10%);
+
+    min-height: 6rem;
   }
 }

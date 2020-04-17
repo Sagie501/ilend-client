@@ -5,8 +5,7 @@ import { User } from '../../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  constructor() {
-  }
+  constructor() {}
 
   cities = ['Rehovot', 'Netanya', 'Pardesiya'];
 

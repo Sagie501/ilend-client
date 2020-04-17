@@ -1,5 +1,15 @@
-import { filterByCategory, filterByCity, filterByPrice, filterBySearch } from '../actions/filter.actions';
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import {
+  filterByCategory,
+  filterByCity,
+  filterByPrice,
+  filterBySearch,
+} from '../actions/filter.actions';
+import {
+  createFeatureSelector,
+  createReducer,
+  createSelector,
+  on,
+} from '@ngrx/store';
 import { PriceFilter } from '../models/price-filter.model';
 import { DropdownFilter } from '../models/dropdown-filter.model';
 
@@ -23,19 +33,19 @@ export const filteringReducer = createReducer(
   initialState,
   on(filterBySearch, (state, action) => ({
     ...state,
-    searchValue: action.value
+    searchValue: action.value,
   })),
   on(filterByPrice, (state, action) => ({
     ...state,
-    priceValue: { from: action.from, to: action.to }
+    priceValue: { from: action.from, to: action.to },
   })),
   on(filterByCategory, (state, action) => ({
     ...state,
-    categoryValue: getNewFilteredValues(action.value, state.categoryValue)
+    categoryValue: getNewFilteredValues(action.value, state.categoryValue),
   })),
   on(filterByCity, (state, action) => ({
     ...state,
-    cityValue: getNewFilteredValues(action.value, state.cityValue)
+    cityValue: getNewFilteredValues(action.value, state.cityValue),
   }))
 );
 

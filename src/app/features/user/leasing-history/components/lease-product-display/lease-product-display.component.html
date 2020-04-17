@@ -1,0 +1,14 @@
+<div class="lease-product-display">
+  <ile-user-name-circle [user]="leasing.lessor"></ile-user-name-circle>
+  <span class="product-name">{{ leasing.product.name }}</span>
+  <span class="product-price">${{ leasing.product.requestedPrice }}</span>
+  <ile-order-status [status]="leasing.status"></ile-order-status>
+  <div class="images">
+    <ile-image
+      *ngFor="let link of leasing.product.pictureLink"
+      [link]="link"
+      [size]="'small'"
+    ></ile-image>
+  </div>
+  <ile-button [text]="'Cancel'"></ile-button>
+</div>
