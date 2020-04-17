@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
 import { CheckoutComponent } from './features/checkout/containers/checkout/checkout.component';
+import { LeasingHistoryComponent } from './features/user/leasing-history/containers/leasing-history/leasing-history.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,16 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
+  },
+  {
+    path: 'user',
+    component: MainComponent,
+    children: [
+      {
+        path: 'leasing-history',
+        component: LeasingHistoryComponent,
+      },
+    ],
   },
   {
     path: '',

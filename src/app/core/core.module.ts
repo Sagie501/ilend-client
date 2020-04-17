@@ -11,6 +11,7 @@ import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
 import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
 import { CheckoutModule } from '../features/checkout/checkout.module';
+import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CheckoutModule } from '../features/checkout/checkout.module';
     SharedModule,
     FilterBarModule,
     CheckoutModule,
+    LeasingHistoryModule,
   ],
   providers: [UserService],
 })
