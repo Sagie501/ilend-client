@@ -1,1 +1,53 @@
-<p>payment works!</p>
+<div class="payment">
+  <button (click)="switch()">Switch</button>
+  <ile-credit-card-simulator
+    class="credit-card"
+    [ngClass]="{
+      'card-left': isVisa,
+      'card-right': !isVisa,
+      'credit-card__hidden': isVisa === undefined
+    }"
+    [isVisa]="isVisa"
+  ></ile-credit-card-simulator>
+
+  <form
+    [formGroup]="paymentForm"
+    novalidate
+    style="max-width: 500px; margin: 0 auto; padding-top: 20px;"
+  >
+    <input
+      id="cc-number"
+      (input)="goToNextField('creditCard', expireInput)"
+      formControlName="creditCard"
+      type="tel"
+      class="input-lg form-control cc-number"
+      autocomplete="cc-number"
+      placeholder="•••• •••• •••• ••••"
+      ccNumber
+    />
+
+    <input
+      id="cc-exp"
+      (input)="goToNextField('expDate', cvcInput)"
+      #expireInput
+      formControlName="expDate"
+      type="tel"
+      class="input-lg form-control cc-exp"
+      autocomplete="cc-exp"
+      placeholder="•• / ••"
+      ccExp
+    />
+
+    <input
+      id="cc-cvc"
+      #cvcInput
+      formControlName="cvc"
+      type="tel"
+      class="input-lg form-control cc-cvc"
+      autocomplete="off"
+      placeholder="•••"
+      required
+      ccCVC
+    />
+  </form>
+</div>
