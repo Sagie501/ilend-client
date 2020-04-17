@@ -11,5 +11,4 @@ export type Leasing = {
   status: LeasingStatusFromServer;
   startDate: Date;
   endDate: Date;
-  price: number;
 };

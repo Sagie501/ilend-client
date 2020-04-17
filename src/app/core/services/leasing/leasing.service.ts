@@ -25,10 +25,10 @@ export class LeasingService {
     for (let index = 0; index < amount; index++) {
       leasings.push({
         leasingID: Math.floor(Math.random() * 95635321).toString(),
-        price: faker.commerce.price(),
         status: this.randomEnum(LeasingStatusFromServer),
         product: {
           name: faker.commerce.productName(),
+          requestedPrice: faker.commerce.price(),
         } as Product,
         startDate: faker.date.past(),
         lessee: {
@@ -57,11 +57,11 @@ export class LeasingService {
     for (let index = 0; index < amount; index++) {
       leasings.push({
         leasingID: Math.floor(Math.random() * 95635321).toString(),
-        price: faker.commerce.price(),
         status: LeasingStatusFromServer.WAITING_FOR_APPROVE,
         product: {
           name: faker.commerce.productName(),
           pictureLink: this.getImages(),
+          requestedPrice: faker.commerce.price(),
         } as Product,
         startDate: faker.date.past(),
         lessee: {
