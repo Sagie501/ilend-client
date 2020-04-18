@@ -1,0 +1,19 @@
+<div class="leasing-history">
+  <div class="header">
+    <div class="headline">Leasing History</div>
+    <div class="sub-headline">
+      Good afternoon Niv!
+      <span *ngIf="pendingLeasings.length > 0">
+        You have {{ pendingLeasings.length }} pending leasings.</span>
+    </div>
+  </div>
+
+  <div class="pending" *ngIf="pendingLeasings.length > 0">
+    <ile-lease-product-display
+      *ngFor="let pendingLeasing of pendingLeasings"
+      [leasing]="pendingLeasing"
+    ></ile-lease-product-display>
+  </div>
+
+  <ile-leasings-table></ile-leasings-table>
+</div>

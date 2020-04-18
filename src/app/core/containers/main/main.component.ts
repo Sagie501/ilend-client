@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilteringState } from '../../../features/filter-bar/reducers/filter.reducer';
 import { Store } from '@ngrx/store';
-import {
-  FilterBySearch,
-  FilterByPrice,
-  FilterByCategory,
-  FilterByCity,
-} from '../../../features/filter-bar/actions/filter.actions';
 import { FilterService } from '../../../features/filter-bar/services/filter/filter.service';
 
 @Component({
@@ -50,5 +44,6 @@ export class MainComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

@@ -15,6 +15,7 @@ import { AccountPageComponent } from './components/account-page/account-page/acc
 import {MatDividerModule} from '@angular/material/divider';
 
 
+import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,14 @@ import {MatDividerModule} from '@angular/material/divider';
     DataOutletComponent,
     AccountPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, FilterBarModule, MatDividerModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    FilterBarModule,
+    LeasingHistoryModule,
+    MatDividerModule
+  ],
   providers: [UserService],
 })
 export class CoreModule {}
