@@ -11,6 +11,10 @@ import { UserService } from './services/user/user.service';
 import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
 import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
+import { AccountPageComponent } from './components/account-page/account-page/account-page.component';
+import {MatDividerModule} from '@angular/material/divider';
+
+
 
 @NgModule({
   declarations: [
@@ -20,8 +24,9 @@ import { DataOutletComponent } from './containers/data-outlet/data-outlet.compon
     MainComponent,
     HomeComponent,
     DataOutletComponent,
+    AccountPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, FilterBarModule],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, FilterBarModule, MatDividerModule],
   providers: [UserService],
 })
 export class CoreModule {}
