@@ -29,4 +29,5 @@ import { ImageComponent } from './components/image/image.component';
     ImageComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

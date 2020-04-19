@@ -32,6 +32,7 @@
     "graphql-tag": "^2.10.3",
     "highcharts": "^8.0.4",
     "highcharts-angular": "^2.4.0",
+    "ng-image-slider": "^2.4.1",
     "ng5-slider": "^1.2.4",
     "rxjs": "~6.5.5",
     "tslib": "^1.11.1",

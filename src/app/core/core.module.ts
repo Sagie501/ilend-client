@@ -7,11 +7,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainComponent } from './containers/main/main.component';
 import { SharedModule } from '../shared/shared.module';
-import { UserService } from './services/user/user.service';
 import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
 import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
 import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-h
     SidebarComponent,
     MainComponent,
     HomeComponent,
-    DataOutletComponent,
+    DataOutletComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +28,10 @@ import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-h
     SharedModule,
     FilterBarModule,
     LeasingHistoryModule,
+    NgImageSliderModule
   ],
-  providers: [UserService],
+  providers: []
 })
-export class CoreModule {}
+export class CoreModule {
+
+}
