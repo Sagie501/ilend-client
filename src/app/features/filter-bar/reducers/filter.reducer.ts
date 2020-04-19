@@ -25,23 +25,24 @@ export const filteringReducer = createReducer(
   initialState,
   on(filterBySearch, (state, action) => ({
     ...state,
-    searchValue: action.value,
+    searchValue: action.value
   })),
   on(filterByPrice, (state, action) => ({
     ...state,
-    priceValue: { from: action.from, to: action.to },
+    priceValue: { from: action.from, to: action.to }
   })),
   on(filterByCategory, (state, action) => ({
     ...state,
-    categoryValue: getNewFilteredValues(action.value, state.categoryValue),
+    categoryValue: getNewFilteredValues(action.value, state.categoryValue)
   })),
   on(filterByCountry, (state, action) => ({
     ...state,
     countryValue: getNewFilteredValues(action.value, state.countryValue),
+    cityValue: undefined
   })),
   on(filterByCity, (state, action) => ({
     ...state,
-    cityValue: getNewFilteredValues(action.value, state.cityValue),
+    cityValue: getNewFilteredValues(action.value, state.cityValue)
   }))
 );
 

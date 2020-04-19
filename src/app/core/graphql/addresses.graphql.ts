@@ -6,8 +6,8 @@ export const getCountriesQuery = gql`
   }
 `;
 
-export const getCitiesByCountryQuery = gql`
-  query getCitiesByCountry($countryName: String!) {
-    getCitiesByCountry(countryName: $countryName)
+export const getCitiesByCountriesQuery = gql`
+  query getCitiesByCountries($countriesNames: [String]!) {
+    getCitiesByCountries(countriesNames: $countriesNames)
   }
 `;

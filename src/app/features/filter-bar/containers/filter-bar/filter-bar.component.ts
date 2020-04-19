@@ -6,7 +6,7 @@ import { filterByCategory, filterByCity, filterByCountry, filterByPrice, filterB
 import { PriceFilter } from '../../models/price-filter.model';
 import { Option } from '../../models/options.model';
 import { combineLatest, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Product } from '../../../../core/models/product.model';
 import { CategoryService } from '../../../../core/services/category/category.service';
 import { Category } from '../../../../core/models/category.model';
@@ -71,28 +71,35 @@ export class FilterBarComponent implements OnInit {
     })
   );
 
-  cities$: Observable<Option[]> = combineLatest([
-      this.addressesService.getCitiesByCountry('Israel'), // TODO: Take all the cities by the selected countries
-      this.filteringStore.select(getCityFilterValue)
-    ]
-  ).pipe(
-    map(([cities, selectedCities]) => {
-      let citiesOptions: Array<Option> = cities.map((city) => {
-        return {
-          id: city,
-          title: city,
-          amount: Math.floor(Math.random() * 201) // TODO: Need to add the correct logic
-        } as Option;
-      });
-      citiesOptions.forEach((city) => {
-        if (selectedCities) {
-          city.isChecked = selectedCities.includes(city.id);
-        } else {
-          city.isChecked = false;
-        }
-      });
+  cities$ = this.filteringStore.select(getCountryFilterValue).pipe(
+    switchMap((selectedCountries) => {
+      if (selectedCountries) {
+        return combineLatest([
+          this.addressesService.getCitiesByCountries(selectedCountries),
+          this.filteringStore.select(getCityFilterValue)
+        ]).pipe(
+          map(([cities, selectedCities]) => {
+            let citiesOptions: Array<Option> = cities.map((city) => {
+              return {
+                id: city,
+                title: city,
+                amount: Math.floor(Math.random() * 201) // TODO: Need to add the correct logic
+              } as Option;
+            });
+            citiesOptions.forEach((city) => {
+              if (selectedCities) {
+                city.isChecked = selectedCities.includes(city.id);
+              } else {
+                city.isChecked = false;
+              }
+            });
 
-      return citiesOptions;
+            return citiesOptions;
+          })
+        );
+      } else {
+        return of([]);
+      }
     })
   );
 
