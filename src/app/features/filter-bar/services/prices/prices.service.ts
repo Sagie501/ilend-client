@@ -8,7 +8,7 @@ const GROUP_NUMBER = 50;
 })
 export class PricesService {
 
-  prices = []
+  prices = [];
 
   constructor() {
     // TODO: Use the real products when there are products
@@ -19,7 +19,7 @@ export class PricesService {
 
   getPricesRanges(products: Product[]): number[] {
     // Get all the prices
-    // TODO: User the real products when there are products
+    // TODO: Use the real products when there are products
     // let prices: number[] = products.map((product) => product.requestedPrice);
 
     let jumpValue = this.getJumpValue(products);

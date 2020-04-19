@@ -1,6 +1,6 @@
 <div class="filter-bar">
   <ile-search (search)="search($event)"></ile-search>
-  <ile-price-filter (changed)="priceChanged($event)">
+  <ile-price-filter [products]="products" (changed)="priceChanged($event)">
   </ile-price-filter>
   <ile-dropdown-filter class="category-filter" [title]="'Category'" [values]="categories$ | async"
     (changed)="categoriesChanged($event)">

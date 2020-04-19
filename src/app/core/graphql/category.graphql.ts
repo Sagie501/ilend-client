@@ -8,3 +8,12 @@ export const categoryFragment = gql`
     pictureLink
   }
 `;
+
+export const getCategoriesQuery = gql`
+  {
+    getCategories {
+      ...CategoryFragment
+    }
+  }
+  ${categoryFragment}
+`;
