@@ -1,15 +1,5 @@
-import {
-  filterByCategory,
-  filterByCity,
-  filterByPrice,
-  filterBySearch,
-} from '../actions/filter.actions';
-import {
-  createFeatureSelector,
-  createReducer,
-  createSelector,
-  on,
-} from '@ngrx/store';
+import { filterByCategory, filterByCity, filterByCountry, filterByPrice, filterBySearch, } from '../actions/filter.actions';
+import { createFeatureSelector, createReducer, createSelector, on, } from '@ngrx/store';
 import { PriceFilter } from '../models/price-filter.model';
 import { DropdownFilter } from '../models/dropdown-filter.model';
 
@@ -19,6 +9,7 @@ export class FilteringState {
   searchValue: string;
   priceValue: PriceFilter;
   categoryValue: string[];
+  countryValue: string[];
   cityValue: string[];
 }
 
@@ -26,6 +17,7 @@ export let initialState: FilteringState = {
   searchValue: '',
   priceValue: { from: 0, to: Number.MAX_SAFE_INTEGER },
   categoryValue: undefined,
+  countryValue: undefined,
   cityValue: undefined,
 };
 
@@ -42,6 +34,10 @@ export const filteringReducer = createReducer(
   on(filterByCategory, (state, action) => ({
     ...state,
     categoryValue: getNewFilteredValues(action.value, state.categoryValue),
+  })),
+  on(filterByCountry, (state, action) => ({
+    ...state,
+    countryValue: getNewFilteredValues(action.value, state.countryValue),
   })),
   on(filterByCity, (state, action) => ({
     ...state,
@@ -80,6 +76,11 @@ export const getPriceFilterValue = createSelector(
 export const getCategoryFilterValue = createSelector(
   getState,
   (state: FilteringState) => state.categoryValue
+);
+
+export const getCountryFilterValue = createSelector(
+  getState,
+  (state: FilteringState) => state.countryValue
 );
 
 export const getCityFilterValue = createSelector(

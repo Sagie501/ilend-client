@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FilteringState, getCategoryFilterValue, getCityFilterValue, } from '../../reducers/filter.reducer';
+import { FilteringState, getCategoryFilterValue, getCityFilterValue, getCountryFilterValue, } from '../../reducers/filter.reducer';
 import { DropdownFilter } from '../../models/dropdown-filter.model';
 import { Store } from '@ngrx/store';
-import { filterByCategory, filterByCity, filterByPrice, filterBySearch, } from '../../actions/filter.actions';
+import { filterByCategory, filterByCity, filterByCountry, filterByPrice, filterBySearch, } from '../../actions/filter.actions';
 import { PriceFilter } from '../../models/price-filter.model';
 import { Option } from '../../models/options.model';
 import { combineLatest, Observable, of } from 'rxjs';
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { Product } from '../../../../core/models/product.model';
 import { CategoryService } from '../../../../core/services/category/category.service';
 import { Category } from '../../../../core/models/category.model';
+import { AddressesService } from '../../../../core/services/addresses/addresses.service';
 
 @Component({
   selector: 'ile-filter-bar',
@@ -17,54 +18,8 @@ import { Category } from '../../../../core/models/category.model';
   styleUrls: ['./filter-bar.component.less'],
 })
 export class FilterBarComponent implements OnInit {
-  // TODO: Remove this when DB is connected
 
-  @Input() products: Array<Product> = [];
-
-  cities: Option[] = [
-    {
-      id: 'Rehovot',
-      isChecked: false,
-      title: 'Rehovot',
-      amount: 345,
-    },
-    {
-      id: 'Netanya',
-      isChecked: false,
-      title: 'Netanya',
-      amount: 1,
-    },
-    {
-      id: 'Pardesiya',
-      isChecked: false,
-      title: 'Pardesiya',
-    },
-    {
-      id: 'Holon',
-      isChecked: false,
-      title: 'Holon',
-    },
-    {
-      id: 'Rishon LeTsion',
-      isChecked: false,
-      title: 'Rishon LeTsion',
-    },
-    {
-      id: 'Tel Aviv',
-      isChecked: false,
-      title: 'Tel Aviv',
-    },
-    {
-      id: 'New York',
-      isChecked: false,
-      title: 'New York',
-    },
-    {
-      id: 'Barcelona',
-      isChecked: false,
-      title: 'Barcelona',
-    },
-  ];
+  @Input() products: Array<Product>;
 
   categories$: Observable<Option[]> = combineLatest([
       this.categoryService.getCategories(),
@@ -91,13 +46,20 @@ export class FilterBarComponent implements OnInit {
     })
   );
 
-  cities$: Observable<Option[]> = combineLatest([
-      of(this.cities),
-      this.filteringStore.select(getCityFilterValue)
+  countries$: Observable<Option[]> = combineLatest([
+      this.addressesService.getCountries(),
+      this.filteringStore.select(getCountryFilterValue)
     ]
   ).pipe(
-    map(([cities, selectedCities]) => {
-      cities.forEach((city) => {
+    map(([countries, selectedCities]) => {
+      let countriesOptions: Array<Option> = countries.map((country) => {
+        return {
+          id: country,
+          title: country,
+          amount: Math.floor(Math.random() * 301) // TODO: Need to add the correct logic
+        } as Option;
+      });
+      countriesOptions.forEach((city) => {
         if (selectedCities) {
           city.isChecked = selectedCities.includes(city.id);
         } else {
@@ -105,11 +67,37 @@ export class FilterBarComponent implements OnInit {
         }
       });
 
-      return cities;
+      return countriesOptions;
     })
   );
 
-  constructor(private filteringStore: Store<FilteringState>, private categoryService: CategoryService) {
+  cities$: Observable<Option[]> = combineLatest([
+      this.addressesService.getCitiesByCountry('Israel'), // TODO: Take all the cities by the selected countries
+      this.filteringStore.select(getCityFilterValue)
+    ]
+  ).pipe(
+    map(([cities, selectedCities]) => {
+      let citiesOptions: Array<Option> = cities.map((city) => {
+        return {
+          id: city,
+          title: city,
+          amount: Math.floor(Math.random() * 201) // TODO: Need to add the correct logic
+        } as Option;
+      });
+      citiesOptions.forEach((city) => {
+        if (selectedCities) {
+          city.isChecked = selectedCities.includes(city.id);
+        } else {
+          city.isChecked = false;
+        }
+      });
+
+      return citiesOptions;
+    })
+  );
+
+  constructor(private filteringStore: Store<FilteringState>, private categoryService: CategoryService,
+              private addressesService: AddressesService) {
   }
 
   ngOnInit(): void {
@@ -125,6 +113,10 @@ export class FilterBarComponent implements OnInit {
 
   categoriesChanged(change: DropdownFilter) {
     this.filteringStore.dispatch(filterByCategory({ value: change }));
+  }
+
+  countriesChanged(change: DropdownFilter) {
+    this.filteringStore.dispatch(filterByCountry({ value: change }));
   }
 
   citiesChanged(change: DropdownFilter) {
