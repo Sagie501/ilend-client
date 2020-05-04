@@ -25,6 +25,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.paymentForm = this.fb.group({
+      name: [''],
       creditCard: ['', [CreditCardValidators.validateCCNumber]],
       expDate: ['', [CreditCardValidators.validateExpDate]],
       cvc: [
@@ -42,11 +43,25 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-  switch() {
-    if (!this.creditCardNumber) {
-      this.creditCardNumber = '5326 1900 8768 9302';
+  hasCreditCard(): boolean {
+    if (
+      this.paymentForm.get('creditCard') &&
+      this.paymentForm.get('creditCard').value &&
+      this.paymentForm.get('creditCard').value.length > 0
+    ) {
+      return true;
     }
+    return false;
+  }
 
-    this.isVisa = !this.isVisa;
+  getValue(name: string): string {
+    if (
+      this.paymentForm.get(name) &&
+      this.paymentForm.get(name).value &&
+      this.paymentForm.get(name).value.length > 0
+    ) {
+      return this.paymentForm.get(name).value;
+    }
+    return '';
   }
 }

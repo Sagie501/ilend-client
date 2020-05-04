@@ -8,6 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CreditCardSimulatorComponent implements OnInit {
   @Input() isVisa: boolean;
 
+  @Input() cardNumber: string;
+  @Input() name: string;
+  @Input() expirationDate: string;
+
   constructor() {}
 
   ngOnInit(): void {}

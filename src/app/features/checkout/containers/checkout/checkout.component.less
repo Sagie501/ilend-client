@@ -3,6 +3,7 @@
 .checkout {
   height: 100vh;
   background-color: @text-color;
+  overflow: hidden;
 
   display: grid;
   grid-template-rows: @header-height auto;
@@ -16,5 +17,7 @@
 
   ile-payment {
     grid-column: 2 e("/") 3;
+    align-self: center;
+    overflow-y: auto;
   }
 }

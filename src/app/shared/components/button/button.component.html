@@ -1,1 +1,3 @@
-<div class="button" (click)="clicked.emit()">{{ text }}</div>
+<div class="button" (click)="clicked.emit()" [ngClass]="{ large: isLarge }">
+  {{ text }}
+</div>
