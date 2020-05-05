@@ -10,8 +10,30 @@
   flex-direction: column;
   align-items: center;
 
-  ng-image-slider {
-    width: 20rem;
+  .images-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    ng-image-slider {
+      width: 20rem;
+    }
+
+    .slider-arrow {
+      cursor: pointer;
+      font-size: 22px;
+      transition: .5s ease-in-out;
+      border-radius: 50%;
+      text-align: center;
+      height: 2.8rem;
+      width: 2.8rem;
+      line-height: 2.5rem;
+    }
+
+    .slider-arrow:hover {
+      background-color: #d4cdcd;
+    }
   }
 
   .product-header {

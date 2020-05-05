@@ -1,5 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Product } from '../../../../core/models/product.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgImageSliderComponent } from 'ng-image-slider';
 
 @Component({
   selector: 'ile-product-card',
@@ -9,9 +11,10 @@ import { Product } from '../../../../core/models/product.model';
 export class ProductCardComponent implements OnInit, OnChanges {
 
   @Input() product: Product;
+  @ViewChild('imagesSlider') imagesSlider: NgImageSliderComponent;
   images: Array<{ thumbImage: string }> = [];
 
-  constructor() {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -29,5 +32,17 @@ export class ProductCardComponent implements OnInit, OnChanges {
         thumbImage: link
       };
     });
+  }
+
+  prevImage() {
+    this.imagesSlider.prev();
+  }
+
+  nextImage() {
+    this.imagesSlider.next();
+  }
+
+  navigateToProductPage() {
+    this.router.navigate([this.product.id], { relativeTo: this.activatedRoute });
   }
 }

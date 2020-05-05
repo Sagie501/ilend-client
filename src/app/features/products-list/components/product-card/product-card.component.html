@@ -1,12 +1,16 @@
 <div class="product-card">
-  <ng-image-slider [images]="images" [imagePopup]="false" [animationSpeed]="0.7"
-                   [infinite]="true" [imageSize]="{width: '100%', height: '146px', space: 3}"
-                   [showArrow]="product.pictureLinks.length > 1"></ng-image-slider>
+  <div class="images-container">
+    <span class="slider-arrow" *ngIf="product.pictureLinks.length > 1" (click)="prevImage()"><</span>
+    <ng-image-slider #imagesSlider [images]="images" [imagePopup]="false" [animationSpeed]="0.7"
+                     [infinite]="true" [imageSize]="{width: '100%', height: '146px', space: 3}"
+                     [showArrow]="false"></ng-image-slider>
+    <span class="slider-arrow" *ngIf="product.pictureLinks.length > 1" (click)="nextImage()">></span>
+  </div>
   <div class="product-header">
     <span class="product-name">{{ product.name }}</span>
     <span class="product-price">${{ product.requestedPrice }}</span>
   </div>
   <p
     class="product-description text-ellipsis">{{ product.description || 'The owner didn\'t add any description' }}</p>
-  <ile-button [text]="'Lend now'"></ile-button>
+  <ile-button [text]="'Lend now'" (clicked)="navigateToProductPage()"></ile-button>
 </div>
