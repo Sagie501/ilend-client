@@ -13,9 +13,9 @@ export class CategoryService {
   constructor(private apollo: Apollo) { }
 
   getCategories(): Observable<Array<Category>> {
-    return this.apollo.watchQuery<any>({
+    return this.apollo.query<any>({
       query: getCategoriesQuery
-    }).valueChanges.pipe<Array<Category>>(
+    }).pipe<Array<Category>>(
       map(({ data }) => {
         return data.getCategories as Array<Category>;
       })

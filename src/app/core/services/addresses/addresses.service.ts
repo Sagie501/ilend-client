@@ -12,9 +12,9 @@ export class AddressesService {
   constructor(private apollo: Apollo) { }
 
   getCountries(): Observable<Array<string>> {
-    return this.apollo.watchQuery<any>({
+    return this.apollo.query<any>({
       query: getCountriesQuery
-    }).valueChanges.pipe<Array<string>>(
+    }).pipe<Array<string>>(
       map(({ data }) => {
         return data.getAllCountries as Array<string>;
       })
@@ -22,12 +22,12 @@ export class AddressesService {
   }
 
   getCitiesByCountries(countriesNames: Array<string>): Observable<Array<string>> {
-    return this.apollo.watchQuery<any>({
+    return this.apollo.query<any>({
       query: getCitiesByCountriesQuery,
       variables: {
         countriesNames
       }
-    }).valueChanges.pipe<Array<string>>(
+    }).pipe<Array<string>>(
       map(({ data }) => {
         return data.getCitiesByCountries as Array<string>;
       })

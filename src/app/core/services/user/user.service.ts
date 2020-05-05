@@ -34,14 +34,14 @@ export class UserService {
   }
 
   login(email: string, password: string): Observable<User> {
-    return this.apollo.watchQuery<any>({
+    return this.apollo.query<any>({
       query: loginQuery,
       variables: {
         email,
         password
       },
       errorPolicy: 'all'
-    }).valueChanges.pipe(
+    }).pipe(
       map(({ data, errors }) => {
         // TODO: Handle the case that user put wrong details
         if (errors) {
