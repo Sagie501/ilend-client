@@ -11,6 +11,7 @@ import { Product } from '../../../../core/models/product.model';
 import { CategoryService } from '../../../../core/services/category/category.service';
 import { Category } from '../../../../core/models/category.model';
 import { AddressesService } from '../../../../core/services/addresses/addresses.service';
+import { ProductsService } from '../../../../core/services/products/products.service';
 
 @Component({
   selector: 'ile-filter-bar',
@@ -19,19 +20,19 @@ import { AddressesService } from '../../../../core/services/addresses/addresses.
 })
 export class FilterBarComponent implements OnInit {
 
-  @Input() products: Array<Product>;
-
+  products$: Observable<Array<Product>> = this.productsService.getProducts();
   categories$: Observable<Option[]> = combineLatest([
       this.categoryService.getCategories(),
-      this.filteringStore.select(getCategoryFilterValue)
+      this.filteringStore.select(getCategoryFilterValue),
+      this.products$
     ]
   ).pipe(
-    map(([categories, selectedCategories]) => {
+    map(([categories, selectedCategories, products]) => {
       let categoriesOptions: Array<Option> = categories.map((category: Category) => {
         return {
           id: category.id,
           title: category.name,
-          amount: this.products.filter((product) => product.categoryId === category.id).length
+          amount: products.filter((product) => product.categoryId === category.id).length
         } as Option;
       });
       categoriesOptions.forEach((category) => {
@@ -104,7 +105,7 @@ export class FilterBarComponent implements OnInit {
   );
 
   constructor(private filteringStore: Store<FilteringState>, private categoryService: CategoryService,
-              private addressesService: AddressesService) {
+              private addressesService: AddressesService, private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
