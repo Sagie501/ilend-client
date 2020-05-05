@@ -30,3 +30,12 @@ export const getProductsQuery = gql`
   }
   ${productFragment}
 `;
+
+export const getProductByIdQuery = gql`
+  query getProductById($productId: ID!) {
+    getProductById(productId: $productId) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
