@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './containers/app/app.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
@@ -11,7 +10,7 @@ import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
 import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
 import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
-import { NgImageSliderModule } from 'ng-image-slider';
+import { ProductsListModule } from '../features/products-list/products-list.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     SharedModule,
     FilterBarModule,
     LeasingHistoryModule,
-    NgImageSliderModule
+    ProductsListModule
   ],
   providers: []
 })
