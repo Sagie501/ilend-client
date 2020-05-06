@@ -3,7 +3,7 @@ import { User } from '../../models/user.model';
 import { Gender } from '../../../shared/enums/gender.enum';
 import { ProductsService } from '../products/products.service';
 import { Apollo } from 'apollo-angular';
-import { loginQuery } from '../../graphql/user.graphql';
+import { addToWishlistMutation, loginQuery } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -49,6 +49,20 @@ export class UserService {
         } else {
           return this.mapUserForClient(data.login);
         }
+      })
+    );
+  }
+
+  addProductToWishlist(userId: string, productId: string): Observable<User> {
+    return this.apollo.mutate<any>({
+      mutation: addToWishlistMutation,
+      variables: {
+        userId,
+        productId
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return this.mapUserForClient(data.addToWishList);
       })
     );
   }

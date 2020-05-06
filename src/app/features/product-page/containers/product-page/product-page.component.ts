@@ -30,6 +30,10 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     ];
   }
 
+  addProductToWishlist() {
+    // TODO
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }

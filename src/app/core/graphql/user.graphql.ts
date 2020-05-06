@@ -38,3 +38,12 @@ export const loginQuery = gql`
   }
   ${userFragment}
 `;
+
+export const addToWishlistMutation = gql`
+  mutation addToWishList($userId: ID!, $productId: ID!) {
+    addToWishList(userId: $userId, productId: $productId) {
+      ...UserFragment
+    }
+  }
+  ${userFragment}
+`;

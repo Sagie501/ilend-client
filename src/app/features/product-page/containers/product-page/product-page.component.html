@@ -8,5 +8,5 @@
   <span class="owner-label">Lend from <a>USER_NAME</a></span>
   <p class="product-description text-ellipsis">{{ product?.description || 'The owner didn\'t add any description' }}</p>
   <ile-button [text]="'Lend now'" class="lend-button"></ile-button>
-  <ile-button [text]="'Add to Wishlist'"></ile-button>
+  <ile-button [text]="'Add to Wishlist'" (clicked)="addProductToWishlist()"></ile-button>
 </div>
