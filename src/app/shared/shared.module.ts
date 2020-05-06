@@ -7,6 +7,8 @@ import { UserNameCircleComponent } from './components/user-name-circle/user-name
 import { ButtonComponent } from './components/button/button.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { ImageComponent } from './components/image/image.component';
+import { ImagesSliderComponent } from './components/images-slider/images-slider.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,9 @@ import { ImageComponent } from './components/image/image.component';
     ButtonComponent,
     OrderStatusComponent,
     ImageComponent,
+    ImagesSliderComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, NgImageSliderModule],
   exports: [
     SearchComponent,
     CheckboxComponent,
@@ -27,6 +30,7 @@ import { ImageComponent } from './components/image/image.component';
     ButtonComponent,
     OrderStatusComponent,
     ImageComponent,
+    ImagesSliderComponent,
   ],
 })
 export class SharedModule {

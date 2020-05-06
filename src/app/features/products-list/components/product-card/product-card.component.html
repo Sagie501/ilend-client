@@ -1,11 +1,5 @@
 <div class="product-card">
-  <div class="images-container">
-    <span class="slider-arrow" *ngIf="product.pictureLinks.length > 1" (click)="prevImage()"><</span>
-    <ng-image-slider #imagesSlider [images]="images" [imagePopup]="false" [animationSpeed]="0.7"
-                     [infinite]="true" [imageSize]="{width: '100%', height: '146px', space: 3}"
-                     [showArrow]="false"></ng-image-slider>
-    <span class="slider-arrow" *ngIf="product.pictureLinks.length > 1" (click)="nextImage()">></span>
-  </div>
+  <ile-images-slider [images]="product?.pictureLinks" [imageHeight]="146" [imageWidth]="'20rem'"></ile-images-slider>
   <div class="product-header">
     <span class="product-name">{{ product.name }}</span>
     <span class="product-price">${{ product.requestedPrice }}</span>

@@ -11,6 +11,7 @@ import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
 import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
 import { ProductsListModule } from '../features/products-list/products-list.module';
+import { ProductPageModule } from '../features/product-page/product-page.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProductsListModule } from '../features/products-list/products-list.modu
     SharedModule,
     FilterBarModule,
     LeasingHistoryModule,
-    ProductsListModule
+    ProductsListModule,
+    ProductPageModule
   ],
   providers: []
 })

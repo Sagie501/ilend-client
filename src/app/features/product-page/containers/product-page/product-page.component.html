@@ -1,1 +1,12 @@
-<p>product-page works!</p>
+<div class="product-card">
+  <ile-images-slider [images]="product?.pictureLinks" [imageHeight]="200" [imageWidth]="'75rem'"></ile-images-slider>
+  <div class="product-header">
+    <span class="product-name">{{ product?.name }}</span>
+    <span class="product-price">${{ product?.requestedPrice }}</span>
+  </div>
+  <!--  TODO: Add real user name-->
+  <span class="owner-label">Lend from <a>USER_NAME</a></span>
+  <p class="product-description text-ellipsis">{{ product?.description || 'The owner didn\'t add any description' }}</p>
+  <ile-button [text]="'Lend now'" class="lend-button"></ile-button>
+  <ile-button [text]="'Add to Wishlist'"></ile-button>
+</div>
