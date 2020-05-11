@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { User } from '../../../../core/models/user.model';
-import { login } from '../../../user/actions/user.actoins';
-import { MyErrorStateMatcher } from '../../../../shared/helpers/erroe-state-matcher.helper';
-import { getLoggedInUser } from '../../../user/reducer/user.reducer';
+import { User } from '../../../../../core/models/user.model';
+import { login } from '../../../actions/user.actoins';
+import { MyErrorStateMatcher } from '../../../../../shared/helpers/erroe-state-matcher.helper';
+import { getLoggedInUser } from '../../../reducer/user.reducer';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 

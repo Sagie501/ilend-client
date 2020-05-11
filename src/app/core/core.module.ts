@@ -9,11 +9,9 @@ import { SharedModule } from '../shared/shared.module';
 import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
 import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
-import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
 import { ProductsListModule } from '../features/products-list/products-list.module';
 import { ProductPageModule } from '../features/product-page/product-page.module';
 import { UserModule } from '../features/user/user.module';
-import { LoginModule } from '../features/login/login.module';
 
 @NgModule({
   declarations: [
@@ -30,8 +28,6 @@ import { LoginModule } from '../features/login/login.module';
     SharedModule,
     FilterBarModule,
     UserModule,
-    LoginModule,
-    LeasingHistoryModule,
     ProductsListModule,
     ProductPageModule
   ],

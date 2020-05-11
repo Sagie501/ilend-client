@@ -26,6 +26,15 @@ export const loginQuery = gql`
   ${userFragment}
 `;
 
+export const addUserMutation = gql`
+  mutation addUser($user: UserInput!) {
+    addUser(user: $user) {
+      ...UserFragment
+    }
+  }
+  ${userFragment}
+`;
+
 export const addToWishlistMutation = gql`
   mutation addToWishList($userId: ID!, $productId: ID!) {
     addToWishList(userId: $userId, productId: $productId) {

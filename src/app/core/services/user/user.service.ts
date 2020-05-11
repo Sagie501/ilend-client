@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Gender } from '../../../shared/enums/gender.enum';
 import { Apollo } from 'apollo-angular';
-import { addToWishlistMutation, loginQuery } from '../../graphql/user.graphql';
+import { addToWishlistMutation, addUserMutation, loginQuery } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -62,6 +62,22 @@ export class UserService {
     }).pipe(
       map(({ data, errors }) => {
         return this.mapUserForClient(data.addToWishList);
+      })
+    );
+  }
+
+  createNewUser(user: any): Observable<User> {
+    return this.apollo.mutate<any>({
+      mutation: addUserMutation,
+      variables: {
+        user: {
+          ...user,
+          birthDate: user.birthDate.getTime()
+        }
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return this.mapUserForClient(data.addUser);
       })
     );
   }
