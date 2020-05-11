@@ -4,8 +4,8 @@ import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
 import { LeasingHistoryComponent } from './features/user/leasing-history/containers/leasing-history/leasing-history.component';
 import { ProductPageComponent } from './features/product-page/containers/product-page/product-page.component';
-import { LoginComponent } from './features/user/login/containers/login/login.component';
-import { SignUpComponent } from './features/user/sign-up/containers/sign-up/sign-up.component';
+import { LoginComponent } from './features/login/containers/login/login.component';
+import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.component';
 
 const routes: Routes = [
   {

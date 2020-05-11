@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
-import { MyErrorStateMatcher } from '../../../../../shared/helpers/erroe-state-matcher.helper';
+import { MyErrorStateMatcher } from '../../../../shared/helpers/erroe-state-matcher.helper';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { AddressesService } from '../../../../../core/services/addresses/addresses.service';
+import { AddressesService } from '../../../../core/services/addresses/addresses.service';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { getLoggedInUser, UserState } from '../../../reducer/user.reducer';
-import { createNewUser } from '../../../actions/user.actoins';
+import { getLoggedInUser, UserState } from '../../../user/reducer/user.reducer';
+import { createNewUser } from '../../../user/actions/user.actoins';
 import { Router } from '@angular/router';
 
 @Component({

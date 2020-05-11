@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductPageComponent } from './containers/product-page/product-page.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { SharedModule } from '../../shared/shared.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -11,7 +12,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     NgImageSliderModule,
-    SharedModule
+    SharedModule,
+    MatTooltipModule
   ]
 })
 export class ProductPageModule { }
