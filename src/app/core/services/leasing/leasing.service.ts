@@ -30,16 +30,16 @@ export class LeasingService {
         product: {
           name: faker.commerce.productName(),
           requestedPrice: faker.commerce.price(),
+          owner: {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+          } as User
         } as Product,
         startDate: faker.date.past(),
         lessee: {
           firstName: faker.name.firstName(),
           lastName: faker.name.firstName(),
-        } as User,
-        lessor: {
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
-        } as User,
+        } as User
       });
     }
 
@@ -63,16 +63,16 @@ export class LeasingService {
           name: faker.commerce.productName(),
           pictureLinks: this.getImages(),
           requestedPrice: faker.commerce.price(),
+          owner: {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+          } as User
         } as Product,
         startDate: faker.date.past(),
         lessee: {
           firstName: faker.name.firstName(),
           lastName: faker.name.firstName(),
-        } as User,
-        lessor: {
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
-        } as User,
+        } as User
       });
     }
 

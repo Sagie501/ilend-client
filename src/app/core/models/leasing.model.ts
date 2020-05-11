@@ -5,7 +5,6 @@ import { LeasingStatusFromServer } from 'src/app/shared/helpers/order-status.hel
 export type Leasing = {
   id: string;
   transactionId: string;
-  lessor: User; // TODO: Maybe should be taken from the product owner
   lessee: User;
   product: Product;
   status: LeasingStatusFromServer;
