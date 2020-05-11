@@ -5,13 +5,14 @@ import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { getProductByIdQuery, getProductsQuery } from '../../graphql/product.graphql';
 import { CommentsService } from '../comments/comments.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
 
-  constructor(private apollo: Apollo, private commentsService: CommentsService) {
+  constructor(private apollo: Apollo, private commentsService: CommentsService, private userService: UserService) {
   }
 
   getProducts(): Observable<Array<Product>> {
@@ -44,12 +45,11 @@ export class ProductsService {
   mapProductForClient(serverProduct): Product {
     let clientProduct = {
       ...serverProduct,
-      ownerId: serverProduct.owner.id,
+      owner: this.userService.mapUserForClient(serverProduct.owner),
       categoryId: serverProduct.category.id,
       pictureLinks: JSON.parse(serverProduct.pictureLinks),
       comments: serverProduct.comments.map(this.commentsService.mapCommentForClient)
     };
-    delete clientProduct.owner;
     delete clientProduct.category;
     return clientProduct;
   }

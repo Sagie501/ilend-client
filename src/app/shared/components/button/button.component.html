@@ -1,1 +1,2 @@
-<div class="button" (click)="clicked.emit()">{{ text }}</div>
+<div class="button" (click)="clicked.emit()" *ngIf="type === 'button'">{{ text }}</div>
+<button type="submit" class="button" *ngIf="type === 'submit'" [disabled]="disabled">{{text}}</button>

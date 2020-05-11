@@ -14,5 +14,6 @@ export class LeasingHistoryComponent implements OnInit {
     this.pendingLeasings = this.leasingService.getPendingLeasings();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

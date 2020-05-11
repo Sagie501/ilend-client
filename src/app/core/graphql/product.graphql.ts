@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import { commentFragment } from './comment.graphql';
+import { userFragment } from './user.graphql';
 
 export const productFragment = gql`
   fragment ProductFragment on Product {
@@ -10,7 +11,7 @@ export const productFragment = gql`
     requestedPrice
     rating
     owner {
-      id
+      ...UserFragment
     }
     category {
       id
@@ -19,6 +20,7 @@ export const productFragment = gql`
       ...CommentFragment
     }
    }
+   ${userFragment}
    ${commentFragment}
 `;
 

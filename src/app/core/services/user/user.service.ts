@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Gender } from '../../../shared/enums/gender.enum';
-import { ProductsService } from '../products/products.service';
 import { Apollo } from 'apollo-angular';
 import { addToWishlistMutation, loginQuery } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
@@ -12,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  constructor(private apollo: Apollo, private productsService: ProductsService) {
+  constructor(private apollo: Apollo) {
   }
 
   cities = ['Rehovot', 'Netanya', 'Pardesiya'];
@@ -70,13 +69,7 @@ export class UserService {
   mapUserForClient(user): User {
     return {
       ...user,
-      birthDate: new Date(user.birthDate),
-      products: user.products.map((product) => {
-        return this.productsService.mapProductForClient(product);
-      }),
-      wishList: user.wishList.map((product) => {
-        return this.productsService.mapProductForClient(product);
-      })
+      birthDate: new Date(user.birthDate)
     };
   }
 }

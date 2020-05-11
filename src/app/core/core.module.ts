@@ -12,6 +12,8 @@ import { DataOutletComponent } from './containers/data-outlet/data-outlet.compon
 import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
 import { ProductsListModule } from '../features/products-list/products-list.module';
 import { ProductPageModule } from '../features/product-page/product-page.module';
+import { UserModule } from '../features/user/user.module';
+import { LoginModule } from '../features/login/login.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ProductPageModule } from '../features/product-page/product-page.module'
     AppRoutingModule,
     SharedModule,
     FilterBarModule,
+    UserModule,
+    LoginModule,
     LeasingHistoryModule,
     ProductsListModule,
     ProductPageModule
