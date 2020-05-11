@@ -6,6 +6,7 @@ import { LeasingHistoryComponent } from './features/user/leasing-history/contain
 import { ProductPageComponent } from './features/product-page/containers/product-page/product-page.component';
 import { LoginComponent } from './features/login/containers/login/login.component';
 import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.component';
+import { WishlistComponent } from './features/user/wishlist/containers/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
         path: 'leasing-history',
         component: LeasingHistoryComponent,
       },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
+      }
     ],
   },
   {

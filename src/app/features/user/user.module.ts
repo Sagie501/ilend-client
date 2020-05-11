@@ -5,6 +5,7 @@ import { userReducer, userToken } from './reducer/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './effects/user.effects';
 import { LeasingHistoryModule } from './leasing-history/leasing-history.module';
+import { WishlistModule } from './wishlist/wishlist.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LeasingHistoryModule } from './leasing-history/leasing-history.module';
     StoreModule.forFeature(userToken, userReducer),
     EffectsModule.forFeature([UserEffects]),
     CommonModule,
-    LeasingHistoryModule
+    LeasingHistoryModule,
+    WishlistModule
   ]
 })
 export class UserModule { }

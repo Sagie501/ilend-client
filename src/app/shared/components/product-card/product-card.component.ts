@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../../../core/models/product.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from '../../../core/models/product.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ile-product-card',
@@ -11,13 +11,13 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
   navigateToProductPage() {
-    this.router.navigate([this.product.id], { relativeTo: this.activatedRoute });
+    this.router.navigateByUrl(`/home/products/${this.product.id}`);
   }
 }
