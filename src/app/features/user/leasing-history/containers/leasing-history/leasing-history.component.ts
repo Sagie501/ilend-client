@@ -5,7 +5,9 @@ import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.he
 import { User } from '../../../../../core/models/user.model';
 import { getLoggedInUser, UserState } from '../../../reducer/user.reducer';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { LeasingStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
 
 @Component({
   selector: 'ile-leasing-history',
@@ -14,19 +16,31 @@ import { Subscription } from 'rxjs';
 })
 export class LeasingHistoryComponent implements OnInit, OnDestroy {
 
-  pendingLeasings: Leasing[];
+  pendingLeasings: Leasing[] = [];
+  leasings: Array<Leasing> = [];
   loggedInUser: User;
   subscriptions: Array<Subscription>;
   getGreetingSentence = getGreetingSentence;
 
   constructor(private leasingService: LeasingService, private userStore: Store<UserState>) {
-    this.pendingLeasings = this.leasingService.getPendingLeasings();
   }
 
   ngOnInit(): void {
     this.subscriptions = [
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
+      }),
+      this.userStore.select(getLoggedInUser).pipe(
+        switchMap((loggedInUser) => {
+          if (loggedInUser) {
+            return this.leasingService.getAllLeasingRequests(loggedInUser.id);
+          } else {
+            return of([] as Array<Leasing>);
+          }
+        })
+      ).subscribe((leasings) => {
+        this.leasings = leasings;
+        this.pendingLeasings = leasings.filter((leasing) => leasing.status === LeasingStatusFromServer.WAITING_FOR_APPROVE);
       })
     ];
   }
