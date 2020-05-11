@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { getLoggedInUser, UserState } from '../../../features/user/reducer/user.reducer';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/user.model';
+import { logout } from '../../../features/user/actions/user.actoins';
 
 @Component({
   selector: 'ile-sidebar',
@@ -23,6 +24,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.loggedInUser = loggedInUser;
       })
     ];
+  }
+
+  logout() {
+    this.userStore.dispatch(logout());
   }
 
   ngOnDestroy(): void {

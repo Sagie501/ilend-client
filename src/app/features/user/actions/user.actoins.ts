@@ -14,3 +14,7 @@ export const loginSucceeded = createAction(
 export const loginFailed = createAction(
   '[User] Login Failed'
 );
+
+export const logout = createAction(
+  '[User] Logout'
+);

@@ -3,4 +3,5 @@
   <a routerLink="/home">Home</a>
   <a routerLink="/user/leasing-history">User Leasing History</a>
   <a routerLink="/home/login" *ngIf="!loggedInUser">Login</a>
+  <a routerLink="/home" *ngIf="loggedInUser" (click)="logout()">Logout</a>
 </div>
