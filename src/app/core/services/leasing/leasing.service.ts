@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Leasing } from '../../models/leasing.model';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { getAllLeasingRequestsQuery } from '../../graphql/leasing.graphql';
+import { getAllLeasingRequestsQuery, setLeaseRequestStatusMutation } from '../../graphql/leasing.graphql';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 import { ProductsService } from '../products/products.service';
+import { LeasingStatusFromServer } from '../../../shared/helpers/order-status.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -16,18 +17,32 @@ export class LeasingService {
   }
 
   getAllLeasingRequests(lessorId: string): Observable<Array<Leasing>> {
-    return this.apollo.query<any>({
+    return this.apollo.watchQuery<any>({
       query: getAllLeasingRequestsQuery,
       variables: {
         lessorId
       }
-    }).pipe(
+    }).valueChanges.pipe(
       map(({ data, errors }) => {
         let leasings: Array<Leasing> = data.getAllLeasingRequests;
         leasings = leasings.map((leasing) => {
           return this.mapLeasingForClient(leasing);
         });
         return leasings;
+      })
+    );
+  }
+
+  setLeaseRequestStatus(leasingId: string, status: LeasingStatusFromServer): Observable<Leasing> {
+    return this.apollo.mutate<any>({
+      mutation: setLeaseRequestStatusMutation,
+      variables: {
+        leasingId,
+        status
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return this.mapLeasingForClient(data.setLeaseRequestStatus);
       })
     );
   }

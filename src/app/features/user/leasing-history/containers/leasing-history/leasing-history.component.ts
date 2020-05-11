@@ -45,6 +45,10 @@ export class LeasingHistoryComponent implements OnInit, OnDestroy {
     ];
   }
 
+  changeLeasingRequestStatus(value: { leasingId: string, status: LeasingStatusFromServer }) {
+    this.leasingService.setLeaseRequestStatus(value.leasingId, value.status).subscribe();
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
