@@ -5,8 +5,9 @@ import { Subscription } from 'rxjs';
 import { ProductsService } from '../../../../core/services/products/products.service';
 import { switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { getLoggedInUser, UserState } from '../../../user/reducer/user.reducer';
+import { getLoggedInUser, getUserWishlist, UserState } from '../../../user/reducer/user.reducer';
 import { User } from '../../../../core/models/user.model';
+import { addProductToWishlist, removeProductFromWishlist } from '../../../user/actions/user.actoins';
 
 @Component({
   selector: 'ile-product-page',
@@ -16,6 +17,8 @@ import { User } from '../../../../core/models/user.model';
 export class ProductPageComponent implements OnInit, OnDestroy {
 
   product: Product;
+  userWishlist: Array<Product>;
+  isProductInWishlist: boolean;
   loggedInUser: User;
   subscriptions: Array<Subscription>;
 
@@ -30,15 +33,32 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         })
       ).subscribe((product: Product) => {
         this.product = product;
+        this.checkIfProductInWishlist();
       }),
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
+      }),
+      this.userStore.select(getUserWishlist).subscribe((userWishlist) => {
+        this.userWishlist = userWishlist;
+        this.checkIfProductInWishlist();
       })
     ];
   }
 
+  checkIfProductInWishlist() {
+    if (this.product && this.userWishlist) {
+      this.isProductInWishlist = !!this.userWishlist.find((product) => product.id === this.product.id);
+    } else {
+      this.isProductInWishlist = false;
+    }
+  }
+
   addProductToWishlist() {
-    // TODO
+    this.userStore.dispatch(addProductToWishlist({ userId: this.loggedInUser.id, productId: this.product.id }));
+  }
+
+  removeProductFromWishlist() {
+    this.userStore.dispatch(removeProductFromWishlist({ userId: this.loggedInUser.id, productId: this.product.id }));
   }
 
   ngOnDestroy(): void {

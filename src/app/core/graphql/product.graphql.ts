@@ -41,3 +41,34 @@ export const getProductByIdQuery = gql`
   }
   ${productFragment}
 `;
+
+export const getUserWishlist = gql`
+  query getUserWishList($userId: ID!) {
+    getUserWishList(userId: $userId) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
+
+export const addToWishlistMutation = gql`
+  mutation addToWishList($userId: ID!, $productId: ID!) {
+    addToWishList(userId: $userId, productId: $productId) {
+      wishList {
+        ...ProductFragment
+      }
+    }
+  }
+  ${productFragment}
+`;
+
+export const removeFromWishlistMutation = gql`
+  mutation removeFromWishList($userId: ID!, $productId: ID!) {
+    removeFromWishList(userId: $userId, productId: $productId) {
+      wishList {
+        ...ProductFragment
+      }
+    }
+  }
+  ${productFragment}
+`;
