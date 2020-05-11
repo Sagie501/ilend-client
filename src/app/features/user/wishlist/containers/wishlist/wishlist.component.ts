@@ -4,6 +4,7 @@ import { getLoggedInUser, getUserWishlist, UserState } from '../../../reducer/us
 import { Subscription } from 'rxjs';
 import { Product } from '../../../../../core/models/product.model';
 import { User } from '../../../../../core/models/user.model';
+import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.helper';
 
 @Component({
   selector: 'ile-wishlist',
@@ -15,6 +16,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
   wishlist: Array<Product> = [];
   loggedInUser: User;
   subscriptions: Array<Subscription>;
+  getGreetingSentence = getGreetingSentence;
 
   constructor(private userStore: Store<UserState>) { }
 

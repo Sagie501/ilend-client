@@ -1,7 +1,7 @@
 <div class="header">
   <div class="headline">Wishlist</div>
   <div class="sub-headline">
-    Good afternoon {{ loggedInUser?.firstName }}!
+    {{getGreetingSentence() + ' ' + loggedInUser?.firstName }}!
     <span *ngIf="wishlist.length > 0">
         You have {{ wishlist.length }} products in your wishlist.</span>
   </div>

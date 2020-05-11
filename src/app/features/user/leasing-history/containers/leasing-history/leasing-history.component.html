@@ -2,7 +2,7 @@
   <div class="header">
     <div class="headline">Leasing History</div>
     <div class="sub-headline">
-      Good afternoon Niv!
+      {{getGreetingSentence() + ' ' + loggedInUser?.firstName }}!
       <span *ngIf="pendingLeasings.length > 0">
         You have {{ pendingLeasings.length }} pending leasings.</span>
     </div>
