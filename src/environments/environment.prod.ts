@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  ilendGateway: 'http://ilend.cs.colman.ac.il:443'
 };

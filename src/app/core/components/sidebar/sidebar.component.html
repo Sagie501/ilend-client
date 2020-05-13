@@ -1,4 +1,11 @@
 <div class="sidebar">
+  <span>{{ "Hello, " + (loggedInUser?.firstName || "Guest") + "!" }}</span>
   <a routerLink="/home">Home</a>
-  <a routerLink="/user/leasing-history">User Leasing History</a>
+  <a routerLink="/home" *ngIf="loggedInUser">My Account</a>
+  <a routerLink="/user/wishlist" *ngIf="loggedInUser">My Wishlist</a>
+  <a routerLink="/user/leasing-history" *ngIf="loggedInUser">Leasing History</a>
+  <a routerLink="/home" *ngIf="loggedInUser">Ongoing Deliveries</a>
+  <a routerLink="/home/login" *ngIf="!loggedInUser">Login</a>
+  <a routerLink="/home/sign-up" *ngIf="!loggedInUser">Sign up</a>
+  <a routerLink="/home" *ngIf="loggedInUser" (click)="logout()">Logout</a>
 </div>

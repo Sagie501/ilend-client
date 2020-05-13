@@ -1,8 +1,10 @@
+import { Gender } from '../../shared/enums/gender.enum';
+
 export type User = {
-  userID: string;
+  id: string;
   firstName: string;
   lastName: string;
-  gender: string;
+  gender: Gender;
   birthDate: Date;
   email: string;
   phoneNumber: string;
