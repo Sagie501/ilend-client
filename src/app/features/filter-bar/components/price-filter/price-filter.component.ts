@@ -25,11 +25,12 @@ export class PriceFilterComponent implements OnInit {
   }
 
   openOverlay() {
+    let priceRanges = this.pricesService.getPricesRanges(this.products);
     this.priceFilterOverlayService.open(
       {
-        data: this.pricesService.getPricesRanges(this.products),
+        data: priceRanges,
         currentMinimum: /*this.currentMinimum*/0,
-        currentMaximum: /*this.currentMaximum*/this.pricesService.getPricesRanges(this.products).length,
+        currentMaximum: /*this.currentMaximum*/priceRanges.length,
         jumpValue: this.pricesService.getJumpValue(this.products),
         callback: (change: PriceFilter) => this.changed.emit(change),
       } as PriceFilterOverlayConfig,

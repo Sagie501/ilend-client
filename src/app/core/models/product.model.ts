@@ -1,11 +1,13 @@
+import { Comment } from './comment.model';
+
 export type Product = {
-  productID: string;
-  userID: string;
+  id: string;
+  ownerId: string;
   name: string;
   description: string;
-  pictureLink: string[];
+  pictureLinks: string[];
   requestedPrice: number;
-  categoryID: string;
+  categoryId: string;
   rating: number;
-  comments: any[];
+  comments: Comment[];
 };

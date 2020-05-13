@@ -19,7 +19,8 @@ export const DEFAULT_CONFIG: FilterOverlayConfig = {
 };
 
 export abstract class FilterOverlayService {
-  constructor(protected overlay: Overlay, protected injector: Injector) { }
+  constructor(protected overlay: Overlay, protected injector: Injector) {
+  }
 
   open(config: FilterOverlayConfig, element: ElementRef): OverlayRef {
     // Uniting the configuration
@@ -65,7 +66,7 @@ export abstract class FilterOverlayService {
     const overlayConfig = new OverlayConfig({
       ...specificOverlayConfig,
       positionStrategy
-    })
+    });
 
     return overlayConfig;
   }
@@ -82,6 +83,8 @@ export abstract class FilterOverlayService {
   }
 
   protected abstract getSpecificOverlayConfig(config: FilterOverlayConfig): OverlayConfig;
+
   protected abstract getComponentPortal(injector: PortalInjector): ComponentPortal<any>;
+
   protected abstract createInjector(config: FilterOverlayConfig): PortalInjector;
 }

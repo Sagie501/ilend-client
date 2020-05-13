@@ -12,7 +12,8 @@ export class LeasingService {
   leasings: Leasing[];
   pendingLeasings: Leasing[];
 
-  constructor() {}
+  constructor() {
+  }
 
   getLeasings() {
     if (this.leasings) {
@@ -24,7 +25,7 @@ export class LeasingService {
 
     for (let index = 0; index < amount; index++) {
       leasings.push({
-        leasingID: Math.floor(Math.random() * 95635321).toString(),
+        id: Math.floor(Math.random() * 95635321).toString(),
         status: this.randomEnum(LeasingStatusFromServer),
         product: {
           name: faker.commerce.productName(),
@@ -56,11 +57,11 @@ export class LeasingService {
 
     for (let index = 0; index < amount; index++) {
       leasings.push({
-        leasingID: Math.floor(Math.random() * 95635321).toString(),
+        id: Math.floor(Math.random() * 95635321).toString(),
         status: LeasingStatusFromServer.WAITING_FOR_APPROVE,
         product: {
           name: faker.commerce.productName(),
-          pictureLink: this.getImages(),
+          pictureLinks: this.getImages(),
           requestedPrice: faker.commerce.price(),
         } as Product,
         startDate: faker.date.past(),

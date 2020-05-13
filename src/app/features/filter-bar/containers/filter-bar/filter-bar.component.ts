@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FilteringState, getCategoryFilterValue, getCityFilterValue, } from '../../reducers/filter.reducer';
+import { Component, Input, OnInit } from '@angular/core';
+import { FilteringState, getCategoryFilterValue, getCityFilterValue, getCountryFilterValue, } from '../../reducers/filter.reducer';
 import { DropdownFilter } from '../../models/dropdown-filter.model';
 import { Store } from '@ngrx/store';
-import { filterByCategory, filterByCity, filterByPrice, filterBySearch, } from '../../actions/filter.actions';
+import { filterByCategory, filterByCity, filterByCountry, filterByPrice, filterBySearch, } from '../../actions/filter.actions';
 import { PriceFilter } from '../../models/price-filter.model';
 import { Option } from '../../models/options.model';
 import { combineLatest, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import { Product } from '../../../../core/models/product.model';
+import { CategoryService } from '../../../../core/services/category/category.service';
+import { Category } from '../../../../core/models/category.model';
+import { AddressesService } from '../../../../core/services/addresses/addresses.service';
+import { ProductsService } from '../../../../core/services/products/products.service';
 
 @Component({
   selector: 'ile-filter-bar',
@@ -14,85 +19,23 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./filter-bar.component.less'],
 })
 export class FilterBarComponent implements OnInit {
-  // TODO: Remove this when DB is connected
-  categories: Option[] = [
-    {
-      id: '1',
-      isChecked: false,
-      title: 'hello',
-      amount: 23,
-    },
-    {
-      id: '2',
-      isChecked: false,
-      title: 'world',
-      amount: 12,
-    },
-    {
-      id: '3',
-      isChecked: false,
-      title: 'what',
-      amount: 5,
-    },
-    {
-      id: '4',
-      isChecked: false,
-      title: 'ciao',
-    },
-  ];
 
-  cities: Option[] = [
-    {
-      id: 'Rehovot',
-      isChecked: false,
-      title: 'Rehovot',
-      amount: 345,
-    },
-    {
-      id: 'Netanya',
-      isChecked: false,
-      title: 'Netanya',
-      amount: 1,
-    },
-    {
-      id: 'Pardesiya',
-      isChecked: false,
-      title: 'Pardesiya',
-    },
-    {
-      id: 'Holon',
-      isChecked: false,
-      title: 'Holon',
-    },
-    {
-      id: 'Rishon LeTsion',
-      isChecked: false,
-      title: 'Rishon LeTsion',
-    },
-    {
-      id: 'Tel Aviv',
-      isChecked: false,
-      title: 'Tel Aviv',
-    },
-    {
-      id: 'New York',
-      isChecked: false,
-      title: 'New York',
-    },
-    {
-      id: 'Barcelona',
-      isChecked: false,
-      title: 'Barcelona',
-    },
-  ];
-
+  products$: Observable<Array<Product>> = this.productsService.getProducts();
   categories$: Observable<Option[]> = combineLatest([
-      of(this.categories),
-      this.filteringStore.select(getCategoryFilterValue)
+      this.categoryService.getCategories(),
+      this.filteringStore.select(getCategoryFilterValue),
+      this.products$
     ]
   ).pipe(
-    map(([categories, selectedCategories]) => {
-      categories.forEach((category) => {
+    map(([categories, selectedCategories, products]) => {
+      let categoriesOptions: Array<Option> = categories.map((category: Category) => {
+        return {
+          id: category.id,
+          title: category.name,
+          amount: products.filter((product) => product.categoryId === category.id).length
+        } as Option;
+      });
+      categoriesOptions.forEach((category) => {
         if (selectedCategories) {
           category.isChecked = selectedCategories.includes(category.id);
         } else {
@@ -100,16 +43,24 @@ export class FilterBarComponent implements OnInit {
         }
       });
 
-      return categories;
+      return categoriesOptions;
     })
   );
 
-  cities$: Observable<Option[]> = combineLatest(
-    of(this.cities),
-    this.filteringStore.select(getCityFilterValue)
+  countries$: Observable<Option[]> = combineLatest([
+      this.addressesService.getCountries(),
+      this.filteringStore.select(getCountryFilterValue)
+    ]
   ).pipe(
-    map(([cities, selectedCities]) => {
-      cities.forEach((city) => {
+    map(([countries, selectedCities]) => {
+      let countriesOptions: Array<Option> = countries.map((country) => {
+        return {
+          id: country,
+          title: country,
+          amount: Math.floor(Math.random() * 301) // TODO: Need to add the correct logic
+        } as Option;
+      });
+      countriesOptions.forEach((city) => {
         if (selectedCities) {
           city.isChecked = selectedCities.includes(city.id);
         } else {
@@ -117,11 +68,44 @@ export class FilterBarComponent implements OnInit {
         }
       });
 
-      return cities;
+      return countriesOptions;
     })
   );
 
-  constructor(private filteringStore: Store<FilteringState>) {
+  cities$ = this.filteringStore.select(getCountryFilterValue).pipe(
+    switchMap((selectedCountries) => {
+      if (selectedCountries) {
+        return combineLatest([
+          this.addressesService.getCitiesByCountries(selectedCountries),
+          this.filteringStore.select(getCityFilterValue)
+        ]).pipe(
+          map(([cities, selectedCities]) => {
+            let citiesOptions: Array<Option> = cities.map((city) => {
+              return {
+                id: city,
+                title: city,
+                amount: Math.floor(Math.random() * 201) // TODO: Need to add the correct logic
+              } as Option;
+            });
+            citiesOptions.forEach((city) => {
+              if (selectedCities) {
+                city.isChecked = selectedCities.includes(city.id);
+              } else {
+                city.isChecked = false;
+              }
+            });
+
+            return citiesOptions;
+          })
+        );
+      } else {
+        return of([]);
+      }
+    })
+  );
+
+  constructor(private filteringStore: Store<FilteringState>, private categoryService: CategoryService,
+              private addressesService: AddressesService, private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
@@ -137,6 +121,10 @@ export class FilterBarComponent implements OnInit {
 
   categoriesChanged(change: DropdownFilter) {
     this.filteringStore.dispatch(filterByCategory({ value: change }));
+  }
+
+  countriesChanged(change: DropdownFilter) {
+    this.filteringStore.dispatch(filterByCountry({ value: change }));
   }
 
   citiesChanged(change: DropdownFilter) {
