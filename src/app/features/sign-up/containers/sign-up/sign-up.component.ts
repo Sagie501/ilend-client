@@ -6,8 +6,9 @@ import { AddressesService } from '../../../../core/services/addresses/addresses.
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { getLoggedInUser, UserState } from '../../../user/reducer/user.reducer';
-import { createNewUser } from '../../../user/actions/user.actoins';
+import { createNewUser, createNewUserFailed } from '../../../user/actions/user.actoins';
 import { Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'ile-sign-up',
@@ -22,6 +23,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   cityOptions: Array<string> = [];
   filteredCountryOptions: Observable<string[]>;
   filteredCityOptions: Observable<string[]>;
+  signUpErrorMessage: string = '';
 
   // TODO: Decide which of the fields is really required for the sign up steps - maybe all of them?
   signUpForm = new FormGroup({
@@ -43,7 +45,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
     gender: new FormControl('', [Validators.required])
   });
 
-  constructor(private addressesService: AddressesService, private userStore: Store<UserState>, private router: Router) {
+  constructor(private addressesService: AddressesService, private userStore: Store<UserState>,
+              private router: Router, private actions$: Actions) {
   }
 
   ngOnInit(): void {
@@ -67,6 +70,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
         if (loggedInUser) {
           this.router.navigateByUrl('/home');
         }
+      }),
+      this.actions$.pipe(
+        ofType(createNewUserFailed)
+      ).subscribe((action) => {
+        this.signUpErrorMessage = action.message; // TODO: Need to make the errors prettier. Maybe should be in the users service
       })
     ];
 

@@ -59,10 +59,15 @@ export class UserService {
           ...user,
           birthDate: user.birthDate.getTime()
         }
-      }
+      },
+      errorPolicy: 'all'
     }).pipe(
       map(({ data, errors }) => {
-        return this.mapUserForClient(data.addUser);
+        if (errors) {
+          throw errors[0].message;
+        } else {
+          return this.mapUserForClient(data.addUser);
+        }
       })
     );
   }

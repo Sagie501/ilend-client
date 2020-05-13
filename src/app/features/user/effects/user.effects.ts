@@ -46,7 +46,7 @@ export class UserEffects {
       switchMap(action => {
         return this.userService.createNewUser(action.user).pipe(
           map(user => createNewUserSucceeded({ user, wishlist: [] })),
-          catchError(message => of(createNewUserFailed())),
+          catchError(message => of(createNewUserFailed({ message }))),
         );
       }),
     );

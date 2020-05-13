@@ -32,7 +32,8 @@ export const createNewUserSucceeded = createAction(
 );
 
 export const createNewUserFailed = createAction(
-  '[User] Create New User Failed'
+  '[User] Create New User Failed',
+  props<{ message: string }>()
 );
 
 export const addProductToWishlist = createAction(
