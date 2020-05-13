@@ -13,6 +13,7 @@ import {
 } from '../actions/user.actoins';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products/products.service';
+import { of } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
@@ -30,10 +31,10 @@ export class UserEffects {
               map((wishlist) => {
                 return loginSucceeded({ user, wishlist });
               }),
-              catchError(message => loginFailed),
+              catchError(message => of(loginFailed({ message }))),
             );
           }),
-          catchError(message => loginFailed),
+          catchError(message => of(loginFailed({ message })))
         );
       }),
     );
@@ -45,7 +46,7 @@ export class UserEffects {
       switchMap(action => {
         return this.userService.createNewUser(action.user).pipe(
           map(user => createNewUserSucceeded({ user, wishlist: [] })),
-          catchError(message => createNewUserFailed),
+          catchError(message => of(createNewUserFailed())),
         );
       }),
     );
@@ -57,7 +58,7 @@ export class UserEffects {
       switchMap(action => {
         return this.productsService.addProductToWishlist(action.userId, action.productId).pipe(
           map(wishlist => addProductToWishlistSucceeded({ wishlist })),
-          catchError(message => addProductToWishlistFailed),
+          catchError(message => of(addProductToWishlistFailed())),
         );
       }),
     );
@@ -69,7 +70,7 @@ export class UserEffects {
       switchMap(action => {
         return this.productsService.removeProductFromWishlist(action.userId, action.productId).pipe(
           map(wishlist => removeProductFromWishlistSucceeded({ wishlist })),
-          catchError(message => removeProductFromWishlistFailed),
+          catchError(message => of(removeProductFromWishlistFailed())),
         );
       }),
     );

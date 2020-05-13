@@ -42,9 +42,8 @@ export class UserService {
       errorPolicy: 'all'
     }).pipe(
       map(({ data, errors }) => {
-        // TODO: Handle the case that user put wrong details
         if (errors) {
-          console.log(errors);
+          throw errors[0].message;
         } else {
           return this.mapUserForClient(data.login);
         }
