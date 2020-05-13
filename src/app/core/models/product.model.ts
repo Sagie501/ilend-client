@@ -1,8 +1,9 @@
 import { Comment } from './comment.model';
+import { User } from './user.model';
 
 export type Product = {
   id: string;
-  ownerId: string;
+  owner: User;
   name: string;
   description: string;
   pictureLinks: string[];

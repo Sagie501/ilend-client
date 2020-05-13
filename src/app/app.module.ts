@@ -12,6 +12,7 @@ import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
 
 registerLocaleData(en);
 
@@ -20,6 +21,7 @@ registerLocaleData(en);
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({ }),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 5,
     }),

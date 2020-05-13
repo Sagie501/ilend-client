@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Gender } from '../../../shared/enums/gender.enum';
-import { ProductsService } from '../products/products.service';
 import { Apollo } from 'apollo-angular';
-import { loginQuery } from '../../graphql/user.graphql';
+import { addUserMutation, loginQuery } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -12,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  constructor(private apollo: Apollo, private productsService: ProductsService) {
+  constructor(private apollo: Apollo) {
   }
 
   cities = ['Rehovot', 'Netanya', 'Pardesiya'];
@@ -43,11 +42,31 @@ export class UserService {
       errorPolicy: 'all'
     }).pipe(
       map(({ data, errors }) => {
-        // TODO: Handle the case that user put wrong details
         if (errors) {
-          console.log(errors);
+          throw errors[0].message;
         } else {
           return this.mapUserForClient(data.login);
+        }
+      })
+    );
+  }
+
+  createNewUser(user: any): Observable<User> {
+    return this.apollo.mutate<any>({
+      mutation: addUserMutation,
+      variables: {
+        user: {
+          ...user,
+          birthDate: user.birthDate.getTime()
+        }
+      },
+      errorPolicy: 'all'
+    }).pipe(
+      map(({ data, errors }) => {
+        if (errors) {
+          throw errors[0].message;
+        } else {
+          return this.mapUserForClient(data.addUser);
         }
       })
     );
@@ -56,13 +75,7 @@ export class UserService {
   mapUserForClient(user): User {
     return {
       ...user,
-      birthDate: new Date(user.birthDate),
-      products: user.products.map((product) => {
-        return this.productsService.mapProductForClient(product);
-      }),
-      wishList: user.wishList.map((product) => {
-        return this.productsService.mapProductForClient(product);
-      })
+      birthDate: new Date(user.birthDate)
     };
   }
 }

@@ -10,8 +10,8 @@
     </tr>
     <tr *ngFor="let lease of leasings">
       <td class="leasing-lessor">
-        <ile-user-name-circle [user]="lease.lessor"></ile-user-name-circle>
-        {{ lease.lessor.firstName }}
+        <ile-user-name-circle [user]="lease.lessee"></ile-user-name-circle>
+        {{ lease.lessee.firstName }}
       </td>
       <td>{{ lease.product.name }}</td>
       <td>{{ lease.id }}</td>

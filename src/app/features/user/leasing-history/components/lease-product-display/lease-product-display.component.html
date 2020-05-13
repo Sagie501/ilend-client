@@ -1,5 +1,5 @@
 <div class="lease-product-display">
-  <ile-user-name-circle [user]="leasing.lessor"></ile-user-name-circle>
+  <ile-user-name-circle [user]="leasing.lessee"></ile-user-name-circle>
   <span class="product-name">{{ leasing.product.name }}</span>
   <span class="product-price">${{ leasing.product.requestedPrice }}</span>
   <ile-order-status [status]="leasing.status"></ile-order-status>
@@ -10,5 +10,5 @@
       [size]="'small'"
     ></ile-image>
   </div>
-  <ile-button [text]="'Cancel'"></ile-button>
+  <ile-button [text]="'Cancel'" (clicked)="cancelLeasingRequest()"></ile-button>
 </div>

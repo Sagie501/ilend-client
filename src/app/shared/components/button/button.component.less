@@ -7,8 +7,16 @@
   color: @text-color;
   width: fit-content;
   cursor: pointer;
+  font-family: "Raleway", sans-serif;
+  border: none;
 
-  &:hover {
+  &:hover:not(.disabled) {
     background-color: darken(@secondary-color, 20%);
   }
+}
+
+.disabled {
+  opacity: 0.7;
+  filter: saturate(0.8);
+  pointer-events: none;
 }

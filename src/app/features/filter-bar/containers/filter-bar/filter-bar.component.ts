@@ -49,15 +49,16 @@ export class FilterBarComponent implements OnInit {
 
   countries$: Observable<Option[]> = combineLatest([
       this.addressesService.getCountries(),
-      this.filteringStore.select(getCountryFilterValue)
+      this.filteringStore.select(getCountryFilterValue),
+      this.products$
     ]
   ).pipe(
-    map(([countries, selectedCities]) => {
+    map(([countries, selectedCities, products]) => {
       let countriesOptions: Array<Option> = countries.map((country) => {
         return {
           id: country,
           title: country,
-          amount: Math.floor(Math.random() * 301) // TODO: Need to add the correct logic
+          amount: products.filter((product) => product.owner.country === country).length
         } as Option;
       });
       countriesOptions.forEach((city) => {
@@ -77,14 +78,15 @@ export class FilterBarComponent implements OnInit {
       if (selectedCountries) {
         return combineLatest([
           this.addressesService.getCitiesByCountries(selectedCountries),
-          this.filteringStore.select(getCityFilterValue)
+          this.filteringStore.select(getCityFilterValue),
+          this.products$
         ]).pipe(
-          map(([cities, selectedCities]) => {
+          map(([cities, selectedCities, products]) => {
             let citiesOptions: Array<Option> = cities.map((city) => {
               return {
                 id: city,
                 title: city,
-                amount: Math.floor(Math.random() * 201) // TODO: Need to add the correct logic
+                amount: products.filter((product) => product.owner.city === city).length
               } as Option;
             });
             citiesOptions.forEach((city) => {
