@@ -1,3 +1,20 @@
-<div class="button" [ngClass]="{disabled: disabled}" (click)="clicked.emit()" *ngIf="type === 'button'">{{ text }}</div>
-<button type="submit" class="button" [ngClass]="{disabled: disabled}" *ngIf="type === 'submit'"
-        [disabled]="disabled">{{text}}</button>
+<div class="button" (click)="clicked.emit()" [ngClass]="{ large: isLarge }">
+  {{ text }}
+</div>
+<div
+  class="button"
+  [ngClass]="{ disabled: disabled }"
+  (click)="clicked.emit()"
+  *ngIf="type === 'button'"
+>
+  {{ text }}
+</div>
+<button
+  type="submit"
+  class="button"
+  [ngClass]="{ disabled: disabled }"
+  *ngIf="type === 'submit'"
+  [disabled]="disabled"
+>
+  {{ text }}
+</button>

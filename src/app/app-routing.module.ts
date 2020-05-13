@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
+import { CheckoutComponent } from './features/checkout/containers/checkout/checkout.component';
 import { LeasingHistoryComponent } from './features/user/leasing-history/containers/leasing-history/leasing-history.component';
 import { ProductPageComponent } from './features/product-page/containers/product-page/product-page.component';
 import { LoginComponent } from './features/login/containers/login/login.component';
@@ -30,17 +31,22 @@ const routes: Routes = [
       },
       {
         path: 'products/:id',
-        component: ProductPageComponent
+        component: ProductPageComponent,
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
       },
       {
         path: 'sign-up',
-        component: SignUpComponent
-      }
+        component: SignUpComponent,
+      },
     ],
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'user',
@@ -54,7 +60,7 @@ const routes: Routes = [
       {
         path: 'wishlist',
         component: WishlistComponent,
-      }
+      },
     ],
   },
   {
@@ -72,5 +78,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
