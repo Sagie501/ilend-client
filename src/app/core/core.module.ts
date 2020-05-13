@@ -15,7 +15,6 @@ import { ProductPageModule } from '../features/product-page/product-page.module'
 import { UserModule } from '../features/user/user.module';
 import { LoginModule } from '../features/login/login.module';
 import { SignUpModule } from '../features/sign-up/sign-up.module';
-import { AccountPageComponent } from './components/account-page/account-page/account-page.component';
 import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
@@ -24,8 +23,7 @@ import { MatDividerModule } from '@angular/material/divider';
     SidebarComponent,
     MainComponent,
     HomeComponent,
-    DataOutletComponent,
-    AccountPageComponent
+    DataOutletComponent
   ],
   imports: [
     BrowserModule,
@@ -38,8 +36,7 @@ import { MatDividerModule } from '@angular/material/divider';
     LoginModule,
     SignUpModule,
     ProductsListModule,
-    ProductPageModule,
-    MatDividerModule
+    ProductPageModule
   ],
   providers: [],
 })

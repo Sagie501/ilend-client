@@ -1,0 +1,61 @@
+<div class="account-page">
+  <div class="account-page__title">Account</div>
+  <div class="account">
+    <!-- membership -->
+    <div class="account-section">
+
+      <div class="line">
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="header">Membership</div>
+      <section class="user-account">
+        <div class="user-details">
+          <div class="first-name">First Name:
+            <div class="detail">{{ loggedInUser?.firstName }}</div>
+          </div>
+          <div class="second-name">Last Name:
+            <div class="detail">{{ loggedInUser?.lastName }}</div>
+          </div>
+          <div class="email">Email:
+            <div class="detail">{{ loggedInUser?.email }}</div>
+          </div>
+          <div class="password">Password:
+            <div class="detail">*********</div>
+          </div>
+          <div class="Address">Address:
+            <div
+              class="detail">{{ loggedInUser?.street + ', ' + loggedInUser?.city + ', ' + loggedInUser?.country}}</div>
+          </div>
+        </div>
+        <div class="links">
+          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Change account e-mail</a>
+          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Change password</a>
+          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Change address</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- My profile -->
+    <div class="account-section">
+      <div class="line">
+        <mat-divider></mat-divider>
+      </div>
+
+
+      <div class="header">My profile</div>
+      <section class="user-profile">
+        <div class="links__center">
+          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/wishlist">Wish list</a>
+          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Favorites
+            Categories</a>
+          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Leasing
+            history</a>
+          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Become a
+            lessor</a>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</div>
