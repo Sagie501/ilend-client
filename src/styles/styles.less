@@ -3,6 +3,7 @@
 @import "components.less";
 
 @import "../../node_modules/@angular/cdk/overlay-prebuilt.css";
+@import "../../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 *,
 *::before,
@@ -40,4 +41,8 @@ body {
 ::selection {
   background-color: @primary-color;
   color: @text-color;
+}
+
+.ng-image-slider .ng-image-slider-container .main .main-inner .img-div {
+  box-shadow: none !important;
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'src/app/core/models/user.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Leasing } from 'src/app/core/models/leasing.model';
+import { LeasingStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
 
 @Component({
   selector: 'ile-lease-product-display',
@@ -8,9 +8,17 @@ import { Leasing } from 'src/app/core/models/leasing.model';
   styleUrls: ['./lease-product-display.component.less'],
 })
 export class LeaseProductDisplayComponent implements OnInit {
+
   @Input() leasing: Leasing;
+  @Output() changeLeasingRequestStatus: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  cancelLeasingRequest() {
+    this.changeLeasingRequestStatus.emit({ leasingId: this.leasing.id, status: LeasingStatusFromServer.DENIED });
+  }
 }

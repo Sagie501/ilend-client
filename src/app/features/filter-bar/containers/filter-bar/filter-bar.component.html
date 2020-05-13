@@ -1,9 +1,12 @@
 <div class="filter-bar">
   <ile-search (search)="search($event)"></ile-search>
-  <ile-price-filter (changed)="priceChanged($event)">
+  <ile-price-filter [products]="products$ | async" (changed)="priceChanged($event)">
   </ile-price-filter>
   <ile-dropdown-filter class="category-filter" [title]="'Category'" [values]="categories$ | async"
     (changed)="categoriesChanged($event)">
+  </ile-dropdown-filter>
+  <ile-dropdown-filter class="country-filter" [title]="'Country'" [values]="countries$ | async"
+                       (changed)="countriesChanged($event)">
   </ile-dropdown-filter>
   <ile-dropdown-filter class="city-filter" [title]="'City'" [values]="cities$ | async"
     (changed)="citiesChanged($event)">

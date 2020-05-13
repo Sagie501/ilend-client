@@ -1,0 +1,31 @@
+<div class="login-container">
+  <span style="width: fit-content">Welcome to ILend!</span>
+  <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email').hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" [errorStateMatcher]="matcher"
+             type="password">
+      <mat-error *ngIf="loginForm.get('password').hasError('required')">
+        password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="sign-up-tip">Don't have a user yet? <a routerLink="/home/sign-up">Sign Up</a> now!</div>
+
+    <ile-button [text]="'Login'" [type]="'submit'" [disabled]="!loginForm.valid"></ile-button>
+  </form>
+
+  <span class="login-error-message">{{ loginErrorMessage }}</span>
+</div>

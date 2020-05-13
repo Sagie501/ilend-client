@@ -16,6 +16,11 @@ export const filterByCategory = createAction(
   props<{ value: DropdownFilter }>()
 );
 
+export const filterByCountry = createAction(
+  '[Filter] Filter by country',
+  props<{ value: DropdownFilter }>()
+);
+
 export const filterByCity = createAction(
   '[Filter] Filter by city',
   props<{ value: DropdownFilter }>()

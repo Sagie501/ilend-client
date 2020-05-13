@@ -11,7 +11,8 @@ export class UserNameCircleComponent implements OnInit {
   initials: string;
   userColor: string;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.initials = this.getInitials().toUpperCase();
@@ -26,21 +27,21 @@ export class UserNameCircleComponent implements OnInit {
 
   hashCode(str) {
     // java String#hashCode
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
     return hash;
   }
 
   getUserColor(name: string) {
-    var hash = 0;
-    for (var i = 0; i < name.length; i++) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
       hash = name.charCodeAt(i) + ((hash << 5) - hash);
     }
-    var colour = '#';
-    for (var i = 0; i < 3; i++) {
-      var value = (hash >> (i * 8)) & 0xff;
+    let colour = '#';
+    for (let i = 0; i < 3; i++) {
+      let value = (hash >> (i * 8)) & 0xff;
       colour += ('00' + value.toString(16)).substr(-2);
     }
     return colour;

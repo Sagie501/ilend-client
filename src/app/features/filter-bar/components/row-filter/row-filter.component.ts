@@ -12,7 +12,9 @@ export class RowFilterComponent implements OnInit {
 
   @Output() changed: EventEmitter<DropdownFilter> = new EventEmitter();
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }
