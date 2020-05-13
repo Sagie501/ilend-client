@@ -31,21 +31,22 @@ const routes: Routes = [
       },
       {
         path: 'products/:id',
-        component: ProductPageComponent
+        component: ProductPageComponent,
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
       },
       {
         path: 'sign-up',
-        component: SignUpComponent
-      }
+        component: SignUpComponent,
+      },
     ],
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'user',
@@ -59,7 +60,7 @@ const routes: Routes = [
       {
         path: 'wishlist',
         component: WishlistComponent,
-      }
+      },
     ],
   },
   {
@@ -77,5 +78,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
