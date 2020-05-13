@@ -1,9 +1,6 @@
-<div class="button" (click)="clicked.emit()" [ngClass]="{ large: isLarge }">
-  {{ text }}
-</div>
 <div
   class="button"
-  [ngClass]="{ disabled: disabled }"
+  [ngClass]="{ disabled: disabled, large: isLarge }"
   (click)="clicked.emit()"
   *ngIf="type === 'button'"
 >
