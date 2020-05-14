@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './effects/user.effects';
 import { LeasingHistoryModule } from './leasing-history/leasing-history.module';
 import { WishlistModule } from './wishlist/wishlist.module';
+import { MyAccountModule } from './my-account/my-account.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { WishlistModule } from './wishlist/wishlist.module';
     EffectsModule.forFeature([UserEffects]),
     CommonModule,
     LeasingHistoryModule,
-    WishlistModule
+    WishlistModule,
+    MyAccountModule
   ]
 })
 export class UserModule { }
