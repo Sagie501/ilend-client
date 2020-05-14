@@ -4,7 +4,6 @@ import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
 import { CheckoutComponent } from './features/checkout/containers/checkout/checkout.component';
 import { LeasingHistoryComponent } from './features/user/leasing-history/containers/leasing-history/leasing-history.component';
-import { AccountPageComponent } from './core/components/account-page/account-page/account-page.component';
 import { ProductPageComponent } from './features/product-page/containers/product-page/product-page.component';
 import { LoginComponent } from './features/login/containers/login/login.component';
 import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.component';
@@ -74,8 +73,8 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'account-page',
-        component: AccountPageComponent,
+        path: 'my-account',
+        component: MyAccountComponent,
       },
     ],
   },
