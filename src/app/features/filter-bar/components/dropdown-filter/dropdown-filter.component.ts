@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  Input,
-  InjectionToken,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, } from '@angular/core';
 import { DropdownFilterOverlayService } from '../../services/overlay/dropdown/dropdown-filter-overlay.service';
 import { Option } from '../../models/options.model';
 import { DropdownFilter } from '../../models/dropdown-filter.model';
@@ -27,9 +18,11 @@ export class DropdownFilterComponent implements OnInit {
 
   constructor(
     private dropdownFilterOverlayService: DropdownFilterOverlayService
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   openOverlay() {
     this.dropdownFilterOverlayService.open(

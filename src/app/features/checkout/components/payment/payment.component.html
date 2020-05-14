@@ -1,0 +1,76 @@
+<div class="payment">
+  <div class="headline">Card Details</div>
+
+  <ile-credit-card-simulator
+    class="credit-card"
+    [ngClass]="{
+      'card-left': isVisa,
+      'card-right': !isVisa,
+      'credit-card__hidden': !hasCreditCard()
+    }"
+    [isVisa]="isVisa"
+    [cardNumber]="getValue('creditCard')"
+    [name]="getValue('name')"
+    [expirationDate]="getValue('expDate')"
+  ></ile-credit-card-simulator>
+
+  <form [formGroup]="paymentForm" novalidate class="payment-form">
+    <div class="payment-field name-field">
+      <label for="name">Name on Card</label>
+      <input
+        id="name"
+        formControlName="name"
+        type="text"
+        class="cc-name"
+        placeholder="Name on Card"
+      />
+    </div>
+
+    <div class="payment-field cc-number-field">
+      <label for="cc-number">Card Number</label>
+      <input
+        id="cc-number"
+        (input)="goToNextField('creditCard', expireInput)"
+        formControlName="creditCard"
+        #creditCard
+        type="tel"
+        class="cc-number"
+        autocomplete="cc-number"
+        placeholder="••••  ••••  ••••  ••••"
+        ccNumber
+      />
+    </div>
+
+    <div class="payment-field cc-exp-field">
+      <label for="cc-exp">Expiration Date</label>
+      <input
+        id="cc-exp"
+        (input)="goToNextField('expDate', cvcInput)"
+        #expireInput
+        formControlName="expDate"
+        type="tel"
+        class="cc-exp"
+        autocomplete="cc-exp"
+        placeholder="•• / ••"
+        ccExp
+      />
+    </div>
+
+    <div class="payment-field cc-cvc-field">
+      <label for="cc-cvc">CVV</label>
+      <input
+        id="cc-cvc"
+        #cvcInput
+        formControlName="cvc"
+        type="tel"
+        class="cc-cvc"
+        autocomplete="off"
+        placeholder="•••"
+        required
+        ccCVC
+      />
+    </div>
+  </form>
+
+  <ile-button [text]="'Checkout'" [isLarge]="true"></ile-button>
+</div>

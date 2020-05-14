@@ -10,11 +10,11 @@
     </tr>
     <tr *ngFor="let lease of leasings">
       <td class="leasing-lessor">
-        <ile-user-name-circle [user]="lease.lessor"></ile-user-name-circle>
-        {{ lease.lessor.firstName }}
+        <ile-user-name-circle [user]="lease.lessee"></ile-user-name-circle>
+        {{ lease.lessee.firstName }}
       </td>
       <td>{{ lease.product.name }}</td>
-      <td>{{ lease.leasingID }}</td>
+      <td>{{ lease.id }}</td>
       <td>{{ lease.startDate | date: "dd / MM / yyyy" }}</td>
       <td>${{ lease.product.requestedPrice }}</td>
       <td><ile-order-status [status]="lease.status"></ile-order-status></td>

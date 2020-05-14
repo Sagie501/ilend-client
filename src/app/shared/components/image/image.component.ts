@@ -9,7 +9,9 @@ export class ImageComponent implements OnInit {
   @Input() link: string;
   @Input() size: string;
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

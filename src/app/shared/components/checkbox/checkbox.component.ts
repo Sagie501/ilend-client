@@ -12,9 +12,11 @@ export class CheckboxComponent implements OnInit {
 
   @Output() changed: EventEmitter<DropdownFilter> = new EventEmitter();
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   onChanged() {
     this.changed.emit({ id: this.id, isChecked: !this.isChecked });

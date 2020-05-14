@@ -3,30 +3,41 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from './components/search/search.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { AmountComponent } from './components/amount/amount.component';
+import { HeaderComponent } from './components/header/header.component';
 import { UserNameCircleComponent } from './components/user-name-circle/user-name-circle.component';
 import { ButtonComponent } from './components/button/button.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { ImageComponent } from './components/image/image.component';
+import { ImagesSliderComponent } from './components/images-slider/images-slider.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
     SearchComponent,
     CheckboxComponent,
     AmountComponent,
+    HeaderComponent,
     UserNameCircleComponent,
     ButtonComponent,
     OrderStatusComponent,
     ImageComponent,
+    ImagesSliderComponent,
+    ProductCardComponent
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, NgImageSliderModule],
   exports: [
     SearchComponent,
     CheckboxComponent,
     AmountComponent,
+    HeaderComponent,
     UserNameCircleComponent,
     ButtonComponent,
     OrderStatusComponent,
     ImageComponent,
+    ImagesSliderComponent,
+    ProductCardComponent
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}
