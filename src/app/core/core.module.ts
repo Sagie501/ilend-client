@@ -8,12 +8,14 @@ import { SharedModule } from '../shared/shared.module';
 import { FilterBarModule } from '../features/filter-bar/filter-bar.module';
 import { HomeComponent } from './containers/home/home.component';
 import { DataOutletComponent } from './containers/data-outlet/data-outlet.component';
-import { AccountPageComponent } from './components/account-page/account-page/account-page.component';
-import {MatDividerModule} from '@angular/material/divider';
-
-
 import { CheckoutModule } from '../features/checkout/checkout.module';
 import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-history.module';
+import { MatDividerModule } from '@angular/material/divider';
+import { UserModule } from '../features/user/user.module';
+import { LoginModule } from '../features/login/login.module';
+import { SignUpModule } from '../features/sign-up/sign-up.module';
+import { ProductsListModule } from '../features/products-list/products-list.module';
+import { ProductPageModule } from '../features/product-page/product-page.module';
 
 @NgModule({
   declarations: [
@@ -21,8 +23,7 @@ import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-h
     SidebarComponent,
     MainComponent,
     HomeComponent,
-    DataOutletComponent,
-    AccountPageComponent,
+    DataOutletComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +32,14 @@ import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-h
     FilterBarModule,
     CheckoutModule,
     LeasingHistoryModule,
-    MatDividerModule
+    MatDividerModule,
+    UserModule,
+    LoginModule,
+    SignUpModule,
+    ProductsListModule,
+    ProductPageModule
   ],
   providers: [],
 })
-export class CoreModule {}
+export class CoreModule {
+}

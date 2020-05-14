@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
 import { CheckoutComponent } from './features/checkout/containers/checkout/checkout.component';
@@ -10,6 +10,7 @@ import { LoginComponent } from './features/login/containers/login/login.componen
 import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.component';
 import { WishlistComponent } from './features/user/wishlist/containers/wishlist/wishlist.component';
 import { AuthGuard } from './core/services/auth-guard/auth.guard';
+import { MyAccountComponent } from './features/user/my-account/containers/my-account/my-account.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,7 @@ const routes: Routes = [
       {
         path: 'sign-up',
         component: SignUpComponent,
-      },
+      }
     ],
   },
   {
@@ -55,13 +56,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
+        path: 'my-account',
+        component: MyAccountComponent,
+      },
+      {
         path: 'leasing-history',
         component: LeasingHistoryComponent,
       },
       {
         path: 'wishlist',
         component: WishlistComponent,
-      },
+      }
     ],
   },
   {
@@ -87,6 +92,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
