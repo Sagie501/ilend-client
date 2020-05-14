@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Gender } from '../../../shared/enums/gender.enum';
 import { Apollo } from 'apollo-angular';
-import { addUserMutation, loginQuery } from '../../graphql/user.graphql';
+import { addUserMutation, loginQuery, updateUserMutation } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -67,6 +67,25 @@ export class UserService {
           throw errors[0].message;
         } else {
           return this.mapUserForClient(data.addUser);
+        }
+      })
+    );
+  }
+
+  updateUser(userId: string, partialUser: any): Observable<User> {
+    return this.apollo.mutate<any>({
+      mutation: updateUserMutation,
+      variables: {
+        userId,
+        user: partialUser
+      },
+      errorPolicy: 'all'
+    }).pipe(
+      map(({ data, errors }) => {
+        if (errors) {
+          throw errors[0].message;
+        } else {
+          return this.mapUserForClient(data.updateUser);
         }
       })
     );

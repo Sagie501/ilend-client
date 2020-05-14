@@ -63,3 +63,19 @@ export const removeProductFromWishlistSucceeded = createAction(
 export const removeProductFromWishlistFailed = createAction(
   '[User] Remove Product From Wishlist Failed'
 );
+
+export const updateUser = createAction(
+  '[User] Update User',
+  props<{ userId: string, partialUser: any }>()
+);
+
+export const updateUserSucceeded = createAction(
+  '[User] Update User Succeeded',
+  props<{ user: User }>()
+);
+
+export const updateUserFailed = createAction(
+  '[User] Update User Failed',
+  props<{ message: string }>()
+);
+

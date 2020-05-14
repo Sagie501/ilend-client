@@ -2,14 +2,21 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../../../core/services/user/user.service';
 import {
-  addProductToWishlist, addProductToWishlistFailed, addProductToWishlistSucceeded,
+  addProductToWishlist,
+  addProductToWishlistFailed,
+  addProductToWishlistSucceeded,
   createNewUser,
   createNewUserFailed,
   createNewUserSucceeded,
   login,
   loginFailed,
   loginSucceeded,
-  removeProductFromWishlist, removeProductFromWishlistFailed, removeProductFromWishlistSucceeded
+  removeProductFromWishlist,
+  removeProductFromWishlistFailed,
+  removeProductFromWishlistSucceeded,
+  updateUser,
+  updateUserFailed,
+  updateUserSucceeded
 } from '../actions/user.actoins';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products/products.service';
@@ -47,6 +54,18 @@ export class UserEffects {
         return this.userService.createNewUser(action.user).pipe(
           map(user => createNewUserSucceeded({ user, wishlist: [] })),
           catchError(message => of(createNewUserFailed({ message }))),
+        );
+      }),
+    );
+  });
+
+  updateUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateUser),
+      switchMap(action => {
+        return this.userService.updateUser(action.userId, action.partialUser).pipe(
+          map(user => updateUserSucceeded({ user })),
+          catchError(message => of(updateUserFailed({ message }))),
         );
       }),
     );

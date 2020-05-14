@@ -34,3 +34,12 @@ export const addUserMutation = gql`
   }
   ${userFragment}
 `;
+
+export const updateUserMutation = gql`
+  mutation updateUser($userId: ID!, $user: UserInput!) {
+    updateUser(userId: $userId, user: $user) {
+      ...UserFragment
+    }
+  }
+  ${userFragment}
+`;
