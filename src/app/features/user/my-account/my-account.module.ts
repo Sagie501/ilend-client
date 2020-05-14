@@ -8,11 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';
 
 
 
 @NgModule({
-  declarations: [MyAccountComponent, EmailDialogComponent],
+  declarations: [MyAccountComponent, EmailDialogComponent, PasswordDialogComponent],
   imports: [
     CommonModule,
     MatDividerModule,

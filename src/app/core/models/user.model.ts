@@ -12,4 +12,5 @@ export type User = {
   city: string;
   street: string;
   zipCode: string;
+  password: string;
 };

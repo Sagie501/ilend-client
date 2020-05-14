@@ -14,6 +14,7 @@ export const userFragment = gql`
     street
     zipCode
     isAdmin
+    password
   }
 `;
 

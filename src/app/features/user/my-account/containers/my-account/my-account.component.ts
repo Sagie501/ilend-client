@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EmailDialogComponent } from '../../components/email-dialog/email-dialog.component';
 import { updateUser, updateUserFailed } from '../../../actions/user.actoins';
 import { Actions, ofType } from '@ngrx/effects';
+import { PasswordDialogComponent } from '../../components/password-dialog/password-dialog.component';
 
 @Component({
   selector: 'ile-my-account',
@@ -17,7 +18,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
 
   loggedInUser: User;
   subscriptions: Array<Subscription>;
-  dialogRef: MatDialogRef<EmailDialogComponent>;
+  dialogRef: MatDialogRef<EmailDialogComponent | PasswordDialogComponent>;
 
   constructor(private userStore: Store<UserState>, private dialog: MatDialog, private actions$: Actions) {
   }
@@ -47,8 +48,21 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       autoFocus: false
     });
 
-    this.dialogRef.componentInstance.changeEmailEvent.subscribe((newEmail) => {
+    (this.dialogRef.componentInstance as EmailDialogComponent).changeEmailEvent.subscribe((newEmail) => {
       this.userStore.dispatch(updateUser({ userId: this.loggedInUser.id, partialUser: { email: newEmail } }));
+    });
+  }
+
+  openPasswordDialog() {
+    this.dialogRef = this.dialog.open(PasswordDialogComponent, {
+      autoFocus: false,
+      data: {
+        password: this.loggedInUser.password
+      }
+    });
+
+    (this.dialogRef.componentInstance as PasswordDialogComponent).changePasswordEvent.subscribe((newPassword) => {
+      this.userStore.dispatch(updateUser({ userId: this.loggedInUser.id, partialUser: { password: newPassword } }));
     });
   }
 
