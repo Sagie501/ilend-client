@@ -69,16 +69,6 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'user',
-    component: MainComponent,
-    children: [
-      {
-        path: 'my-account',
-        component: MyAccountComponent,
-      },
-    ],
-  },
-  {
     path: '',
     redirectTo: '/home/products',
     pathMatch: 'full',
