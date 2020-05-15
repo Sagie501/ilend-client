@@ -1,5 +1,6 @@
 import { Comment } from './comment.model';
 import { User } from './user.model';
+import { Category } from './category.model';
 
 export type Product = {
   id: string;
@@ -8,7 +9,7 @@ export type Product = {
   description: string;
   pictureLinks: string[];
   requestedPrice: number;
-  categoryId: string;
+  category: Category;
   rating: number;
   comments: Comment[];
 };

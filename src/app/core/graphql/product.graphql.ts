@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { commentFragment } from './comment.graphql';
 import { userFragment } from './user.graphql';
+import { categoryFragment } from './category.graphql';
 
 export const productFragment = gql`
   fragment ProductFragment on Product {
@@ -14,13 +15,14 @@ export const productFragment = gql`
       ...UserFragment
     }
     category {
-      id
+      ...CategoryFragment
     }
     comments {
       ...CommentFragment
     }
    }
    ${userFragment}
+   ${categoryFragment}
    ${commentFragment}
 `;
 

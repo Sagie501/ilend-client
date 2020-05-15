@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { categoryFragment } from './category.graphql';
 
 export const userFragment = gql`
   fragment UserFragment on User {
@@ -15,7 +16,11 @@ export const userFragment = gql`
     zipCode
     isAdmin
     password
+    favoriteCategories {
+      ...CategoryFragment
+    }
   }
+  ${categoryFragment}
 `;
 
 export const loginQuery = gql`
@@ -39,6 +44,24 @@ export const addUserMutation = gql`
 export const updateUserMutation = gql`
   mutation updateUser($userId: ID!, $user: UserInput!) {
     updateUser(userId: $userId, user: $user) {
+      ...UserFragment
+    }
+  }
+  ${userFragment}
+`;
+
+export const addFavoriteCategoriesMutation = gql`
+  mutation addFavoriteCategories($userId: ID!, $categoriesIds: [ID]!) {
+    addFavoriteCategories(userId: $userId, categoriesIds: $categoriesIds) {
+      ...UserFragment
+    }
+  }
+  ${userFragment}
+`;
+
+export const removeFavoriteCategoriesMutation = gql`
+  mutation removeFavoriteCategories($userId: ID!, $categoriesIds: [ID]!) {
+    removeFavoriteCategories(userId: $userId, categoriesIds: $categoriesIds) {
       ...UserFragment
     }
   }

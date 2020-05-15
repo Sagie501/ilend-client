@@ -5,7 +5,9 @@ import {
   createNewUserSucceeded,
   loginSucceeded,
   logout,
-  removeProductFromWishlistSucceeded, updateUserSucceeded
+  removeProductFromWishlistSucceeded,
+  updateUserFavoriteCategoriesSucceeded,
+  updateUserSucceeded
 } from '../actions/user.actoins';
 import { Product } from '../../../core/models/product.model';
 
@@ -32,7 +34,7 @@ export const userReducer = createReducer(
       userWishlist: action.wishlist
     };
   }),
-  on(updateUserSucceeded, (state, action) => {
+  on(updateUserSucceeded, updateUserFavoriteCategoriesSucceeded, (state, action) => {
     localStorage.setItem('logged-in-user', JSON.stringify(action.user));
     return {
       ...state,

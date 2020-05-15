@@ -11,11 +11,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';
 import { AddressDialogComponent } from './components/address-dialog/address-dialog.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FavoriteCategoriesDialogComponent } from './components/favorite-categories-dialog/favorite-categories-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
 @NgModule({
-  declarations: [MyAccountComponent, EmailDialogComponent, PasswordDialogComponent, AddressDialogComponent],
+  declarations: [MyAccountComponent, EmailDialogComponent, PasswordDialogComponent, AddressDialogComponent,
+    FavoriteCategoriesDialogComponent],
   imports: [
     CommonModule,
     MatDividerModule,
@@ -24,7 +28,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSnackBarModule,
+    MatSelectModule
   ]
 })
 export class MyAccountModule { }

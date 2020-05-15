@@ -79,3 +79,17 @@ export const updateUserFailed = createAction(
   props<{ message: string }>()
 );
 
+export const updateUserFavoriteCategories = createAction(
+  '[User] Update User Favorite Categories',
+  props<{ userId: string, favoriteCategoriesIds: Array<string> }>()
+);
+
+export const updateUserFavoriteCategoriesSucceeded = createAction(
+  '[User] Update User Favorite Categories Succeeded',
+  props<{ user: User }>()
+);
+
+export const updateUserFavoriteCategoriesFailed = createAction(
+  '[User] Update User Favorite Categories Failed',
+  props<{ message: string }>()
+);

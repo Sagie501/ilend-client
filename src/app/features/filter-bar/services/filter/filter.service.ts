@@ -61,7 +61,7 @@ export class FilterService {
   // TODO: Use the real categories from the DB
   generateFilterByCategory(filteredCategories: string[]) {
     return filteredCategories
-      ? (product: Product) => filteredCategories.includes(product.categoryId)
+      ? (product: Product) => filteredCategories.includes(product.category.id)
       : alwaysTrue;
   }
 
