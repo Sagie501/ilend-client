@@ -13,7 +13,7 @@ import {
 } from '../actions/user.actoins';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products/products.service';
-import { of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
@@ -27,9 +27,9 @@ export class UserEffects {
       switchMap(action => {
         return this.userService.login(action.email, action.password).pipe(
           switchMap((user) => {
-            return this.productsService.getUserWishlist(user.id).pipe(
-              map((wishlist) => {
-                return loginSucceeded({ user, wishlist });
+            return forkJoin([this.productsService.getUserWishlist(user.id), this.productsService.getProductsByUserId(user.id)]).pipe(
+              map(([wishlist, products]) => {
+                return loginSucceeded({ user, wishlist, products });
               }),
               catchError(message => of(loginFailed({ message }))),
             );
@@ -45,7 +45,7 @@ export class UserEffects {
       ofType(createNewUser),
       switchMap(action => {
         return this.userService.createNewUser(action.user).pipe(
-          map(user => createNewUserSucceeded({ user, wishlist: [] })),
+          map(user => createNewUserSucceeded({ user, wishlist: [], products: [] })),
           catchError(message => of(createNewUserFailed({ message }))),
         );
       }),

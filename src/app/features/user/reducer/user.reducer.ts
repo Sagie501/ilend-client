@@ -14,11 +14,13 @@ export const userToken = 'userReducer';
 export class UserState {
   loggedInUser: User;
   userWishlist: Array<Product>;
+  userProducts: Array<Product>;
 }
 
 export let initialState: UserState = {
   loggedInUser: JSON.parse(localStorage.getItem('logged-in-user')),
-  userWishlist: JSON.parse(localStorage.getItem('user-wish-list'))
+  userWishlist: JSON.parse(localStorage.getItem('user-wish-list')),
+  userProducts: JSON.parse(localStorage.getItem('user-products'))
 };
 
 export const userReducer = createReducer(
@@ -26,10 +28,12 @@ export const userReducer = createReducer(
   on(loginSucceeded, createNewUserSucceeded, (state, action) => {
     localStorage.setItem('logged-in-user', JSON.stringify(action.user));
     localStorage.setItem('user-wish-list', JSON.stringify(action.wishlist));
+    localStorage.setItem('user-products', JSON.stringify(action.products));
     return {
       ...state,
       loggedInUser: action.user,
-      userWishlist: action.wishlist
+      userWishlist: action.wishlist,
+      userProducts: action.products
     };
   }),
   on(addProductToWishlistSucceeded, removeProductFromWishlistSucceeded, (state, action) => {
@@ -59,4 +63,9 @@ export const getLoggedInUser = createSelector(
 export const getUserWishlist = createSelector(
   getState,
   (state: UserState) => state.userWishlist
+);
+
+export const getUserProducts = createSelector(
+  getState,
+  (state: UserState) => state.userProducts
 );

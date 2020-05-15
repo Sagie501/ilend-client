@@ -5,9 +5,9 @@ import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import {
   addToWishlistMutation,
-  getProductByIdQuery,
+  getProductByIdQuery, getProductsByUserIdQuery,
   getProductsQuery,
-  getUserWishlist,
+  getUserWishlistQuery,
   removeFromWishlistMutation
 } from '../../graphql/product.graphql';
 import { CommentsService } from '../comments/comments.service';
@@ -48,9 +48,26 @@ export class ProductsService {
     );
   }
 
-  getUserWishlist(userId): Observable<Array<Product>> {
+  getProductsByUserId(userId: string): Observable<Array<Product>> {
     return this.apollo.query<any>({
-      query: getUserWishlist,
+      query: getProductsByUserIdQuery,
+      variables: {
+        userId
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        let products = data.getProductsByUserId;
+        products = products.map((product) => {
+          return this.mapProductForClient(product);
+        });
+        return products as Array<Product>;
+      })
+    );
+  }
+
+  getUserWishlist(userId: string): Observable<Array<Product>> {
+    return this.apollo.query<any>({
+      query: getUserWishlistQuery,
       variables: {
         userId
       }

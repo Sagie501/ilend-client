@@ -9,7 +9,7 @@ export const login = createAction(
 
 export const loginSucceeded = createAction(
   '[User] Login Succeeded',
-  props<{ user: User, wishlist: Array<Product> }>()
+  props<{ user: User, wishlist: Array<Product>, products: Array<Product> }>()
 );
 
 export const loginFailed = createAction(
@@ -28,7 +28,7 @@ export const createNewUser = createAction(
 
 export const createNewUserSucceeded = createAction(
   '[User] Create New User Succeeded',
-  props<{ user: User, wishlist: Array<Product> }>()
+  props<{ user: User, wishlist: Array<Product>, products: Array<Product> }>()
 );
 
 export const createNewUserFailed = createAction(

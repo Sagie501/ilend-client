@@ -42,7 +42,16 @@ export const getProductByIdQuery = gql`
   ${productFragment}
 `;
 
-export const getUserWishlist = gql`
+export const getProductsByUserIdQuery = gql`
+  query getProductsByUserId($userId: ID!) {
+    getProductsByUserId(userId: $userId) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
+
+export const getUserWishlistQuery = gql`
   query getUserWishList($userId: ID!) {
     getUserWishList(userId: $userId) {
       ...ProductFragment
