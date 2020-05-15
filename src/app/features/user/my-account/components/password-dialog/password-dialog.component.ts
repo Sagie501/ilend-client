@@ -16,7 +16,7 @@ export class PasswordDialogComponent implements OnInit {
     confirmNewPassword: new FormControl('', [Validators.required, this.checkIfMatchingPasswords.bind(this)]),
   });
   matcher = new MyErrorStateMatcher();
-  @Output() changePasswordEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() changeUserEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { password: string, errorMessage: string }) { }
 

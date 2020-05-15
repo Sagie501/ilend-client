@@ -19,7 +19,7 @@
     <span *ngIf="data.errorMessage" class="error-message">{{ data.errorMessage }}</span>
   </div>
   <div mat-dialog-actions>
-    <button mat-stroked-button color="primary" (click)="changeEmailEvent.emit(emailFormControl.value)"
+    <button mat-stroked-button color="primary" (click)="changeUserEvent.emit(emailFormControl.value)"
             [disabled]="emailFormControl.invalid">Change my email</button>
     <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
   </div>

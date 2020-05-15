@@ -8,6 +8,7 @@ import { EmailDialogComponent } from '../../components/email-dialog/email-dialog
 import { updateUser, updateUserFailed } from '../../../actions/user.actoins';
 import { Actions, ofType } from '@ngrx/effects';
 import { PasswordDialogComponent } from '../../components/password-dialog/password-dialog.component';
+import { AddressDialogComponent } from '../../components/address-dialog/address-dialog.component';
 
 @Component({
   selector: 'ile-my-account',
@@ -18,7 +19,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
 
   loggedInUser: User;
   subscriptions: Array<Subscription>;
-  dialogRef: MatDialogRef<EmailDialogComponent | PasswordDialogComponent>;
+  dialogRef: MatDialogRef<EmailDialogComponent | PasswordDialogComponent | AddressDialogComponent>;
 
   constructor(private userStore: Store<UserState>, private dialog: MatDialog, private actions$: Actions) {
   }
@@ -48,7 +49,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       autoFocus: false
     });
 
-    (this.dialogRef.componentInstance as EmailDialogComponent).changeEmailEvent.subscribe((newEmail) => {
+    this.dialogRef.componentInstance.changeUserEvent.subscribe((newEmail) => {
       this.userStore.dispatch(updateUser({ userId: this.loggedInUser.id, partialUser: { email: newEmail } }));
     });
   }
@@ -61,8 +62,24 @@ export class MyAccountComponent implements OnInit, OnDestroy {
       }
     });
 
-    (this.dialogRef.componentInstance as PasswordDialogComponent).changePasswordEvent.subscribe((newPassword) => {
+    this.dialogRef.componentInstance.changeUserEvent.subscribe((newPassword) => {
       this.userStore.dispatch(updateUser({ userId: this.loggedInUser.id, partialUser: { password: newPassword } }));
+    });
+  }
+
+  openAddressDialog() {
+    this.dialogRef = this.dialog.open(AddressDialogComponent, {
+      autoFocus: false,
+      data: {
+        zipCode: this.loggedInUser.zipCode,
+        street: this.loggedInUser.street,
+        city: this.loggedInUser.city,
+        country: this.loggedInUser.country
+      }
+    });
+
+    this.dialogRef.componentInstance.changeUserEvent.subscribe((newAddress) => {
+      this.userStore.dispatch(updateUser({ userId: this.loggedInUser.id, partialUser: { ...newAddress } }));
     });
   }
 

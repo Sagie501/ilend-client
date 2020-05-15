@@ -9,11 +9,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';
+import { AddressDialogComponent } from './components/address-dialog/address-dialog.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
 @NgModule({
-  declarations: [MyAccountComponent, EmailDialogComponent, PasswordDialogComponent],
+  declarations: [MyAccountComponent, EmailDialogComponent, PasswordDialogComponent, AddressDialogComponent],
   imports: [
     CommonModule,
     MatDividerModule,
@@ -21,7 +23,8 @@ import { PasswordDialogComponent } from './components/password-dialog/password-d
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule
   ]
 })
 export class MyAccountModule { }

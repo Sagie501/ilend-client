@@ -12,7 +12,7 @@ export class EmailDialogComponent implements OnInit {
 
   emailFormControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
-  @Output() changeEmailEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() changeUserEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { email: string, errorMessage: string }) {
   }
