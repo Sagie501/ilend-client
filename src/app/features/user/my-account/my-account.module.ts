@@ -15,8 +15,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FavoriteCategoriesDialogComponent } from './components/favorite-categories-dialog/favorite-categories-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
 
-
-
 @NgModule({
   declarations: [MyAccountComponent, EmailDialogComponent, PasswordDialogComponent, AddressDialogComponent,
     FavoriteCategoriesDialogComponent],
