@@ -36,6 +36,7 @@
     "highcharts-angular": "^2.4.0",
     "ng-image-slider": "^2.5.0",
     "ng5-slider": "^1.2.4",
+    "ngx-material-file-input": "^2.1.1",
     "rxjs": "~6.5.5",
     "tslib": "^1.12.0",
     "zone.js": "~0.10.3"

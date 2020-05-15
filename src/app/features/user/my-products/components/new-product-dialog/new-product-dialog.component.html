@@ -1,0 +1,56 @@
+<div class="product-dialog">
+  <span class="header" mat-dialog-title>Create new product!</span>
+  <div mat-dialog-content>
+    <form [formGroup]="productFormGroup" class="product-form">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input required matInput formControlName="name" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="productFormGroup.get('name').hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input required matInput formControlName="description" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="productFormGroup.get('description').hasError('required')">
+          Description is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Requested Price</mat-label>
+        <input required matInput formControlName="requestedPrice" [errorStateMatcher]="matcher" type="number">
+        <mat-error *ngIf="productFormGroup.get('requestedPrice').hasError('required')">
+          Requested price is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category" required>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="productFormGroup.get('category').hasError('required')">
+          Category is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Product images</mat-label>
+        <ngx-mat-file-input formControlName="imageFiles" multiple accept="image/*"></ngx-mat-file-input>
+        <mat-error *ngIf="productFormGroup.get('imageFiles').hasError('required')">
+          At least one image is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <span *ngIf="data?.errorMessage" class="error-message">{{ data?.errorMessage }}</span>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="createProductEvent.emit(productFormGroup.value)"
+            [disabled]="productFormGroup.invalid">Create new product</button>
+    <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
+  </div>
+</div>
