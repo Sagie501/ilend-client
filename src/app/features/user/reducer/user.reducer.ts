@@ -1,6 +1,7 @@
 import { User } from '../../../core/models/user.model';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import {
+  addNewProductSucceeded,
   addProductToWishlistSucceeded,
   createNewUserSucceeded,
   loginSucceeded,
@@ -19,16 +20,14 @@ export class UserState {
 
 export let initialState: UserState = {
   loggedInUser: JSON.parse(localStorage.getItem('logged-in-user')),
-  userWishlist: JSON.parse(localStorage.getItem('user-wish-list')),
-  userProducts: JSON.parse(localStorage.getItem('user-products'))
+  userWishlist: null,
+  userProducts: null
 };
 
 export const userReducer = createReducer(
   initialState,
   on(loginSucceeded, createNewUserSucceeded, (state, action) => {
     localStorage.setItem('logged-in-user', JSON.stringify(action.user));
-    localStorage.setItem('user-wish-list', JSON.stringify(action.wishlist));
-    localStorage.setItem('user-products', JSON.stringify(action.products));
     return {
       ...state,
       loggedInUser: action.user,
@@ -37,15 +36,21 @@ export const userReducer = createReducer(
     };
   }),
   on(addProductToWishlistSucceeded, removeProductFromWishlistSucceeded, (state, action) => {
-    localStorage.setItem('user-wish-list', JSON.stringify(action.wishlist));
     return {
       ...state,
       userWishlist: action.wishlist
     };
   }),
+  on(addNewProductSucceeded, (state, action) => {
+    let newProducts = state.userProducts ? [...state.userProducts] : [];
+    newProducts.push(action.product);
+    return {
+      ...state,
+      userProducts: newProducts
+    };
+  }),
   on(logout, (state, action) => {
     localStorage.removeItem('logged-in-user');
-    localStorage.removeItem('user-wish-list');
     return {
       ...state,
       loggedInUser: null

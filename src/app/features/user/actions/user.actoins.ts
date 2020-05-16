@@ -2,6 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import { User } from '../../../core/models/user.model';
 import { Product } from '../../../core/models/product.model';
 
+export const initUser = createAction(
+  '[User] Init User'
+);
+
 export const login = createAction(
   '[User] Login',
   props<{ email: string, password: string }>()
@@ -34,6 +38,20 @@ export const createNewUserSucceeded = createAction(
 export const createNewUserFailed = createAction(
   '[User] Create New User Failed',
   props<{ message: string }>()
+);
+
+export const addNewProduct = createAction(
+  '[User] Add New Product',
+  props<{ categoryId: string, product: any }>()
+);
+
+export const addNewProductSucceeded = createAction(
+  '[User] Add New Product Succeeded',
+  props<{ product: Product }>()
+);
+
+export const addNewProductFailed = createAction(
+  '[User] Add New Product Failed'
 );
 
 export const addProductToWishlist = createAction(

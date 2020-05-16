@@ -22,6 +22,7 @@ export class NewProductDialogComponent implements OnInit, OnDestroy {
   });
   matcher = new MyErrorStateMatcher();
   categories: Array<Category>;
+  isLoading: boolean = false;
   subscriptions: Array<Subscription>;
   @ViewChild('image') image;
   @Output() createProductEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -35,10 +36,6 @@ export class NewProductDialogComponent implements OnInit, OnDestroy {
         this.categories = categories;
       })
     ];
-
-    this.productFormGroup.get('imageFiles').valueChanges.subscribe((value) => {
-      console.log(value);
-    });
   }
 
   ngOnDestroy(): void {

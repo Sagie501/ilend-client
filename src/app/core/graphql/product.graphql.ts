@@ -51,6 +51,15 @@ export const getProductsByUserIdQuery = gql`
   ${productFragment}
 `;
 
+export const addProductMutation = gql`
+  mutation addProduct($ownerId: ID!, $categoryId: ID!, $product: ProductInput!) {
+    addProduct(ownerId: $ownerId, categoryId: $categoryId, product: $product) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
+
 export const getUserWishlistQuery = gql`
   query getUserWishList($userId: ID!) {
     getUserWishList(userId: $userId) {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import {
+  addProductMutation,
   addToWishlistMutation,
   getProductByIdQuery, getProductsByUserIdQuery,
   getProductsQuery,
@@ -61,6 +62,21 @@ export class ProductsService {
           return this.mapProductForClient(product);
         });
         return products as Array<Product>;
+      })
+    );
+  }
+
+  addProduct(ownerId: string, categoryId: string, product): Observable<Product> {
+    return this.apollo.mutate<any>({
+      mutation: addProductMutation,
+      variables: {
+        ownerId,
+        categoryId,
+        product
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return this.mapProductForClient(data.addProduct) as Product;
       })
     );
   }

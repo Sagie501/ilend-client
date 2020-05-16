@@ -12,7 +12,8 @@
 
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <input required matInput formControlName="description" [errorStateMatcher]="matcher">
+        <textarea required matInput formControlName="description" [errorStateMatcher]="matcher"
+                  cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="2"></textarea>
         <mat-error *ngIf="productFormGroup.get('description').hasError('required')">
           Description is <strong>required</strong>
         </mat-error>
@@ -49,8 +50,12 @@
     <span *ngIf="data?.errorMessage" class="error-message">{{ data?.errorMessage }}</span>
   </div>
   <div mat-dialog-actions>
-    <button mat-stroked-button color="primary" (click)="createProductEvent.emit(productFormGroup.value)"
-            [disabled]="productFormGroup.invalid">Create new product</button>
+    <mat-spinner [diameter]="25" *ngIf="isLoading"></mat-spinner>
+    <button mat-stroked-button color="primary"
+            (click)="isLoading = true; createProductEvent.emit(productFormGroup.value)"
+            [disabled]="productFormGroup.invalid || isLoading" [ngStyle]="{'margin-left': isLoading ? '8px' : '0'}">
+      Create new product
+    </button>
     <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
   </div>
 </div>

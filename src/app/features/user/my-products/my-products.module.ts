@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MyProductsModule { }
