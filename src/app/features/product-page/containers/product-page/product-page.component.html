@@ -5,7 +5,7 @@
     <span class="product-price">${{ product?.requestedPrice }}</span>
   </div>
   <!--  TODO: Add router link to the user profile-->
-  <div class="owner-label">Lend from <a>{{product?.owner.firstName + product?.owner.lastName}}</a></div>
+  <div class="owner-label">Lend from <a>{{product?.owner.firstName + ' ' + product?.owner.lastName}}</a></div>
   <p class="product-description text-ellipsis">{{ product?.description || 'The owner didn\'t add any description' }}</p>
   <ile-button [text]="'Lend now'" class="lend-button" matTooltip="{{!loggedInUser ? 'Login to continue' : ''}}"
               [matTooltipPosition]="'above'" [disabled]="!loggedInUser"></ile-button>
