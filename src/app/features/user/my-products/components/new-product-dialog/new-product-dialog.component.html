@@ -41,7 +41,7 @@
 
       <mat-form-field>
         <mat-label>Product images</mat-label>
-        <ngx-mat-file-input formControlName="imageFiles" multiple accept="image/*"></ngx-mat-file-input>
+        <ngx-mat-file-input formControlName="imageFiles" required multiple accept="image/*"></ngx-mat-file-input>
         <mat-error *ngIf="productFormGroup.get('imageFiles').hasError('required')">
           At least one image is <strong>required</strong>
         </mat-error>
