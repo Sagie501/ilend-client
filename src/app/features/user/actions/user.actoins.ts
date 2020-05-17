@@ -81,3 +81,33 @@ export const removeProductFromWishlistSucceeded = createAction(
 export const removeProductFromWishlistFailed = createAction(
   '[User] Remove Product From Wishlist Failed'
 );
+
+export const updateUser = createAction(
+  '[User] Update User',
+  props<{ userId: string, partialUser: any }>()
+);
+
+export const updateUserSucceeded = createAction(
+  '[User] Update User Succeeded',
+  props<{ user: User }>()
+);
+
+export const updateUserFailed = createAction(
+  '[User] Update User Failed',
+  props<{ message: string }>()
+);
+
+export const updateUserFavoriteCategories = createAction(
+  '[User] Update User Favorite Categories',
+  props<{ userId: string, favoriteCategoriesIds: Array<string> }>()
+);
+
+export const updateUserFavoriteCategoriesSucceeded = createAction(
+  '[User] Update User Favorite Categories Succeeded',
+  props<{ user: User }>()
+);
+
+export const updateUserFavoriteCategoriesFailed = createAction(
+  '[User] Update User Favorite Categories Failed',
+  props<{ message: string }>()
+);

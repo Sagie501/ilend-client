@@ -29,9 +29,9 @@
           </div>
         </div>
         <div class="links">
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Change account e-mail</a>
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Change password</a>
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Change address</a>
+          <a data-uia="account-email-link" class="account-section-link" (click)="openEmailDialog()">Change account e-mail</a>
+          <a data-uia="account-email-link" class="account-section-link" (click)="openPasswordDialog()">Change password</a>
+          <a data-uia="account-email-link" class="account-section-link" (click)="openAddressDialog()">Change address</a>
         </div>
       </section>
     </div>
@@ -46,7 +46,7 @@
       <section class="user-profile">
         <div class="links__center">
           <a data-uia="account-email-link" class="account-section-link" routerLink="/user/wishlist">Wish list</a>
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">Favorites
+          <a data-uia="account-email-link" class="account-section-link" (click)="openFavoriteCategoriesDialog()">Favorite
             Categories</a>
           <a data-uia="account-email-link" class="account-section-link" routerLink="/user/leasing-history">Leasing
             history</a>

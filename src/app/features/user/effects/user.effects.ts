@@ -1,31 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../../../core/services/user/user.service';
 import {
-  addNewProduct,
-  addNewProductFailed,
-  addNewProductSucceeded,
   addProductToWishlist,
   addProductToWishlistFailed,
   addProductToWishlistSucceeded,
   createNewUser,
   createNewUserFailed,
-  createNewUserSucceeded, initUser,
+  createNewUserSucceeded,
   login,
   loginFailed,
   loginSucceeded,
   removeProductFromWishlist,
   removeProductFromWishlistFailed,
-  removeProductFromWishlistSucceeded
+  removeProductFromWishlistSucceeded,
+  updateUser,
+  updateUserFailed,
+  updateUserFavoriteCategories,
+  updateUserSucceeded,
+  updateUserFavoriteCategoriesSucceeded,
+  updateUserFavoriteCategoriesFailed,
+  initUser,
+  addNewProduct,
+  addNewProductSucceeded,
+  addNewProductFailed
 } from '../actions/user.actoins';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products/products.service';
-import { EMPTY, forkJoin, of } from 'rxjs';
+import { EMPTY, forkJoin, merge, of } from 'rxjs';
+import { Store, Action } from '@ngrx/store';
 import { getLoggedInUser, UserState } from '../reducer/user.reducer';
-import { Action, Store } from '@ngrx/store';
 
 @Injectable()
-export class UserEffects implements OnInitEffects {
+export class UserEffects {
 
   constructor(private actions$: Actions, private userService: UserService, private productsService: ProductsService,
               private userStore: Store<UserState>) {
@@ -80,6 +87,18 @@ export class UserEffects implements OnInitEffects {
     );
   });
 
+  updateUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateUser),
+      switchMap(action => {
+        return this.userService.updateUser(action.userId, action.partialUser).pipe(
+          map(user => updateUserSucceeded({ user })),
+          catchError(message => of(updateUserFailed({ message }))),
+        );
+      }),
+    );
+  });
+
   addNewProduct$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(addNewProduct),
@@ -112,6 +131,26 @@ export class UserEffects implements OnInitEffects {
         return this.productsService.removeProductFromWishlist(action.userId, action.productId).pipe(
           map(wishlist => removeProductFromWishlistSucceeded({ wishlist })),
           catchError(message => of(removeProductFromWishlistFailed())),
+        );
+      }),
+    );
+  });
+
+  updateUserFavoriteCategories$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateUserFavoriteCategories),
+      withLatestFrom(this.userStore.select(getLoggedInUser)),
+      switchMap(([action, loggedInUser]) => {
+        let idsToAdd = action.favoriteCategoriesIds.filter((categoryId) =>
+          !loggedInUser.favoriteCategories.map((category) => category.id).includes(categoryId));
+        let idsToRemove = loggedInUser.favoriteCategories.map((category) =>
+          category.id).filter((categoryId) => !action.favoriteCategoriesIds.includes(categoryId));
+        return merge(this.userService.addFavoriteCategories(action.userId, idsToAdd),
+          this.userService.removeFavoriteCategories(action.userId, idsToRemove)).pipe(
+          map(user => {
+            return updateUserFavoriteCategoriesSucceeded({ user });
+          }),
+          catchError(message => of(updateUserFavoriteCategoriesFailed({ message }))),
         );
       }),
     );

@@ -135,14 +135,11 @@ export class ProductsService {
   }
 
   mapProductForClient(serverProduct): Product {
-    let clientProduct = {
+    return {
       ...serverProduct,
       owner: this.userService.mapUserForClient(serverProduct.owner),
-      categoryId: serverProduct.category.id,
       pictureLinks: JSON.parse(serverProduct.pictureLinks),
       comments: serverProduct.comments.map(this.commentsService.mapCommentForClient)
     };
-    delete clientProduct.category;
-    return clientProduct;
   }
 }
