@@ -13,6 +13,7 @@ import { LeasingHistoryModule } from '../features/user/leasing-history/leasing-h
 import { UserModule } from '../features/user/user.module';
 import { LoginModule } from '../features/login/login.module';
 import { SignUpModule } from '../features/sign-up/sign-up.module';
+import { AdminDashboardModule } from '../features/admin-dashboard/admin-dashboard.module';
 import { ProductsListModule } from '../features/products-list/products-list.module';
 import { ProductPageModule } from '../features/product-page/product-page.module';
 
@@ -22,7 +23,7 @@ import { ProductPageModule } from '../features/product-page/product-page.module'
     SidebarComponent,
     MainComponent,
     HomeComponent,
-    DataOutletComponent
+    DataOutletComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +36,9 @@ import { ProductPageModule } from '../features/product-page/product-page.module'
     LoginModule,
     SignUpModule,
     ProductsListModule,
-    ProductPageModule
+    ProductPageModule,
+    AdminDashboardModule,
   ],
   providers: [],
 })
-export class CoreModule {
-}
+export class CoreModule {}

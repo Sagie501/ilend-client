@@ -9,6 +9,8 @@ import { LoginComponent } from './features/login/containers/login/login.componen
 import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.component';
 import { WishlistComponent } from './features/user/wishlist/containers/wishlist/wishlist.component';
 import { AuthGuard } from './core/services/auth-guard/auth.guard';
+import { AdminDashboardComponent } from './features/admin-dashboard/containers/admin-dashboard/admin-dashboard.component';
+import { AdminGuard } from './core/services/admin-guard/admin-guard.guard';
 import { MyAccountComponent } from './features/user/my-account/containers/my-account/my-account.component';
 import { MyProductsComponent } from './features/user/my-products/containers/my-products/my-products.component';
 
@@ -42,7 +44,7 @@ const routes: Routes = [
       {
         path: 'sign-up',
         component: SignUpComponent,
-      }
+      },
     ],
   },
   {
@@ -70,7 +72,18 @@ const routes: Routes = [
       {
         path: 'my-products',
         component: MyProductsComponent,
-      }
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    component: MainComponent,
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent,
+      },
     ],
   },
   {
@@ -86,7 +99,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
