@@ -11,6 +11,7 @@ import { ImageComponent } from './components/image/image.component';
 import { ImagesSliderComponent } from './components/images-slider/images-slider.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     ImagesSliderComponent,
     ProductCardComponent
   ],
-  imports: [CommonModule, NgImageSliderModule],
+  imports: [CommonModule, NgImageSliderModule, AppRoutingModule],
   exports: [
     SearchComponent,
     CheckboxComponent,
