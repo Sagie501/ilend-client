@@ -1,0 +1,14 @@
+<table class="table">
+  <tr class="table__header">
+    <th *ngFor="let title of titles">{{ title }}</th>
+    <th *ngIf="funcName">{{ funcName }}</th>
+  </tr>
+  <tr *ngFor="let item of data">
+    <td *ngFor="let value of item">
+      {{ !isDate(value) ? value : (value | date: "dd / MM / yyyy") }}
+    </td>
+    <td *ngIf="funcName">
+      <span class="link" (click)="func.emit(item)">{{ funcName }}</span>
+    </td>
+  </tr>
+</table>

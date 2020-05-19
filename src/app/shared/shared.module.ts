@@ -11,6 +11,8 @@ import { ImageComponent } from './components/image/image.component';
 import { ImagesSliderComponent } from './components/images-slider/images-slider.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { DataDiagramComponent } from './components/data-diagram/data-diagram.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -28,6 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
     ImageComponent,
     ImagesSliderComponent,
     ProductCardComponent,
+    DataTableComponent,
+    DataDiagramComponent,
     ConfirmationDialogComponent
   ],
   imports: [CommonModule, NgImageSliderModule, AppRoutingModule, MatDialogModule, MatButtonModule],
@@ -41,8 +45,9 @@ import { MatButtonModule } from '@angular/material/button';
     OrderStatusComponent,
     ImageComponent,
     ImagesSliderComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    DataTableComponent,
+    DataDiagramComponent,
   ],
 })
-export class SharedModule {
-}
+export class SharedModule { }

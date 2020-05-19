@@ -13,6 +13,7 @@ export type User = {
   city: string;
   street: string;
   zipCode: string;
+  isAdmin: boolean;
   password: string;
   favoriteCategories: Array<Category>;
 };
