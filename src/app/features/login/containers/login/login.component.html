@@ -3,7 +3,7 @@
   <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" [errorStateMatcher]="matcher"
+      <input matInput required formControlName="email" [errorStateMatcher]="matcher"
              placeholder="Ex. pat@example.com">
       <mat-error *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')">
         Please enter a valid email address
@@ -15,16 +15,18 @@
 
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput formControlName="password" [errorStateMatcher]="matcher"
+      <input matInput required formControlName="password" [errorStateMatcher]="matcher"
              type="password">
       <mat-error *ngIf="loginForm.get('password').hasError('required')">
-        password is <strong>required</strong>
+        Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>
 
     <div class="sign-up-tip">Don't have a user yet? <a routerLink="/home/sign-up">Sign Up</a> now!</div>
 
-    <ile-button [text]="'Login'" [type]="'submit'" [disabled]="!loginForm.valid"></ile-button>
+    <ile-button [text]="'Login'" [type]="'submit'" [disabled]="loginForm.invalid"
+                matTooltip="{{loginForm.invalid ? 'Fill all the required fields' : ''}}"
+                [matTooltipPosition]="'above'"></ile-button>
   </form>
 
   <span class="login-error-message">{{ loginErrorMessage }}</span>

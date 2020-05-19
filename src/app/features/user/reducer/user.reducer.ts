@@ -1,11 +1,14 @@
 import { User } from '../../../core/models/user.model';
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import {
+  addNewProductSucceeded,
   addProductToWishlistSucceeded,
   createNewUserSucceeded,
   loginSucceeded,
   logout,
-  removeProductFromWishlistSucceeded
+  removeProductFromWishlistSucceeded,
+  updateUserFavoriteCategoriesSucceeded,
+  updateUserSucceeded
 } from '../actions/user.actoins';
 import { Product } from '../../../core/models/product.model';
 
@@ -14,34 +17,49 @@ export const userToken = 'userReducer';
 export class UserState {
   loggedInUser: User;
   userWishlist: Array<Product>;
+  userProducts: Array<Product>;
 }
 
 export let initialState: UserState = {
   loggedInUser: JSON.parse(localStorage.getItem('logged-in-user')),
-  userWishlist: JSON.parse(localStorage.getItem('user-wish-list'))
+  userWishlist: null,
+  userProducts: null
 };
 
 export const userReducer = createReducer(
   initialState,
   on(loginSucceeded, createNewUserSucceeded, (state, action) => {
     localStorage.setItem('logged-in-user', JSON.stringify(action.user));
-    localStorage.setItem('user-wish-list', JSON.stringify(action.wishlist));
     return {
       ...state,
       loggedInUser: action.user,
-      userWishlist: action.wishlist
+      userWishlist: action.wishlist,
+      userProducts: action.products
+    };
+  }),
+  on(updateUserSucceeded, updateUserFavoriteCategoriesSucceeded, (state, action) => {
+    localStorage.setItem('logged-in-user', JSON.stringify(action.user));
+    return {
+      ...state,
+      loggedInUser: action.user
     };
   }),
   on(addProductToWishlistSucceeded, removeProductFromWishlistSucceeded, (state, action) => {
-    localStorage.setItem('user-wish-list', JSON.stringify(action.wishlist));
     return {
       ...state,
       userWishlist: action.wishlist
+    };
+  }),
+  on(addNewProductSucceeded, (state, action) => {
+    let newProducts = state.userProducts ? [...state.userProducts] : [];
+    newProducts.push(action.product);
+    return {
+      ...state,
+      userProducts: newProducts
     };
   }),
   on(logout, (state, action) => {
     localStorage.removeItem('logged-in-user');
-    localStorage.removeItem('user-wish-list');
     return {
       ...state,
       loggedInUser: null
@@ -59,4 +77,9 @@ export const getLoggedInUser = createSelector(
 export const getUserWishlist = createSelector(
   getState,
   (state: UserState) => state.userWishlist
+);
+
+export const getUserProducts = createSelector(
+  getState,
+  (state: UserState) => state.userProducts
 );

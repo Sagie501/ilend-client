@@ -1,0 +1,54 @@
+@import "../../../../../styles/styles.less";
+
+.credit-card {
+  height: 14rem;
+  width: @credit-card-width;
+  border-radius: 2rem;
+
+  background-color: @credit-card-color;
+  position: relative;
+
+  .visa {
+    width: 7rem;
+  }
+
+  .mastercard {
+    width: 8rem;
+  }
+
+  .card-details {
+    font-family: "Roboto";
+    font-weight: 100;
+    display: grid;
+    height: 7rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    justify-items: center;
+
+    position: absolute;
+    top: 5rem;
+    width: @credit-card-width;
+  }
+
+  .card-number {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+    grid-column: 1 e("/") 3;
+    grid-row: 1 e("/") 4;
+  }
+
+  .name {
+    justify-self: start;
+    margin-left: 2rem;
+    grid-column: 1 e("/") 2;
+    grid-row: 4 e("/") 5;
+  }
+
+  .expiration-date {
+    grid-column: 2 e("/") 3;
+    grid-row: 4 e("/") 5;
+    justify-self: end;
+    margin-right: 2rem;
+  }
+}

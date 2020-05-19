@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Gender } from '../../../shared/enums/gender.enum';
 import { Apollo } from 'apollo-angular';
-import { addUserMutation, loginQuery } from '../../graphql/user.graphql';
+import {
+  addFavoriteCategoriesMutation,
+  addUserMutation,
+  loginQuery,
+  removeFavoriteCategoriesMutation,
+  updateUserMutation
+} from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -72,10 +78,67 @@ export class UserService {
     );
   }
 
+  updateUser(userId: string, partialUser: any): Observable<User> {
+    return this.apollo.mutate<any>({
+      mutation: updateUserMutation,
+      variables: {
+        userId,
+        user: partialUser
+      },
+      errorPolicy: 'all'
+    }).pipe(
+      map(({ data, errors }) => {
+        if (errors) {
+          throw errors[0].message;
+        } else {
+          return this.mapUserForClient(data.updateUser);
+        }
+      })
+    );
+  }
+
   mapUserForClient(user): User {
     return {
       ...user,
       birthDate: new Date(user.birthDate)
     };
+  }
+
+  addFavoriteCategories(userId: string, categoriesIds: Array<string>): Observable<User> {
+    return this.apollo.mutate<any>({
+      mutation: addFavoriteCategoriesMutation,
+      variables: {
+        userId,
+        categoriesIds
+      },
+      errorPolicy: 'all'
+    }).pipe(
+      map(({ data, errors }) => {
+        if (errors) {
+          throw errors[0].message;
+        } else {
+          return this.mapUserForClient(data.addFavoriteCategories);
+        }
+      })
+    );
+  }
+
+  removeFavoriteCategories(userId: string, categoriesIds: Array<string>): Observable<User> {
+    return this.apollo.mutate<any>({
+      mutation: removeFavoriteCategoriesMutation,
+      variables: {
+        userId,
+        categoriesIds
+      },
+      errorPolicy: 'all'
+    }).pipe(
+      map(({ data, errors }) => {
+        if (errors) {
+          throw errors[0].message;
+        } else {
+          return this.mapUserForClient(data.removeFavoriteCategories);
+        }
+      })
+    );
   }
 }

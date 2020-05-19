@@ -1,4 +1,5 @@
 import { Gender } from '../../shared/enums/gender.enum';
+import { Category } from './category.model';
 
 export type User = {
   id: string;
@@ -13,4 +14,6 @@ export type User = {
   street: string;
   zipCode: string;
   isAdmin: boolean;
+  password: string;
+  favoriteCategories: Array<Category>;
 };

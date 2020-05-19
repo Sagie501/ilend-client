@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { commentFragment } from './comment.graphql';
 import { userFragment } from './user.graphql';
+import { categoryFragment } from './category.graphql';
 
 export const productFragment = gql`
   fragment ProductFragment on Product {
@@ -14,13 +15,14 @@ export const productFragment = gql`
       ...UserFragment
     }
     category {
-      id
+      ...CategoryFragment
     }
     comments {
       ...CommentFragment
     }
    }
    ${userFragment}
+   ${categoryFragment}
    ${commentFragment}
 `;
 
@@ -42,7 +44,25 @@ export const getProductByIdQuery = gql`
   ${productFragment}
 `;
 
-export const getUserWishlist = gql`
+export const getProductsByUserIdQuery = gql`
+  query getProductsByUserId($userId: ID!) {
+    getProductsByUserId(userId: $userId) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
+
+export const addProductMutation = gql`
+  mutation addProduct($ownerId: ID!, $categoryId: ID!, $product: ProductInput!) {
+    addProduct(ownerId: $ownerId, categoryId: $categoryId, product: $product) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
+
+export const getUserWishlistQuery = gql`
   query getUserWishList($userId: ID!) {
     getUserWishList(userId: $userId) {
       ...ProductFragment

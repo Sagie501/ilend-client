@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './core/containers/main/main.component';
 import { HomeComponent } from './core/containers/home/home.component';
+import { CheckoutComponent } from './features/checkout/containers/checkout/checkout.component';
 import { LeasingHistoryComponent } from './features/user/leasing-history/containers/leasing-history/leasing-history.component';
 import { ProductPageComponent } from './features/product-page/containers/product-page/product-page.component';
 import { LoginComponent } from './features/login/containers/login/login.component';
@@ -10,6 +11,8 @@ import { WishlistComponent } from './features/user/wishlist/containers/wishlist/
 import { AuthGuard } from './core/services/auth-guard/auth.guard';
 import { AdminDashboardComponent } from './features/admin-dashboard/containers/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './core/services/admin-guard/admin-guard.guard';
+import { MyAccountComponent } from './features/user/my-account/containers/my-account/my-account.component';
+import { MyProductsComponent } from './features/user/my-products/containers/my-products/my-products.component';
 
 const routes: Routes = [
   {
@@ -45,10 +48,19 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'user',
     component: MainComponent,
     canActivate: [AuthGuard],
     children: [
+      {
+        path: 'my-account',
+        component: MyAccountComponent,
+      },
       {
         path: 'leasing-history',
         component: LeasingHistoryComponent,
@@ -56,6 +68,10 @@ const routes: Routes = [
       {
         path: 'wishlist',
         component: WishlistComponent,
+      },
+      {
+        path: 'my-products',
+        component: MyProductsComponent,
       },
     ],
   },
