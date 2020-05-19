@@ -14,6 +14,7 @@ import { ProductPageModule } from '../features/product-page/product-page.module'
 import { UserModule } from '../features/user/user.module';
 import { LoginModule } from '../features/login/login.module';
 import { SignUpModule } from '../features/sign-up/sign-up.module';
+import { AdminDashboardModule } from '../features/admin-dashboard/admin-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { SignUpModule } from '../features/sign-up/sign-up.module';
     SidebarComponent,
     MainComponent,
     HomeComponent,
-    DataOutletComponent
+    DataOutletComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,10 +34,9 @@ import { SignUpModule } from '../features/sign-up/sign-up.module';
     LoginModule,
     SignUpModule,
     ProductsListModule,
-    ProductPageModule
+    ProductPageModule,
+    AdminDashboardModule,
   ],
-  providers: []
+  providers: [],
 })
-export class CoreModule {
-
-}
+export class CoreModule {}

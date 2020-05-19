@@ -8,6 +8,7 @@ import { LoginComponent } from './features/login/containers/login/login.componen
 import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.component';
 import { WishlistComponent } from './features/user/wishlist/containers/wishlist/wishlist.component';
 import { AuthGuard } from './core/services/auth-guard/auth.guard';
+import { AdminDashboardComponent } from './features/admin-dashboard/containers/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -30,16 +31,16 @@ const routes: Routes = [
       },
       {
         path: 'products/:id',
-        component: ProductPageComponent
+        component: ProductPageComponent,
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
       },
       {
         path: 'sign-up',
-        component: SignUpComponent
-      }
+        component: SignUpComponent,
+      },
     ],
   },
   {
@@ -54,7 +55,18 @@ const routes: Routes = [
       {
         path: 'wishlist',
         component: WishlistComponent,
-      }
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    component: MainComponent,
+    // canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent,
+      },
     ],
   },
   {
@@ -72,5 +84,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

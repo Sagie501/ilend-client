@@ -66,3 +66,26 @@
     min-height: 6rem;
   }
 }
+
+.link {
+  color: @secondary-color;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  backface-visibility: hidden;
+
+  &:hover {
+    border-bottom: 1px solid @hover-color;
+    color: @hover-color;
+  }
+}
+
+.admin-tab {
+  padding-top: 2rem;
+  height: calc(100vh - @header-height - 48px);
+}
+
+.mat-tab-body-content {
+  overflow: unset !important;
+}
