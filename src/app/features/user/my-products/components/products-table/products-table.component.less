@@ -1,0 +1,25 @@
+@import "../../../../../../styles/styles.less";
+
+.products-table {
+  overflow-x: auto;
+  width: calc(100vw - @sidebar-width - 6rem);
+  margin: 0 3rem;
+
+  .images-cell {
+    max-width: 12rem;
+  }
+
+  .description-cell {
+    max-width: 20rem;
+  }
+
+  .actions-cell {
+    width: 15rem;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+  }
+}

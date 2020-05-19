@@ -1,18 +1,22 @@
-<div class="header">
-  <div class="headline">My Products</div>
-  <div class="sub-headline">
-    {{getGreetingSentence() + ' ' + loggedInUser?.firstName }}!
-    <span *ngIf="userProducts?.length > 0">
+<div class="my-products">
+  <div class="header">
+    <div class="headline">My Products</div>
+    <div class="sub-headline">
+      <div>
+        {{getGreetingSentence() + ' ' + loggedInUser?.firstName }}!
+        <span *ngIf="userProducts?.length > 0">
         You have {{ userProducts.length }} products.
     </span>
-    <span *ngIf="userProducts?.length === 0">
+        <span *ngIf="userProducts?.length === 0">
       It looks like you don't have products yet.
       <br>
       Start lease your own Products now!
     </span>
+      </div>
+      <ile-button [text]="'Add new product'" (clicked)="openNewProductDialog()"></ile-button>
+    </div>
   </div>
-</div>
 
-<div>
-  <ile-button [text]="'Add new product'" (clicked)="openNewProductDialog()"></ile-button>
+  <ile-products-table [products]="userProducts" (editProductEvent)="openEditProductDialog($event)"
+                      (deleteProductEvent)="deleteProduct($event)"></ile-products-table>
 </div>

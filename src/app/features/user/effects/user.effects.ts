@@ -23,7 +23,13 @@ import {
   initUser,
   addNewProduct,
   addNewProductSucceeded,
-  addNewProductFailed
+  addNewProductFailed,
+  deleteProduct,
+  deleteProductSucceeded,
+  deleteProductFailed,
+  updateProduct,
+  updateProductSucceeded,
+  updateProductFailed
 } from '../actions/user.actoins';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products/products.service';
@@ -107,6 +113,30 @@ export class UserEffects {
         return this.productsService.addProduct(loggedInUser.id, action.categoryId, action.product).pipe(
           map(product => addNewProductSucceeded({ product })),
           catchError(message => of(addNewProductFailed())),
+        );
+      }),
+    );
+  });
+
+  updateProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateProduct),
+      switchMap((action) => {
+        return this.productsService.updateProduct(action.productId, action.categoryId, action.product).pipe(
+          map(product => updateProductSucceeded({ product })),
+          catchError(message => of(updateProductFailed())),
+        );
+      }),
+    );
+  });
+
+  deleteProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteProduct),
+      switchMap((action) => {
+        return this.productsService.deleteProduct(action.productId).pipe(
+          map(() => deleteProductSucceeded({ productId: action.productId })),
+          catchError(message => of(deleteProductFailed())),
         );
       }),
     );

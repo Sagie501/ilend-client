@@ -1,0 +1,28 @@
+<div class="products-table">
+  <table class="table">
+    <tr class="table__header">
+      <th>Images</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Cost</th>
+      <th>Rating</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td class="images-cell">
+        <ile-images-slider [images]="product.pictureLinks" [imageHeight]="146"
+                           [imageWidth]="'20rem'"></ile-images-slider>
+      </td>
+      <td>{{ product.name }}</td>
+      <td class="description-cell">{{ product.description }}</td>
+      <td>{{ product.requestedPrice }}</td>
+      <td>{{ product.rating }}</td>
+      <td class="actions-cell">
+        <div>
+          <ile-button [text]="'Edit'" (clicked)="editProductEvent.emit(product.id)"></ile-button>
+          <ile-button [text]="'Delete'" (clicked)="deleteProductEvent.emit(product.id)"></ile-button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

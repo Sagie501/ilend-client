@@ -1,5 +1,5 @@
 <div class="product-dialog">
-  <span class="header" mat-dialog-title>Create new product!</span>
+  <span class="header" mat-dialog-title>{{isCreatingMode ? 'Create new product!' : 'Update your product!'}}</span>
   <div mat-dialog-content>
     <form [formGroup]="productFormGroup" class="product-form">
       <mat-form-field>
@@ -52,9 +52,9 @@
   <div mat-dialog-actions>
     <mat-spinner [diameter]="25" *ngIf="isLoading"></mat-spinner>
     <button mat-stroked-button color="primary"
-            (click)="isLoading = true; createProductEvent.emit(productFormGroup.value)"
+            (click)="isLoading = true; saveProductEvent.emit(productFormGroup.value)"
             [disabled]="productFormGroup.invalid || isLoading" [ngStyle]="{'margin-left': isLoading ? '8px' : '0'}">
-      Create new product
+      {{isCreatingMode ? 'Create new product' : 'Update product'}}
     </button>
     <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
   </div>
