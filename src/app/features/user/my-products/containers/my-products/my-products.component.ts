@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../../../core/models/product.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { NewProductDialogComponent } from '../../components/new-product-dialog/new-product-dialog.component';
+import { ProductDialogComponent } from '../../components/product-dialog/product-dialog.component';
 import { addNewProduct, deleteProduct, updateProduct } from '../../../actions/user.actoins';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileInput } from 'ngx-material-file-input';
@@ -22,7 +22,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   userProducts: Array<Product>;
   getGreetingSentence = getGreetingSentence;
   subscriptions: Array<Subscription>;
-  dialogRef: MatDialogRef<NewProductDialogComponent>;
+  dialogRef: MatDialogRef<ProductDialogComponent>;
 
   constructor(private userStore: Store<UserState>, private dialog: MatDialog, private snackBar: MatSnackBar) {
   }
@@ -35,7 +35,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
       this.userStore.select(getUserProducts).subscribe((userProducts) => {
         this.userProducts = userProducts;
         if (this.loggedInUser && this.dialogRef) {
-          this.snackBar.open('Your new product created!', 'OK', {
+          this.snackBar.open(this.dialogRef.componentInstance.isCreatingMode ? 'Your new product created!' : 'Your product has been updated!', 'OK', {
             duration: 3000
           });
           this.dialogRef.close();
@@ -46,33 +46,17 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   }
 
   openNewProductDialog() {
-    this.dialogRef = this.dialog.open(NewProductDialogComponent, {
+    this.dialogRef = this.dialog.open(ProductDialogComponent, {
       autoFocus: false
     });
 
+    this.dialogRef.componentInstance.isCreatingMode = true;
     this.subscriptions.push(
-      this.dialogRef.componentInstance.createProductEvent.subscribe((newProduct) => {
+      this.dialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
         let categoryId = newProduct.category.id;
         delete newProduct.category;
-        newProduct.pictureLinks = [];
 
-        let promise = new Promise((resolve) => {
-          let finishedFiles = 0;
-          for (let file of newProduct.imageFiles._files) {
-            let reader = new FileReader();
-            reader.onload = (e: any) => {
-              finishedFiles++;
-              newProduct.pictureLinks.push(e.target.result.split(',')[1]);
-              if (finishedFiles === newProduct.imageFiles._files.length) {
-                delete newProduct.imageFiles;
-                resolve();
-              }
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-
-        promise.then(() => {
+        this.prepareProductToSave(newProduct).then((newProduct) => {
           this.userStore.dispatch(addNewProduct({ categoryId, product: newProduct }));
         });
       })
@@ -82,7 +66,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   async openEditProductDialog(productId: string) {
     let product = this.userProducts.find((product) => product.id === productId);
 
-    this.dialogRef = this.dialog.open(NewProductDialogComponent, {
+    this.dialogRef = this.dialog.open(ProductDialogComponent, {
       autoFocus: false,
       data: {
         name: product.name,
@@ -93,33 +77,38 @@ export class MyProductsComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.dialogRef.componentInstance.isCreatingMode = false;
     this.subscriptions.push(
-      this.dialogRef.componentInstance.createProductEvent.subscribe((newProduct) => {
+      this.dialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
         let categoryId = newProduct.category.id;
         delete newProduct.category;
-        newProduct.pictureLinks = [];
 
-        let promise = new Promise((resolve) => {
-          let finishedFiles = 0;
-          for (let file of newProduct.imageFiles._files) {
-            let reader = new FileReader();
-            reader.onload = (e: any) => {
-              finishedFiles++;
-              newProduct.pictureLinks.push(e.target.result.split(',')[1]);
-              if (finishedFiles === newProduct.imageFiles._files.length) {
-                delete newProduct.imageFiles;
-                resolve();
-              }
-            };
-            reader.readAsDataURL(file);
-          }
-        });
 
-        promise.then(() => {
+        this.prepareProductToSave(newProduct).then((newProduct) => {
           this.userStore.dispatch(updateProduct({ productId, categoryId, product: newProduct }));
         });
       })
     );
+  }
+
+  prepareProductToSave(newProduct): Promise<any> {
+    newProduct.pictureLinks = [];
+
+    return new Promise((resolve) => {
+      let finishedFiles = 0;
+      for (let file of newProduct.imageFiles._files) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          finishedFiles++;
+          newProduct.pictureLinks.push(e.target.result.split(',')[1]);
+          if (finishedFiles === newProduct.imageFiles._files.length) {
+            delete newProduct.imageFiles;
+            resolve(newProduct);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
   }
 
   deleteProduct(productId: string) {

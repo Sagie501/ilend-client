@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyProductsComponent } from './containers/my-products/my-products.component';
 import { SharedModule } from '../../../shared/shared.module';
-import { NewProductDialogComponent } from './components/new-product-dialog/new-product-dialog.component';
+import { ProductDialogComponent } from './components/product-dialog/product-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,8 +16,8 @@ import { ProductsTableComponent } from './components/products-table/products-tab
 
 
 @NgModule({
-  declarations: [MyProductsComponent, NewProductDialogComponent, ProductsTableComponent],
-  entryComponents: [NewProductDialogComponent],
+  declarations: [MyProductsComponent, ProductDialogComponent, ProductsTableComponent],
+  entryComponents: [ProductDialogComponent],
   imports: [
     CommonModule,
     SharedModule,

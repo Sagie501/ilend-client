@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MyErrorStateMatcher } from '../../../../../shared/helpers/error-state-matcher.helper';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,10 +9,10 @@ import { FileInput } from 'ngx-material-file-input';
 
 @Component({
   selector: 'ile-new-product-dialog',
-  templateUrl: './new-product-dialog.component.html',
-  styleUrls: ['./new-product-dialog.component.less']
+  templateUrl: './product-dialog.component.html',
+  styleUrls: ['./product-dialog.component.less']
 })
-export class NewProductDialogComponent implements OnInit, OnDestroy {
+export class ProductDialogComponent implements OnInit, OnDestroy {
 
   productFormGroup: FormGroup = new FormGroup({
     category: new FormControl(null, [Validators.required]),
@@ -26,7 +26,8 @@ export class NewProductDialogComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   subscriptions: Array<Subscription>;
   @ViewChild('image') image;
-  @Output() createProductEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() isCreatingMode: boolean;
+  @Output() saveProductEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
                 name: string,
