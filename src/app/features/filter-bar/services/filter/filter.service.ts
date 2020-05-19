@@ -8,6 +8,7 @@ import {
   getCityFilterValue,
   getPriceFilterValue,
   getSearchFilterValue,
+  getCountryFilterValue,
 } from '../../reducers/filter.reducer';
 import { Product } from '../../../../core/models/product.model';
 import { UserService } from '../../../../core/services/user/user.service';
@@ -20,32 +21,36 @@ export const alwaysTrue = (product: Product) => true;
 })
 export class FilterService {
   filteringFunction$ = combineLatest([
-      this.filteringStore.pipe(
-        select(getSearchFilterValue),
-        map(this.generateFilterBySearch)
-      ),
-      this.filteringStore.pipe(
-        select(getPriceFilterValue),
-        map(this.generateFilterByPrice)
-      ),
-      this.filteringStore.pipe(
-        select(getCategoryFilterValue),
-        map(this.generateFilterByCategory)
-      ),
-      this.filteringStore.pipe(
-        select(getCityFilterValue),
-        map((selectedCities: string[]) =>
-          this.generateFilterByCity(selectedCities)
-        )
+    this.filteringStore.pipe(
+      select(getSearchFilterValue),
+      map(this.generateFilterBySearch)
+    ),
+    this.filteringStore.pipe(
+      select(getPriceFilterValue),
+      map(this.generateFilterByPrice)
+    ),
+    this.filteringStore.pipe(
+      select(getCategoryFilterValue),
+      map(this.generateFilterByCategory)
+    ),
+    this.filteringStore.pipe(
+      select(getCountryFilterValue),
+      map((selectedCountries: string[]) =>
+        this.generateFilterByCountry(selectedCountries)
       )
-    ]
-  ).pipe(map(this.generateFilteringFunction));
+    ),
+    this.filteringStore.pipe(
+      select(getCityFilterValue),
+      map((selectedCities: string[]) =>
+        this.generateFilterByCity(selectedCities)
+      )
+    ),
+  ]).pipe(map(this.generateFilteringFunction));
 
   constructor(
     private filteringStore: Store<FilteringState>,
     private userService: UserService
-  ) {
-  }
+  ) {}
 
   generateFilterBySearch(value: string) {
     return (product: Product) =>
@@ -58,18 +63,21 @@ export class FilterService {
       product.requestedPrice <= value.to;
   }
 
-  // TODO: Use the real categories from the DB
   generateFilterByCategory(filteredCategories: string[]) {
     return filteredCategories
       ? (product: Product) => filteredCategories.includes(product.category.id)
       : alwaysTrue;
   }
 
-  // TODO: Use the real user id
+  generateFilterByCountry(filteredCountries: string[]) {
+    return filteredCountries
+      ? (product: Product) => filteredCountries.includes(product.owner.country)
+      : alwaysTrue;
+  }
+
   generateFilterByCity(filteredCities: string[]) {
     return filteredCities
-      ? (product: Product) =>
-        filteredCities.includes(this.userService.getFakeUser().city)
+      ? (product: Product) => filteredCities.includes(product.owner.city)
       : alwaysTrue;
   }
 
