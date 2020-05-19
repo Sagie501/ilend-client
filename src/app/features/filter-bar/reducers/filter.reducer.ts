@@ -1,5 +1,16 @@
-import { filterByCategory, filterByCity, filterByCountry, filterByPrice, filterBySearch, } from '../actions/filter.actions';
-import { createFeatureSelector, createReducer, createSelector, on, } from '@ngrx/store';
+import {
+  filterByCategory,
+  filterByCity,
+  filterByCountry,
+  filterByPrice,
+  filterBySearch,
+} from '../actions/filter.actions';
+import {
+  createFeatureSelector,
+  createReducer,
+  createSelector,
+  on,
+} from '@ngrx/store';
 import { PriceFilter } from '../models/price-filter.model';
 import { DropdownFilter } from '../models/dropdown-filter.model';
 
@@ -25,24 +36,24 @@ export const filteringReducer = createReducer(
   initialState,
   on(filterBySearch, (state, action) => ({
     ...state,
-    searchValue: action.value
+    searchValue: action.value,
   })),
   on(filterByPrice, (state, action) => ({
     ...state,
-    priceValue: { from: action.from, to: action.to }
+    priceValue: { from: action.from, to: action.to },
   })),
   on(filterByCategory, (state, action) => ({
     ...state,
-    categoryValue: getNewFilteredValues(action.value, state.categoryValue)
+    categoryValue: getNewFilteredValues(action.value, state.categoryValue),
   })),
   on(filterByCountry, (state, action) => ({
     ...state,
     countryValue: getNewFilteredValues(action.value, state.countryValue),
-    cityValue: undefined
+    cityValue: undefined,
   })),
   on(filterByCity, (state, action) => ({
     ...state,
-    cityValue: getNewFilteredValues(action.value, state.cityValue)
+    cityValue: getNewFilteredValues(action.value, state.cityValue),
   }))
 );
 
@@ -53,7 +64,7 @@ const getNewFilteredValues = (
   currentValues = currentValues ? currentValues : [];
   let newValues = [];
 
-  if (change.isChecked) {
+  if (!currentValues.includes(change.id)) {
     newValues = currentValues.concat(change.id);
   } else {
     newValues = currentValues.filter((val) => val !== change.id);
