@@ -54,6 +54,34 @@ export const addNewProductFailed = createAction(
   '[User] Add New Product Failed'
 );
 
+export const updateProduct = createAction(
+  '[User] Update Product',
+  props<{ productId: string, categoryId: string, product: any }>()
+);
+
+export const updateProductSucceeded = createAction(
+  '[User] Update Product Succeeded',
+  props<{ product: Product }>()
+);
+
+export const updateProductFailed = createAction(
+  '[User] Update Product Failed'
+);
+
+export const deleteProduct = createAction(
+  '[User] Delete Product',
+  props<{ productId: string }>()
+);
+
+export const deleteProductSucceeded = createAction(
+  '[User] Delete Product Succeeded',
+  props<{ productId: string }>()
+);
+
+export const deleteProductFailed = createAction(
+  '[User] Delete Product Failed'
+);
+
 export const addProductToWishlist = createAction(
   '[User] Add Product To Wishlist',
   props<{ userId: string, productId: string }>()

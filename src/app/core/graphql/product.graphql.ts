@@ -62,6 +62,21 @@ export const addProductMutation = gql`
   ${productFragment}
 `;
 
+export const updateProductMutation = gql`
+  mutation updateProduct($productId: ID!, $categoryId: ID! $product: ProductInput!) {
+    updateProduct(productId: $productId, categoryId: $categoryId, product: $product) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
+
+export const deleteProductMutation = gql`
+  mutation removeProduct($productId: ID!) {
+    removeProduct(productId: $productId)
+  }
+`;
+
 export const getUserWishlistQuery = gql`
   query getUserWishList($userId: ID!) {
     getUserWishList(userId: $userId) {

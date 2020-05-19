@@ -3,10 +3,10 @@ import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/
 import {
   addNewProductSucceeded,
   addProductToWishlistSucceeded,
-  createNewUserSucceeded,
+  createNewUserSucceeded, deleteProductSucceeded,
   loginSucceeded,
   logout,
-  removeProductFromWishlistSucceeded,
+  removeProductFromWishlistSucceeded, updateProductSucceeded,
   updateUserFavoriteCategoriesSucceeded,
   updateUserSucceeded
 } from '../actions/user.actoins';
@@ -56,6 +56,19 @@ export const userReducer = createReducer(
     return {
       ...state,
       userProducts: newProducts
+    };
+  }),
+  on(updateProductSucceeded, (state, action) => {
+    let productIndex = state.userProducts.findIndex((product) => product.id === action.product.id);
+    return {
+      ...state,
+      userProducts: [...state.userProducts.slice(0, productIndex), action.product, ...state.userProducts.slice(productIndex + 1)]
+    };
+  }),
+  on(deleteProductSucceeded, (state, action) => {
+    return {
+      ...state,
+      userProducts: state.userProducts.filter(product => product.id !== action.productId)
     };
   }),
   on(logout, (state, action) => {

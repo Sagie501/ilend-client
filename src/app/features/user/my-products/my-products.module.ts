@@ -12,10 +12,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ProductsTableComponent } from './components/products-table/products-table.component';
 
 
 @NgModule({
-  declarations: [MyProductsComponent, NewProductDialogComponent],
+  declarations: [MyProductsComponent, NewProductDialogComponent, ProductsTableComponent],
   entryComponents: [NewProductDialogComponent],
   imports: [
     CommonModule,

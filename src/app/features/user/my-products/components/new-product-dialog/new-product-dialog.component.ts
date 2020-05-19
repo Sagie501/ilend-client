@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoryService } from '../../../../../core/services/category/category.service';
 import { Subscription } from 'rxjs';
 import { Category } from '../../../../../core/models/category.model';
+import { FileInput } from 'ngx-material-file-input';
 
 @Component({
   selector: 'ile-new-product-dialog',
@@ -14,11 +15,11 @@ import { Category } from '../../../../../core/models/category.model';
 export class NewProductDialogComponent implements OnInit, OnDestroy {
 
   productFormGroup: FormGroup = new FormGroup({
-    category: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    requestedPrice: new FormControl(null, [Validators.required]),
-    imageFiles: new FormControl(null, [Validators.required])
+    category: new FormControl(null, [Validators.required]),
+    name: new FormControl(this.data?.name, [Validators.required]),
+    description: new FormControl(this.data?.description, [Validators.required]),
+    requestedPrice: new FormControl(this.data?.requestedPrice, [Validators.required]),
+    imageFiles: new FormControl(this.data?.imageFiles, [Validators.required])
   });
   matcher = new MyErrorStateMatcher();
   categories: Array<Category>;
@@ -27,13 +28,25 @@ export class NewProductDialogComponent implements OnInit, OnDestroy {
   @ViewChild('image') image;
   @Output() createProductEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { password: string, errorMessage: string },
-              private categoryService: CategoryService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {
+                name: string,
+                description: string,
+                requestedPrice: number,
+                category: Category,
+                errorMessage: string,
+                imageFiles: FileInput
+              },
+              private categoryService: CategoryService) {
+  }
 
   ngOnInit(): void {
     this.subscriptions = [
       this.categoryService.getCategories().subscribe((categories) => {
         this.categories = categories;
+        if (this.data) {
+          let categoryIndex = this.categories.findIndex((category) => category.id === this.data.category.id);
+          this.productFormGroup.get('category').patchValue(this.categories[categoryIndex]);
+        }
       })
     ];
   }

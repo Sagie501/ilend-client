@@ -5,11 +5,11 @@ import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import {
   addProductMutation,
-  addToWishlistMutation,
+  addToWishlistMutation, deleteProductMutation,
   getProductByIdQuery, getProductsByUserIdQuery,
   getProductsQuery,
   getUserWishlistQuery,
-  removeFromWishlistMutation
+  removeFromWishlistMutation, updateProductMutation
 } from '../../graphql/product.graphql';
 import { CommentsService } from '../comments/comments.service';
 import { UserService } from '../user/user.service';
@@ -24,14 +24,19 @@ export class ProductsService {
 
   getProducts(): Observable<Array<Product>> {
     return this.apollo.watchQuery<any>({
-      query: getProductsQuery
+      query: getProductsQuery,
+      fetchPolicy: 'cache-and-network'
     }).valueChanges.pipe<Array<Product>>(
-      map(({ data }) => {
-        let products = data.getProducts;
-        products = products.map((product) => {
-          return this.mapProductForClient(product);
-        });
-        return products as Array<Product>;
+      map(({ data, loading }) => {
+        if (!loading) {
+          let products = data.getProducts || [];
+          products = products.map((product) => {
+            return this.mapProductForClient(product);
+          });
+          return products as Array<Product>;
+        } else {
+          return [];
+        }
       })
     );
   }
@@ -77,6 +82,34 @@ export class ProductsService {
     }).pipe(
       map(({ data, errors }) => {
         return this.mapProductForClient(data.addProduct) as Product;
+      })
+    );
+  }
+
+  updateProduct(productId: string, categoryId: string, product): Observable<Product> {
+    return this.apollo.mutate<any>({
+      mutation: updateProductMutation,
+      variables: {
+        productId,
+        categoryId,
+        product
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return this.mapProductForClient(data.updateProduct) as Product;
+      })
+    );
+  }
+
+  deleteProduct(productId: string): Observable<boolean> {
+    return this.apollo.mutate<any>({
+      mutation: deleteProductMutation,
+      variables: {
+        productId
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return data.removeProduct;
       })
     );
   }
