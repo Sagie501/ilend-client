@@ -9,6 +9,7 @@ import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.c
 import { WishlistComponent } from './features/user/wishlist/containers/wishlist/wishlist.component';
 import { AuthGuard } from './core/services/auth-guard/auth.guard';
 import { AdminDashboardComponent } from './features/admin-dashboard/containers/admin-dashboard/admin-dashboard.component';
+import { AdminGuard } from './core/services/admin-guard/admin-guard.guard';
 
 const routes: Routes = [
   {
@@ -61,7 +62,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: MainComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AdminGuard],
     children: [
       {
         path: 'dashboard',
