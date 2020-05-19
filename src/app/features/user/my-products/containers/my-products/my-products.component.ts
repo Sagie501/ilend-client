@@ -10,6 +10,7 @@ import { ProductDialogComponent } from '../../components/product-dialog/product-
 import { addNewProduct, deleteProduct, updateProduct } from '../../../actions/user.actoins';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileInput } from 'ngx-material-file-input';
+import { ConfirmationDialogComponent } from '../../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ile-my-products',
@@ -22,7 +23,8 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   userProducts: Array<Product>;
   getGreetingSentence = getGreetingSentence;
   subscriptions: Array<Subscription>;
-  dialogRef: MatDialogRef<ProductDialogComponent>;
+  productDialogRef: MatDialogRef<ProductDialogComponent>;
+  deleteProductDialogRef: MatDialogRef<ConfirmationDialogComponent>;
 
   constructor(private userStore: Store<UserState>, private dialog: MatDialog, private snackBar: MatSnackBar) {
   }
@@ -34,25 +36,33 @@ export class MyProductsComponent implements OnInit, OnDestroy {
       }),
       this.userStore.select(getUserProducts).subscribe((userProducts) => {
         this.userProducts = userProducts;
-        if (this.loggedInUser && this.dialogRef) {
-          this.snackBar.open(this.dialogRef.componentInstance.isCreatingMode ? 'Your new product created!' : 'Your product has been updated!', 'OK', {
-            duration: 3000
-          });
-          this.dialogRef.close();
-          this.dialogRef = null;
+        if (this.loggedInUser) {
+          if (this.productDialogRef) {
+            this.snackBar.open(this.productDialogRef.componentInstance.isCreatingMode ? 'Your new product created!' : 'Your product has been updated!', 'OK', {
+              duration: 3000
+            });
+            this.productDialogRef.close();
+            this.productDialogRef = null;
+          } else if (this.deleteProductDialogRef) {
+            this.snackBar.open('Your product has been deleted!', 'OK', {
+              duration: 3000
+            });
+            this.deleteProductDialogRef.close();
+            this.deleteProductDialogRef = null;
+          }
         }
       })
     ];
   }
 
   openNewProductDialog() {
-    this.dialogRef = this.dialog.open(ProductDialogComponent, {
+    this.productDialogRef = this.dialog.open(ProductDialogComponent, {
       autoFocus: false
     });
 
-    this.dialogRef.componentInstance.isCreatingMode = true;
+    this.productDialogRef.componentInstance.isCreatingMode = true;
     this.subscriptions.push(
-      this.dialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
+      this.productDialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
         let categoryId = newProduct.category.id;
         delete newProduct.category;
 
@@ -66,7 +76,7 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   async openEditProductDialog(productId: string) {
     let product = this.userProducts.find((product) => product.id === productId);
 
-    this.dialogRef = this.dialog.open(ProductDialogComponent, {
+    this.productDialogRef = this.dialog.open(ProductDialogComponent, {
       autoFocus: false,
       data: {
         name: product.name,
@@ -77,12 +87,11 @@ export class MyProductsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.dialogRef.componentInstance.isCreatingMode = false;
+    this.productDialogRef.componentInstance.isCreatingMode = false;
     this.subscriptions.push(
-      this.dialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
+      this.productDialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
         let categoryId = newProduct.category.id;
         delete newProduct.category;
-
 
         this.prepareProductToSave(newProduct).then((newProduct) => {
           this.userStore.dispatch(updateProduct({ productId, categoryId, product: newProduct }));
@@ -112,7 +121,15 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct(productId: string) {
-    this.userStore.dispatch(deleteProduct({ productId }));
+    this.deleteProductDialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    this.deleteProductDialogRef.componentInstance.title = 'Delete product';
+    this.deleteProductDialogRef.componentInstance.content = 'Are you sure that you want to delete this product?';
+    this.subscriptions.push(
+      this.deleteProductDialogRef.componentInstance.approveClicked.subscribe(() => {
+        this.userStore.dispatch(deleteProduct({ productId }));
+      })
+    );
   }
 
   getBlobFilesForImagesProducts(imagesURLS: Array<string>, productName: string): Promise<Array<File>> {

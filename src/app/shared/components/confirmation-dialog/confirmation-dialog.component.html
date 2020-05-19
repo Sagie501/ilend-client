@@ -1,0 +1,13 @@
+<div class="product-dialog">
+  <span class="header" mat-dialog-title>{{ title }}</span>
+  <div mat-dialog-content>
+    {{ content }}
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="primary"
+            (click)="approveClicked.emit()">
+      Approve
+    </button>
+    <button mat-stroked-button color="warn" mat-dialog-close>Cancel</button>
+  </div>
+</div>

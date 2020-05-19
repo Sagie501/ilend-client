@@ -12,6 +12,9 @@ import { ImagesSliderComponent } from './components/images-slider/images-slider.
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,9 +27,10 @@ import { AppRoutingModule } from '../app-routing.module';
     OrderStatusComponent,
     ImageComponent,
     ImagesSliderComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ConfirmationDialogComponent
   ],
-  imports: [CommonModule, NgImageSliderModule, AppRoutingModule],
+  imports: [CommonModule, NgImageSliderModule, AppRoutingModule, MatDialogModule, MatButtonModule],
   exports: [
     SearchComponent,
     CheckboxComponent,
