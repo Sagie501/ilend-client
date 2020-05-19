@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { ProductsService } from '../../../../core/services/products/products.service';
 import { switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { getLoggedInUser, getUserWishlist, UserState } from '../../../user/reducer/user.reducer';
+import { getLoggedInUser, getUserProducts, getUserWishlist, UserState } from '../../../user/reducer/user.reducer';
 import { User } from '../../../../core/models/user.model';
 import { addProductToWishlist, removeProductFromWishlist } from '../../../user/actions/user.actoins';
 
@@ -18,7 +18,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   product: Product;
   userWishlist: Array<Product>;
+  userProducts: Array<Product>;
   isProductInWishlist: boolean;
+  isLoggedInUserProduct: boolean;
   loggedInUser: User;
   subscriptions: Array<Subscription>;
 
@@ -34,6 +36,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       ).subscribe((product: Product) => {
         this.product = product;
         this.checkIfProductInWishlist();
+        this.checkIfLoggedInUserProduct();
       }),
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
@@ -41,6 +44,10 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       this.userStore.select(getUserWishlist).subscribe((userWishlist) => {
         this.userWishlist = userWishlist;
         this.checkIfProductInWishlist();
+      }),
+      this.userStore.select(getUserProducts).subscribe((userProducts) => {
+        this.userProducts = userProducts;
+        this.checkIfLoggedInUserProduct();
       })
     ];
   }
@@ -50,6 +57,14 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       this.isProductInWishlist = !!this.userWishlist.find((product) => product.id === this.product.id);
     } else {
       this.isProductInWishlist = false;
+    }
+  }
+
+  checkIfLoggedInUserProduct() {
+    if (this.product && this.userProducts) {
+      this.isLoggedInUserProduct = !!this.userProducts.find((product) => product.id === this.product.id);
+    } else {
+      this.isLoggedInUserProduct = false;
     }
   }
 

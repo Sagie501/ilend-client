@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import {
+  addProductMutation,
   addToWishlistMutation,
-  getProductByIdQuery,
+  getProductByIdQuery, getProductsByUserIdQuery,
   getProductsQuery,
-  getUserWishlist,
+  getUserWishlistQuery,
   removeFromWishlistMutation
 } from '../../graphql/product.graphql';
 import { CommentsService } from '../comments/comments.service';
@@ -48,9 +49,41 @@ export class ProductsService {
     );
   }
 
-  getUserWishlist(userId): Observable<Array<Product>> {
+  getProductsByUserId(userId: string): Observable<Array<Product>> {
     return this.apollo.query<any>({
-      query: getUserWishlist,
+      query: getProductsByUserIdQuery,
+      variables: {
+        userId
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        let products = data.getProductsByUserId;
+        products = products.map((product) => {
+          return this.mapProductForClient(product);
+        });
+        return products as Array<Product>;
+      })
+    );
+  }
+
+  addProduct(ownerId: string, categoryId: string, product): Observable<Product> {
+    return this.apollo.mutate<any>({
+      mutation: addProductMutation,
+      variables: {
+        ownerId,
+        categoryId,
+        product
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return this.mapProductForClient(data.addProduct) as Product;
+      })
+    );
+  }
+
+  getUserWishlist(userId: string): Observable<Array<Product>> {
+    return this.apollo.query<any>({
+      query: getUserWishlistQuery,
       variables: {
         userId
       }
@@ -102,14 +135,11 @@ export class ProductsService {
   }
 
   mapProductForClient(serverProduct): Product {
-    let clientProduct = {
+    return {
       ...serverProduct,
       owner: this.userService.mapUserForClient(serverProduct.owner),
-      categoryId: serverProduct.category.id,
       pictureLinks: JSON.parse(serverProduct.pictureLinks),
       comments: serverProduct.comments.map(this.commentsService.mapCommentForClient)
     };
-    delete clientProduct.category;
-    return clientProduct;
   }
 }

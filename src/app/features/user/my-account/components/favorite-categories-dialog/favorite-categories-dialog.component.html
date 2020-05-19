@@ -1,0 +1,27 @@
+<div class="favorite-categories-dialog">
+  <span class="header" mat-dialog-title>Changing your Favorite Categories</span>
+  <div mat-dialog-content>
+    <div class="line">
+      <mat-form-field>
+        <mat-label>Favorite Categories</mat-label>
+        <mat-select [formControl]="favoriteCategoriesFormControl" multiple>
+          <mat-select-trigger>
+            {{favoriteCategoriesFormControl.value?.length > 0 ? favoriteCategoriesFormControl.value[0].name : ''}}
+            <span *ngIf="favoriteCategoriesFormControl.value?.length > 1"
+                  class="additional-selection">(+{{favoriteCategoriesFormControl.value.length - 1}} {{favoriteCategoriesFormControl.value?.length === 2 ? 'other' : 'others'}}
+              )
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <span *ngIf="data.errorMessage" class="error-message">{{ data.errorMessage }}</span>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="changeUserEvent.emit(favoriteCategoriesFormControl.value)"
+            [disabled]="favoriteCategoriesFormControl.invalid">Change my favorite categories
+    </button>
+    <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
+  </div>
+</div>

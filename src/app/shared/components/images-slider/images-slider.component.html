@@ -2,7 +2,7 @@
   <span class="slider-arrow" *ngIf="images?.length > 1" (click)="prevImage()"><</span>
   <ng-image-slider #imagesSlider *ngIf="images?.length > 0" [images]="thumbImages" [imagePopup]="false"
                    [animationSpeed]="0.7" [ngStyle]="{width: imageWidth}"
-                   [infinite]="true" [imageSize]="{width: '100%', height: imageHeight + 'px', space: 3}"
+                   [infinite]="true" [imageSize]="{width: '98%', height: imageHeight + 'px', space: 3}"
                    [showArrow]="false"></ng-image-slider>
   <span class="slider-arrow" *ngIf="images?.length > 1" (click)="nextImage()">></span>
 </div>

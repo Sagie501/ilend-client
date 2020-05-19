@@ -7,6 +7,7 @@ import { UserEffects } from './effects/user.effects';
 import { LeasingHistoryModule } from './leasing-history/leasing-history.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { MyAccountModule } from './my-account/my-account.module';
+import { MyProductsModule } from './my-products/my-products.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MyAccountModule } from './my-account/my-account.module';
     CommonModule,
     LeasingHistoryModule,
     WishlistModule,
-    MyAccountModule
+    MyAccountModule,
+    MyProductsModule
   ]
 })
 export class UserModule { }

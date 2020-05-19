@@ -5,13 +5,14 @@
     <span class="product-price">${{ product?.requestedPrice }}</span>
   </div>
   <!--  TODO: Add router link to the user profile-->
-  <div class="owner-label">Lend from <a>{{product?.owner.firstName + product?.owner.lastName}}</a></div>
+  <div class="owner-label">Lend from <a>{{product?.owner.firstName + ' ' + product?.owner.lastName}}</a></div>
   <p class="product-description text-ellipsis">{{ product?.description || 'The owner didn\'t add any description' }}</p>
   <ile-button [text]="'Lend now'" class="lend-button" matTooltip="{{!loggedInUser ? 'Login to continue' : ''}}"
               [matTooltipPosition]="'above'" [disabled]="!loggedInUser"></ile-button>
   <ile-button [text]="'Add to Wishlist'" *ngIf="!isProductInWishlist"
-              matTooltip="{{!loggedInUser ? 'Login to continue' : ''}}"
-              [matTooltipPosition]="'above'" [disabled]="!loggedInUser" (clicked)="addProductToWishlist()"></ile-button>
+              matTooltip="{{!loggedInUser ? 'Login to continue' : isLoggedInUserProduct ? 'Can\'t add your own product to wishlist' : ''}}"
+              [matTooltipPosition]="'above'" [disabled]="!loggedInUser || isLoggedInUserProduct"
+              (clicked)="addProductToWishlist()"></ile-button>
   <ile-button [text]="'Remove from Wishlist'" *ngIf="isProductInWishlist"
               (clicked)="removeProductFromWishlist()"></ile-button>
 </div>

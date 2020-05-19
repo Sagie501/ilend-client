@@ -18,7 +18,7 @@
       <input matInput required formControlName="password" [errorStateMatcher]="matcher"
              type="password">
       <mat-error *ngIf="loginForm.get('password').hasError('required')">
-        password is <strong>required</strong>
+        Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>
 

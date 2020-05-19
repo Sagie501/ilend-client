@@ -10,6 +10,7 @@ import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.c
 import { WishlistComponent } from './features/user/wishlist/containers/wishlist/wishlist.component';
 import { AuthGuard } from './core/services/auth-guard/auth.guard';
 import { MyAccountComponent } from './features/user/my-account/containers/my-account/my-account.component';
+import { MyProductsComponent } from './features/user/my-products/containers/my-products/my-products.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
       {
         path: 'wishlist',
         component: WishlistComponent,
+      },
+      {
+        path: 'my-products',
+        component: MyProductsComponent,
       }
     ],
   },

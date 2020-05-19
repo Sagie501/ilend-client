@@ -32,7 +32,7 @@ export class FilterBarComponent implements OnInit {
         return {
           id: category.id,
           title: category.name,
-          amount: products.filter((product) => product.categoryId === category.id).length
+          amount: products.filter((product) => product.category.id === category.id).length
         } as Option;
       });
       categoriesOptions.forEach((category) => {
