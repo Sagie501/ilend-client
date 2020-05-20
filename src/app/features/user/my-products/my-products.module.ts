@@ -13,6 +13,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProductsTableComponent } from './components/products-table/products-table.component';
+import { AppRoutingModule } from '../../../app-routing.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ProductsTableComponent } from './components/products-table/products-tab
     MatSelectModule,
     MaterialFileInputModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AppRoutingModule
   ]
 })
 export class MyProductsModule { }

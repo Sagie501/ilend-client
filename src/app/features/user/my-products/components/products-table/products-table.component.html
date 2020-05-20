@@ -8,7 +8,7 @@
       <th>Rating</th>
       <th>Actions</th>
     </tr>
-    <tr *ngFor="let product of products">
+    <tr *ngFor="let product of products" [routerLink]="['/home/products', product.id]">
       <td class="images-cell">
         <ile-images-slider [images]="product.pictureLinks" [imageHeight]="146"
                            [imageWidth]="'20rem'"></ile-images-slider>
