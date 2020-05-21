@@ -9,10 +9,31 @@
   <p class="product-description text-ellipsis">{{ product?.description || 'The owner didn\'t add any description' }}</p>
   <ile-button [text]="'Lend now'" class="lend-button" matTooltip="{{!loggedInUser ? 'Login to continue' : ''}}"
               [matTooltipPosition]="'above'" [disabled]="!loggedInUser"></ile-button>
-  <ile-button [text]="'Add to Wishlist'" *ngIf="!isProductInWishlist"
+  <ile-button [text]="'Add to Wishlist'" *ngIf="!isProductInWishlist" class="wishlist-button"
               matTooltip="{{!loggedInUser ? 'Login to continue' : isLoggedInUserProduct ? 'Can\'t add your own product to wishlist' : ''}}"
               [matTooltipPosition]="'above'" [disabled]="!loggedInUser || isLoggedInUserProduct"
               (clicked)="addProductToWishlist()"></ile-button>
-  <ile-button [text]="'Remove from Wishlist'" *ngIf="isProductInWishlist"
+  <ile-button [text]="'Remove from Wishlist'" *ngIf="isProductInWishlist" class="wishlist-button"
               (clicked)="removeProductFromWishlist()"></ile-button>
+  <div class="comments-container">
+    <div class="comments">
+      <div class="comment" *ngFor="let comment of product?.comments">
+        <span class="comment-author">{{comment.user.firstName + ' ' + comment.user.lastName + ':'}}</span>
+        <span class="comment-content">{{comment.comment}}</span>
+        <span class="comment-date">{{comment.date | date: 'dd/MM/yy HH:mm'}}</span>
+      </div>
+      <div class="no-comments" *ngIf="product?.comments.length === 0">
+        <span>This product doesn't have comments yet.</span>
+        <span>Be the first one the comment!</span>
+      </div>
+    </div>
+    <div class="new-comment" *ngIf="loggedInUser">
+      <mat-form-field>
+        <mat-label>New comment</mat-label>
+        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="2"
+        [(ngModel)]="comment"></textarea>
+      </mat-form-field>
+      <ile-button [text]="'Post comment'" (clicked)="postNewComment()" [disabled]="!comment || comment === ''"></ile-button>
+    </div>
+  </div>
 </div>
