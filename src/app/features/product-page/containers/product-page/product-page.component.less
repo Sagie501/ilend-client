@@ -1,4 +1,5 @@
 @import "../../../../../styles/styles.less";
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 .product-card {
   width: 100%;
@@ -25,6 +26,19 @@
       font-weight: bold;
     }
 
+    .product-rating {
+      font-size: 1.4rem;
+
+      &:before {
+        margin-left: 1rem;
+        font-size: 1.25em;
+        font-family: FontAwesome;
+        display: inline-block;
+        content: "\f005";
+        color: #FFD700;
+      }
+    }
+
     .product-price {
       color: #3674a4;
     }
@@ -47,9 +61,50 @@
     margin-bottom: 0.5rem;
   }
 
+  .ratings {
+    fieldset, label { margin: 0; padding: 0; }
+
+    /****** Style Star Rating Widget *****/
+
+    .rating {
+      border: none;
+      float: left;
+      position: relative;
+    }
+
+    .rating > input { display: none; }
+    .rating > label:before {
+      margin: 5px;
+      font-size: 1.25em;
+      font-family: FontAwesome;
+      display: inline-block;
+      content: "\f005";
+    }
+
+    .rating > .half:before {
+      content: "\f089";
+      position: absolute;
+    }
+
+    .rating > label {
+      color: #ddd;
+      float: right;
+    }
+
+    /***** CSS Magic to Highlight Stars on Hover *****/
+
+    .rating > input:checked ~ label, /* show gold star when clicked */
+    .rating:not(:checked) > label:hover, /* hover current star */
+    .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+    .rating > input:checked + label:hover, /* hover current star when changing rating */
+    .rating > input:checked ~ label:hover,
+    .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+    .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+  }
+
   .comments-container {
     width: 55%;
-    margin-top: auto;
 
     .comments {
       min-height: 13rem;

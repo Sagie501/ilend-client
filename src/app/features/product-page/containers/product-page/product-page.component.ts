@@ -24,6 +24,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   isLoggedInUserProduct: boolean;
   loggedInUser: User;
   comment: string;
+  isRated: boolean = false;
   subscriptions: Array<Subscription>;
 
   constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService, private userStore: Store<UserState>,
@@ -77,6 +78,13 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   removeProductFromWishlist() {
     this.userStore.dispatch(removeProductFromWishlist({ userId: this.loggedInUser.id, productId: this.product.id }));
+  }
+
+  updateProductRating(rating: number) {
+    this.isRated = true;
+    this.productsService.addNewRating(this.product.id, rating).subscribe((product) => {
+      this.product.rating = product.rating;
+    });
   }
 
   postNewComment() {

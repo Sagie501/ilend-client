@@ -1,7 +1,10 @@
 <div class="product-card">
   <ile-images-slider [images]="product?.pictureLinks" [imageHeight]="200" [imageWidth]="'75rem'"></ile-images-slider>
   <div class="product-header">
-    <span class="product-name">{{ product?.name }}</span>
+    <div style="display: flex; align-items: center;">
+      <span class="product-name">{{ product?.name }}</span>
+      <span class="product-rating">{{product?.rating | number: '1.0-2'}}</span>
+    </div>
     <span class="product-price">${{ product?.requestedPrice }}</span>
   </div>
   <!--  TODO: Add router link to the user profile-->
@@ -15,6 +18,20 @@
               (clicked)="addProductToWishlist()"></ile-button>
   <ile-button [text]="'Remove from Wishlist'" *ngIf="isProductInWishlist" class="wishlist-button"
               (clicked)="removeProductFromWishlist()"></ile-button>
+  <div class="ratings" *ngIf="product?.owner.id !== loggedInUser?.id">
+    <fieldset class="rating" [ngStyle]="{'pointer-events': isRated ? 'none' : 'auto'}">
+      <input type="radio" id="star5" name="rating" value="5" (input)="updateProductRating(5)" /><label class = "full" for="star5"></label>
+      <input type="radio" id="star4half" name="rating" value="4 and a half" (input)="updateProductRating(4.5)" /><label class="half" for="star4half"></label>
+      <input type="radio" id="star4" name="rating" value="4" (input)="updateProductRating(4)" /><label class = "full" for="star4"></label>
+      <input type="radio" id="star3half" name="rating" value="3 and a half" (input)="updateProductRating(3.5)" /><label class="half" for="star3half"></label>
+      <input type="radio" id="star3" name="rating" value="3" (input)="updateProductRating(3)" /><label class = "full" for="star3"></label>
+      <input type="radio" id="star2half" name="rating" value="2 and a half" (input)="updateProductRating(2.5)" /><label class="half" for="star2half"></label>
+      <input type="radio" id="star2" name="rating" value="2" (input)="updateProductRating(2)" /><label class = "full" for="star2"></label>
+      <input type="radio" id="star1half" name="rating" value="1 and a half" (input)="updateProductRating(1.5)" /><label class="half" for="star1half"></label>
+      <input type="radio" id="star1" name="rating" value="1" (input)="updateProductRating(1)" /><label class = "full" for="star1"></label>
+      <input type="radio" id="starhalf" name="rating" value="half" (input)="updateProductRating(0.5)" /><label class="half" for="starhalf"></label>
+    </fieldset>
+  </div>
   <div class="comments-container">
     <div class="comments">
       <div class="comment" *ngFor="let comment of product?.comments">
