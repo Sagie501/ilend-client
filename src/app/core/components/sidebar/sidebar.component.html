@@ -6,6 +6,7 @@
   <a routerLink="/user/leasing-history" *ngIf="loggedInUser">Leasing History</a>
   <a routerLink="/user/my-products" *ngIf="loggedInUser">My Products</a>
   <a routerLink="/home" *ngIf="loggedInUser">Ongoing Deliveries</a>
+  <a routerLink="/admin/dashboard" *ngIf="loggedInUser && loggedInUser.isAdmin">Admin Dashboard</a>
   <a routerLink="/home/login" *ngIf="!loggedInUser">Login</a>
   <a routerLink="/home/sign-up" *ngIf="!loggedInUser">Sign up</a>
   <a routerLink="/home" *ngIf="loggedInUser" (click)="logout()">Logout</a>
