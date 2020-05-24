@@ -10,9 +10,11 @@ export class ButtonComponent implements OnInit {
   @Input() isLarge: boolean;
   @Input() type: 'submit' | 'button' = 'button';
   @Input() disabled: boolean = false;
-  @Output() clicked: EventEmitter<void> = new EventEmitter();
+  @Output() clicked: EventEmitter<MouseEvent> = new EventEmitter();
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

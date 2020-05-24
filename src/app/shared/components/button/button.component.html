@@ -1,7 +1,7 @@
 <div
   class="button"
   [ngClass]="{ disabled: disabled, large: isLarge }"
-  (click)="clicked.emit()"
+  (click)="clicked.emit($event)"
   *ngIf="type === 'button'"
 >
   {{ text }}

@@ -13,7 +13,7 @@
       <mat-form-field>
         <mat-label>Description</mat-label>
         <textarea required matInput formControlName="description" [errorStateMatcher]="matcher"
-                  cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="2"></textarea>
+                  cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="2"></textarea>
         <mat-error *ngIf="productFormGroup.get('description').hasError('required')">
           Description is <strong>required</strong>
         </mat-error>
