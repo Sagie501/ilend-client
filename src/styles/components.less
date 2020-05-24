@@ -48,7 +48,7 @@
 .table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 1rem;
+  border-spacing: 0 0;
   border-color: darken(@text-color, 10%);
   color: darken(@text-color, 50%);
 
@@ -59,10 +59,13 @@
     border-bottom: 1px solid darken(@text-color, 10%);
   }
 
-  td {
-    padding-bottom: 1rem;
-    border-bottom: 1px solid darken(@text-color, 10%);
+  tr:not(&__header):hover {
+    background-color: rgba(0, 0, 0, .075);
+  }
 
+  td {
+    padding: 1rem 0;
+    border-bottom: 1px solid darken(@text-color, 10%);
     min-height: 6rem;
   }
 }

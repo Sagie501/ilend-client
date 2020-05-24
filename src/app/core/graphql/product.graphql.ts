@@ -77,6 +77,15 @@ export const deleteProductMutation = gql`
   }
 `;
 
+export const addNewRatingMutation = gql`
+  mutation addNewRating($productId: ID!, $rating: Float!) {
+    addNewRating(productId: $productId, rating: $rating) {
+      ...ProductFragment
+    }
+  }
+  ${productFragment}
+`;
+
 export const getUserWishlistQuery = gql`
   query getUserWishList($userId: ID!) {
     getUserWishList(userId: $userId) {

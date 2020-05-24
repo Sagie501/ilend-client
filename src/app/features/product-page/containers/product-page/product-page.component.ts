@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { getLoggedInUser, getUserProducts, getUserWishlist, UserState } from '../../../user/reducer/user.reducer';
 import { User } from '../../../../core/models/user.model';
 import { addProductToWishlist, removeProductFromWishlist } from '../../../user/actions/user.actoins';
+import { CommentsService } from '../../../../core/services/comments/comments.service';
 
 @Component({
   selector: 'ile-product-page',
@@ -22,9 +23,12 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   isProductInWishlist: boolean;
   isLoggedInUserProduct: boolean;
   loggedInUser: User;
+  comment: string;
+  isRated: boolean = false;
   subscriptions: Array<Subscription>;
 
-  constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService, private userStore: Store<UserState>) {
+  constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService, private userStore: Store<UserState>,
+              private commentsService: CommentsService) {
   }
 
   ngOnInit(): void {
@@ -74,6 +78,20 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   removeProductFromWishlist() {
     this.userStore.dispatch(removeProductFromWishlist({ userId: this.loggedInUser.id, productId: this.product.id }));
+  }
+
+  updateProductRating(rating: number) {
+    this.isRated = true;
+    this.productsService.addNewRating(this.product.id, rating).subscribe((product) => {
+      this.product.rating = product.rating;
+    });
+  }
+
+  postNewComment() {
+    this.commentsService.addComment(this.loggedInUser.id, this.product.id, this.comment).subscribe((comment) => {
+      this.product.comments.push(comment);
+      this.comment = '';
+    });
   }
 
   ngOnDestroy(): void {

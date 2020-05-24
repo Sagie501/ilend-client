@@ -23,7 +23,7 @@
   }
 
   &__bottom {
-    height: calc(2 * @header-height);
+    height: calc(@header-height + 2 * @sidebar-link-height);
     margin-top: auto;
   }
 
@@ -32,7 +32,7 @@
     align-items: center;
     color: @text-color;
     text-decoration: none;
-    height: 7rem;
+    height: @sidebar-link-height;
     padding-left: 2rem;
     transition: all 0.2s;
     color: darken(#fff, 8%);
@@ -42,8 +42,8 @@
     }
 
     &__icon {
-      width: 3rem;
-      height: 3rem;
+      width: 2rem;
+      height: 2rem;
       margin-right: 2rem;
 
       & > use {

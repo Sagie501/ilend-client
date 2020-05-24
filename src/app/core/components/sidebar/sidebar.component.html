@@ -30,7 +30,7 @@
       *ngIf="loggedInUser"
       ><svg class="sidebar-link__icon">
         <use xlink:href="#lnr-star"></use></svg
-      ><span>My Wishlist</span></a
+      ><span class="sidebar-link__margin">My Wishlist</span></a
     >
     <a
       class="sidebar-link"
@@ -74,6 +74,15 @@
       ><svg class="sidebar-link__icon">
         <use xlink:href="#lnr-pencil"></use></svg
       ><span>Sign up</span></a
+    >
+    <a
+      class="sidebar-link sidebar-link__end"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/admin/dashboard') }"
+      routerLink="/admin/dashboard"
+      *ngIf="loggedInUser && loggedInUser.isAdmin"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-pie-chart"></use></svg
+      ><span class="sidebar-link__margin">Admin Dashboard</span></a
     >
     <a
       class="sidebar-link sidebar-link__end"
