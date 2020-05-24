@@ -1,9 +1,72 @@
 @import "../../../../styles/styles.less";
 
+.welcome {
+  height: @header-height;
+  background-color: @secondary-color;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: darken(#fff, 8%);
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
 .sidebar {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 2 * @header-height);
   background-color: @secondary-color;
   display: flex;
   flex-direction: column;
+
+  &__top {
+    overflow-y: auto;
+  }
+
+  &__bottom {
+    height: calc(@header-height + 2 * @sidebar-link-height);
+    margin-top: auto;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    color: @text-color;
+    text-decoration: none;
+    height: @sidebar-link-height;
+    padding-left: 2rem;
+    transition: all 0.2s;
+    color: darken(#fff, 8%);
+
+    &__margin {
+      margin-top: 0.5rem;
+    }
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+      margin-right: 2rem;
+
+      & > use {
+        fill: darken(#fff, 8%);
+      }
+    }
+
+    &:hover,
+    &__active {
+      background-color: darken(@secondary-color, 20%);
+      color: #fff;
+    }
+
+    &:hover > .sidebar-link__icon > use {
+      fill: #fff;
+    }
+  }
+
+  .legal {
+    height: 7rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    color: darken(#fff, 8%);
+  }
 }
