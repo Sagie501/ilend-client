@@ -1,12 +1,100 @@
+<div class="welcome">
+  {{
+    getGreetingSentence() + ", " + (loggedInUser?.firstName || "Guest") + "!"
+  }}
+</div>
+
 <div class="sidebar">
-  <span>{{ "Hello, " + (loggedInUser?.firstName || "Guest") + "!" }}</span>
-  <a routerLink="/home">Home</a>
-  <a routerLink="/user/my-account" *ngIf="loggedInUser">My Account</a>
-  <a routerLink="/user/wishlist" *ngIf="loggedInUser">My Wishlist</a>
-  <a routerLink="/user/leasing-history" *ngIf="loggedInUser">Leasing History</a>
-  <a routerLink="/user/my-products" *ngIf="loggedInUser">My Products</a>
-  <a routerLink="/home" *ngIf="loggedInUser">Ongoing Deliveries</a>
-  <a routerLink="/home/login" *ngIf="!loggedInUser">Login</a>
-  <a routerLink="/home/sign-up" *ngIf="!loggedInUser">Sign up</a>
-  <a routerLink="/home" *ngIf="loggedInUser" (click)="logout()">Logout</a>
+  <div class="sidebar__top">
+    <a
+      class="sidebar-link"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/home/products') }"
+      routerLink="/home"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-home"></use></svg
+      ><span class="sidebar-link__margin">Home</span></a
+    >
+    <a
+      class="sidebar-link"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-account') }"
+      routerLink="/user/my-account"
+      *ngIf="loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-user"></use></svg
+      ><span>My Account</span></a
+    >
+    <a
+      class="sidebar-link"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/wishlist') }"
+      routerLink="/user/wishlist"
+      *ngIf="loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-star"></use></svg
+      ><span>My Wishlist</span></a
+    >
+    <a
+      class="sidebar-link"
+      [ngClass]="{
+        'sidebar-link__active': isActiveRoute('/user/leasing-history')
+      }"
+      routerLink="/user/leasing-history"
+      *ngIf="loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-history"></use></svg
+      ><span>Leasing History</span></a
+    >
+    <a
+      class="sidebar-link"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
+      routerLink="/user/my-products"
+      *ngIf="loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-list"></use></svg
+      ><span>My Products</span></a
+    >
+    <a
+      class="sidebar-link"
+      [ngClass]="{
+        'sidebar-link__active': isActiveRoute('/user/ongoing-deliveries')
+      }"
+      routerLink="/home"
+      *ngIf="loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-train"></use></svg
+      ><span>Ongoing Deliveries</span></a
+    >
+  </div>
+
+  <div class="sidebar__bottom">
+    <a
+      class="sidebar-link sidebar-link__end"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/home/sign-up') }"
+      routerLink="/home/sign-up"
+      *ngIf="!loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-pencil"></use></svg
+      ><span>Sign up</span></a
+    >
+    <a
+      class="sidebar-link sidebar-link__end"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/home/login') }"
+      routerLink="/home/login"
+      *ngIf="!loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-enter"></use></svg
+      ><span>Login</span></a
+    >
+    <a
+      class="sidebar-link sidebar-link__end"
+      routerLink="/home"
+      *ngIf="loggedInUser"
+      (click)="logout()"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-exit"></use></svg
+      ><span>Logout</span></a
+    >
+    <div class="legal">
+      © 2020 by ILend. All rights reserved.
+    </div>
+  </div>
 </div>
