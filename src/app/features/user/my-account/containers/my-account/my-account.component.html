@@ -1,58 +1,100 @@
 <div class="account-page">
   <div class="account-page__title">Account</div>
   <div class="account">
+    <div class="line"></div>
     <!-- membership -->
     <div class="account-section">
-
-      <div class="line">
-        <mat-divider></mat-divider>
-      </div>
-
       <div class="header">Membership</div>
       <section class="user-account">
         <div class="user-details">
-          <div class="first-name">First Name:
+          <div class="first-name">
+            First Name:
             <div class="detail">{{ loggedInUser?.firstName }}</div>
           </div>
-          <div class="second-name">Last Name:
+          <span class="empty"></span>
+          <div class="second-name">
+            Last Name:
             <div class="detail">{{ loggedInUser?.lastName }}</div>
           </div>
-          <div class="email">Email:
+          <span class="empty"></span>
+          <div class="email">
+            Email:
             <div class="detail">{{ loggedInUser?.email }}</div>
           </div>
-          <div class="password">Password:
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            (click)="openEmailDialog()"
+            >Change account e-mail</a
+          >
+          <div class="password">
+            Password:
             <div class="detail">*********</div>
           </div>
-          <div class="Address">Address:
-            <div
-              class="detail">{{ loggedInUser?.street + ', ' + loggedInUser?.city + ', ' + loggedInUser?.country}}</div>
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            (click)="openPasswordDialog()"
+            >Change password</a
+          >
+          <div class="Address">
+            Address:
+            <div class="detail">
+              {{
+                loggedInUser?.street +
+                  ", " +
+                  loggedInUser?.city +
+                  ", " +
+                  loggedInUser?.country
+              }}
+            </div>
           </div>
-        </div>
-        <div class="links">
-          <a data-uia="account-email-link" class="account-section-link" (click)="openEmailDialog()">Change account e-mail</a>
-          <a data-uia="account-email-link" class="account-section-link" (click)="openPasswordDialog()">Change password</a>
-          <a data-uia="account-email-link" class="account-section-link" (click)="openAddressDialog()">Change address</a>
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            (click)="openAddressDialog()"
+            >Change address</a
+          >
         </div>
       </section>
     </div>
 
+    <div class="line"></div>
     <!-- My profile -->
     <div class="account-section">
-      <div class="line">
-        <mat-divider></mat-divider>
-      </div>
-
       <div class="header">My profile</div>
       <section class="user-profile">
         <div class="links__center">
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/wishlist">Wish list</a>
-          <a data-uia="account-email-link" class="account-section-link" (click)="openFavoriteCategoriesDialog()">Favorite
-            Categories</a>
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/leasing-history">Leasing
-            history</a>
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-products">Manage Your
-            Products</a>
-          <a data-uia="account-email-link" class="account-section-link" routerLink="/user/my-account">View Profits</a>
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            routerLink="/user/wishlist"
+            >Wish list</a
+          >
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            (click)="openFavoriteCategoriesDialog()"
+            >Favorite Categories</a
+          >
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            routerLink="/user/leasing-history"
+            >Leasing history</a
+          >
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            routerLink="/user/my-products"
+            >Manage Your Products</a
+          >
+          <a
+            data-uia="account-email-link"
+            class="account-section-link"
+            routerLink="/user/my-account"
+            >View Profits</a
+          >
         </div>
       </section>
     </div>
