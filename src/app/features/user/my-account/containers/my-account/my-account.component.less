@@ -25,8 +25,12 @@
 
 .user-details {
   float: right;
-  width: 50%;
-  font-weight: 500;
+  width: 65%;
+  // font-weight: 500;
+  height: 15rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
 }
 
 .detail {
@@ -34,8 +38,9 @@
 }
 
 .account {
-  display: inline-block;
+  display: grid;
   margin-bottom: 3rem;
+  width: 100%;
 }
 
 .user-account {
@@ -54,6 +59,12 @@
     width: 60%;
     margin-top: 2rem;
     float: right;
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+      margin-bottom: 0.5rem;
+    }
   }
 }
 
@@ -69,8 +80,8 @@
   width: 50%;
 }
 
-.account-section {
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  height: 11rem;
-}
+// .account-section {
+//   margin-top: 1.5rem;
+//   margin-bottom: 2rem;
+//   height: 11rem;
+// }
