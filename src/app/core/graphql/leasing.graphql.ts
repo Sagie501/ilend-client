@@ -46,6 +46,15 @@ export const getAllOnGoingRequests = gql`
   ${leasingFragment}
 `;
 
+export const getAllOpenedRequests = gql`
+  query getAllOpenedRequests($lessorId: ID!) {
+    getAllOpenedRequests(lessorId: $lessorId) {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;
+
 export const setLeaseRequestStatusMutation = gql`
   mutation setLeaseRequestStatus($leasingId: ID!, $status: LeasingStatus) {
     setLeaseRequestStatus(leasingId: $leasingId, status: $status) {
