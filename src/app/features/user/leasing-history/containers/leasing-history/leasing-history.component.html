@@ -7,6 +7,10 @@
         You have {{ pendingLeasings.length }} pending leasings.</span
       >
     </div>
+    <div class="sub-headline" *ngIf="!leasings || leasings.length === 0">
+      You haven't lended any item, you can start doing it
+      <a class="link" routerLink="/home">here</a>
+    </div>
   </div>
 
   <div class="pending" *ngIf="pendingLeasings.length > 0">
@@ -18,6 +22,7 @@
   </div>
 
   <ile-leasings-table
+    *ngIf="leasings && leasings.length > 0"
     [leasings]="leasings"
     [leasingDirection]="'from'"
   ></ile-leasings-table>
