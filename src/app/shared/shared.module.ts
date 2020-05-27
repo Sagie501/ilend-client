@@ -17,6 +17,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductViewComponent } from './components/product-view/product-view.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,16 @@ import { MatButtonModule } from '@angular/material/button';
     ProductCardComponent,
     DataTableComponent,
     DataDiagramComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ProductViewComponent,
   ],
-  imports: [CommonModule, NgImageSliderModule, AppRoutingModule, MatDialogModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    NgImageSliderModule,
+    AppRoutingModule,
+    MatDialogModule,
+    MatButtonModule,
+  ],
   exports: [
     SearchComponent,
     CheckboxComponent,
@@ -48,6 +56,7 @@ import { MatButtonModule } from '@angular/material/button';
     ProductCardComponent,
     DataTableComponent,
     DataDiagramComponent,
+    ProductViewComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

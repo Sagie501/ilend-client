@@ -1,11 +1,10 @@
 @import "../../../../../styles/styles.less";
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 .product-card {
   width: 100%;
   height: calc(100vh - @header-height);
   overflow-y: auto;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -15,54 +14,20 @@
     margin-bottom: 0.6rem;
   }
 
-  .product-header {
-    display: flex;
-    justify-content: space-between;
-    width: 55%;
-    font-size: 3rem;
-    margin-bottom: 0.7rem;
-
-    .product-name {
-      font-weight: bold;
-    }
-
-    .product-rating {
-      font-size: 1.4rem;
-
-      &:before {
-        margin-left: 1rem;
-        font-size: 1.25em;
-        font-family: FontAwesome;
-        display: inline-block;
-        content: "\f005";
-        color: #FFD700;
-      }
-    }
-
-    .product-price {
-      color: #3674a4;
-    }
+  ile-product-view {
+    margin-bottom: 3rem;
   }
-
-  .owner-label {
-    width: 55%;
-    font-size: 1rem;
-    color: #bfbfbf;
-    margin-bottom: 0.5rem;
-  }
-
-  .product-description {
-    width: 55%;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
-
-  .lend-button, .wishlist-button {
+  .lend-button,
+  .wishlist-button {
     margin-bottom: 0.5rem;
   }
 
   .ratings {
-    fieldset, label { margin: 0; padding: 0; }
+    fieldset,
+    label {
+      margin: 0;
+      padding: 0;
+    }
 
     /****** Style Star Rating Widget *****/
 
@@ -72,7 +37,9 @@
       position: relative;
     }
 
-    .rating > input { display: none; }
+    .rating > input {
+      display: none;
+    }
     .rating > label:before {
       margin: 5px;
       font-size: 1.25em;
@@ -95,12 +62,16 @@
 
     .rating > input:checked ~ label, /* show gold star when clicked */
     .rating:not(:checked) > label:hover, /* hover current star */
-    .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+    .rating:not(:checked) > label:hover ~ label {
+      color: #ffd700;
+    } /* hover previous stars in list */
 
     .rating > input:checked + label:hover, /* hover current star when changing rating */
     .rating > input:checked ~ label:hover,
     .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-    .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+    .rating > input:checked ~ label:hover ~ label {
+      color: #ffed85;
+    }
   }
 
   .comments-container {
@@ -131,7 +102,8 @@
           color: #bfbfbf;
         }
 
-        .comment-content, .comment-date {
+        .comment-content,
+        .comment-date {
           margin-left: 1rem;
         }
       }

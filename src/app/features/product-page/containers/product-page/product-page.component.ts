@@ -1,22 +1,29 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Product } from '../../../../core/models/product.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../../../core/services/products/products.service';
 import { switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { getLoggedInUser, getUserProducts, getUserWishlist, UserState } from '../../../user/reducer/user.reducer';
+import {
+  getLoggedInUser,
+  getUserProducts,
+  getUserWishlist,
+  UserState,
+} from '../../../user/reducer/user.reducer';
 import { User } from '../../../../core/models/user.model';
-import { addProductToWishlist, removeProductFromWishlist } from '../../../user/actions/user.actoins';
+import {
+  addProductToWishlist,
+  removeProductFromWishlist,
+} from '../../../user/actions/user.actoins';
 import { CommentsService } from '../../../../core/services/comments/comments.service';
 
 @Component({
   selector: 'ile-product-page',
   templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.less']
+  styleUrls: ['./product-page.component.less'],
 })
 export class ProductPageComponent implements OnInit, OnDestroy {
-
   product: Product;
   userWishlist: Array<Product>;
   userProducts: Array<Product>;
@@ -27,21 +34,27 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   isRated: boolean = false;
   subscriptions: Array<Subscription>;
 
-  constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService, private userStore: Store<UserState>,
-              private commentsService: CommentsService) {
-  }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productsService: ProductsService,
+    private userStore: Store<UserState>,
+    private commentsService: CommentsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions = [
-      this.activatedRoute.params.pipe(
-        switchMap((params: Params) => {
-          return this.productsService.getProductById(params.id);
-        })
-      ).subscribe((product: Product) => {
-        this.product = product;
-        this.checkIfProductInWishlist();
-        this.checkIfLoggedInUserProduct();
-      }),
+      this.activatedRoute.params
+        .pipe(
+          switchMap((params: Params) => {
+            return this.productsService.getProductById(params.id);
+          })
+        )
+        .subscribe((product: Product) => {
+          this.product = product;
+          this.checkIfProductInWishlist();
+          this.checkIfLoggedInUserProduct();
+        }),
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
       }),
@@ -52,13 +65,15 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       this.userStore.select(getUserProducts).subscribe((userProducts) => {
         this.userProducts = userProducts;
         this.checkIfLoggedInUserProduct();
-      })
+      }),
     ];
   }
 
   checkIfProductInWishlist() {
     if (this.product && this.userWishlist) {
-      this.isProductInWishlist = !!this.userWishlist.find((product) => product.id === this.product.id);
+      this.isProductInWishlist = !!this.userWishlist.find(
+        (product) => product.id === this.product.id
+      );
     } else {
       this.isProductInWishlist = false;
     }
@@ -66,32 +81,52 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   checkIfLoggedInUserProduct() {
     if (this.product && this.userProducts) {
-      this.isLoggedInUserProduct = !!this.userProducts.find((product) => product.id === this.product.id);
+      this.isLoggedInUserProduct = !!this.userProducts.find(
+        (product) => product.id === this.product.id
+      );
     } else {
       this.isLoggedInUserProduct = false;
     }
   }
 
   addProductToWishlist() {
-    this.userStore.dispatch(addProductToWishlist({ userId: this.loggedInUser.id, productId: this.product.id }));
+    this.userStore.dispatch(
+      addProductToWishlist({
+        userId: this.loggedInUser.id,
+        productId: this.product.id,
+      })
+    );
   }
 
   removeProductFromWishlist() {
-    this.userStore.dispatch(removeProductFromWishlist({ userId: this.loggedInUser.id, productId: this.product.id }));
+    this.userStore.dispatch(
+      removeProductFromWishlist({
+        userId: this.loggedInUser.id,
+        productId: this.product.id,
+      })
+    );
   }
 
   updateProductRating(rating: number) {
     this.isRated = true;
-    this.productsService.addNewRating(this.product.id, rating).subscribe((product) => {
-      this.product.rating = product.rating;
-    });
+    this.productsService
+      .addNewRating(this.product.id, rating)
+      .subscribe((product) => {
+        this.product.rating = product.rating;
+      });
   }
 
   postNewComment() {
-    this.commentsService.addComment(this.loggedInUser.id, this.product.id, this.comment).subscribe((comment) => {
-      this.product.comments.push(comment);
-      this.comment = '';
-    });
+    this.commentsService
+      .addComment(this.loggedInUser.id, this.product.id, this.comment)
+      .subscribe((comment) => {
+        this.product.comments.push(comment);
+        this.comment = '';
+      });
+  }
+
+  navigateToCheckout() {
+    this.router.navigateByUrl(`/checkout/${this.product.id}`);
   }
 
   ngOnDestroy(): void {
