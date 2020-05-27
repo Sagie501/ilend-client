@@ -1,8 +1,26 @@
 <div class="images-container">
-  <span class="slider-arrow" *ngIf="images?.length > 1" (click)="$event.stopPropagation(); prevImage()"><</span>
-  <ng-image-slider #imagesSlider *ngIf="images?.length > 0" [images]="thumbImages" [imagePopup]="false"
-                   [animationSpeed]="0.7" [ngStyle]="{width: imageWidth}"
-                   [infinite]="true" [imageSize]="{width: '99%', height: imageHeight + 'px', space: 3}"
-                   [showArrow]="false"></ng-image-slider>
-  <span class="slider-arrow" *ngIf="images?.length > 1" (click)="$event.stopPropagation(); nextImage()">></span>
+  <span
+    class="slider-arrow"
+    *ngIf="images?.length > 1"
+    (click)="$event.stopPropagation(); prevImage()"
+    ><</span
+  >
+  <ng-image-slider
+    class="image-slider"
+    #imagesSlider
+    *ngIf="images?.length > 0"
+    [images]="thumbImages"
+    [imagePopup]="false"
+    [animationSpeed]="0.7"
+    [ngStyle]="{ width: imageWidth }"
+    [infinite]="true"
+    [imageSize]="{ width: '99%', height: imageHeight + 'px', space: 3 }"
+    [showArrow]="false"
+  ></ng-image-slider>
+  <span
+    class="slider-arrow"
+    *ngIf="images?.length > 1"
+    (click)="$event.stopPropagation(); nextImage()"
+    >></span
+  >
 </div>
