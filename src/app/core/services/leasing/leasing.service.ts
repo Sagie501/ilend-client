@@ -6,6 +6,7 @@ import {
   getAllLeasingRequestsQuery,
   setLeaseRequestStatusMutation,
   getAllLeasesByLesseeId,
+  getAllOnGoingRequests,
 } from '../../graphql/leasing.graphql';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
@@ -32,11 +33,7 @@ export class LeasingService {
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
-          let leasings: Array<Leasing> = data.getAllLeasingRequests;
-          leasings = leasings.map((leasing) => {
-            return this.mapLeasingForClient(leasing);
-          });
-          return leasings;
+          return this.mapLeasingsForClient(data.getAllLeasingRequests);
         })
       );
   }
@@ -51,15 +48,23 @@ export class LeasingService {
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
-          let leasings: Array<Leasing> = data.getAllLeasesByLesseeId;
-          leasings = leasings.map((leasing) => {
-            return this.mapLeasingForClient(leasing);
-          });
-          return leasings;
+          return this.mapLeasingsForClient(data.getAllLeasesByLesseeId);
         })
       );
   }
 
+  getAllOnGoingRequests(lessorId: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllOnGoingRequests,
+        variables: { lessorId },
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          return this.mapLeasingsForClient(data.getAllOnGoingRequests);
+        })
+      );
+  }
   setLeaseRequestStatus(
     leasingId: string,
     status: LeasingStatusFromServer
@@ -77,6 +82,13 @@ export class LeasingService {
           return this.mapLeasingForClient(data.setLeaseRequestStatus);
         })
       );
+  }
+
+  mapLeasingsForClient(serverLeasings): Leasing[] {
+    let mappedLeasings = serverLeasings.map((leasing) => {
+      return this.mapLeasingForClient(leasing);
+    });
+    return mappedLeasings;
   }
 
   mapLeasingForClient(serverLeasing): Leasing {
