@@ -19,9 +19,27 @@ export const leasingFragment = gql`
   ${productFragment}
 `;
 
+export const getAllLeasesByLesseeId = gql`
+  query getAllLeasesByLesseeId($lesseeId: ID!) {
+    getAllLeasesByLesseeId(lesseeId: $lesseeId) {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;
+
 export const getAllLeasingRequestsQuery = gql`
   query getAllLeasingRequests($lessorId: ID!) {
     getAllLeasingRequests(lessorId: $lessorId) {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;
+
+export const getAllOnGoingRequests = gql`
+  query getAllOnGoingRequests($lessorId: ID!) {
+    getAllOnGoingRequests(lessorId: $lessorId) {
       ...LeasingFragment
     }
   }
