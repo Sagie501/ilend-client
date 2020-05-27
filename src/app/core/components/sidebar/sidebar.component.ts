@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   loggedInUser: User;
   userProducts: Product[] = [];
   ongoingLeasingsAmount: number = 0;
+  openedRequestAmount: number = 0;
   subscriptions: Array<Subscription>;
   getGreetingSentence = getGreetingSentence;
 
@@ -32,24 +33,45 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions = [
+    let subscriptionsArray = [];
+    subscriptionsArray = [
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
+
+        subscriptionsArray.push(
+          this.leasingsService
+            .getAllOnGoingRequests(this.loggedInUser.id)
+            .subscribe((leasings) => {
+              this.ongoingLeasingsAmount = leasings.length;
+            })
+        );
+
+        subscriptionsArray.push(
+          this.leasingsService
+            .getAllOpenedRequests(this.loggedInUser.id)
+            .subscribe((leasings) => {
+              this.openedRequestAmount = leasings.length;
+            })
+        );
       }),
       this.userStore.select(getUserProducts).subscribe((userProducts) => {
         if (userProducts) {
           this.userProducts = userProducts;
-
-          this.subscriptions.push(
-            this.leasingsService
-              .getAllOnGoingRequests(this.loggedInUser.id)
-              .subscribe((leasings) => {
-                this.ongoingLeasingsAmount = leasings.length;
-              })
-          );
         }
       }),
     ];
+
+    this.subscriptions = subscriptionsArray;
+  }
+
+  fetchAmountData() {
+    this.subscriptions.push(
+      this.leasingsService
+        .getAllOnGoingRequests(this.loggedInUser.id)
+        .subscribe((leasings) => {
+          this.ongoingLeasingsAmount = leasings.length;
+        })
+    );
   }
 
   logout() {
