@@ -7,6 +7,7 @@ import {
   setLeaseRequestStatusMutation,
   getAllLeasesByLesseeId,
   getAllOnGoingRequests,
+  getAllOpenedRequests,
 } from '../../graphql/leasing.graphql';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
@@ -65,6 +66,20 @@ export class LeasingService {
         })
       );
   }
+
+  getAllOpenedRequests(lessorId: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllOpenedRequests,
+        variables: { lessorId },
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          return this.mapLeasingsForClient(data.getAllOpenedRequests);
+        })
+      );
+  }
+
   setLeaseRequestStatus(
     leasingId: string,
     status: LeasingStatusFromServer
