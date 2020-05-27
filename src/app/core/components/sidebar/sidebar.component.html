@@ -78,8 +78,10 @@
       matTooltip="{{ 'You have ' + '0' + ' ongoing leasings.' }}"
       [matTooltipPosition]="'right'"
       class="sidebar-link"
-      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
-      routerLink="/user/my-products"
+      [ngClass]="{
+        'sidebar-link__active': isActiveRoute('/user/ongoing-leasings')
+      }"
+      routerLink="/user/ongoing-leasings"
       *ngIf="loggedInUser && userProducts.length > 0"
       ><svg class="sidebar-link__icon">
         <use xlink:href="#lnr-hourglass"></use></svg
