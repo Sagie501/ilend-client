@@ -48,7 +48,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'checkout',
+    path: 'checkout/:id',
     component: CheckoutComponent,
     canActivate: [AuthGuard],
   },
