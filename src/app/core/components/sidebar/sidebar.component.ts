@@ -3,12 +3,14 @@ import { Store } from '@ngrx/store';
 import {
   getLoggedInUser,
   UserState,
+  getUserProducts,
 } from '../../../features/user/reducer/user.reducer';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/user.model';
 import { logout } from '../../../features/user/actions/user.actoins';
 import { Router } from '@angular/router';
 import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.helper';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'ile-sidebar',
@@ -17,6 +19,7 @@ import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.he
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   loggedInUser: User;
+  userProducts: Product[] = [];
   subscriptions: Array<Subscription>;
   getGreetingSentence = getGreetingSentence;
 
@@ -26,6 +29,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscriptions = [
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
+      }),
+      this.userStore.select(getUserProducts).subscribe((userProducts) => {
+        if (userProducts) {
+          this.userProducts = userProducts;
+        }
       }),
     ];
   }
