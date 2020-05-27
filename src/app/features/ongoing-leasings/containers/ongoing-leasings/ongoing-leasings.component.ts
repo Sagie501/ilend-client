@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
 import { Store } from '@ngrx/store';
 import {
@@ -16,7 +16,7 @@ import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.he
   templateUrl: './ongoing-leasings.component.html',
   styleUrls: ['./ongoing-leasings.component.less'],
 })
-export class OngoingLeasingsComponent implements OnInit {
+export class OngoingLeasingsComponent implements OnInit, OnDestroy {
   leasings: Array<Leasing> = [];
   loggedInUser: User;
   subscriptions: Array<Subscription>;
@@ -47,5 +47,9 @@ export class OngoingLeasingsComponent implements OnInit {
           this.leasings = leasings;
         }),
     ];
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

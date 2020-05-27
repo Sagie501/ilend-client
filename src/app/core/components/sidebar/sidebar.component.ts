@@ -11,6 +11,7 @@ import { logout } from '../../../features/user/actions/user.actoins';
 import { Router } from '@angular/router';
 import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.helper';
 import { Product } from '../../models/product.model';
+import { LeasingService } from '../../services/leasing/leasing.service';
 
 @Component({
   selector: 'ile-sidebar',
@@ -20,10 +21,15 @@ import { Product } from '../../models/product.model';
 export class SidebarComponent implements OnInit, OnDestroy {
   loggedInUser: User;
   userProducts: Product[] = [];
+  ongoingLeasingsAmount: number = 0;
   subscriptions: Array<Subscription>;
   getGreetingSentence = getGreetingSentence;
 
-  constructor(private userStore: Store<UserState>, private router: Router) {}
+  constructor(
+    private userStore: Store<UserState>,
+    private router: Router,
+    private leasingsService: LeasingService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions = [
@@ -33,6 +39,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.userStore.select(getUserProducts).subscribe((userProducts) => {
         if (userProducts) {
           this.userProducts = userProducts;
+
+          this.subscriptions.push(
+            this.leasingsService
+              .getAllOnGoingRequests(this.loggedInUser.id)
+              .subscribe((leasings) => {
+                this.ongoingLeasingsAmount = leasings.length;
+              })
+          );
         }
       }),
     ];
