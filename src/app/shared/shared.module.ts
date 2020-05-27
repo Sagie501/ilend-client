@@ -18,6 +18,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductViewComponent } from './components/product-view/product-view.component';
+import { LeasingsTableComponent } from './components/leasings-table/leasings-table.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ProductViewComponent } from './components/product-view/product-view.com
     DataDiagramComponent,
     ConfirmationDialogComponent,
     ProductViewComponent,
+    LeasingsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +59,7 @@ import { ProductViewComponent } from './components/product-view/product-view.com
     DataTableComponent,
     DataDiagramComponent,
     ProductViewComponent,
+    LeasingsTableComponent,
   ],
 })
 export class SharedModule {}
