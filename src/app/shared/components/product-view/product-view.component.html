@@ -2,7 +2,7 @@
   <ile-images-slider
     [images]="product?.pictureLinks"
     [imageHeight]="300"
-    [imageWidth]="'75rem'"
+    [imageWidth]="width"
   ></ile-images-slider>
   <div class="product-view__data">
     <div style="display: flex; align-items: center;">
@@ -12,5 +12,16 @@
       }}</span>
     </div>
     <span class="product-price">${{ product?.requestedPrice }}</span>
+  </div>
+  <div class="owner-label">
+    Lend from
+    <a>{{ product?.owner.firstName + " " + product?.owner.lastName }}</a>
+  </div>
+
+  <div class="product-view__desc">
+    <!--  TODO: Add router link to the user profile-->
+    <p class="product-description text-ellipsis">
+      {{ product?.description || "The owner didn't add any description" }}
+    </p>
   </div>
 </div>

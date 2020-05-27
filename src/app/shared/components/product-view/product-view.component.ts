@@ -8,6 +8,7 @@ import { Product } from 'src/app/core/models/product.model';
 })
 export class ProductViewComponent implements OnInit {
   @Input() product: Product;
+  @Input() width: string;
 
   constructor() {}
 

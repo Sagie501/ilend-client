@@ -1,13 +1,5 @@
 <div class="product-card">
-  <ile-product-view [product]="product"></ile-product-view>
-  <!--  TODO: Add router link to the user profile-->
-  <div class="owner-label">
-    Lend from
-    <a>{{ product?.owner.firstName + " " + product?.owner.lastName }}</a>
-  </div>
-  <p class="product-description text-ellipsis">
-    {{ product?.description || "The owner didn't add any description" }}
-  </p>
+  <ile-product-view [product]="product" [width]="'75rem'"></ile-product-view>
   <ile-button
     [text]="'Lend now'"
     class="lend-button"
