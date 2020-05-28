@@ -22,6 +22,8 @@ import { Product } from '../../models/product.model';
 export class LessorGuard implements CanActivate {
   constructor(private userStore: Store<UserState>, private router: Router) {}
 
+  static isFirstTime = true;
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -33,7 +35,12 @@ export class LessorGuard implements CanActivate {
     return this.userStore.select(getLoggedInUser).pipe(
       switchMap((loggedInUser) => {
         if (loggedInUser && loggedInUser.isAdmin) {
-          return this.userStore.select(getUserProducts).pipe(skip(1));
+          if (LessorGuard.isFirstTime && this.router.url === '/') {
+            LessorGuard.isFirstTime = false;
+            return this.userStore.select(getUserProducts).pipe(skip(1));
+          } else {
+            return this.userStore.select(getUserProducts);
+          }
         } else {
           return [];
         }
