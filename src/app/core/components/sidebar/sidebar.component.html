@@ -67,8 +67,10 @@
       matTooltip="{{ 'You have ' + openedRequestAmount + ' open requests.' }}"
       [matTooltipPosition]="'right'"
       class="sidebar-link"
-      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
-      routerLink="/user/my-products"
+      [ngClass]="{
+        'sidebar-link__active': isActiveRoute('/user/open-requests')
+      }"
+      routerLink="/user/open-requests"
       *ngIf="loggedInUser && userProducts.length > 0"
       ><svg class="sidebar-link__icon">
         <use xlink:href="assets/linearicons.svg#lnr-inbox"></use></svg

@@ -15,6 +15,7 @@ import { MyAccountComponent } from './features/user/my-account/containers/my-acc
 import { MyProductsComponent } from './features/user/my-products/containers/my-products/my-products.component';
 import { OngoingLeasingsComponent } from './features/user/ongoing-leasings/containers/ongoing-leasings/ongoing-leasings.component';
 import { LessorGuard } from './core/services/lessor-guard/lessor-guard.guard';
+import { OpenRequestsComponent } from './features/user/open-requests/containers/open-requests/open-requests.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,11 @@ const routes: Routes = [
       {
         path: 'ongoing-leasings',
         component: OngoingLeasingsComponent,
+        canActivate: [LessorGuard],
+      },
+      {
+        path: 'open-requests',
+        component: OpenRequestsComponent,
         canActivate: [LessorGuard],
       },
     ],
