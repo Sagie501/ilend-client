@@ -38,21 +38,23 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
 
-        subscriptionsArray.push(
-          this.leasingsService
-            .getAllOnGoingRequests(this.loggedInUser.id)
-            .subscribe((leasings) => {
-              this.ongoingLeasingsAmount = leasings.length;
-            })
-        );
+        if (loggedInUser) {
+          subscriptionsArray.push(
+            this.leasingsService
+              .getAllOnGoingRequests(this.loggedInUser.id)
+              .subscribe((leasings) => {
+                this.ongoingLeasingsAmount = leasings.length;
+              })
+          );
 
-        subscriptionsArray.push(
-          this.leasingsService
-            .getAllOpenedRequests(this.loggedInUser.id)
-            .subscribe((leasings) => {
-              this.openedRequestAmount = leasings.length;
-            })
-        );
+          subscriptionsArray.push(
+            this.leasingsService
+              .getAllOpenedRequests(this.loggedInUser.id)
+              .subscribe((leasings) => {
+                this.openedRequestAmount = leasings.length;
+              })
+          );
+        }
       }),
       this.userStore.select(getUserProducts).subscribe((userProducts) => {
         if (userProducts) {
