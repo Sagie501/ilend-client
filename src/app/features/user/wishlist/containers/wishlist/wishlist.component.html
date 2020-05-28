@@ -1,11 +1,17 @@
-<div class="header">
-  <div class="headline">Wishlist</div>
-  <div class="sub-headline">
-    {{getGreetingSentence() + ' ' + loggedInUser?.firstName }}!
-    <span *ngIf="wishlist.length > 0">
-        You have {{ wishlist.length }} products in your wishlist.</span>
+<div class="ile-wishlist">
+  <div class="header">
+    <div class="headline">Wishlist</div>
+    <div class="sub-headline">
+      {{ getGreetingSentence() + " " + loggedInUser?.firstName }}!
+      <span *ngIf="wishlist.length > 0">
+        You have {{ wishlist.length }} products in your wishlist.</span
+      >
+    </div>
   </div>
-</div>
-<div class="products-container" *ngIf="wishlist.length > 0">
-  <ile-product-card *ngFor="let product of wishlist" [product]="product"></ile-product-card>
+  <div class="products-container" *ngIf="wishlist.length > 0">
+    <ile-product-card
+      *ngFor="let product of wishlist"
+      [product]="product"
+    ></ile-product-card>
+  </div>
 </div>
