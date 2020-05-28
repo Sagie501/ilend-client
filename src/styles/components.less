@@ -60,14 +60,16 @@
     border-bottom: 1px solid darken(@text-color, 10%);
   }
 
-  tr:not(&__header):hover {
+  tr:not(&__header):not(.no_hover):hover {
     background-color: rgba(0, 0, 0, 0.075);
   }
 
   td {
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     border-bottom: 1px solid darken(@text-color, 10%);
-    min-height: 6rem;
+    min-height: 7rem;
+    font-size: 1.6rem;
+    padding-left: 0.5rem;
   }
 }
 

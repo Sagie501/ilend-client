@@ -3,7 +3,7 @@
     <th *ngFor="let title of titles">{{ title }}</th>
     <th *ngIf="funcName">{{ funcName }}</th>
   </tr>
-  <tr *ngFor="let item of data">
+  <tr *ngFor="let item of data" class="no_hover">
     <td *ngFor="let value of item">
       {{ !isDate(value) ? value : (value | date: "dd / MM / yyyy") }}
     </td>
