@@ -12,13 +12,21 @@
   outline: none;
 
   &:hover:not(.disabled) {
-    background-color: darken(@secondary-color, 20%);
+    background-color: darken(@secondary-color, 10%);
   }
 
   &.large {
     padding: 1rem 3rem;
     font-size: 2rem;
     line-height: 2.2rem;
+  }
+
+  &.approve {
+    background-color: @approve-color;
+
+    &:hover:not(.disabled) {
+      background-color: darken(@approve-color, 10%);
+    }
   }
 }
 
