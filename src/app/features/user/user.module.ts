@@ -9,6 +9,7 @@ import { WishlistModule } from './wishlist/wishlist.module';
 import { MyAccountModule } from './my-account/my-account.module';
 import { MyProductsModule } from './my-products/my-products.module';
 import { OngoingLeasingsModule } from '../ongoing-leasings/ongoing-leasings.module';
+import { OpenRequestsModule } from './open-requests/open-requests.module';
 
 @NgModule({
   declarations: [],
@@ -18,6 +19,7 @@ import { OngoingLeasingsModule } from '../ongoing-leasings/ongoing-leasings.modu
     CommonModule,
     LeasingHistoryModule,
     OngoingLeasingsModule,
+    OpenRequestsModule,
     WishlistModule,
     MyAccountModule,
     MyProductsModule,
