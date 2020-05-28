@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductViewComponent } from './components/product-view/product-view.component';
 import { LeasingsTableComponent } from './components/leasings-table/leasings-table.component';
 import { LeaseProductDisplayComponent } from './components/lease-product-display/lease-product-display.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LeaseProductDisplayComponent } from './components/lease-product-display
     AppRoutingModule,
     MatDialogModule,
     MatButtonModule,
+    MatTooltipModule,
   ],
   exports: [
     SearchComponent,

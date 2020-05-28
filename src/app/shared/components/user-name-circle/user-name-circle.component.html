@@ -1,3 +1,8 @@
-<div class="user-name-circle" [ngStyle]="{ 'background-color': userColor }">
+<span
+  class="user-name-circle"
+  [ngStyle]="{ 'background-color': userColor }"
+  matTooltip="{{ user.firstName + ' ' + user.lastName }}"
+  [matTooltipPosition]="'below'"
+>
   {{ initials }}
-</div>
+</span>
