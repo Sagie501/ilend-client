@@ -26,4 +26,11 @@ export class LeaseProductDisplayComponent implements OnInit {
       status: LeasingStatusFromServer.DENIED,
     });
   }
+
+  approveLeasingRequest() {
+    this.changeLeasingRequestStatus.emit({
+      leasingId: this.leasing.id,
+      status: LeasingStatusFromServer.WAITING_FOR_DELIVERY,
+    });
+  }
 }

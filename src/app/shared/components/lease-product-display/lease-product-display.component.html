@@ -14,7 +14,8 @@
     <ile-button
       *ngIf="isLessor"
       [text]="'Approve'"
-      (clicked)="cancelLeasingRequest()"
+      [isApprove]="true"
+      (clicked)="approveLeasingRequest()"
     ></ile-button>
     <ile-button
       [text]="'Cancel'"
