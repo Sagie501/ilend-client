@@ -8,7 +8,7 @@ import { LeasingHistoryModule } from './leasing-history/leasing-history.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { MyAccountModule } from './my-account/my-account.module';
 import { MyProductsModule } from './my-products/my-products.module';
-
+import { OngoingLeasingsModule } from '../ongoing-leasings/ongoing-leasings.module';
 
 @NgModule({
   declarations: [],
@@ -17,9 +17,10 @@ import { MyProductsModule } from './my-products/my-products.module';
     EffectsModule.forFeature([UserEffects]),
     CommonModule,
     LeasingHistoryModule,
+    OngoingLeasingsModule,
     WishlistModule,
     MyAccountModule,
-    MyProductsModule
-  ]
+    MyProductsModule,
+  ],
 })
-export class UserModule { }
+export class UserModule {}

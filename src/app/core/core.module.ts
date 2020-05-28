@@ -40,7 +40,6 @@ import { OngoingLeasingsModule } from '../features/ongoing-leasings/ongoing-leas
     ProductsListModule,
     ProductPageModule,
     AdminDashboardModule,
-    OngoingLeasingsModule,
     MatTooltipModule,
   ],
   providers: [],
