@@ -15,11 +15,13 @@
     </div>
   </div>
 
-  <ile-lease-product-display
-    *ngFor="let leasing of leasings"
-    [leasing]="leasing"
-    [user]="leasing.lessee"
-    [isLessor]="true"
-    (changeLeasingRequestStatus)="changeLeasingRequestStatus($event)"
-  ></ile-lease-product-display>
+  <div class="requests">
+    <ile-lease-product-display
+      *ngFor="let leasing of leasings"
+      [leasing]="leasing"
+      [user]="leasing.lessee"
+      [isLessor]="true"
+      (changeLeasingRequestStatus)="changeLeasingRequestStatus($event)"
+    ></ile-lease-product-display>
+  </div>
 </div>
