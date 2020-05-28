@@ -11,6 +11,7 @@ import { LeasingStatusFromServer } from '../../helpers/order-status.helper';
 export class LeaseProductDisplayComponent implements OnInit {
   @Input() leasing: Leasing;
   @Input() user: User;
+  @Input() isLessor: boolean = false;
   @Output() changeLeasingRequestStatus: EventEmitter<any> = new EventEmitter<
     any
   >();

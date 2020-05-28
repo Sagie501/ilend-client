@@ -10,5 +10,15 @@
       [size]="'small'"
     ></ile-image>
   </div>
-  <ile-button [text]="'Cancel'" (clicked)="cancelLeasingRequest()"></ile-button>
+  <div class="buttons">
+    <ile-button
+      *ngIf="isLessor"
+      [text]="'Approve'"
+      (clicked)="cancelLeasingRequest()"
+    ></ile-button>
+    <ile-button
+      [text]="'Cancel'"
+      (clicked)="cancelLeasingRequest()"
+    ></ile-button>
+  </div>
 </div>

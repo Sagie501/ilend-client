@@ -19,6 +19,7 @@
     *ngFor="let leasing of leasings"
     [leasing]="leasing"
     [user]="leasing.lessee"
+    [isLessor]="true"
     (changeLeasingRequestStatus)="changeLeasingRequestStatus($event)"
   ></ile-lease-product-display>
 </div>
