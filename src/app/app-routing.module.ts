@@ -13,7 +13,7 @@ import { AdminDashboardComponent } from './features/admin-dashboard/containers/a
 import { AdminGuard } from './core/services/admin-guard/admin-guard.guard';
 import { MyAccountComponent } from './features/user/my-account/containers/my-account/my-account.component';
 import { MyProductsComponent } from './features/user/my-products/containers/my-products/my-products.component';
-import { OngoingLeasingsComponent } from './features/ongoing-leasings/containers/ongoing-leasings/ongoing-leasings.component';
+import { OngoingLeasingsComponent } from './features/user/ongoing-leasings/containers/ongoing-leasings/ongoing-leasings.component';
 import { LessorGuard } from './core/services/lessor-guard/lessor-guard.guard';
 
 const routes: Routes = [
