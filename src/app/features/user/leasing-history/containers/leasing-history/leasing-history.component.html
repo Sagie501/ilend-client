@@ -17,6 +17,7 @@
     <ile-lease-product-display
       *ngFor="let pendingLeasing of pendingLeasings"
       [leasing]="pendingLeasing"
+      [user]="pendingLeasing.product.owner"
       (changeLeasingRequestStatus)="changeLeasingRequestStatus($event)"
     ></ile-lease-product-display>
   </div>
