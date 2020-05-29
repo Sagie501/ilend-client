@@ -1,4 +1,4 @@
-@import "../../../../../../styles/styles.less";
+@import "../../../../styles/styles.less";
 
 .lease-product-display {
   width: 45rem;
@@ -42,10 +42,18 @@
     }
   }
 
-  ile-button {
+  .buttons {
     grid-row: 4 e("/") 5;
     grid-column: 2 e("/") 4;
 
     justify-self: end;
+
+    display: grid;
+    justify-items: end;
+    grid-template-columns: repeat(2, 1fr);
+
+    &__cancel {
+      grid-column: 2 e("/") 3;
+    }
   }
 }

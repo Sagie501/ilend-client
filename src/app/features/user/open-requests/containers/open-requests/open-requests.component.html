@@ -1,0 +1,27 @@
+<div class="open-requests">
+  <div class="header">
+    <div class="headline">Open Requests</div>
+    <div class="sub-headline">
+      {{ getGreetingSentence() + " " + loggedInUser?.firstName }}!
+      <span *ngIf="leasings.length > 0">
+        You have {{ leasings.length }} open requests.</span
+      >
+    </div>
+    <div class="sub-headline" *ngIf="!leasings || leasings.length === 0">
+      You don't have any open requests, you can add new product here
+      <a class="link" routerLink="/user/my-products" routerLinkActive="active"
+        >here</a
+      >.
+    </div>
+  </div>
+
+  <div class="requests">
+    <ile-lease-product-display
+      *ngFor="let leasing of leasings"
+      [leasing]="leasing"
+      [user]="leasing.lessee"
+      [isLessor]="true"
+      (changeLeasingRequestStatus)="changeLeasingRequestStatus($event)"
+    ></ile-lease-product-display>
+  </div>
+</div>

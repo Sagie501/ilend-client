@@ -11,7 +11,7 @@
       [ngClass]="{ 'sidebar-link__active': isActiveRoute('/home/products') }"
       routerLink="/home"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-home"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-home"></use></svg
       ><span class="sidebar-link__margin">Home</span></a
     >
     <a
@@ -20,7 +20,7 @@
       routerLink="/user/my-account"
       *ngIf="loggedInUser"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-user"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-user"></use></svg
       ><span>My Account</span></a
     >
     <a
@@ -29,7 +29,7 @@
       routerLink="/user/wishlist"
       *ngIf="loggedInUser"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-star"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-star"></use></svg
       ><span class="sidebar-link__margin">My Wishlist</span></a
     >
     <a
@@ -40,7 +40,7 @@
       routerLink="/user/leasing-history"
       *ngIf="loggedInUser"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-history"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-history"></use></svg
       ><span>Leasing History</span></a
     >
     <a
@@ -51,7 +51,7 @@
       routerLink="/home"
       *ngIf="loggedInUser"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-train"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-train"></use></svg
       ><span>Ongoing Deliveries</span></a
     >
     <a
@@ -60,19 +60,23 @@
       routerLink="/user/my-products"
       *ngIf="loggedInUser"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-list"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-list"></use></svg
       ><span>My Products</span></a
     >
     <a
-      matTooltip="{{ 'You have ' + '0' + ' open requests.' }}"
+      matTooltip="{{ 'You have ' + openedRequestAmount + ' open requests.' }}"
       [matTooltipPosition]="'right'"
       class="sidebar-link"
-      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
-      routerLink="/user/my-products"
+      [ngClass]="{
+        'sidebar-link__active': isActiveRoute('/user/open-requests')
+      }"
+      routerLink="/user/open-requests"
       *ngIf="loggedInUser && userProducts.length > 0"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-inbox"></use></svg
-      ><span>Open Requests <strong>(0)</strong></span></a
+        <use xlink:href="assets/linearicons.svg#lnr-inbox"></use></svg
+      ><span
+        >Open Requests <strong>({{ openedRequestAmount }})</strong></span
+      ></a
     >
     <a
       matTooltip="{{
@@ -86,7 +90,7 @@
       routerLink="/user/ongoing-leasings"
       *ngIf="loggedInUser && userProducts.length > 0"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-hourglass"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-hourglass"></use></svg
       ><span
         >Ongoing Leasings <strong>({{ ongoingLeasingsAmount }})</strong></span
       ></a
@@ -100,7 +104,7 @@
       routerLink="/home/sign-up"
       *ngIf="!loggedInUser"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-pencil"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-pencil"></use></svg
       ><span>Sign up</span></a
     >
     <a
@@ -109,7 +113,7 @@
       routerLink="/admin/dashboard"
       *ngIf="loggedInUser && loggedInUser.isAdmin"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-pie-chart"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-pie-chart"></use></svg
       ><span class="sidebar-link__margin">Admin Dashboard</span></a
     >
     <a
@@ -118,7 +122,7 @@
       routerLink="/home/login"
       *ngIf="!loggedInUser"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-enter"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-enter"></use></svg
       ><span>Login</span></a
     >
     <a
@@ -127,7 +131,7 @@
       *ngIf="loggedInUser"
       (click)="logout()"
       ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-exit"></use></svg
+        <use xlink:href="assets/linearicons.svg#lnr-exit"></use></svg
       ><span>Logout</span></a
     >
     <div class="legal">

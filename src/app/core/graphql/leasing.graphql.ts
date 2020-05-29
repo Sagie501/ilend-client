@@ -28,18 +28,18 @@ export const getAllLeasesByLesseeId = gql`
   ${leasingFragment}
 `;
 
-export const getAllLeasingRequestsQuery = gql`
-  query getAllLeasingRequests($lessorId: ID!) {
-    getAllLeasingRequests(lessorId: $lessorId) {
+export const getAllOnGoingRequests = gql`
+  query getAllOnGoingRequests($lessorId: ID!) {
+    getAllOnGoingRequests(lessorId: $lessorId) {
       ...LeasingFragment
     }
   }
   ${leasingFragment}
 `;
 
-export const getAllOnGoingRequests = gql`
-  query getAllOnGoingRequests($lessorId: ID!) {
-    getAllOnGoingRequests(lessorId: $lessorId) {
+export const getAllOpenedRequests = gql`
+  query getAllOpenedRequests($lessorId: ID!) {
+    getAllOpenedRequests(lessorId: $lessorId) {
       ...LeasingFragment
     }
   }

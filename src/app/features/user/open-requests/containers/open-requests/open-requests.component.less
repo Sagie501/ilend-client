@@ -1,0 +1,26 @@
+@import "../../../../../../styles/styles.less";
+
+.open-requests {
+  background-color: @text-color;
+
+  overflow-y: auto;
+
+  .header {
+    padding: 2rem 3rem;
+  }
+
+  .headline {
+    margin-bottom: 1rem;
+  }
+
+  .requests {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: calc(100vh - 7rem - 9.5rem);
+
+    & > ile-lease-product-display {
+      padding: 1rem 0 3rem 3.5rem;
+    }
+  }
+}

@@ -7,9 +7,16 @@
         You have {{ leasings.length }} ongoing leasings.</span
       >
     </div>
+    <div class="sub-headline" *ngIf="!leasings || leasings.length === 0">
+      You don't have ongoing leasings, you can add new product here
+      <a class="link" routerLink="/user/my-products" routerLinkActive="active"
+        >here</a
+      >.
+    </div>
   </div>
 
   <ile-leasings-table
+    *ngIf="leasings && leasings.length > 0"
     [leasings]="leasings"
     [leasingDirection]="'by'"
   ></ile-leasings-table>

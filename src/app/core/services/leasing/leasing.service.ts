@@ -3,10 +3,10 @@ import { Leasing } from '../../models/leasing.model';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
-  getAllLeasingRequestsQuery,
   setLeaseRequestStatusMutation,
   getAllLeasesByLesseeId,
   getAllOnGoingRequests,
+  getAllOpenedRequests,
 } from '../../graphql/leasing.graphql';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
@@ -23,21 +23,6 @@ export class LeasingService {
     private productsService: ProductsService
   ) {}
 
-  getAllLeasingRequests(lessorId: string): Observable<Array<Leasing>> {
-    return this.apollo
-      .watchQuery<any>({
-        query: getAllLeasingRequestsQuery,
-        variables: {
-          lessorId,
-        },
-      })
-      .valueChanges.pipe(
-        map(({ data, errors }) => {
-          return this.mapLeasingsForClient(data.getAllLeasingRequests);
-        })
-      );
-  }
-
   getAllLeasesByLesseeId(lesseeId: string): Observable<Array<Leasing>> {
     return this.apollo
       .watchQuery<any>({
@@ -45,6 +30,7 @@ export class LeasingService {
         variables: {
           lesseeId,
         },
+        pollInterval: 2000,
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
@@ -58,6 +44,7 @@ export class LeasingService {
       .watchQuery<any>({
         query: getAllOnGoingRequests,
         variables: { lessorId },
+        pollInterval: 2000,
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
@@ -65,6 +52,21 @@ export class LeasingService {
         })
       );
   }
+
+  getAllOpenedRequests(lessorId: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllOpenedRequests,
+        variables: { lessorId },
+        pollInterval: 2000,
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          return this.mapLeasingsForClient(data.getAllOpenedRequests);
+        })
+      );
+  }
+
   setLeaseRequestStatus(
     leasingId: string,
     status: LeasingStatusFromServer

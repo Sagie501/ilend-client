@@ -1,6 +1,6 @@
 <div
   class="button"
-  [ngClass]="{ disabled: disabled, large: isLarge }"
+  [ngClass]="{ disabled: disabled, large: isLarge, approve: isApprove }"
   (click)="clicked.emit($event)"
   *ngIf="type === 'button'"
 >

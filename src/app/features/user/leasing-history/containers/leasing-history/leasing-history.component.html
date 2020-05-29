@@ -7,17 +7,23 @@
         You have {{ pendingLeasings.length }} pending leasings.</span
       >
     </div>
+    <div class="sub-headline" *ngIf="!leasings || leasings.length === 0">
+      You haven't lended any item, you can start doing it
+      <a class="link" routerLink="/home" routerLinkActive="active">here</a>.
+    </div>
   </div>
 
   <div class="pending" *ngIf="pendingLeasings.length > 0">
     <ile-lease-product-display
       *ngFor="let pendingLeasing of pendingLeasings"
       [leasing]="pendingLeasing"
+      [user]="pendingLeasing.product.owner"
       (changeLeasingRequestStatus)="changeLeasingRequestStatus($event)"
     ></ile-lease-product-display>
   </div>
 
   <ile-leasings-table
+    *ngIf="leasings && leasings.length > 0"
     [leasings]="leasings"
     [leasingDirection]="'from'"
   ></ile-leasings-table>

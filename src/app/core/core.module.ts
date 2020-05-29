@@ -17,7 +17,6 @@ import { AdminDashboardModule } from '../features/admin-dashboard/admin-dashboar
 import { ProductsListModule } from '../features/products-list/products-list.module';
 import { ProductPageModule } from '../features/product-page/product-page.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { OngoingLeasingsModule } from '../features/ongoing-leasings/ongoing-leasings.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { OngoingLeasingsModule } from '../features/ongoing-leasings/ongoing-leas
     ProductsListModule,
     ProductPageModule,
     AdminDashboardModule,
-    OngoingLeasingsModule,
     MatTooltipModule,
   ],
   providers: [],
