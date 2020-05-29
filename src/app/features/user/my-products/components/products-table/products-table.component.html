@@ -16,7 +16,7 @@
       <td>{{ product.name }}</td>
       <td class="description-cell">{{ product.description }}</td>
       <td>{{ product.requestedPrice }}</td>
-      <td>{{ product.rating }}</td>
+      <td>{{ product.rating | number: "1.0-2" }}</td>
       <td class="actions-cell">
         <div>
           <ile-button [text]="'Edit'" (clicked)="$event.stopPropagation(); editProductEvent.emit(product.id)"></ile-button>
