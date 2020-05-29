@@ -2,9 +2,10 @@
   <div class="header">
     <div class="headline">Leasing History</div>
     <div class="sub-headline">
-      {{getGreetingSentence() + ' ' + loggedInUser?.firstName }}!
+      {{ getGreetingSentence() + " " + loggedInUser?.firstName }}!
       <span *ngIf="pendingLeasings.length > 0">
-        You have {{ pendingLeasings.length }} pending leasings.</span>
+        You have {{ pendingLeasings.length }} pending leasings.</span
+      >
     </div>
   </div>
 
@@ -16,5 +17,8 @@
     ></ile-lease-product-display>
   </div>
 
-  <ile-leasings-table [leasings]="leasings"></ile-leasings-table>
+  <ile-leasings-table
+    [leasings]="leasings"
+    [leasingDirection]="'from'"
+  ></ile-leasings-table>
 </div>

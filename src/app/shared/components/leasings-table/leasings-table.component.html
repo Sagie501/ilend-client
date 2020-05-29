@@ -1,7 +1,7 @@
 <div class="leasings-table">
   <table class="table">
     <tr class="table__header">
-      <th>Ordered from</th>
+      <th>Ordered {{ leasingDirection }}</th>
       <th>Product name</th>
       <th>Order ID</th>
       <th>Date</th>
@@ -10,8 +10,15 @@
     </tr>
     <tr *ngFor="let lease of leasings">
       <td class="leasing-lessor">
-        <ile-user-name-circle [user]="lease.lessee"></ile-user-name-circle>
-        {{ lease.lessee.firstName }}
+        <ile-user-name-circle
+          [user]="
+            leasingDirection === 'from' ? lease.product.owner : lease.lessee
+          "
+        ></ile-user-name-circle>
+        {{
+          (leasingDirection === "from" ? lease.product.owner : lease.lessee)
+            .firstName
+        }}
       </td>
       <td>{{ lease.product.name }}</td>
       <td>{{ lease.id }}</td>

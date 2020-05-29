@@ -16,6 +16,8 @@ import { SignUpModule } from '../features/sign-up/sign-up.module';
 import { AdminDashboardModule } from '../features/admin-dashboard/admin-dashboard.module';
 import { ProductsListModule } from '../features/products-list/products-list.module';
 import { ProductPageModule } from '../features/product-page/product-page.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { OngoingLeasingsModule } from '../features/ongoing-leasings/ongoing-leasings.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ProductPageModule } from '../features/product-page/product-page.module'
     ProductsListModule,
     ProductPageModule,
     AdminDashboardModule,
+    OngoingLeasingsModule,
+    MatTooltipModule,
   ],
   providers: [],
 })

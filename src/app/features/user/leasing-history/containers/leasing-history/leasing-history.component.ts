@@ -15,38 +15,52 @@ import { LeasingStatusFromServer } from '../../../../../shared/helpers/order-sta
   styleUrls: ['./leasing-history.component.less'],
 })
 export class LeasingHistoryComponent implements OnInit, OnDestroy {
-
   pendingLeasings: Leasing[] = [];
   leasings: Array<Leasing> = [];
   loggedInUser: User;
   subscriptions: Array<Subscription>;
   getGreetingSentence = getGreetingSentence;
 
-  constructor(private leasingService: LeasingService, private userStore: Store<UserState>) {
-  }
+  constructor(
+    private leasingService: LeasingService,
+    private userStore: Store<UserState>
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions = [
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
       }),
-      this.userStore.select(getLoggedInUser).pipe(
-        switchMap((loggedInUser) => {
-          if (loggedInUser) {
-            return this.leasingService.getAllLeasingRequests(loggedInUser.id);
-          } else {
-            return of([] as Array<Leasing>);
-          }
-        })
-      ).subscribe((leasings) => {
-        this.leasings = leasings;
-        this.pendingLeasings = leasings.filter((leasing) => leasing.status === LeasingStatusFromServer.WAITING_FOR_APPROVE);
-      })
+      this.userStore
+        .select(getLoggedInUser)
+        .pipe(
+          switchMap((loggedInUser) => {
+            if (loggedInUser) {
+              return this.leasingService.getAllLeasesByLesseeId(
+                loggedInUser.id
+              );
+            } else {
+              return of([] as Array<Leasing>);
+            }
+          })
+        )
+        .subscribe((leasings) => {
+          this.leasings = leasings;
+          this.pendingLeasings = leasings.filter(
+            (leasing) =>
+              leasing.status === LeasingStatusFromServer.WAITING_FOR_APPROVE
+          );
+        }),
     ];
   }
 
-  changeLeasingRequestStatus(value: { leasingId: string, status: LeasingStatusFromServer }) {
-    this.leasingService.setLeaseRequestStatus(value.leasingId, value.status).subscribe();
+  changeLeasingRequestStatus(value: {
+    leasingId: string;
+    status: LeasingStatusFromServer;
+  }) {
+    this.leasingService
+      .setLeaseRequestStatus(value.leasingId, value.status)
+      .subscribe();
   }
 
   ngOnDestroy(): void {

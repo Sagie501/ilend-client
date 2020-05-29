@@ -45,15 +45,6 @@
     >
     <a
       class="sidebar-link"
-      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
-      routerLink="/user/my-products"
-      *ngIf="loggedInUser"
-      ><svg class="sidebar-link__icon">
-        <use xlink:href="#lnr-list"></use></svg
-      ><span>My Products</span></a
-    >
-    <a
-      class="sidebar-link"
       [ngClass]="{
         'sidebar-link__active': isActiveRoute('/user/ongoing-deliveries')
       }"
@@ -62,6 +53,43 @@
       ><svg class="sidebar-link__icon">
         <use xlink:href="#lnr-train"></use></svg
       ><span>Ongoing Deliveries</span></a
+    >
+    <a
+      class="sidebar-link"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
+      routerLink="/user/my-products"
+      *ngIf="loggedInUser"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-list"></use></svg
+      ><span>My Products</span></a
+    >
+    <a
+      matTooltip="{{ 'You have ' + '0' + ' open requests.' }}"
+      [matTooltipPosition]="'right'"
+      class="sidebar-link"
+      [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
+      routerLink="/user/my-products"
+      *ngIf="loggedInUser && userProducts.length > 0"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-inbox"></use></svg
+      ><span>Open Requests <strong>(0)</strong></span></a
+    >
+    <a
+      matTooltip="{{
+        'You have ' + ongoingLeasingsAmount + ' ongoing leasings.'
+      }}"
+      [matTooltipPosition]="'right'"
+      class="sidebar-link"
+      [ngClass]="{
+        'sidebar-link__active': isActiveRoute('/user/ongoing-leasings')
+      }"
+      routerLink="/user/ongoing-leasings"
+      *ngIf="loggedInUser && userProducts.length > 0"
+      ><svg class="sidebar-link__icon">
+        <use xlink:href="#lnr-hourglass"></use></svg
+      ><span
+        >Ongoing Leasings <strong>({{ ongoingLeasingsAmount }})</strong></span
+      ></a
     >
   </div>
 
