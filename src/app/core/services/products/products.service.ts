@@ -183,11 +183,13 @@ export class ProductsService {
   }
 
   mapProductForClient(serverProduct): Product {
-    return {
-      ...serverProduct,
-      owner: this.userService.mapUserForClient(serverProduct.owner),
-      pictureLinks: JSON.parse(serverProduct.pictureLinks),
-      comments: serverProduct.comments.map(this.commentsService.mapCommentForClient)
-    };
+    if (serverProduct) {
+      return {
+        ...serverProduct,
+        owner: this.userService.mapUserForClient(serverProduct.owner),
+        pictureLinks: JSON.parse(serverProduct.pictureLinks),
+        comments: serverProduct.comments.map(this.commentsService.mapCommentForClient)
+      };
+    }
   }
 }

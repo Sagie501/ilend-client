@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LessorGuardGuard } from './lessor-guard.guard';
+import { CheckoutGuard } from './checkout.guard';
 
-describe('LessorGuardGuard', () => {
-  let guard: LessorGuardGuard;
+describe('CheckoutGuard', () => {
+  let guard: CheckoutGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(LessorGuardGuard);
+    guard = TestBed.inject(CheckoutGuard);
   });
 
   it('should be created', () => {

@@ -8,14 +8,16 @@ import { ProductPageComponent } from './features/product-page/containers/product
 import { LoginComponent } from './features/login/containers/login/login.component';
 import { SignUpComponent } from './features/sign-up/containers/sign-up/sign-up.component';
 import { WishlistComponent } from './features/user/wishlist/containers/wishlist/wishlist.component';
-import { AuthGuard } from './core/services/auth-guard/auth.guard';
+import { AuthGuard } from './core/guards/auth-guard/auth.guard';
 import { AdminDashboardComponent } from './features/admin-dashboard/containers/admin-dashboard/admin-dashboard.component';
-import { AdminGuard } from './core/services/admin-guard/admin-guard.guard';
+import { AdminGuard } from './core/guards/admin-guard/admin.guard';
 import { MyAccountComponent } from './features/user/my-account/containers/my-account/my-account.component';
 import { MyProductsComponent } from './features/user/my-products/containers/my-products/my-products.component';
 import { OngoingLeasingsComponent } from './features/user/ongoing-leasings/containers/ongoing-leasings/ongoing-leasings.component';
-import { LessorGuard } from './core/services/lessor-guard/lessor-guard.guard';
+import { LessorGuard } from './core/guards/lessor-guard/lessor.guard';
 import { OpenRequestsComponent } from './features/user/open-requests/containers/open-requests/open-requests.component';
+import { CheckoutGuard } from './core/guards/checkout-guard/checkout.guard';
+import { ProductGuard } from './core/guards/product-guard/product.guard';
 
 const routes: Routes = [
   {
@@ -39,6 +41,7 @@ const routes: Routes = [
       {
         path: 'products/:id',
         component: ProductPageComponent,
+        canActivate: [ProductGuard]
       },
       {
         path: 'login',
@@ -53,7 +56,7 @@ const routes: Routes = [
   {
     path: 'checkout/:id',
     component: CheckoutComponent,
-    canActivate: [AuthGuard],
+    canActivate: [CheckoutGuard],
   },
   {
     path: 'user',
