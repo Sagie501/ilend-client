@@ -1,8 +1,7 @@
 <div class="credit-card">
 
-<!--  TODO: Fix images styles and add only png images-->
   <img
-    class="image mastercard"
+    class="image {{creditCardType}}"
     *ngIf="creditCardType"
     src="assets/images/credit-cards/{{creditCardType}}.png"
     alt="Credit card logo"
