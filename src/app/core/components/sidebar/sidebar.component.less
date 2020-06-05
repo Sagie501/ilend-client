@@ -3,12 +3,35 @@
 .welcome {
   height: @header-height;
   background-color: @secondary-color;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: darken(#fff, 8%);
   display: flex;
   align-items: center;
   padding-left: 2rem;
+
+  ile-user-name-circle {
+    margin-right: 2rem;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--profile {
+    width: fit-content;
+    margin-top: 0.3rem;
+    font-size: 1.2rem;
+    color: @text-color;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid @text-color;
+
+    &:hover {
+      color: darken(@text-color, 7%);
+      border-bottom: 1px solid darken(@text-color, 7%);
+    }
+  }
 }
 
 .sidebar {
@@ -25,6 +48,9 @@
   &__bottom {
     height: calc(@header-height + 2 * @sidebar-link-height);
     margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   .sidebar-link {
