@@ -1,15 +1,11 @@
 <div class="credit-card">
-  <img
-    class="image visa"
-    *ngIf="isVisa"
-    src="http://pngimg.com/uploads/visa/visa_PNG36.png"
-    alt="Visa logo"
-  />
+
+<!--  TODO: Fix images styles and add only png images-->
   <img
     class="image mastercard"
-    *ngIf="!isVisa"
-    src="http://pngimg.com/uploads/mastercard/mastercard_PNG9.png"
-    alt="MasterCard logo"
+    *ngIf="creditCardType"
+    src="assets/images/credit-cards/{{creditCardType}}.png"
+    alt="Credit card logo"
   />
 
   <div class="card-details">

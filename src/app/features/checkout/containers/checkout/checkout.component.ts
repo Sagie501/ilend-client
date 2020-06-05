@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
 import { switchMap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.less'],
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
   product: Product;
   subscriptions: Array<Subscription>;
 
@@ -31,5 +31,9 @@ export class CheckoutComponent implements OnInit {
           this.product = product;
         }),
     ];
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

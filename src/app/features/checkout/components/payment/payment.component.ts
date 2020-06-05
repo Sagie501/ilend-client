@@ -10,15 +10,14 @@ import { CreditCardValidators, CreditCard } from 'angular-cc-library';
   styleUrls: ['./payment.component.less'],
 })
 export class PaymentComponent implements OnInit {
-  creditCardNumber: string;
 
-  isVisa = undefined;
+  creditCardType: string;
 
   public paymentForm: FormGroup;
 
   type$ = defer(() => this.paymentForm.get('creditCard').valueChanges).pipe(
     map((num: string) => CreditCard.cardType(num)),
-    tap((type: string) => (this.isVisa = type === 'visa'))
+    tap((type: string) => (this.creditCardType = type))
   );
 
   constructor(private fb: FormBuilder) {}
@@ -30,6 +29,7 @@ export class PaymentComponent implements OnInit {
       expDate: ['', [CreditCardValidators.validateExpDate]],
       cvc: [
         '',
+        // TODO: Take the cvc length from the card type
         [Validators.required, Validators.minLength(3), Validators.maxLength(4)],
       ],
     });
@@ -63,5 +63,9 @@ export class PaymentComponent implements OnInit {
       return this.paymentForm.get(name).value;
     }
     return '';
+  }
+
+  checkout() {
+    console.log(this.paymentForm.value);
   }
 }

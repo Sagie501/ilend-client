@@ -45,6 +45,7 @@
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(2, 1fr);
     row-gap: 2rem;
+    position: relative;
 
     label {
       color: @text-color;
@@ -99,7 +100,9 @@
   }
 
   ile-button {
-    bottom: 3rem;
     position: absolute;
+    bottom: -8rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

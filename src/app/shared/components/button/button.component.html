@@ -9,7 +9,7 @@
 <button
   type="submit"
   class="button"
-  [ngClass]="{ disabled: disabled }"
+  [ngClass]="{ disabled: disabled, large: isLarge, approve: isApprove }"
   *ngIf="type === 'submit'"
   [disabled]="disabled"
 >
