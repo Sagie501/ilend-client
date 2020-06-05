@@ -11,6 +11,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
   declarations: [SignUpComponent],
@@ -25,9 +26,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
+    MaterialFileInputModule,
     MatSelectModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+  ],
 })
-export class SignUpModule {
-}
+export class SignUpModule {}

@@ -8,11 +8,11 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class UserNameCircleComponent implements OnInit {
   @Input() user: User;
+  @Input() showTooltip: boolean = true;
   initials: string;
   userColor: string;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.initials = this.getInitials().toUpperCase();
