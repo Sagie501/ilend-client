@@ -16,6 +16,7 @@ export const userFragment = gql`
     zipCode
     isAdmin
     password
+    profilePicture
     favoriteCategories {
       ...CategoryFragment
     }
