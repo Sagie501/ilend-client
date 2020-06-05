@@ -1,9 +1,14 @@
 <div class="sign-up-container">
-  <span style="width: fit-content">Welcome to ILend!</span>
+  <span style="width: fit-content;">Welcome to ILend!</span>
   <form [formGroup]="signUpForm" class="sign-up-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>First Name</mat-label>
-      <input required matInput formControlName="firstName" [errorStateMatcher]="matcher">
+      <input
+        required
+        matInput
+        formControlName="firstName"
+        [errorStateMatcher]="matcher"
+      />
       <mat-error *ngIf="signUpForm.get('firstName').hasError('required')">
         First name is <strong>required</strong>
       </mat-error>
@@ -11,7 +16,12 @@
 
     <mat-form-field>
       <mat-label>Last Name</mat-label>
-      <input required matInput formControlName="lastName" [errorStateMatcher]="matcher">
+      <input
+        required
+        matInput
+        formControlName="lastName"
+        [errorStateMatcher]="matcher"
+      />
       <mat-error *ngIf="signUpForm.get('lastName').hasError('required')">
         Last name is <strong>required</strong>
       </mat-error>
@@ -19,9 +29,19 @@
 
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input required matInput formControlName="email" [errorStateMatcher]="matcher"
-             placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="signUpForm.get('email').hasError('email') && !signUpForm.get('email').hasError('required')">
+      <input
+        required
+        matInput
+        formControlName="email"
+        [errorStateMatcher]="matcher"
+        placeholder="Ex. pat@example.com"
+      />
+      <mat-error
+        *ngIf="
+          signUpForm.get('email').hasError('email') &&
+          !signUpForm.get('email').hasError('required')
+        "
+      >
         Please enter a valid email address
       </mat-error>
       <mat-error *ngIf="signUpForm.get('email').hasError('required')">
@@ -31,10 +51,19 @@
 
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input required matInput formControlName="password" [errorStateMatcher]="matcher"
-             type="password">
+      <input
+        required
+        matInput
+        formControlName="password"
+        [errorStateMatcher]="matcher"
+        type="password"
+      />
       <mat-error
-        *ngIf="signUpForm.get('password').hasError('minlength') && !signUpForm.get('password').hasError('required')">
+        *ngIf="
+          signUpForm.get('password').hasError('minlength') &&
+          !signUpForm.get('password').hasError('required')
+        "
+      >
         Please enter a password with more then 6 letters
       </mat-error>
       <mat-error *ngIf="signUpForm.get('password').hasError('required')">
@@ -44,10 +73,19 @@
 
     <mat-form-field>
       <mat-label>Confirm Password</mat-label>
-      <input required matInput formControlName="confirmPassword" [errorStateMatcher]="matcher"
-             type="password">
+      <input
+        required
+        matInput
+        formControlName="confirmPassword"
+        [errorStateMatcher]="matcher"
+        type="password"
+      />
       <mat-error
-        *ngIf="signUpForm.get('confirmPassword').hasError('mismatchPasswords') && !signUpForm.get('confirmPassword').hasError('required')">
+        *ngIf="
+          signUpForm.get('confirmPassword').hasError('mismatchPasswords') &&
+          !signUpForm.get('confirmPassword').hasError('required')
+        "
+      >
         The passwords isn't identical
       </mat-error>
       <mat-error *ngIf="signUpForm.get('confirmPassword').hasError('required')">
@@ -58,7 +96,12 @@
     <!--    TODO: Check how to format the date-->
     <mat-form-field>
       <mat-label>Choose your birth date</mat-label>
-      <input required matInput formControlName="birthDate" [matDatepicker]="picker">
+      <input
+        required
+        matInput
+        formControlName="birthDate"
+        [matDatepicker]="picker"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="signUpForm.get('birthDate').hasError('required')">
@@ -67,10 +110,27 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Profile picture</mat-label>
+      <ngx-mat-file-input
+        formControlName="profilePicture"
+        accept="image/*"
+      ></ngx-mat-file-input>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Phone number</mat-label>
-      <input required matInput formControlName="phoneNumber" [errorStateMatcher]="matcher">
+      <input
+        required
+        matInput
+        formControlName="phoneNumber"
+        [errorStateMatcher]="matcher"
+      />
       <mat-error
-        *ngIf="signUpForm.get('phoneNumber').hasError('pattern') && !signUpForm.get('phoneNumber').hasError('required')">
+        *ngIf="
+          signUpForm.get('phoneNumber').hasError('pattern') &&
+          !signUpForm.get('phoneNumber').hasError('required')
+        "
+      >
         Please enter a valid phone number
       </mat-error>
       <mat-error *ngIf="signUpForm.get('phoneNumber').hasError('required')">
@@ -80,14 +140,26 @@
 
     <mat-form-field>
       <mat-label>Country</mat-label>
-      <input matInput required formControlName="country" [matAutocomplete]="countryAuto">
+      <input
+        matInput
+        required
+        formControlName="country"
+        [matAutocomplete]="countryAuto"
+      />
       <mat-autocomplete #countryAuto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredCountryOptions | async" [value]="option">
-          {{option}}
+        <mat-option
+          *ngFor="let option of filteredCountryOptions | async"
+          [value]="option"
+        >
+          {{ option }}
         </mat-option>
       </mat-autocomplete>
       <mat-error
-        *ngIf="signUpForm.get('country').hasError('valueNotFromList') && !signUpForm.get('country').hasError('required')">
+        *ngIf="
+          signUpForm.get('country').hasError('valueNotFromList') &&
+          !signUpForm.get('country').hasError('required')
+        "
+      >
         You must choose country from the list
       </mat-error>
       <mat-error *ngIf="signUpForm.get('country').hasError('required')">
@@ -97,17 +169,35 @@
 
     <mat-form-field>
       <mat-label>City</mat-label>
-      <input matInput required formControlName="city" [matAutocomplete]="cityAuto">
+      <input
+        matInput
+        required
+        formControlName="city"
+        [matAutocomplete]="cityAuto"
+      />
       <mat-autocomplete #cityAuto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredCityOptions | async" [value]="option">
-          {{option}}
+        <mat-option
+          *ngFor="let option of filteredCityOptions | async"
+          [value]="option"
+        >
+          {{ option }}
         </mat-option>
       </mat-autocomplete>
       <mat-error
-        *ngIf="signUpForm.get('city').hasError('valueNotFromList') && !signUpForm.get('city').hasError('required') && !signUpForm.get('country').invalid">
+        *ngIf="
+          signUpForm.get('city').hasError('valueNotFromList') &&
+          !signUpForm.get('city').hasError('required') &&
+          !signUpForm.get('country').invalid
+        "
+      >
         You must choose city from the list
       </mat-error>
-      <mat-error *ngIf="signUpForm.get('city').hasError('required') && !signUpForm.get('country').invalid">
+      <mat-error
+        *ngIf="
+          signUpForm.get('city').hasError('required') &&
+          !signUpForm.get('country').invalid
+        "
+      >
         City is <strong>required</strong>
       </mat-error>
       <mat-error *ngIf="signUpForm.get('country').invalid">
@@ -117,7 +207,12 @@
 
     <mat-form-field>
       <mat-label>Street</mat-label>
-      <input required matInput formControlName="street" [errorStateMatcher]="matcher">
+      <input
+        required
+        matInput
+        formControlName="street"
+        [errorStateMatcher]="matcher"
+      />
       <mat-error *ngIf="signUpForm.get('street').hasError('required')">
         Street is <strong>required</strong>
       </mat-error>
@@ -125,7 +220,13 @@
 
     <mat-form-field>
       <mat-label>Zipcode</mat-label>
-      <input required matInput type="number" formControlName="zipCode" [errorStateMatcher]="matcher">
+      <input
+        required
+        matInput
+        type="number"
+        formControlName="zipCode"
+        [errorStateMatcher]="matcher"
+      />
       <mat-error *ngIf="signUpForm.get('zipCode').hasError('required')">
         Zipcode is <strong>required</strong>
       </mat-error>
@@ -135,7 +236,7 @@
       <mat-label>Gender</mat-label>
       <mat-select formControlName="gender" required>
         <mat-option *ngFor="let gender of ['MALE', 'FEMALE']" [value]="gender">
-          {{gender}}
+          {{ gender }}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="signUpForm.get('gender').hasError('required')">
@@ -143,11 +244,19 @@
       </mat-error>
     </mat-form-field>
 
-    <div class="login-tip">Already have a user? <a routerLink="/home/login">Login</a> now!</div>
+    <div class="login-tip">
+      Already have a user? <a routerLink="/home/login">Login</a> now!
+    </div>
 
-    <ile-button [text]="'Sign Up'" [type]="'submit'" [disabled]="signUpForm.invalid"
-                matTooltip="{{signUpForm.invalid ? 'Fill all the required fields' : ''}}"
-                [matTooltipPosition]="'above'"></ile-button>
+    <ile-button
+      [text]="'Sign Up'"
+      [type]="'submit'"
+      [disabled]="signUpForm.invalid"
+      matTooltip="{{
+        signUpForm.invalid ? 'Fill all the required fields' : ''
+      }}"
+      [matTooltipPosition]="'above'"
+    ></ile-button>
   </form>
 
   <span class="sign-up-error-message">{{ signUpErrorMessage }}</span>
