@@ -1,8 +1,25 @@
 <span
+  *ngIf="!user.profilePicture"
   class="user-name-circle"
   [ngStyle]="{ 'background-color': userColor }"
-  matTooltip="{{ user.firstName + ' ' + user.lastName }}"
+  matTooltip="{{
+    showTooltip ? user.firstName + ' ' + user.lastName : undefined
+  }}"
   [matTooltipPosition]="'below'"
 >
   {{ initials }}
 </span>
+<div
+  class="user-photo"
+  *ngIf="user.profilePicture"
+  matTooltip="{{
+    showTooltip ? user.firstName + ' ' + user.lastName : undefined
+  }}"
+  [matTooltipPosition]="'below'"
+>
+  <img
+    src="{{ user.profilePicture }}"
+    alt="{{ user.firstName + ' ' + user.lastName }}"
+    class="user-image"
+  />
+</div>

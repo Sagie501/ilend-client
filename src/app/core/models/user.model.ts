@@ -16,4 +16,5 @@ export type User = {
   isAdmin: boolean;
   password: string;
   favoriteCategories: Array<Category>;
+  profilePicture?: string;
 };
