@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { defer } from 'rxjs';
+import { defer, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { CreditCardValidators, CreditCard } from 'angular-cc-library';
+import { CardDefinition } from 'angular-cc-library/lib/credit-card';
 
 @Component({
   selector: 'ile-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.less'],
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit, OnDestroy {
 
   creditCardType: string;
-
+  subscriptions: Array<Subscription>;
   public paymentForm: FormGroup;
 
   type$ = defer(() => this.paymentForm.get('creditCard').valueChanges).pipe(
@@ -20,7 +21,24 @@ export class PaymentComponent implements OnInit {
     tap((type: string) => (this.creditCardType = type))
   );
 
-  constructor(private fb: FormBuilder) {}
+  cvc$ = defer(() => this.paymentForm.get('creditCard').valueChanges).pipe(
+    map((num: string) => CreditCard.cardFromNumber(num)),
+    tap((type: CardDefinition) => {
+      let minCvcLength = 3;
+      let maxCvcLength = 4;
+      if (type) {
+        minCvcLength = type.cvvLength[0];
+        maxCvcLength = type.cvvLength[type.cvvLength.length - 1];
+      }
+      this.paymentForm.get('cvc')
+        .setValidators([Validators.required,
+          Validators.minLength(minCvcLength),
+          Validators.maxLength(maxCvcLength)]);
+    })
+  );
+
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.paymentForm = this.fb.group({
@@ -29,12 +47,14 @@ export class PaymentComponent implements OnInit {
       expDate: ['', [CreditCardValidators.validateExpDate]],
       cvc: [
         '',
-        // TODO: Take the cvc length from the card type
         [Validators.required, Validators.minLength(3), Validators.maxLength(4)],
       ],
     });
 
-    this.type$.subscribe();
+    this.subscriptions = [
+      this.type$.subscribe(),
+      this.cvc$.subscribe()
+    ];
   }
 
   public goToNextField(controlName: string, nextField: HTMLInputElement) {
@@ -67,5 +87,9 @@ export class PaymentComponent implements OnInit {
 
   checkout() {
     console.log(this.paymentForm.value);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }
