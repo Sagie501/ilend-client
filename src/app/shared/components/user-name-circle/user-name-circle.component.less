@@ -1,12 +1,28 @@
 .user-name-circle {
   color: #fff;
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.4rem;
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.user-photo {
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  position: relative;
+  border-radius: 50%;
+
+  .user-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+  }
 }
