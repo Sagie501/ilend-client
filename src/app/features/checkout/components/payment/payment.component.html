@@ -2,19 +2,17 @@
   <div class="headline">Card Details</div>
 
   <ile-credit-card-simulator
-    class="credit-card"
+    class="credit-card card-right"
     [ngClass]="{
-      'card-left': isVisa,
-      'card-right': !isVisa,
       'credit-card__hidden': !hasCreditCard()
     }"
-    [isVisa]="isVisa"
+    [creditCardType]="creditCardType"
     [cardNumber]="getValue('creditCard')"
     [name]="getValue('name')"
     [expirationDate]="getValue('expDate')"
   ></ile-credit-card-simulator>
 
-  <form [formGroup]="paymentForm" novalidate class="payment-form">
+  <form [formGroup]="paymentForm" novalidate class="payment-form" (ngSubmit)="checkout()">
     <div class="payment-field name-field">
       <label for="name">Name on Card</label>
       <input
@@ -32,7 +30,6 @@
         id="cc-number"
         (input)="goToNextField('creditCard', expireInput)"
         formControlName="creditCard"
-        #creditCard
         type="tel"
         class="cc-number"
         autocomplete="cc-number"
@@ -70,7 +67,7 @@
         ccCVC
       />
     </div>
-  </form>
 
-  <ile-button [text]="'Checkout'" [isLarge]="true"></ile-button>
+    <ile-button [text]="'Checkout'" [isLarge]="true" [type]="'submit'" [disabled]="paymentForm.invalid"></ile-button>
+  </form>
 </div>

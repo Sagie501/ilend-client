@@ -1,7 +1,7 @@
 <div
   class="button"
   [ngClass]="{ disabled: disabled, large: isLarge, approve: isApprove }"
-  (click)="clicked.emit($event)"
+  (click)="onClick($event)"
   *ngIf="type === 'button'"
 >
   {{ text }}
@@ -9,7 +9,7 @@
 <button
   type="submit"
   class="button"
-  [ngClass]="{ disabled: disabled }"
+  [ngClass]="{ disabled: disabled, large: isLarge, approve: isApprove }"
   *ngIf="type === 'submit'"
   [disabled]="disabled"
 >
