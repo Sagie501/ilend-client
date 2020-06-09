@@ -24,6 +24,15 @@ export const userFragment = gql`
   ${categoryFragment}
 `;
 
+export const getAllUsers = gql`
+  {
+    getAllUsers {
+      ...UserFragment
+    }
+  }
+  ${userFragment}
+`;
+
 export const loginQuery = gql`
   query login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
