@@ -8,6 +8,7 @@ import {
   loginQuery,
   removeFavoriteCategoriesMutation,
   updateUserMutation,
+  getAllUsers,
 } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -34,6 +35,23 @@ export class UserService {
       phoneNumber: '12345678932',
       zipCode: '12346',
     } as User;
+  }
+
+  getAllUsers(): Observable<Array<User>> {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllUsers,
+        pollInterval: 10000,
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          if (errors) {
+            throw errors[0].message;
+          } else {
+            return data.getAllUsers.map(this.mapUserForClient);
+          }
+        })
+      );
   }
 
   login(email: string, password: string): Observable<User> {
