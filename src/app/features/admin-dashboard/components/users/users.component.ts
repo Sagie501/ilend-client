@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../../../core/models/user.model';
 
 @Component({
@@ -8,6 +8,8 @@ import { User } from '../../../../core/models/user.model';
 })
 export class UsersComponent implements OnInit {
   @Input() users: User[];
+
+  @Output() removeUserFunc: EventEmitter<void> = new EventEmitter<void>();
 
   titles = [
     'User ID',
@@ -25,6 +27,6 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {}
 
   removeUser(userDetails: any[]) {
-    alert(`${userDetails[0]} User has been removed.`);
+    this.removeUserFunc.emit(userDetails[0]);
   }
 }
