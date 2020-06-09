@@ -9,6 +9,7 @@ import {
   removeFavoriteCategoriesMutation,
   updateUserMutation,
   getAllUsers,
+  removeUserMutation,
 } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -93,6 +94,26 @@ export class UserService {
             throw errors[0].message;
           } else {
             return this.mapUserForClient(data.addUser);
+          }
+        })
+      );
+  }
+
+  removeUser(userId: string): Observable<boolean> {
+    return this.apollo
+      .mutate<any>({
+        mutation: removeUserMutation,
+        variables: {
+          userId,
+        },
+        errorPolicy: 'all',
+      })
+      .pipe(
+        map(({ data, errors }) => {
+          if (errors) {
+            throw errors[0].message;
+          } else {
+            return data.removeUser;
           }
         })
       );
