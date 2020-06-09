@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../../../../core/models/user.model';
 
 @Component({
   selector: 'ile-users',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.less'],
 })
 export class UsersComponent implements OnInit {
+  @Input() users: User[];
+
   titles = [
     'User ID',
     'Full Name',
@@ -15,32 +18,6 @@ export class UsersComponent implements OnInit {
     'Address',
   ];
 
-  data = [
-    [
-      'b9aaa401-3527-430e-a10a-5cdc600cc2b2',
-      'Niv Hindi',
-      'nivhindi1@gmail.com',
-      'Male',
-      new Date(),
-      'Alon 16, Ganei Tikva, Israel',
-    ],
-    [
-      'b9aaa401-3527-430e-a10a-5cdc600cc2b2',
-      'Niv Hindi',
-      'nivhindi1@gmail.com',
-      'Male',
-      new Date(),
-      'Alon 16, Ganei Tikva, Israel',
-    ],
-    [
-      'b9aaa401-3527-430e-a10a-5cdc600cc2b2',
-      'Niv Hindi',
-      'nivhindi1@gmail.com',
-      'Male',
-      new Date(),
-      'Alon 16, Ganei Tikva, Israel',
-    ],
-  ];
   funcName = 'Remove';
 
   constructor() {}

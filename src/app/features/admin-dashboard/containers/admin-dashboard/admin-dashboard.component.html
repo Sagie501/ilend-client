@@ -3,7 +3,9 @@
     <mat-tab label="Overview" class="admin-tab">
       <ile-overview></ile-overview>
     </mat-tab>
-    <mat-tab label="Users" class="admin-tab"><ile-users></ile-users></mat-tab>
+    <mat-tab label="Users" class="admin-tab"
+      ><ile-users [users]="allUsers$ | async"></ile-users
+    ></mat-tab>
     <mat-tab label="Leasings">Leasings</mat-tab>
   </mat-tab-group>
 </div>
