@@ -46,6 +46,15 @@ export const getAllOpenedRequests = gql`
   ${leasingFragment}
 `;
 
+export const getAllLeasings = gql`
+  {
+    getAllLeasings {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;
+
 export const setLeaseRequestStatusMutation = gql`
   mutation setLeaseRequestStatus($leasingId: ID!, $status: LeasingStatus) {
     setLeaseRequestStatus(leasingId: $leasingId, status: $status) {
