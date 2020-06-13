@@ -43,6 +43,33 @@ export class OverviewComponent implements OnInit {
       '**** **** **** 0215',
       '$25',
     ],
+    [
+      'Ski equipment',
+      'Niv Hindi',
+      'Sagie Ivan',
+      new Date(),
+      new Date(),
+      '**** **** **** 0215',
+      '$25',
+    ],
+    [
+      'Ski equipment',
+      'Niv Hindi',
+      'Sagie Ivan',
+      new Date(),
+      new Date(),
+      '**** **** **** 0215',
+      '$25',
+    ],
+    [
+      'Ski equipment',
+      'Niv Hindi',
+      'Sagie Ivan',
+      new Date(),
+      new Date(),
+      '**** **** **** 0215',
+      '$25',
+    ],
   ];
 
   earnings = [20, 35, 18.3, 42, 10.25, 73.215, 53];

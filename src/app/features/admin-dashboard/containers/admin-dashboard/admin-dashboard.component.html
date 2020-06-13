@@ -9,6 +9,8 @@
         (removeUserFunc)="removeUser($event)"
       ></ile-users
     ></mat-tab>
-    <mat-tab label="Leasings">Leasings</mat-tab>
+    <mat-tab label="Leasings"
+      ><ile-all-leasings [leasings]="allLeasings$ | async"></ile-all-leasings
+    ></mat-tab>
   </mat-tab-group>
 </div>
