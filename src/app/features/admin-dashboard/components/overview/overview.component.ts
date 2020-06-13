@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'ile-overview',
@@ -73,7 +73,7 @@ export class OverviewComponent implements OnInit {
   ];
 
   earnings = [20, 35, 18.3, 42, 10.25, 73.215, 53];
-  leasings = [10, 14, 8, 5, 6, 16, 18];
+  @Input() leasingsPerDay: number[];
 
   constructor() {}
 

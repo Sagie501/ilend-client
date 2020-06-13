@@ -34,10 +34,13 @@
     "graphql-tag": "^2.10.3",
     "highcharts": "^8.1.0",
     "highcharts-angular": "^2.4.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.26.0",
     "ng-image-slider": "^2.5.0",
     "ng5-slider": "^1.2.4",
     "ngx-material-file-input": "^2.1.1",
     "rxjs": "~6.5.5",
+    "save": "^2.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

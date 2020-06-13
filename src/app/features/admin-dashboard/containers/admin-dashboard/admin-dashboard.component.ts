@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Leasing } from 'src/app/core/models/leasing.model';
 import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
+import { AdminDiagramService } from '../../services/admin-diagram/admin-diagram.service';
 
 @Component({
   selector: 'ile-admin-dashboard',
@@ -25,9 +26,12 @@ export class AdminDashboardComponent implements OnInit {
     })
   );
 
+  leasingsPerDay$ = this.adminDiagramSevice.getLeasingsDiagramData();
+
   constructor(
     private userService: UserService,
     private leasingService: LeasingService,
+    private adminDiagramSevice: AdminDiagramService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -46,18 +50,14 @@ export class AdminDashboardComponent implements OnInit {
 
   mapLeasingForDashboard(leasing: Leasing) {
     return [
-      // leasing.id,
-      'c17fc64e-e011-4a74-8aaf-59bb4f7aa520',
-      // leasing.lessee.id,
-      'c17fc64e-e011-4a74-8aaf-59bb4f7aa520',
+      leasing.id,
+      leasing.lessee.id,
       [leasing.lessee.firstName, leasing.lessee.lastName].join(' '),
-      // leasing.product.owner.id,
-      'c17fc64e-e011-4a74-8aaf-59bb4f7aa520',
+      leasing.product.owner.id,
       [leasing.product.owner.firstName, leasing.product.owner.lastName].join(
         ' '
       ),
-      // leasing.product.id,
-      'c17fc64e-e011-4a74-8aaf-59bb4f7aa520',
+      leasing.product.id,
       leasing.product.name,
       new Date(leasing.startDate),
       new Date(leasing.endDate),

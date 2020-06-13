@@ -1,7 +1,7 @@
 <div class="admin-dashboard">
   <mat-tab-group>
     <mat-tab label="Overview" class="admin-tab">
-      <ile-overview></ile-overview>
+      <ile-overview [leasingsPerDay]="leasingsPerDay$ | async"></ile-overview>
     </mat-tab>
     <mat-tab label="Users" class="admin-tab"
       ><ile-users

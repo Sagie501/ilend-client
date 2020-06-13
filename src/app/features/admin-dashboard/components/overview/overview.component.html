@@ -5,7 +5,11 @@
       [title]="'Earnings'"
       [prefix]="'$'"
     ></ile-data-diagram>
-    <ile-data-diagram [data]="leasings" [title]="'Leasings'"></ile-data-diagram>
+    <ile-data-diagram
+      [data]="leasingsPerDay"
+      [title]="'Leasings'"
+    ></ile-data-diagram>
   </div>
+  {{ leasingsPerDay }}
   <ile-data-table [titles]="titles" [data]="data"></ile-data-table>
 </div>
