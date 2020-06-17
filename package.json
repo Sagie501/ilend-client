@@ -32,7 +32,7 @@
     "apollo-link": "^1.2.14",
     "graphql": "^15.1.0",
     "graphql-tag": "^2.10.3",
-    "highcharts": "^8.1.1",
+    "highcharts": "^8.1.2",
     "highcharts-angular": "^2.4.0",
     "ng-image-slider": "^2.5.0",
     "ng5-slider": "^1.2.4",
