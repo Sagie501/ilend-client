@@ -28,7 +28,17 @@
               "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles/styles.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "@angular/common/locales/en",
+              "highcharts",
+              "highcharts/themes/grid-light",
+              "graphql-tag",
+              "rxjs/operators",
+              "rxjs/Subject",
+              "rxjs/Subscription",
+              "zen-observable"
+            ]
           },
           "configurations": {
             "production": {
