@@ -7,7 +7,7 @@ import {
   addNewRatingMutation,
   addProductMutation,
   addToWishlistMutation, deleteProductMutation,
-  getProductByIdQuery, getProductsByUserIdQuery,
+  getProductByIdQuery, getProductPriceSuggestionQuery, getProductsByUserIdQuery,
   getProductsQuery,
   getUserWishlistQuery,
   removeFromWishlistMutation, updateProductMutation
@@ -73,11 +73,11 @@ export class ProductsService {
   }
 
   addProduct(ownerId: string, categoryId: string, product): Observable<Product> {
+    product.ownerId = ownerId;
+    product.categoryId = categoryId;
     return this.apollo.mutate<any>({
       mutation: addProductMutation,
       variables: {
-        ownerId,
-        categoryId,
         product
       }
     }).pipe(
@@ -88,11 +88,11 @@ export class ProductsService {
   }
 
   updateProduct(productId: string, categoryId: string, product): Observable<Product> {
+    product.categoryId = categoryId;
     return this.apollo.mutate<any>({
       mutation: updateProductMutation,
       variables: {
         productId,
-        categoryId,
         product
       }
     }).pipe(
@@ -178,6 +178,19 @@ export class ProductsService {
     }).pipe(
       map(({ data, errors }) => {
         return this.mapProductForClient(data.addNewRating) as Product;
+      })
+    );
+  }
+
+  getProductPriceSuggestion(productId): Observable<number> {
+    return this.apollo.query<any>({
+      query: getProductPriceSuggestionQuery,
+      variables: {
+        productId
+      }
+    }).pipe(
+      map(({ data, errors }) => {
+        return data.getProductPriceSuggestion;
       })
     );
   }

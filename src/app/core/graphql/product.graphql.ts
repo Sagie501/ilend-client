@@ -54,8 +54,8 @@ export const getProductsByUserIdQuery = gql`
 `;
 
 export const addProductMutation = gql`
-  mutation addProduct($ownerId: ID!, $categoryId: ID!, $product: ProductInput!) {
-    addProduct(ownerId: $ownerId, categoryId: $categoryId, product: $product) {
+  mutation addProduct($product: ProductInput!) {
+    addProduct(product: $product) {
       ...ProductFragment
     }
   }
@@ -63,8 +63,8 @@ export const addProductMutation = gql`
 `;
 
 export const updateProductMutation = gql`
-  mutation updateProduct($productId: ID!, $categoryId: ID! $product: ProductInput!) {
-    updateProduct(productId: $productId, categoryId: $categoryId, product: $product) {
+  mutation updateProduct($productId: ID!, $product: ProductInput!) {
+    updateProduct(productId: $productId, product: $product) {
       ...ProductFragment
     }
   }
@@ -115,4 +115,10 @@ export const removeFromWishlistMutation = gql`
     }
   }
   ${productFragment}
+`;
+
+export const getProductPriceSuggestionQuery = gql`
+  query getProductPriceSuggestion($productId: ID!) {
+    getProductPriceSuggestion(productId: $productId)
+  }
 `;
