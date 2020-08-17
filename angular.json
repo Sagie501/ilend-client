@@ -37,7 +37,8 @@
               "rxjs/operators",
               "rxjs/Subject",
               "rxjs/Subscription",
-              "zen-observable"
+              "zen-observable",
+              "lodash"
             ]
           },
           "configurations": {
