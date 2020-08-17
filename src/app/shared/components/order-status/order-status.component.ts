@@ -14,12 +14,10 @@ export class OrderStatusComponent implements OnInit {
   statusText: string;
   statusColor: string;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.statusText = getStatusForClient(this.status);
     this.statusColor = getStatusColor(this.status);
-    console.log(this.statusColor);
   }
 }

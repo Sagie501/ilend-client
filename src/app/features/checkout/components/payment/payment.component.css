@@ -1,0 +1,271 @@
+/*-------------------- Shared Variables --------------------*/
+/*-------------------- General --------------------*/
+.card-headline {
+  z-index: 2;
+  transform: translate(0, 5.5em);
+  transition: all 0.5s ease;
+}
+.card-headline.header-slide {
+  transform: translate(0, 0);
+  margin-bottom: 1.5rem;
+}
+h1 {
+  font-weight: 100;
+  font-size: 3.4rem;
+  display: block;
+}
+.payment-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+@media (max-width: 476px) {
+  .payment-container {
+    border: none;
+  }
+}
+.cardinfo-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.bg-illustration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+.bg-illustration svg {
+  width: 100%;
+}
+.card-shape,
+#checkout-form.visa,
+#checkout-form.master-card,
+#checkout-form.maestro,
+#checkout-form.american-express,
+#checkout-form.discover,
+#checkout-form.unionpay,
+#checkout-form.jcb,
+#checkout-form.diners-club {
+  border-radius: 6px;
+  padding: 2em 2em 1em;
+}
+@media (max-width: 476px) {
+  .card-shape,
+  #checkout-form.visa,
+  #checkout-form.master-card,
+  #checkout-form.maestro,
+  #checkout-form.american-express,
+  #checkout-form.discover,
+  #checkout-form.unionpay,
+  #checkout-form.jcb,
+  #checkout-form.diners-club {
+    padding: 2em 1.5em 1em;
+  }
+}
+#checkout-form {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  padding: 8em 3em 2em;
+  width: 27em;
+  margin-bottom: 2em;
+  transition: all 600ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  animation: cardIntro 500ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  z-index: 1;
+}
+#checkout-form:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+@media (max-width: 476px) {
+  #checkout-form {
+    box-sizing: border-box;
+    padding: 7em 2em 2em;
+    width: 100%;
+  }
+}
+#checkout-form.visa {
+  color: #fff;
+  background-color: #0d4aa2;
+}
+#checkout-form.master-card {
+  color: #fff;
+  background-color: #363636;
+  background: linear-gradient(
+    115deg,
+    #d82332,
+    #d82332 50%,
+    #f1ad3d 50%,
+    #f1ad3d
+  );
+}
+#checkout-form.maestro {
+  color: #fff;
+  background-color: #363636;
+  background: linear-gradient(
+    115deg,
+    #009ddd,
+    #009ddd 50%,
+    #ed1c2e 50%,
+    #ed1c2e
+  );
+}
+#checkout-form.american-express {
+  color: #fff;
+  background-color: #007cc3;
+}
+#checkout-form.discover {
+  color: #fff;
+  background-color: #ff6000;
+  background: linear-gradient(#d14310, #f7961e);
+}
+#checkout-form.unionpay,
+#checkout-form.jcb,
+#checkout-form.diners-club {
+  color: #fff;
+  background-color: #363636;
+}
+.cardinfo-label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+.cardinfo-exp-date {
+  margin-right: 1em;
+  width: 100%;
+}
+.cardinfo-cvv {
+  width: 100%;
+}
+#button-pay {
+  cursor: pointer;
+  width: 16em;
+  font-size: 15px;
+  border: 0;
+  padding: 1.2em 1em;
+  color: #fff;
+  background: #282c37;
+  border-radius: 4px;
+  z-index: 0;
+  transform: translateY(-100px);
+  transition: all 500ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  opacity: 0;
+  -webkit-appearance: none;
+}
+#button-pay:hover {
+  background: #535b72;
+}
+#button-pay:active {
+  animation: cardIntro 200ms cubic-bezier(0.2, 1.3, 0.7, 1);
+}
+#button-pay.show-button {
+  transform: translateY(0);
+  opacity: 1;
+}
+.cardinfo-card-number {
+  position: relative;
+}
+#card-image {
+  position: absolute;
+  top: 2.5rem;
+  right: 1em;
+  width: 44px;
+  height: 28px;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/346994/card_sprite.png);
+  background-size: 86px 458px;
+  border-radius: 4px;
+  background-position: -100px 0;
+  background-repeat: no-repeat;
+  margin-bottom: 1em;
+}
+#card-image.visa {
+  background-position: 0 -398px;
+}
+#card-image.master-card {
+  background-position: 0 -281px;
+}
+#card-image.american-express {
+  background-position: 0 -370px;
+}
+#card-image.discover {
+  background-position: 0 -163px;
+}
+#card-image.maestro {
+  background-position: 0 -251px;
+}
+#card-image.jcb {
+  background-position: 0 -221px;
+}
+#card-image.diners-club {
+  background-position: 0 -133px;
+}
+/*-------------------- Inputs --------------------*/
+.input-wrapper {
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.86);
+  height: 2.75em;
+  border: 1px solid #eee;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 5px 10px;
+  margin-bottom: 1em;
+}
+.cardholder-name {
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.86);
+  height: 2.75em;
+  border: 1px solid #eee;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 5px 10px;
+  margin-bottom: 1em;
+  color: rgb(40, 44, 55);
+  outline: none;
+  transition: all 0.2s;
+}
+.cardholder-name.invalid {
+  border: 1px solid #e53a40;
+}
+.cardinfo-card-number,
+.cardinfo-exp-date,
+.cardinfo-cvv {
+  transition: transform 0.3s;
+}
+.braintree-hosted-fields-focused {
+  border-color: #5db6e8;
+}
+.braintree-hosted-fields-invalid {
+  border-color: #e53a40;
+  animation: shake 500ms cubic-bezier(0.2, 1.3, 0.7, 1) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+/*-------------------- Animations --------------------*/
+@keyframes cardIntro {
+  0% {
+    transform: scale(0.8) translate(0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(1px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-3px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(3px, 0, 0);
+  }
+}

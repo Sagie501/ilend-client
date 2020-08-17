@@ -54,3 +54,16 @@ export const setLeaseRequestStatusMutation = gql`
   }
   ${leasingFragment}
 `;
+
+export const openLeaseRequest = gql`
+  mutation openLeaseRequest(
+    $leasing: LeasingInput!
+    $cardNonce: String!
+    $price: Float!
+  ) {
+    openLeaseRequest(leasing: $leasing, cardNonce: $cardNonce, price: $price) {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;

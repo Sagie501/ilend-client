@@ -11,3 +11,10 @@ export type Leasing = {
   startDate: Date;
   endDate: Date;
 };
+
+export type LeasingInput = {
+  lesseeId: string;
+  productId: string;
+  startDate: number;
+  endDate: number;
+};
