@@ -32,6 +32,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   loggedInUser: User;
   comment: string;
   isRated: boolean = false;
+  suggestedPrice: number;
   subscriptions: Array<Subscription>;
 
   constructor(
@@ -54,6 +55,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
           this.product = product;
           this.checkIfProductInWishlist();
           this.checkIfLoggedInUserProduct();
+          this.productsService.getProductPriceSuggestion(product.id).subscribe((suggestedPrice) => {
+            this.suggestedPrice = suggestedPrice;
+          });
         }),
       this.userStore.select(getLoggedInUser).subscribe((loggedInUser) => {
         this.loggedInUser = loggedInUser;
