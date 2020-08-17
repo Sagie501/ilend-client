@@ -1,10 +1,20 @@
 <div class="product-card">
   <ile-product-view [product]="product" [width]="'75rem'"></ile-product-view>
-  <span style="margin-bottom: 1rem;">The price that suggested by our algorithm is: {{ suggestedPrice }}</span>
+  <!-- <span style="margin-bottom: 1rem;"
+    >The price that suggested by our algorithm is: {{ suggestedPrice }}</span
+  > -->
+  <ile-suggested-price [suggestedPrice]="suggestedPrice"></ile-suggested-price>
   <ile-button
     [text]="'Lend now'"
+    [isLarge]="true"
     class="lend-button"
-    matTooltip="{{ !loggedInUser ? 'Login to continue' : isLoggedInUserProduct ? 'Can\'t lend your own product' : '' }}"
+    matTooltip="{{
+      !loggedInUser
+        ? 'Login to continue'
+        : isLoggedInUserProduct
+        ? 'Can\'t lend your own product'
+        : ''
+    }}"
     [matTooltipPosition]="'above'"
     [disabled]="!loggedInUser || isLoggedInUserProduct"
     (click)="navigateToCheckout()"
@@ -31,29 +41,101 @@
     (clicked)="removeProductFromWishlist()"
   ></ile-button>
   <div class="ratings" *ngIf="product?.owner.id !== loggedInUser?.id">
-    <fieldset class="rating" [ngStyle]="{'pointer-events': isRated ? 'none' : 'auto'}">
-      <input type="radio" id="star5" name="rating" value="5" (input)="updateProductRating(5)" /><label class = "full" for="star5"></label>
-      <input type="radio" id="star4half" name="rating" value="4 and a half" (input)="updateProductRating(4.5)" /><label class="half" for="star4half"></label>
-      <input type="radio" id="star4" name="rating" value="4" (input)="updateProductRating(4)" /><label class = "full" for="star4"></label>
-      <input type="radio" id="star3half" name="rating" value="3 and a half" (input)="updateProductRating(3.5)" /><label class="half" for="star3half"></label>
-      <input type="radio" id="star3" name="rating" value="3" (input)="updateProductRating(3)" /><label class = "full" for="star3"></label>
-      <input type="radio" id="star2half" name="rating" value="2 and a half" (input)="updateProductRating(2.5)" /><label class="half" for="star2half"></label>
-      <input type="radio" id="star2" name="rating" value="2" (input)="updateProductRating(2)" /><label class = "full" for="star2"></label>
-      <input type="radio" id="star1half" name="rating" value="1 and a half" (input)="updateProductRating(1.5)" /><label class="half" for="star1half"></label>
-      <input type="radio" id="star1" name="rating" value="1" (input)="updateProductRating(1)" /><label class = "full" for="star1"></label>
-      <input type="radio" id="starhalf" name="rating" value="half" (input)="updateProductRating(0.5)" /><label class="half" for="starhalf"></label>
+    <fieldset
+      class="rating"
+      [ngStyle]="{ 'pointer-events': isRated ? 'none' : 'auto' }"
+    >
+      <input
+        type="radio"
+        id="star5"
+        name="rating"
+        value="5"
+        (input)="updateProductRating(5)"
+      /><label class="full" for="star5"></label>
+      <input
+        type="radio"
+        id="star4half"
+        name="rating"
+        value="4 and a half"
+        (input)="updateProductRating(4.5)"
+      /><label class="half" for="star4half"></label>
+      <input
+        type="radio"
+        id="star4"
+        name="rating"
+        value="4"
+        (input)="updateProductRating(4)"
+      /><label class="full" for="star4"></label>
+      <input
+        type="radio"
+        id="star3half"
+        name="rating"
+        value="3 and a half"
+        (input)="updateProductRating(3.5)"
+      /><label class="half" for="star3half"></label>
+      <input
+        type="radio"
+        id="star3"
+        name="rating"
+        value="3"
+        (input)="updateProductRating(3)"
+      /><label class="full" for="star3"></label>
+      <input
+        type="radio"
+        id="star2half"
+        name="rating"
+        value="2 and a half"
+        (input)="updateProductRating(2.5)"
+      /><label class="half" for="star2half"></label>
+      <input
+        type="radio"
+        id="star2"
+        name="rating"
+        value="2"
+        (input)="updateProductRating(2)"
+      /><label class="full" for="star2"></label>
+      <input
+        type="radio"
+        id="star1half"
+        name="rating"
+        value="1 and a half"
+        (input)="updateProductRating(1.5)"
+      /><label class="half" for="star1half"></label>
+      <input
+        type="radio"
+        id="star1"
+        name="rating"
+        value="1"
+        (input)="updateProductRating(1)"
+      /><label class="full" for="star1"></label>
+      <input
+        type="radio"
+        id="starhalf"
+        name="rating"
+        value="half"
+        (input)="updateProductRating(0.5)"
+      /><label class="half" for="starhalf"></label>
     </fieldset>
   </div>
   <div class="comments-container">
     <div class="comments">
       <div class="comment" *ngFor="let comment of product?.comments">
-        <span class="comment-author">{{
-          comment.user.firstName + " " + comment.user.lastName + ":"
-          }}</span>
+        <div class="comment__header">
+          <ile-user-name-circle
+            [user]="comment.user"
+            [showTooltip]="false"
+          ></ile-user-name-circle>
+          <span class="comment-author"
+            >{{ comment.user.firstName + " " + comment.user.lastName
+            }}<span class="comment-date"
+              >&nbsp;&nbsp;- &nbsp;{{
+                comment.date | date: "dd MMMM, yyyy"
+              }}</span
+            ></span
+          >
+        </div>
+
         <span class="comment-content">{{ comment.comment }}</span>
-        <span class="comment-date">{{
-          comment.date | date: "dd/MM/yy HH:mm"
-          }}</span>
       </div>
       <div class="no-comments" *ngIf="product?.comments.length === 0">
         <span>This product doesn't have comments yet.</span>

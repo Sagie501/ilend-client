@@ -1,0 +1,31 @@
+@import "../../../../styles/styles.less";
+
+.price-container {
+  font-family: "Open Sans", serif;
+  font-style: italic;
+
+  .price {
+    font-size: 2.5rem;
+    color: @price-color;
+    font-weight: 600;
+
+    &.large {
+      font-size: 3.2rem;
+    }
+
+    &.small {
+      font-size: 1.8rem;
+    }
+  }
+
+  .currency {
+    font-size: 1.8rem;
+    color: @currency-color;
+  }
+
+  .per-day {
+    font-size: 1.4rem;
+    color: @per-day-color;
+    font-weight: 300;
+  }
+}
