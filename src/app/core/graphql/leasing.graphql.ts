@@ -14,6 +14,8 @@ export const leasingFragment = gql`
     status
     startDate
     endDate
+    transactionId
+    total_price
   }
   ${userFragment}
   ${productFragment}
