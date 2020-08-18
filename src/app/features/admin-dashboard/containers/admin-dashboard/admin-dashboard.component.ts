@@ -27,6 +27,12 @@ export class AdminDashboardComponent implements OnInit {
   );
 
   leasingsPerDay$ = this.adminDiagramSevice.getLeasingsDiagramData();
+  earningsPerDay$ = this.adminDiagramSevice.getEaningsDiagramData();
+  latestTransactions$ = this.adminDiagramSevice
+    .getLatestTransactions()
+    .pipe(
+      map((leasings: Leasing[]) => leasings.map(this.mapLeasingForTransactions))
+    );
 
   constructor(
     private userService: UserService,
@@ -62,6 +68,21 @@ export class AdminDashboardComponent implements OnInit {
       new Date(leasing.startDate),
       new Date(leasing.endDate),
       leasing.status,
+    ];
+  }
+
+  mapLeasingForTransactions(leasing: Leasing) {
+    return [
+      leasing.id,
+      [leasing.lessee.firstName, leasing.lessee.lastName].join(' '),
+      [leasing.product.owner.firstName, leasing.product.owner.lastName].join(
+        ' '
+      ),
+      leasing.product.id,
+      leasing.product.name,
+      new Date(leasing.startDate),
+      leasing.transactionId ? leasing.transactionId : '?',
+      leasing.total_price ? `$${leasing.total_price}` : '-',
     ];
   }
 

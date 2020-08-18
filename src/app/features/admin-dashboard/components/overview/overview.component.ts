@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Leasing } from 'src/app/core/models/leasing.model';
 
 @Component({
   selector: 'ile-overview',
@@ -7,14 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class OverviewComponent implements OnInit {
   titles = [
-    'Product name',
-    'Lessee',
-    'Lessor',
-    'Start date',
-    'End date',
-    'Card number',
-    'Amount',
+    'Leasing ID',
+    'Lessee Name',
+    'Lessor Name',
+    'Product ID',
+    'Product Name',
+    'Start Date',
+    'Transaction ID',
+    'Toal Price',
   ];
+
   data = [
     [
       'Ski equipment',
@@ -72,8 +75,9 @@ export class OverviewComponent implements OnInit {
     ],
   ];
 
-  earnings = [20, 35, 18.3, 42, 10.25, 73.215, 53];
+  @Input() earningsPerDay: number[];
   @Input() leasingsPerDay: number[];
+  @Input() latestTransactions: Leasing[];
 
   constructor() {}
 

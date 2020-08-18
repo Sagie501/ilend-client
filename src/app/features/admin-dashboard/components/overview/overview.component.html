@@ -1,7 +1,7 @@
 <div class="overview admin-tab">
   <div class="diagrams">
     <ile-data-diagram
-      [data]="earnings"
+      [data]="earningsPerDay"
       [title]="'Earnings'"
       [prefix]="'$'"
     ></ile-data-diagram>
@@ -10,6 +10,8 @@
       [title]="'Leasings'"
     ></ile-data-diagram>
   </div>
-  {{ leasingsPerDay }}
-  <ile-data-table [titles]="titles" [data]="data"></ile-data-table>
+  <ile-data-table
+    [titles]="titles"
+    [data]="latestTransactions"
+  ></ile-data-table>
 </div>
