@@ -1,0 +1,20 @@
+<div class="profile-picture-dialog">
+  <span class="header" mat-dialog-title>Changing your Profile Picture</span>
+  <div mat-dialog-content>
+    <form [formGroup]="profilePictureGroup" class="profile-pircture-form">
+      <mat-form-field>
+        <mat-label>Profile picture</mat-label>
+        <ngx-mat-file-input
+          formControlName="profilePicture"
+          accept="image/*"
+        ></ngx-mat-file-input>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="changeProfilePicture()">
+      Change my profile picture
+    </button>
+    <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
+  </div>
+</div>
