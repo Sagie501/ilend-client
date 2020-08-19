@@ -21,6 +21,8 @@ import { ProductViewComponent } from './components/product-view/product-view.com
 import { LeasingsTableComponent } from './components/leasings-table/leasings-table.component';
 import { LeaseProductDisplayComponent } from './components/lease-product-display/lease-product-display.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatStepperModule } from '@angular/material/stepper';
+import { LayoutModule } from '@progress/kendo-angular-layout';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     MatButtonModule,
     MatTooltipModule,
+    MatStepperModule,
+    LayoutModule
   ],
   exports: [
     SearchComponent,

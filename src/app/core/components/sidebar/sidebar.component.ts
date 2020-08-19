@@ -23,6 +23,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   userProducts: Product[] = [];
   ongoingLeasingsAmount: number = 0;
   openedRequestAmount: number = 0;
+  onGoingDeliveriesRequestAmount: number = 0;
   subscriptions: Array<Subscription>;
   getGreetingSentence = getGreetingSentence;
 
@@ -52,6 +53,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
               .getAllOpenedRequests(this.loggedInUser.id)
               .subscribe((leasings) => {
                 this.openedRequestAmount = leasings.length;
+              })
+          );
+          subscriptionsArray.push(
+            this.leasingsService
+              .getAllOnGoingDeliveriesRequests(this.loggedInUser.id)
+              .subscribe((leasings) => {
+                this.onGoingDeliveriesRequestAmount = leasings.length;
               })
           );
         }

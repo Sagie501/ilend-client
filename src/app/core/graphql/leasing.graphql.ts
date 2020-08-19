@@ -12,6 +12,7 @@ export const leasingFragment = gql`
       ...ProductFragment
     }
     status
+    deliveryStatus
     startDate
     endDate
   }
@@ -31,6 +32,15 @@ export const getAllLeasesByLesseeId = gql`
 export const getAllOnGoingRequests = gql`
   query getAllOnGoingRequests($lessorId: ID!) {
     getAllOnGoingRequests(lessorId: $lessorId) {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;
+
+export const getAllOnGoingDeliveriesRequests = gql`
+  query getAllOnGoingDeliveriesRequests($lesseeId: ID!) {
+    getAllOnGoingDeliveriesRequests(lesseeId: $lesseeId) {
       ...LeasingFragment
     }
   }
