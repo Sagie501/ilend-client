@@ -14,13 +14,25 @@ export class LeasingsTableComponent implements OnInit {
   @Input() isInDelivery: boolean;
   currentLeasingOpen: string;
 
-  public currentLeasingOpenStatusNumber = 1;
+  public currentLeasingOpenStatusNumber = 2;
 
   public steps = [
-      { label: 'In transit', icon: 'user' , disabled: true},
-      { label: 'Local warehouse', icon: 'home' , disabled: true},
-      { label: 'Dispatched local warehouse', icon: 'user' ,disabled: true },
-      { label: 'Arrived! :)', icon: 'user', disabled: true }
+    { label: 'In transit', iconClass: 'ile-icon fa fa-boxes', disabled: true },
+    {
+      label: 'Local warehouse',
+      iconClass: 'ile-icon fa fa-warehouse',
+      disabled: true,
+    },
+    {
+      label: 'Dispatched local warehouse',
+      iconClass: 'ile-icon fa fa-motorcycle',
+      disabled: true,
+    },
+    {
+      label: 'Arrived! :)',
+      iconClass: 'ile-icon fa fa-clipboard-check',
+      disabled: true,
+    },
   ];
 
   constructor() {}
@@ -32,7 +44,16 @@ export class LeasingsTableComponent implements OnInit {
       this.currentLeasingOpen = undefined;
     } else {
       this.currentLeasingOpen = leasingToBeOpened;
-      this.currentLeasingOpenStatusNumber = deliveryStatus === "IN_TRANSIT" ? 0 : "ARRIVED_IN_LOCAL_WAREHOUSE" ? 1 : deliveryStatus === "DISPATCHING_FROM_LOCAL_WAREHOUSE" ? 2 : 3;
+      this.currentLeasingOpenStatusNumber =
+        deliveryStatus === 'IN_TRANSIT'
+          ? 0
+          : 'ARRIVED_IN_LOCAL_WAREHOUSE'
+          ? 1
+          : deliveryStatus === 'DISPATCHING_FROM_LOCAL_WAREHOUSE'
+          ? 2
+          : 3;
+
+      this.currentLeasingOpenStatusNumber = Math.floor(Math.random() * 4);
     }
   }
 }

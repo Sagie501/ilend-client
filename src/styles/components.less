@@ -171,3 +171,56 @@ td.mat-cell {
   padding-left: 0.5rem !important;
   font-size: 1.5rem;
 }
+
+.ile-icon {
+  font-size: 1.6rem !important;
+}
+
+.delivery-stepper-step {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border-radius: 50%;
+  box-sizing: border-box;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lighten(@primary-color, 15%);
+  color: @text-color;
+}
+
+.k-stepper > .k-progressbar .k-state-selected {
+  background-color: @secondary-color;
+}
+
+.k-step-current .delivery-stepper-step,
+.k-step-done .delivery-stepper-step {
+  background-color: @secondary-color !important;
+}
+
+.k-stepper > .k-progressbar {
+  top: 18px;
+}
+
+.k-step-link .k-icon {
+  font-size: 1.8rem;
+  color: @text-color;
+}
+
+.k-step-link .step-label {
+  margin-top: 1rem;
+  color: @primary-color;
+  width: 20rem;
+}
+
+.k-step-current .step-label,
+.k-step-done .step-label {
+  font-weight: bold;
+  color: @secondary-color;
+}
+
+.k-step-list-horizontal .k-step-link {
+  max-width: 20em !important;
+}

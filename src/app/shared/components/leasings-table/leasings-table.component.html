@@ -1,3 +1,7 @@
+<link
+  rel="stylesheet"
+  href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css"
+/>
 <div class="leasings-table">
   <table class="table">
     <tr class="table__header">
@@ -52,6 +56,12 @@
             [(currentStep)]="currentLeasingOpenStatusNumber"
             [linear]="false"
           >
+            <ng-template kendoStepperStepTemplate let-step>
+              <div class="delivery-stepper-step">
+                <span class="{{ step.iconClass }}"></span>
+              </div>
+              <span class="step-label">{{ step.label }}</span>
+            </ng-template>
           </kendo-stepper>
         </td>
       </tr>
