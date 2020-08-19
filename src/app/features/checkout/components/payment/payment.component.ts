@@ -15,6 +15,7 @@ import {
 })
 export class PaymentComponent implements OnInit {
   @Input() token: string;
+  @Input() result: { success: boolean; message?: string; leasingID?: string };
   @Output() onCheckoutCompleted: EventEmitter<{
     nonce: string;
     returnDate: Date;
@@ -70,11 +71,38 @@ export class PaymentComponent implements OnInit {
     }
   }
 
+  latestBraintreeEvent;
+
+  validateForm(event?) {
+    event = event ? event : this.latestBraintreeEvent;
+    let buttonPay = document.getElementById('button-pay');
+
+    if (
+      this.isNameValidated &&
+      !this.paymentForm.get('endDate').hasError('required') &&
+      event
+    ) {
+      // Check if all fields are valid, then show submit button
+      var formValid = Object.keys(event.fields).every(function (key) {
+        return event.fields[key].isValid;
+      });
+
+      if (formValid) {
+        buttonPay.classList.add('show-button');
+      } else {
+        buttonPay.classList.remove('show-button');
+      }
+    } else {
+      buttonPay.classList.remove('show-button');
+    }
+
+    event ? (this.latestBraintreeEvent = event) : undefined;
+  }
+
   createHostedFields(clientInstance) {
     let form = document.getElementById('checkout-form');
     let cardImage = document.getElementById('card-image');
     let header = document.getElementsByClassName('card-headline')[0];
-    let buttonPay = document.getElementById('button-pay');
     hostedFields.create(
       {
         client: clientInstance,
@@ -125,23 +153,7 @@ export class PaymentComponent implements OnInit {
           return;
         }
 
-        hostedFieldsInstance.on(
-          'validityChange',
-          function (event) {
-            if (this.isNameValidated) {
-              // Check if all fields are valid, then show submit button
-              var formValid = Object.keys(event.fields).every(function (key) {
-                return event.fields[key].isValid;
-              });
-
-              if (formValid) {
-                buttonPay.classList.add('show-button');
-              } else {
-                buttonPay.classList.remove('show-button');
-              }
-            }
-          }.bind(this)
-        );
+        hostedFieldsInstance.on('validityChange', this.validateForm.bind(this));
 
         hostedFieldsInstance.on('empty', function (event) {
           header.classList.remove('header-slide');
@@ -185,10 +197,10 @@ export class PaymentComponent implements OnInit {
                 cardholderName: this.cardholderName,
               },
               function (err, payload) {
-                if (err) {
-                  console.error(err);
-                  return;
-                }
+                // if (err) {
+                //   console.error(err);
+                //   return;
+                // }
 
                 this.onCheckoutCompleted.emit({
                   cardNonce: payload.nonce,

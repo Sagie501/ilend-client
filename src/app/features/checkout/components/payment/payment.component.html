@@ -10,6 +10,8 @@
         [matDatepicker]="picker"
         [matDatepickerFilter]="filterPriorDates"
         formControlName="endDate"
+        (change)="validateForm()"
+        (dateChange)="validateForm()"
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -33,7 +35,7 @@
           type="text"
           class="cardholder-name"
           placeholder="Your name"
-          (change)="validateName($event.target.value)"
+          (change)="validateName($event.target.value); validateForm()"
         />
       </div>
 
@@ -57,5 +59,20 @@
     </form>
 
     <input id="button-pay" type="submit" value="Checkout" />
+  </div>
+  <div class="result">
+    <span *ngIf="result && !result.success" class="result__error">
+      {{ result?.message }}
+    </span>
+    <span *ngIf="result?.success" class="result__success">
+      The leasing request was opened successfully. <br />
+      You can review it
+      <a
+        class="link"
+        routerLink="/user/leasing-history"
+        routerLinkActive="active"
+        >here</a
+      >.
+    </span>
   </div>
 </div>

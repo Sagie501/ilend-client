@@ -4,6 +4,7 @@
   <ile-payment
     *ngIf="token"
     [token]="token"
+    [result]="checkoutResult"
     (onCheckoutCompleted)="openLeaseRequest($event)"
   ></ile-payment>
 
