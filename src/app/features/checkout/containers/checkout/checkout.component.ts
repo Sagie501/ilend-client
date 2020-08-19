@@ -49,12 +49,13 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  openLeaseRequest(cardNonce: string) {
+  openLeaseRequest(payload: { cardNonce: string; returnDate: Date }) {
     this.leasingService
       .openLeaseRequest(
         this.product,
         this.calculateTotalPrice(),
-        cardNonce,
+        payload.cardNonce,
+        payload.returnDate.getTime(),
         new Date().getTime()
       )
       .subscribe((leasing) => {
