@@ -14,13 +14,17 @@
   }
 
   .requests {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
     height: calc(100vh - 7rem - 9.5rem);
 
-    & > ile-lease-product-display {
-      padding: 1rem 0 3rem 3.5rem;
+    &__container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(49rem, 1fr));
+      place-content: center;
+      padding-bottom: 2rem;
+
+      & > ile-lease-product-display {
+        padding: 1rem 0 2rem 3.5rem;
+      }
     }
   }
 }
