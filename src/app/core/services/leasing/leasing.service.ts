@@ -126,13 +126,14 @@ export class LeasingService implements OnDestroy {
     product: Product,
     totalPrice: number,
     cardNonce: string,
-    endDate: number
+    endDate: number,
+    creationDate: number
   ) {
     let leasingInput: LeasingInput = {
       lesseeId: this.loggedInUser.id,
       productId: product.id,
       endDate: endDate,
-      startDate: new Date().getTime(),
+      creationDate: creationDate,
     };
 
     return this.apollo

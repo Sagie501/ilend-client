@@ -8,6 +8,7 @@ export type Leasing = {
   lessee: User;
   product: Product;
   status: LeasingStatusFromServer;
+  creationDate: Date;
   startDate: Date;
   endDate: Date;
 };
@@ -15,6 +16,6 @@ export type Leasing = {
 export type LeasingInput = {
   lesseeId: string;
   productId: string;
-  startDate: number;
+  creationDate: number;
   endDate: number;
 };
