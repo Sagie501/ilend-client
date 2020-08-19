@@ -18,4 +18,8 @@ export class DataTableComponent implements OnInit {
   isDate(value: any) {
     return value instanceof Date;
   }
+
+  isStatus(title: string) {
+    return title.toLowerCase() === 'status';
+  }
 }

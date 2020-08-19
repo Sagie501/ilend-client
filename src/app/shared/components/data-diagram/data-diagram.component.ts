@@ -18,7 +18,9 @@ export class DataDiagramComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges() {
     setTimeout(() => {
       this.chartOptions = new Highcharts.Chart({
         chart: {

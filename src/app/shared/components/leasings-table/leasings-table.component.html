@@ -41,5 +41,28 @@
         </td>
       </tr>
     </ng-container>
+    <tr *ngFor="let lease of leasings" class="no_hover">
+      <td class="leasing-lessor">
+        <ile-user-name-circle
+          [user]="
+            leasingDirection === 'from' ? lease.product.owner : lease.lessee
+          "
+        ></ile-user-name-circle>
+        {{
+          (leasingDirection === "from" ? lease.product.owner : lease.lessee)
+            .firstName
+        }}
+      </td>
+      <td>{{ lease.product.name }}</td>
+      <td>{{ lease.id }}</td>
+      <td>{{ lease.startDate | date: "dd / MM / yyyy" }}</td>
+      <td>
+        <ile-price
+          [price]="lease.product.requestedPrice"
+          [isSmall]="true"
+        ></ile-price>
+      </td>
+      <td><ile-order-status [status]="lease.status"></ile-order-status></td>
+    </tr>
   </table>
 </div>

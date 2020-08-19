@@ -23,6 +23,8 @@ import { LeaseProductDisplayComponent } from './components/lease-product-display
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
 import { LayoutModule } from '@progress/kendo-angular-layout';
+import { SuggestedPriceComponent } from './components/suggested-price/suggested-price.component';
+import { PriceComponent } from './components/price/price.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     ProductViewComponent,
     LeasingsTableComponent,
     LeaseProductDisplayComponent,
+    SuggestedPriceComponent,
+    PriceComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +73,8 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     ProductViewComponent,
     LeasingsTableComponent,
     LeaseProductDisplayComponent,
+    SuggestedPriceComponent,
+    PriceComponent,
   ],
 })
 export class SharedModule {}

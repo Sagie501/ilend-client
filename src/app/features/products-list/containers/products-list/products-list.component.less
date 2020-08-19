@@ -1,8 +1,12 @@
+@import "../../../../../styles/styles.less";
+
 .products-container {
   padding: 2rem;
-  display: flex;
-  flex-wrap: wrap;
   overflow-y: auto;
-  justify-content: space-evenly;
-  height: calc(100vh - 12rem);
+  height: calc(100vh - 14rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(@product-card-width, 1fr));
+  place-items: center;
+  grid-row-gap: 2rem;
+  grid-column-gap: 1rem;
 }
