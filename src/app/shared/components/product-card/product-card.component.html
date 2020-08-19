@@ -1,10 +1,18 @@
 <div class="product-card">
-  <ile-images-slider [images]="product?.pictureLinks" [imageHeight]="146" [imageWidth]="'20rem'"></ile-images-slider>
+  <ile-images-slider
+    [images]="product?.pictureLinks"
+    [imageHeight]="146"
+    [imageWidth]="'20rem'"
+  ></ile-images-slider>
   <div class="product-header">
     <span class="product-name">{{ product.name }}</span>
-    <span class="product-price">${{ product.requestedPrice }}</span>
+    <ile-price [price]="product?.requestedPrice"></ile-price>
   </div>
-  <p
-    class="product-description text-ellipsis">{{ product.description || 'The owner didn\'t add any description' }}</p>
-  <ile-button [text]="'Lend now'" (clicked)="navigateToProductPage()"></ile-button>
+  <p class="product-description text-ellipsis">
+    {{ product.description || "The owner didn't add any description" }}
+  </p>
+  <ile-button
+    [text]="'Lend now'"
+    (clicked)="navigateToProductPage()"
+  ></ile-button>
 </div>

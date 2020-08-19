@@ -21,6 +21,8 @@ import { ProductViewComponent } from './components/product-view/product-view.com
 import { LeasingsTableComponent } from './components/leasings-table/leasings-table.component';
 import { LeaseProductDisplayComponent } from './components/lease-product-display/lease-product-display.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SuggestedPriceComponent } from './components/suggested-price/suggested-price.component';
+import { PriceComponent } from './components/price/price.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ProductViewComponent,
     LeasingsTableComponent,
     LeaseProductDisplayComponent,
+    SuggestedPriceComponent,
+    PriceComponent,
   ],
   imports: [
     CommonModule,
@@ -65,6 +69,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ProductViewComponent,
     LeasingsTableComponent,
     LeaseProductDisplayComponent,
+    SuggestedPriceComponent,
+    PriceComponent,
   ],
 })
 export class SharedModule {}
