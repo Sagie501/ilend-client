@@ -14,6 +14,8 @@ export const leasingFragment = gql`
     status
     startDate
     endDate
+    transactionId
+    total_price
   }
   ${userFragment}
   ${productFragment}
@@ -40,6 +42,15 @@ export const getAllOnGoingRequests = gql`
 export const getAllOpenedRequests = gql`
   query getAllOpenedRequests($lessorId: ID!) {
     getAllOpenedRequests(lessorId: $lessorId) {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;
+
+export const getAllLeasings = gql`
+  {
+    getAllLeasings {
       ...LeasingFragment
     }
   }
