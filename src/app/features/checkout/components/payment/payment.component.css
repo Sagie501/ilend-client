@@ -16,7 +16,6 @@ h1 {
 }
 .payment-container {
   display: flex;
-  height: 100%;
   flex-direction: column;
   align-items: center;
 }
@@ -220,6 +219,8 @@ h1 {
   color: rgb(40, 44, 55);
   outline: none;
   transition: all 0.2s;
+  font-size: 1.8rem;
+  padding: 1rem;
 }
 .cardholder-name.invalid {
   border: 1px solid #e53a40;

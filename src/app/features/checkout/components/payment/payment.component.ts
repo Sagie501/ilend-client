@@ -1,18 +1,24 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import * as client from 'braintree-web/client';
 import * as hostedFields from 'braintree-web/hosted-fields';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'ile-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css'],
+  styleUrls: ['./payment.component.css', './return-date.less'],
 })
 export class PaymentComponent implements OnInit {
   @Input() token: string;
-  @Output() onCheckoutCompleted: EventEmitter<string> = new EventEmitter<
-    string
-  >();
+  @Output() onCheckoutCompleted: EventEmitter<{
+    nonce: string;
+    returnDate: Date;
+  }> = new EventEmitter<{ nonce: string; returnDate: Date }>();
 
   public paymentForm: FormGroup;
 
@@ -21,6 +27,8 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     this.paymentForm = this.fb.group({
       name: [''],
+      dateRange: new FormControl('', [Validators.required]),
+      endDate: new FormControl('', [Validators.required]),
     });
 
     client.create(
@@ -32,8 +40,18 @@ export class PaymentComponent implements OnInit {
           console.error(err);
           return;
         }
+
         this.createHostedFields(clientInstance);
       }
+    );
+  }
+
+  filterPriorDates(d: Date | null): boolean {
+    const day = d || new Date();
+    const today = new Date();
+
+    return (
+      day.getDate() >= today.getDate() && day.getMonth() >= today.getMonth()
     );
   }
 
@@ -172,8 +190,10 @@ export class PaymentComponent implements OnInit {
                   return;
                 }
 
-                // This is where you would submit payload.nonce to your server
-                this.onCheckoutCompleted.emit(payload.nonce);
+                this.onCheckoutCompleted.emit({
+                  cardNonce: payload.nonce,
+                  returnDate: this.paymentForm.value.endDate,
+                });
               }.bind(this)
             );
           }.bind(this),
