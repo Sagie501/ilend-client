@@ -1,22 +1,22 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Leasing, LeasingInput } from '../../models/leasing.model';
+import { Store } from '@ngrx/store';
 import { Apollo } from 'apollo-angular';
 import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { getLoggedInUser } from 'src/app/features/user/reducer/user.reducer';
+import { LeasingStatusFromServer } from '../../../shared/helpers/order-status.helper';
 import {
-  setLeaseRequestStatusMutation,
   getAllLeasesByLesseeId,
   getAllOnGoingRequests,
   getAllOpenedRequests,
   openLeaseRequest,
+  setLeaseRequestStatusMutation,
 } from '../../graphql/leasing.graphql';
-import { map } from 'rxjs/operators';
-import { UserService } from '../user/user.service';
-import { ProductsService } from '../products/products.service';
-import { LeasingStatusFromServer } from '../../../shared/helpers/order-status.helper';
+import { Leasing, LeasingInput } from '../../models/leasing.model';
 import { Product } from '../../models/product.model';
 import { User } from '../../models/user.model';
-import { Store } from '@ngrx/store';
-import { getLoggedInUser } from 'src/app/features/user/reducer/user.reducer';
+import { ProductsService } from '../products/products.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',

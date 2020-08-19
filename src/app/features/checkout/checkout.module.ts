@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CheckoutComponent } from './containers/checkout/checkout.component';
@@ -15,6 +15,7 @@ import {
   DateAdapter,
   MAT_DATE_FORMATS,
 } from '@angular/material/core';
+import { RouterModule } from '@angular/router';
 
 export const LEASE_DATES_FORMATS = {
   parse: {
@@ -27,7 +28,7 @@ export const LEASE_DATES_FORMATS = {
     monthYearA11yLabel: { year: 'numeric', month: 'long' },
   },
 };
-
+@Injectable()
 export class LeaseDatesAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object): string {
     if (displayFormat === 'input') {
@@ -66,6 +67,7 @@ export class LeaseDatesAdapter extends NativeDateAdapter {
     MatDatepickerModule,
     MatNativeDateModule,
     CreditCardDirectivesModule,
+    RouterModule,
   ],
 })
 export class CheckoutModule {}
