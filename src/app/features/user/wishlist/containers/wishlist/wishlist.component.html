@@ -8,10 +8,12 @@
       >
     </div>
   </div>
-  <div class="products-container" *ngIf="wishlist.length > 0">
-    <ile-product-card
-      *ngFor="let product of wishlist"
-      [product]="product"
-    ></ile-product-card>
+  <div class="products">
+    <div class="products-container" *ngIf="wishlist.length > 0">
+      <ile-product-card
+        *ngFor="let product of wishlist"
+        [product]="product"
+      ></ile-product-card>
+    </div>
   </div>
 </div>
