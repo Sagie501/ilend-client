@@ -6,15 +6,18 @@
   background-color: @tertiary-color;
   display: flex;
   align-items: center;
+  padding: 0 2rem;
 
-  span {
-    color: white;
-    font-size: 3rem;
+  .ilend {
+    color: @text-color;
+    font-size: 2rem;
     margin-left: 0.5rem;
     cursor: pointer;
-  }
+    text-decoration: none;
 
-  span:focus {
-    outline: none;
+    &__sub {
+      font-size: 1.5rem;
+      text-transform: lowercase;
+    }
   }
 }

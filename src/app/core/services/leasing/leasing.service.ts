@@ -133,6 +133,7 @@ export class LeasingService implements OnDestroy {
       product: this.productsService.mapProductForClient(serverLeasing.product),
       startDate: new Date(parseInt(serverLeasing.startDate, 10)),
       endDate: new Date(parseInt(serverLeasing.endDate, 10)),
+      creationDate: new Date(parseInt(serverLeasing.creationDate, 10)),
     };
   }
 
