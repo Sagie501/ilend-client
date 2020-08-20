@@ -29,7 +29,7 @@
       class="sidebar-link"
       [ngClass]="{ 'sidebar-link__active': isActiveRoute('/home/products') }"
       routerLink="/home"
-      ><svg class="sidebar-link__icon">
+      ><svg class="sidebar-link__icon home">
         <use xlink:href="assets/linearicons.svg#lnr-home"></use></svg
       ><span class="sidebar-link__margin">Home</span></a
     >
@@ -38,7 +38,7 @@
       [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/wishlist') }"
       routerLink="/user/wishlist"
       *ngIf="loggedInUser"
-      ><svg class="sidebar-link__icon">
+      ><svg class="sidebar-link__icon star">
         <use xlink:href="assets/linearicons.svg#lnr-star"></use></svg
       ><span class="sidebar-link__margin">My Wishlist</span></a
     >
@@ -49,7 +49,7 @@
       }"
       routerLink="/user/leasing-history"
       *ngIf="loggedInUser"
-      ><svg class="sidebar-link__icon">
+      ><svg class="sidebar-link__icon history">
         <use xlink:href="assets/linearicons.svg#lnr-history"></use></svg
       ><span>Leasing History</span></a
     >
@@ -62,7 +62,7 @@
       }"
       routerLink="/user/ongoing-deliveries"
       *ngIf="loggedInUser"
-      ><svg class="sidebar-link__icon">
+      ><svg class="sidebar-link__icon train">
         <use xlink:href="assets/linearicons.svg#lnr-train"></use></svg
       ><span>Ongoing Deliveries <strong>({{ onGoingDeliveriesRequestAmount }})</strong></span></a
 
@@ -72,7 +72,7 @@
       [ngClass]="{ 'sidebar-link__active': isActiveRoute('/user/my-products') }"
       routerLink="/user/my-products"
       *ngIf="loggedInUser"
-      ><svg class="sidebar-link__icon">
+      ><svg class="sidebar-link__icon list">
         <use xlink:href="assets/linearicons.svg#lnr-list"></use></svg
       ><span>My Products</span></a
     >
@@ -85,7 +85,7 @@
       }"
       routerLink="/user/open-requests"
       *ngIf="loggedInUser && userProducts.length > 0"
-      ><svg class="sidebar-link__icon">
+      ><svg class="sidebar-link__icon inbox">
         <use xlink:href="assets/linearicons.svg#lnr-inbox"></use></svg
       ><span
         >Open Requests <strong>({{ openedRequestAmount }})</strong></span

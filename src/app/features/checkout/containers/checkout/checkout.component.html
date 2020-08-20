@@ -1,7 +1,12 @@
 <div class="checkout">
   <ile-header></ile-header>
 
-  <ile-payment></ile-payment>
+  <ile-payment
+    *ngIf="token"
+    [token]="token"
+    [result]="checkoutResult"
+    (onCheckoutCompleted)="openLeaseRequest($event)"
+  ></ile-payment>
 
   <ile-product-view [product]="product" [width]="'40rem'"></ile-product-view>
 </div>

@@ -45,7 +45,10 @@ export class AdminDiagramService {
     let thisDay = moment().endOf('day');
 
     return _.filter(leasings, (leasing: Leasing) => {
-      return moment(leasing.startDate).isBetween(lastSevenDaysStart, thisDay);
+      return moment(leasing.creationDate).isBetween(
+        lastSevenDaysStart,
+        thisDay
+      );
     });
   }
 
@@ -58,7 +61,7 @@ export class AdminDiagramService {
 
   sortDates(leasings: Leasing[]) {
     return leasings.sort(
-      (a, b) => b.startDate.getTime() - a.startDate.getTime()
+      (a, b) => b.creationDate.getTime() - a.creationDate.getTime()
     );
   }
 
@@ -66,7 +69,7 @@ export class AdminDiagramService {
     let summarizedArray = this.getLastSevenDays();
 
     leasings.forEach((leasing) => {
-      summarizedArray[leasing.startDate.getDate().toString()] += 1;
+      summarizedArray[leasing.creationDate.getDate().toString()] += 1;
     });
 
     return Object.values(summarizedArray);
@@ -76,7 +79,7 @@ export class AdminDiagramService {
     let summarizedArray = this.getLastSevenDays();
 
     leasings.forEach((leasing) => {
-      summarizedArray[leasing.startDate.getDate().toString()] +=
+      summarizedArray[leasing.creationDate.getDate().toString()] +=
         leasing.total_price;
     });
 

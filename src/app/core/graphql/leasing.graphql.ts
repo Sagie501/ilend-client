@@ -13,6 +13,7 @@ export const leasingFragment = gql`
     }
     status
     deliveryStatus
+    creationDate
     startDate
     endDate
     transactionId
@@ -70,6 +71,19 @@ export const getAllLeasings = gql`
 export const setLeaseRequestStatusMutation = gql`
   mutation setLeaseRequestStatus($leasingId: ID!, $status: LeasingStatus) {
     setLeaseRequestStatus(leasingId: $leasingId, status: $status) {
+      ...LeasingFragment
+    }
+  }
+  ${leasingFragment}
+`;
+
+export const openLeaseRequest = gql`
+  mutation openLeaseRequest(
+    $leasing: LeasingInput!
+    $cardNonce: String!
+    $price: Float!
+  ) {
+    openLeaseRequest(leasing: $leasing, cardNonce: $cardNonce, price: $price) {
       ...LeasingFragment
     }
   }
