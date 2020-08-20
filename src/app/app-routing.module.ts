@@ -18,6 +18,7 @@ import { LessorGuard } from './core/guards/lessor-guard/lessor.guard';
 import { OpenRequestsComponent } from './features/user/open-requests/containers/open-requests/open-requests.component';
 import { CheckoutGuard } from './core/guards/checkout-guard/checkout.guard';
 import { ProductGuard } from './core/guards/product-guard/product.guard';
+import { OngoingDeliveriesComponent } from './features/user/ongoing-deliveries/containers/ongoing-deliveries/ongoing-deliveries.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,10 @@ const routes: Routes = [
       {
         path: 'my-products',
         component: MyProductsComponent,
+      },
+      {
+        path: 'ongoing-deliveries',
+        component: OngoingDeliveriesComponent,
       },
       {
         path: 'ongoing-leasings',

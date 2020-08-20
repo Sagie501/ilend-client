@@ -25,6 +25,9 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
               "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles/styles.less"
             ],
@@ -61,7 +64,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumError": "6.5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -98,6 +101,9 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
               "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles/styles.less"
             ],

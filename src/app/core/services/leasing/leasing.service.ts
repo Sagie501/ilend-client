@@ -9,6 +9,7 @@ import {
   getAllLeasesByLesseeId,
   getAllOnGoingRequests,
   getAllOpenedRequests,
+  getAllOnGoingDeliveriesRequests,
   openLeaseRequest,
   setLeaseRequestStatusMutation,
   getAllLeasings,
@@ -83,6 +84,22 @@ export class LeasingService implements OnDestroy {
       .valueChanges.pipe(
         map(({ data, errors }) => {
           return this.mapLeasingsForClient(data.getAllOpenedRequests);
+        })
+      );
+  }
+
+  getAllOnGoingDeliveriesRequests(lesseeId: string) {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllOnGoingDeliveriesRequests,
+        variables: { lesseeId },
+        pollInterval: 2000,
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          return this.mapLeasingsForClient(
+            data.getAllOnGoingDeliveriesRequests
+          );
         })
       );
   }

@@ -1,3 +1,7 @@
+<link
+  rel="stylesheet"
+  href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css"
+/>
 <div class="leasings-table">
   <table class="table">
     <tr class="table__header">
@@ -7,29 +11,60 @@
       <th>Date</th>
       <th>Cost</th>
       <th>Status</th>
+      <th *ngIf="isInDelivery">Delivery status</th>
     </tr>
-    <tr *ngFor="let lease of leasings" class="no_hover">
-      <td class="leasing-lessor">
-        <ile-user-name-circle
-          [user]="
-            leasingDirection === 'from' ? lease.product.owner : lease.lessee
-          "
-        ></ile-user-name-circle>
-        {{
-          (leasingDirection === "from" ? lease.product.owner : lease.lessee)
-            .firstName
-        }}
-      </td>
-      <td>{{ lease.product.name }}</td>
-      <td>{{ lease.id }}</td>
-      <td>{{ lease.startDate | date: "dd / MM / yyyy" }}</td>
-      <td>
-        <ile-price
-          [price]="lease.product.requestedPrice"
-          [isSmall]="true"
-        ></ile-price>
-      </td>
-      <td><ile-order-status [status]="lease.status"></ile-order-status></td>
-    </tr>
+    <ng-container *ngFor="let lease of leasings">
+      <tr class="no_hover">
+        <td
+          class="leasing-lessor"
+          [ngClass]="{ inDelivery: isInDelivery, floatLeft: !isInDelivery }"
+        >
+          <ile-user-name-circle
+            [user]="
+              leasingDirection === 'from' ? lease.product.owner : lease.lessee
+            "
+          ></ile-user-name-circle>
+          {{
+            (leasingDirection === "from" ? lease.product.owner : lease.lessee)
+              .firstName
+          }}
+        </td>
+        <td>{{ lease.product.name }}</td>
+        <td>{{ lease.id }}</td>
+        <td>{{ lease.startDate | date: "dd / MM / yyyy" }}</td>
+        <td>
+          <ile-price
+            [price]="lease.product.requestedPrice"
+            [isSmall]="true"
+          ></ile-price>
+        </td>
+        <td><ile-order-status [status]="lease.status"></ile-order-status></td>
+        <td *ngIf="isInDelivery">
+          <button
+            (click)="openDeliveryStatusGraph(lease.id, lease.deliveryStatus)"
+            class="deliveryStatus"
+          >
+            Where's my product?
+          </button>
+        </td>
+      </tr>
+      <tr class="no_hover" *ngIf="currentLeasingOpen === lease.id">
+        <td colspan="7">
+          <kendo-stepper
+            [steps]="steps"
+            [stepType]="'full'"
+            [(currentStep)]="currentLeasingOpenStatusNumber"
+            [linear]="false"
+          >
+            <ng-template kendoStepperStepTemplate let-step>
+              <div class="delivery-stepper-step">
+                <span class="{{ step.iconClass }}"></span>
+              </div>
+              <span class="step-label">{{ step.label }}</span>
+            </ng-template>
+          </kendo-stepper>
+        </td>
+      </tr>
+    </ng-container>
   </table>
 </div>
