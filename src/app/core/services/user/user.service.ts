@@ -8,6 +8,8 @@ import {
   loginQuery,
   removeFavoriteCategoriesMutation,
   updateUserMutation,
+  getAllUsers,
+  removeUserMutation,
 } from '../../graphql/user.graphql';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -34,6 +36,23 @@ export class UserService {
       phoneNumber: '12345678932',
       zipCode: '12346',
     } as User;
+  }
+
+  getAllUsers(): Observable<Array<User>> {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllUsers,
+        pollInterval: 10000,
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          if (errors) {
+            throw errors[0].message;
+          } else {
+            return data.getAllUsers.map(this.mapUserForClient);
+          }
+        })
+      );
   }
 
   login(email: string, password: string): Observable<User> {
@@ -80,6 +99,26 @@ export class UserService {
       );
   }
 
+  removeUser(userId: string): Observable<boolean> {
+    return this.apollo
+      .mutate<any>({
+        mutation: removeUserMutation,
+        variables: {
+          userId,
+        },
+        errorPolicy: 'all',
+      })
+      .pipe(
+        map(({ data, errors }) => {
+          if (errors) {
+            throw errors[0].message;
+          } else {
+            return data.removeUser;
+          }
+        })
+      );
+  }
+
   updateUser(userId: string, partialUser: any): Observable<User> {
     return this.apollo
       .mutate<any>({
@@ -102,13 +141,9 @@ export class UserService {
   }
 
   mapUserForClient(user): User {
-    let profilePicture = user.profilePicture
-      ? JSON.parse(user.profilePicture)[0]
-      : undefined;
     return {
       ...user,
       birthDate: new Date(user.birthDate),
-      profilePicture: profilePicture,
     };
   }
 

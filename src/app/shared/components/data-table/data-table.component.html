@@ -4,8 +4,24 @@
     <th *ngIf="funcName">{{ funcName }}</th>
   </tr>
   <tr *ngFor="let item of data" class="no_hover">
-    <td *ngFor="let value of item">
-      {{ !isDate(value) ? value : (value | date: "dd / MM / yyyy") }}
+    <td *ngFor="let value of item; let i = index">
+      <span
+        matTooltip="{{
+          !isDate(value) && value.length > 16 ? value : undefined
+        }}"
+        [matTooltipPosition]="'below'"
+        >{{
+          !isDate(value)
+            ? !isStatus(titles[i])
+              ? value
+              : ""
+            : (value | date: "dd / MM / yyyy")
+        }}</span
+      >
+      <ile-order-status
+        [status]="value"
+        *ngIf="isStatus(titles[i])"
+      ></ile-order-status>
     </td>
     <td *ngIf="funcName">
       <span class="link" (click)="func.emit(item)">{{ funcName }}</span>

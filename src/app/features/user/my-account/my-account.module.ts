@@ -14,10 +14,18 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FavoriteCategoriesDialogComponent } from './components/favorite-categories-dialog/favorite-categories-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ProfilePictureDialogComponent } from './components/profile-picture-dialog/profile-picture-dialog.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
-  declarations: [MyAccountComponent, EmailDialogComponent, PasswordDialogComponent, AddressDialogComponent,
-    FavoriteCategoriesDialogComponent],
+  declarations: [
+    MyAccountComponent,
+    EmailDialogComponent,
+    PasswordDialogComponent,
+    AddressDialogComponent,
+    FavoriteCategoriesDialogComponent,
+    ProfilePictureDialogComponent,
+  ],
   imports: [
     CommonModule,
     MatDividerModule,
@@ -27,8 +35,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatButtonModule,
     MatAutocompleteModule,
+    MaterialFileInputModule,
     MatSnackBarModule,
-    MatSelectModule
-  ]
+    MatSelectModule,
+  ],
 })
-export class MyAccountModule { }
+export class MyAccountModule {}

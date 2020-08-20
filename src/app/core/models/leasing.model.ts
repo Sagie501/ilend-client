@@ -10,6 +10,7 @@ export type Leasing = {
   status: LeasingStatusFromServer;
   startDate: Date;
   endDate: Date;
+  total_price: number;
 };
 
 export type LeasingInput = {

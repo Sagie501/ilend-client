@@ -1,9 +1,20 @@
 <div class="admin-dashboard">
   <mat-tab-group>
     <mat-tab label="Overview" class="admin-tab">
-      <ile-overview></ile-overview>
+      <ile-overview
+        [leasingsPerDay]="leasingsPerDay$ | async"
+        [earningsPerDay]="earningsPerDay$ | async"
+        [latestTransactions]="latestTransactions$ | async"
+      ></ile-overview>
     </mat-tab>
-    <mat-tab label="Users" class="admin-tab"><ile-users></ile-users></mat-tab>
-    <mat-tab label="Leasings">Leasings</mat-tab>
+    <mat-tab label="Users" class="admin-tab"
+      ><ile-users
+        [users]="allUsers$ | async"
+        (removeUserFunc)="removeUser($event)"
+      ></ile-users
+    ></mat-tab>
+    <mat-tab label="Leasings"
+      ><ile-all-leasings [leasings]="allLeasings$ | async"></ile-all-leasings
+    ></mat-tab>
   </mat-tab-group>
 </div>
