@@ -29,7 +29,7 @@ import {
   deleteProductFailed,
   updateProduct,
   updateProductSucceeded,
-  updateProductFailed
+  updateProductFailed,
 } from '../actions/user.actoins';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products/products.service';
@@ -39,10 +39,12 @@ import { getLoggedInUser, UserState } from '../reducer/user.reducer';
 
 @Injectable()
 export class UserEffects {
-
-  constructor(private actions$: Actions, private userService: UserService, private productsService: ProductsService,
-              private userStore: Store<UserState>) {
-  }
+  constructor(
+    private actions$: Actions,
+    private userService: UserService,
+    private productsService: ProductsService,
+    private userStore: Store<UserState>
+  ) {}
 
   init$ = createEffect(() => {
     return this.actions$.pipe(
@@ -50,11 +52,14 @@ export class UserEffects {
       withLatestFrom(this.userStore.select(getLoggedInUser)),
       switchMap(([action, loggedInUser]) => {
         if (loggedInUser) {
-          return forkJoin([this.productsService.getUserWishlist(loggedInUser.id),
-            this.productsService.getProductsByUserId(loggedInUser.id)]).pipe(
+          return forkJoin([
+            this.productsService.getUserWishlist(loggedInUser.id),
+            this.productsService.getProductsByUserId(loggedInUser.id),
+          ]).pipe(
             map(([wishlist, products]) => {
               return loginSucceeded({ user: loggedInUser, wishlist, products });
-            }));
+            })
+          );
         } else {
           return EMPTY;
         }
@@ -65,43 +70,50 @@ export class UserEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(login),
-      switchMap(action => {
+      switchMap((action) => {
         return this.userService.login(action.email, action.password).pipe(
           switchMap((user) => {
-            return forkJoin([this.productsService.getUserWishlist(user.id), this.productsService.getProductsByUserId(user.id)]).pipe(
+            return forkJoin([
+              this.productsService.getUserWishlist(user.id),
+              this.productsService.getProductsByUserId(user.id),
+            ]).pipe(
               map(([wishlist, products]) => {
                 return loginSucceeded({ user, wishlist, products });
               }),
-              catchError(message => of(loginFailed({ message }))),
+              catchError((message) => of(loginFailed({ message })))
             );
           }),
-          catchError(message => of(loginFailed({ message })))
+          catchError((message) => of(loginFailed({ message })))
         );
-      }),
+      })
     );
   });
 
   createNewUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(createNewUser),
-      switchMap(action => {
+      switchMap((action) => {
         return this.userService.createNewUser(action.user).pipe(
-          map(user => createNewUserSucceeded({ user, wishlist: [], products: [] })),
-          catchError(message => of(createNewUserFailed({ message }))),
+          map((user) =>
+            createNewUserSucceeded({ user, wishlist: [], products: [] })
+          ),
+          catchError((message) => of(createNewUserFailed({ message })))
         );
-      }),
+      })
     );
   });
 
   updateUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(updateUser),
-      switchMap(action => {
-        return this.userService.updateUser(action.userId, action.partialUser).pipe(
-          map(user => updateUserSucceeded({ user })),
-          catchError(message => of(updateUserFailed({ message }))),
-        );
-      }),
+      switchMap((action) => {
+        return this.userService
+          .updateUser(action.userId, action.partialUser)
+          .pipe(
+            map((user) => updateUserSucceeded({ user })),
+            catchError((message) => of(updateUserFailed({ message })))
+          );
+      })
     );
   });
 
@@ -110,11 +122,13 @@ export class UserEffects {
       ofType(addNewProduct),
       withLatestFrom(this.userStore.select(getLoggedInUser)),
       switchMap(([action, loggedInUser]) => {
-        return this.productsService.addProduct(loggedInUser.id, action.categoryId, action.product).pipe(
-          map(product => addNewProductSucceeded({ product })),
-          catchError(message => of(addNewProductFailed())),
-        );
-      }),
+        return this.productsService
+          .addProduct(loggedInUser.id, action.categoryId, action.product)
+          .pipe(
+            map((product) => addNewProductSucceeded({ product })),
+            catchError((message) => of(addNewProductFailed()))
+          );
+      })
     );
   });
 
@@ -122,11 +136,13 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(updateProduct),
       switchMap((action) => {
-        return this.productsService.updateProduct(action.productId, action.categoryId, action.product).pipe(
-          map(product => updateProductSucceeded({ product })),
-          catchError(message => of(updateProductFailed())),
-        );
-      }),
+        return this.productsService
+          .updateProduct(action.productId, action.categoryId, action.product)
+          .pipe(
+            map((product) => updateProductSucceeded({ product })),
+            catchError((message) => of(updateProductFailed()))
+          );
+      })
     );
   });
 
@@ -136,33 +152,37 @@ export class UserEffects {
       switchMap((action) => {
         return this.productsService.deleteProduct(action.productId).pipe(
           map(() => deleteProductSucceeded({ productId: action.productId })),
-          catchError(message => of(deleteProductFailed())),
+          catchError((message) => of(deleteProductFailed()))
         );
-      }),
+      })
     );
   });
 
   addProductToWishlist$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(addProductToWishlist),
-      switchMap(action => {
-        return this.productsService.addProductToWishlist(action.userId, action.productId).pipe(
-          map(wishlist => addProductToWishlistSucceeded({ wishlist })),
-          catchError(message => of(addProductToWishlistFailed())),
-        );
-      }),
+      switchMap((action) => {
+        return this.productsService
+          .addProductToWishlist(action.userId, action.productId)
+          .pipe(
+            map((wishlist) => addProductToWishlistSucceeded({ wishlist })),
+            catchError((message) => of(addProductToWishlistFailed()))
+          );
+      })
     );
   });
 
   removeProductFromWishlist$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(removeProductFromWishlist),
-      switchMap(action => {
-        return this.productsService.removeProductFromWishlist(action.userId, action.productId).pipe(
-          map(wishlist => removeProductFromWishlistSucceeded({ wishlist })),
-          catchError(message => of(removeProductFromWishlistFailed())),
-        );
-      }),
+      switchMap((action) => {
+        return this.productsService
+          .removeProductFromWishlist(action.userId, action.productId)
+          .pipe(
+            map((wishlist) => removeProductFromWishlistSucceeded({ wishlist })),
+            catchError((message) => of(removeProductFromWishlistFailed()))
+          );
+      })
     );
   });
 
@@ -171,18 +191,29 @@ export class UserEffects {
       ofType(updateUserFavoriteCategories),
       withLatestFrom(this.userStore.select(getLoggedInUser)),
       switchMap(([action, loggedInUser]) => {
-        let idsToAdd = action.favoriteCategoriesIds.filter((categoryId) =>
-          !loggedInUser.favoriteCategories.map((category) => category.id).includes(categoryId));
-        let idsToRemove = loggedInUser.favoriteCategories.map((category) =>
-          category.id).filter((categoryId) => !action.favoriteCategoriesIds.includes(categoryId));
-        return merge(this.userService.addFavoriteCategories(action.userId, idsToAdd),
-          this.userService.removeFavoriteCategories(action.userId, idsToRemove)).pipe(
-          map(user => {
+        let idsToAdd = action.favoriteCategoriesIds.filter(
+          (categoryId) =>
+            !loggedInUser.favoriteCategories
+              .map((category) => category.id)
+              .includes(categoryId)
+        );
+        let idsToRemove = loggedInUser.favoriteCategories
+          .map((category) => category.id)
+          .filter(
+            (categoryId) => !action.favoriteCategoriesIds.includes(categoryId)
+          );
+        return merge(
+          this.userService.addFavoriteCategories(action.userId, idsToAdd),
+          this.userService.removeFavoriteCategories(action.userId, idsToRemove)
+        ).pipe(
+          map((user) => {
             return updateUserFavoriteCategoriesSucceeded({ user });
           }),
-          catchError(message => of(updateUserFavoriteCategoriesFailed({ message }))),
+          catchError((message) =>
+            of(updateUserFavoriteCategoriesFailed({ message }))
+          )
         );
-      }),
+      })
     );
   });
 

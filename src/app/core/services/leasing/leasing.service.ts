@@ -11,6 +11,7 @@ import {
   getAllOpenedRequests,
   openLeaseRequest,
   setLeaseRequestStatusMutation,
+  getAllLeasings,
 } from '../../graphql/leasing.graphql';
 import { Leasing, LeasingInput } from '../../models/leasing.model';
 import { Product } from '../../models/product.model';
@@ -82,6 +83,19 @@ export class LeasingService implements OnDestroy {
       .valueChanges.pipe(
         map(({ data, errors }) => {
           return this.mapLeasingsForClient(data.getAllOpenedRequests);
+        })
+      );
+  }
+
+  getAllLeasings() {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllLeasings,
+        pollInterval: 10000,
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          return this.mapLeasingsForClient(data.getAllLeasings);
         })
       );
   }

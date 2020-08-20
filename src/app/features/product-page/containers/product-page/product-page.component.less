@@ -10,16 +10,21 @@
   flex-direction: column;
   align-items: center;
 
+  ile-product-view {
+    width: 65%;
+  }
+
   ile-images-slider {
     margin-bottom: 0.6rem;
   }
 
-  ile-product-view {
+  & > * {
     margin-bottom: 3rem;
   }
+
   .lend-button,
   .wishlist-button {
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
   }
 
   .ratings {
@@ -56,6 +61,7 @@
     .rating > label {
       color: #ddd;
       float: right;
+      cursor: pointer;
     }
 
     /***** CSS Magic to Highlight Stars on Hover *****/
@@ -75,22 +81,46 @@
   }
 
   .comments-container {
-    width: 55%;
+    width: 55rem;
 
     .comments {
       min-height: 13rem;
       overflow-y: auto;
-      border: rgba(0, 0, 0, 0.25) solid 1px;
-      border-radius: 6px;
       margin-bottom: 0.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 5rem;
+      color: @dark-text-color;
 
       .comment {
         display: flex;
         flex-direction: column;
+        padding: 1.5rem 4rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid @dark-text-color;
+        border-radius: 1rem;
+        font-size: 1.7rem;
+        width: 45rem;
+
+        position: relative;
+
+        &__header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 2rem;
+          margin-top: 0.5rem;
+        }
+
+        ile-user-name-circle {
+          position: absolute;
+          left: -2rem;
+        }
 
         .comment-author {
-          font-size: 1.4rem;
-          margin-left: 0.2rem;
+          font-size: 1.9rem;
+          font-weight: 800;
         }
 
         .comment-content {
@@ -98,18 +128,11 @@
         }
 
         .comment-date {
-          font-size: 1rem;
+          font-size: 1.4rem;
+          font-weight: 300;
           color: #bfbfbf;
+          font-family: "Open Sans", serif;
         }
-
-        .comment-content,
-        .comment-date {
-          margin-left: 1rem;
-        }
-      }
-
-      .comment:not(:last-child) {
-        border-bottom: rgba(0, 0, 0, 0.25) solid 1px;
       }
 
       .no-comments {

@@ -60,16 +60,46 @@
     border-bottom: 1px solid darken(@text-color, 10%);
   }
 
-  tr:not(&__header):not(.no_hover):hover {
+  tr:not(&__header):not(.no_hover):not(.mat-row):hover {
     background-color: rgba(0, 0, 0, 0.075);
   }
 
   td {
-    padding: 1.5rem 0;
+    padding: 1.5rem 0.5rem;
     border-bottom: 1px solid darken(@text-color, 10%);
     min-height: 7rem;
     font-size: 1.6rem;
-    padding-left: 0.5rem;
+    // padding-left: 0.5rem;
+  }
+}
+
+.mat-table {
+  background-color: @text-color;
+}
+
+.ellipsis {
+  @media screen and (max-width: 1200px) {
+    max-width: 5.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 900px) {
+    max-width: 4.5rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    max-width: 2.5rem;
+  }
+}
+
+.ellipsis-small {
+  @media screen and (max-width: 900px) {
+    max-width: 5.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 
@@ -90,7 +120,8 @@
 
 .admin-tab {
   padding-top: 2rem;
-  height: calc(100vh - @header-height - 48px);
+  height: calc(100vh - @header-height - 10rem);
+  overflow-y: auto;
 }
 
 .mat-tab-body-content {
@@ -109,4 +140,21 @@ input[type="text"] {
 
 img.image {
   object-fit: contain;
+}
+
+.mat-tab-body {
+  height: 100%;
+  margin-top: 2rem;
+}
+
+.mat-tooltip {
+  font-size: 1.5rem !important;
+  max-width: 50rem !important;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+  font-size: 1.5rem;
 }

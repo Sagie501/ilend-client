@@ -24,6 +24,15 @@ export const userFragment = gql`
   ${categoryFragment}
 `;
 
+export const getAllUsers = gql`
+  {
+    getAllUsers {
+      ...UserFragment
+    }
+  }
+  ${userFragment}
+`;
+
 export const loginQuery = gql`
   query login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -40,6 +49,12 @@ export const addUserMutation = gql`
     }
   }
   ${userFragment}
+`;
+
+export const removeUserMutation = gql`
+  mutation removeUser($userId: ID!) {
+    removeUser(userId: $userId)
+  }
 `;
 
 export const updateUserMutation = gql`

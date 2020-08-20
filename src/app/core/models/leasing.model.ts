@@ -11,6 +11,7 @@ export type Leasing = {
   creationDate: Date;
   startDate: Date;
   endDate: Date;
+  total_price: number;
 };
 
 export type LeasingInput = {

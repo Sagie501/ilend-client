@@ -11,7 +11,7 @@
         product?.rating | number: "1.0-2"
       }}</span>
     </div>
-    <span class="product-price">${{ product?.requestedPrice }}</span>
+    <ile-price [isLarge]="true" [price]="product?.requestedPrice"></ile-price>
   </div>
   <div class="owner-label">
     Lend from
