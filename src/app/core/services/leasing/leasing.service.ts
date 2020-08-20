@@ -7,6 +7,7 @@ import {
   getAllLeasesByLesseeId,
   getAllOnGoingRequests,
   getAllOpenedRequests,
+  getAllLeasings,
 } from '../../graphql/leasing.graphql';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
@@ -63,6 +64,19 @@ export class LeasingService {
       .valueChanges.pipe(
         map(({ data, errors }) => {
           return this.mapLeasingsForClient(data.getAllOpenedRequests);
+        })
+      );
+  }
+
+  getAllLeasings() {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllLeasings,
+        pollInterval: 10000,
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          return this.mapLeasingsForClient(data.getAllLeasings);
         })
       );
   }

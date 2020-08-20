@@ -2,18 +2,16 @@ import { createAction, props } from '@ngrx/store';
 import { User } from '../../../core/models/user.model';
 import { Product } from '../../../core/models/product.model';
 
-export const initUser = createAction(
-  '[User] Init User'
-);
+export const initUser = createAction('[User] Init User');
 
 export const login = createAction(
   '[User] Login',
-  props<{ email: string, password: string }>()
+  props<{ email: string; password: string }>()
 );
 
 export const loginSucceeded = createAction(
   '[User] Login Succeeded',
-  props<{ user: User, wishlist: Array<Product>, products: Array<Product> }>()
+  props<{ user: User; wishlist: Array<Product>; products: Array<Product> }>()
 );
 
 export const loginFailed = createAction(
@@ -21,9 +19,7 @@ export const loginFailed = createAction(
   props<{ message: string }>()
 );
 
-export const logout = createAction(
-  '[User] Logout'
-);
+export const logout = createAction('[User] Logout');
 
 export const createNewUser = createAction(
   '[User] Create New User',
@@ -32,7 +28,7 @@ export const createNewUser = createAction(
 
 export const createNewUserSucceeded = createAction(
   '[User] Create New User Succeeded',
-  props<{ user: User, wishlist: Array<Product>, products: Array<Product> }>()
+  props<{ user: User; wishlist: Array<Product>; products: Array<Product> }>()
 );
 
 export const createNewUserFailed = createAction(
@@ -42,7 +38,7 @@ export const createNewUserFailed = createAction(
 
 export const addNewProduct = createAction(
   '[User] Add New Product',
-  props<{ categoryId: string, product: any }>()
+  props<{ categoryId: string; product: any }>()
 );
 
 export const addNewProductSucceeded = createAction(
@@ -56,7 +52,7 @@ export const addNewProductFailed = createAction(
 
 export const updateProduct = createAction(
   '[User] Update Product',
-  props<{ productId: string, categoryId: string, product: any }>()
+  props<{ productId: string; categoryId: string; product: any }>()
 );
 
 export const updateProductSucceeded = createAction(
@@ -64,9 +60,7 @@ export const updateProductSucceeded = createAction(
   props<{ product: Product }>()
 );
 
-export const updateProductFailed = createAction(
-  '[User] Update Product Failed'
-);
+export const updateProductFailed = createAction('[User] Update Product Failed');
 
 export const deleteProduct = createAction(
   '[User] Delete Product',
@@ -78,13 +72,11 @@ export const deleteProductSucceeded = createAction(
   props<{ productId: string }>()
 );
 
-export const deleteProductFailed = createAction(
-  '[User] Delete Product Failed'
-);
+export const deleteProductFailed = createAction('[User] Delete Product Failed');
 
 export const addProductToWishlist = createAction(
   '[User] Add Product To Wishlist',
-  props<{ userId: string, productId: string }>()
+  props<{ userId: string; productId: string }>()
 );
 
 export const addProductToWishlistSucceeded = createAction(
@@ -98,7 +90,7 @@ export const addProductToWishlistFailed = createAction(
 
 export const removeProductFromWishlist = createAction(
   '[User] Remove Product From Wishlist',
-  props<{ userId: string, productId: string }>()
+  props<{ userId: string; productId: string }>()
 );
 
 export const removeProductFromWishlistSucceeded = createAction(
@@ -112,7 +104,7 @@ export const removeProductFromWishlistFailed = createAction(
 
 export const updateUser = createAction(
   '[User] Update User',
-  props<{ userId: string, partialUser: any }>()
+  props<{ userId: string; partialUser: any }>()
 );
 
 export const updateUserSucceeded = createAction(
@@ -127,7 +119,7 @@ export const updateUserFailed = createAction(
 
 export const updateUserFavoriteCategories = createAction(
   '[User] Update User Favorite Categories',
-  props<{ userId: string, favoriteCategoriesIds: Array<string> }>()
+  props<{ userId: string; favoriteCategoriesIds: Array<string> }>()
 );
 
 export const updateUserFavoriteCategoriesSucceeded = createAction(
