@@ -30,6 +30,7 @@
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
+    "braintree-web": "^3.64.2",
     "moment": "^2.26.0",
     "save": "^2.4.0",
     "graphql": "^15.3.0",

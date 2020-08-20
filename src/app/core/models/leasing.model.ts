@@ -13,3 +13,10 @@ export type Leasing = {
   endDate: Date;
   total_price: number;
 };
+
+export type LeasingInput = {
+  lesseeId: string;
+  productId: string;
+  creationDate: number;
+  endDate: number;
+};
