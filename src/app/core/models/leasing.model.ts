@@ -8,6 +8,7 @@ export type Leasing = {
   lessee: User;
   product: Product;
   status: LeasingStatusFromServer;
+  creationDate: Date;
   startDate: Date;
   endDate: Date;
   total_price: number;

@@ -12,6 +12,7 @@ export const leasingFragment = gql`
       ...ProductFragment
     }
     status
+    creationDate
     startDate
     endDate
     transactionId
