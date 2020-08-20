@@ -62,7 +62,7 @@ export class DataDiagramComponent implements OnInit {
       name: this.title,
       type: 'line',
       data: this.data,
-      color: '#2d8eff',
+      color: '#201265',
     } as Highcharts.SeriesOptionsType;
   }
 }
