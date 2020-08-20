@@ -18,15 +18,23 @@ export type LayoutState = {
 };
 
 export const initialState: LayoutState = {
-  theme: Theme.LIGHT,
+  theme: localStorage.getItem('ilend-preffered-theme')
+    ? (localStorage.getItem('ilend-preffered-theme') as Theme)
+    : Theme.LIGHT,
 };
 
 export const layoutReducer = createReducer(
   initialState,
-  on(ToggleTheme, (state) => ({
-    ...state,
-    theme: state.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT,
-  }))
+  on(ToggleTheme, (state) => {
+    let newState = {
+      ...state,
+      theme: state.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT,
+    };
+
+    localStorage.setItem('ilend-preffered-theme', newState.theme);
+
+    return newState;
+  })
 );
 
 export const getLayoutState = createFeatureSelector(layoutToken);
