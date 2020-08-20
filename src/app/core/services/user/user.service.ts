@@ -102,13 +102,9 @@ export class UserService {
   }
 
   mapUserForClient(user): User {
-    let profilePicture = user.profilePicture
-      ? JSON.parse(user.profilePicture)[0]
-      : undefined;
     return {
       ...user,
       birthDate: new Date(user.birthDate),
-      profilePicture: profilePicture,
     };
   }
 
