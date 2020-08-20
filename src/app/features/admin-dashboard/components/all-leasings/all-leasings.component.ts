@@ -19,7 +19,7 @@ export class AllLeasingsComponent implements OnInit {
     'Lessor Name',
     'Product ID',
     'Product Name',
-    'Start Date',
+    'Creation Date',
     'End Date',
     'Status',
   ];

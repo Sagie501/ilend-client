@@ -65,7 +65,7 @@ export class AdminDashboardComponent implements OnInit {
       ),
       leasing.product.id,
       leasing.product.name,
-      new Date(leasing.startDate),
+      leasing.creationDate,
       new Date(leasing.endDate),
       leasing.status,
     ];
@@ -80,7 +80,7 @@ export class AdminDashboardComponent implements OnInit {
       ),
       leasing.product.id,
       leasing.product.name,
-      new Date(leasing.startDate),
+      leasing.creationDate,
       leasing.transactionId ? leasing.transactionId : '?',
       leasing.total_price ? `$${leasing.total_price}` : '-',
     ];
