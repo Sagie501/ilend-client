@@ -18,6 +18,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   product: Product;
   subscriptions: Array<Subscription>;
   token: string;
+  checkoutResult: { success: boolean; message?: string; leasingID?: string };
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -49,17 +50,35 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  openLeaseRequest(cardNonce: string) {
+  openLeaseRequest(payload: { cardNonce: string; returnDate: Date }) {
     this.leasingService
       .openLeaseRequest(
         this.product,
         this.calculateTotalPrice(),
-        cardNonce,
+        payload.cardNonce,
+        payload.returnDate.getTime(),
         new Date().getTime()
       )
-      .subscribe((leasing) => {
-        console.log(leasing.id);
-      });
+      .subscribe(
+        (leasing: Leasing) => {
+          if (leasing) {
+            this.checkoutResult = {
+              success: true,
+            };
+          } else {
+            this.checkoutResult = {
+              success: false,
+              message: 'Could not open lease request. Please try again later.',
+            };
+          }
+        },
+        (err) => {
+          this.checkoutResult = {
+            success: false,
+            message: 'Could not open lease request. Please try again later.',
+          };
+        }
+      );
   }
 
   calculateTotalPrice(): number {

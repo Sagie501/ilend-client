@@ -1,39 +1,78 @@
-<div class="payment-container">
-  <div class="card-headline">
-    <h1>Card Details</h1>
-  </div>
+<div class="payment">
+  <div class="headline">Checkout</div>
+  <div class="sub-headline">Enter all the details.</div>
 
-  <form [formGroup]="paymentForm" id="checkout-form" class="scale-down">
-    <div class="cardinfo-card-name">
-      <label class="cardinfo-label" for="card-name">Cardholder Name</label>
+  <from class="date-range-form" [formGroup]="paymentForm">
+    <mat-form-field class="return-date">
+      <mat-label>Choose the return date</mat-label>
       <input
-        id="card-name"
-        formControlName="name"
-        type="text"
-        class="cardholder-name"
-        placeholder="Your name"
-        (change)="validateName($event.target.value)"
+        matInput
+        [matDatepicker]="picker"
+        [matDatepickerFilter]="filterPriorDates"
+        formControlName="endDate"
+        (change)="validateForm()"
+        (dateChange)="validateForm()"
       />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="paymentForm.get('endDate').hasError('required')">
+        Return date is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </from>
+
+  <div class="payment-container">
+    <div class="card-headline">
+      <h1>Card Details</h1>
     </div>
 
-    <div class="cardinfo-card-number">
-      <label class="cardinfo-label" for="card-number">Card Number</label>
-      <div class="input-wrapper" id="card-number"></div>
-      <div id="card-image"></div>
-    </div>
-
-    <div class="cardinfo-wrapper">
-      <div class="cardinfo-exp-date">
-        <label class="cardinfo-label" for="expiration-date">Valid Thru</label>
-        <div class="input-wrapper" id="expiration-date"></div>
+    <form [formGroup]="paymentForm" id="checkout-form" class="scale-down">
+      <div class="cardinfo-card-name">
+        <label class="cardinfo-label" for="card-name">Cardholder Name</label>
+        <input
+          id="card-name"
+          formControlName="name"
+          type="text"
+          class="cardholder-name"
+          placeholder="Your name"
+          (change)="validateName($event.target.value); validateForm()"
+        />
       </div>
 
-      <div class="cardinfo-cvv">
-        <label class="cardinfo-label" for="cvv">CVV</label>
-        <div class="input-wrapper" id="cvv"></div>
+      <div class="cardinfo-card-number">
+        <label class="cardinfo-label" for="card-number">Card Number</label>
+        <div class="input-wrapper" id="card-number"></div>
+        <div id="card-image"></div>
       </div>
-    </div>
-  </form>
 
-  <input id="button-pay" type="submit" value="Checkout" />
+      <div class="cardinfo-wrapper">
+        <div class="cardinfo-exp-date">
+          <label class="cardinfo-label" for="expiration-date">Valid Thru</label>
+          <div class="input-wrapper" id="expiration-date"></div>
+        </div>
+
+        <div class="cardinfo-cvv">
+          <label class="cardinfo-label" for="cvv">CVV</label>
+          <div class="input-wrapper" id="cvv"></div>
+        </div>
+      </div>
+    </form>
+
+    <input id="button-pay" type="submit" value="Checkout" />
+  </div>
+  <div class="result">
+    <span *ngIf="result && !result.success" class="result__error">
+      {{ result?.message }}
+    </span>
+    <span *ngIf="result?.success" class="result__success">
+      The leasing request was opened successfully. <br />
+      You can review it
+      <a
+        class="link"
+        routerLink="/user/leasing-history"
+        routerLinkActive="active"
+        >here</a
+      >.
+    </span>
+  </div>
 </div>

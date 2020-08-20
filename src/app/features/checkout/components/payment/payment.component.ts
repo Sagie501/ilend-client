@@ -1,18 +1,25 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import * as client from 'braintree-web/client';
 import * as hostedFields from 'braintree-web/hosted-fields';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'ile-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css'],
+  styleUrls: ['./payment.component.css', './return-date.less'],
 })
 export class PaymentComponent implements OnInit {
   @Input() token: string;
-  @Output() onCheckoutCompleted: EventEmitter<string> = new EventEmitter<
-    string
-  >();
+  @Input() result: { success: boolean; message?: string; leasingID?: string };
+  @Output() onCheckoutCompleted: EventEmitter<{
+    nonce: string;
+    returnDate: Date;
+  }> = new EventEmitter<{ nonce: string; returnDate: Date }>();
 
   public paymentForm: FormGroup;
 
@@ -21,6 +28,8 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     this.paymentForm = this.fb.group({
       name: [''],
+      dateRange: new FormControl('', [Validators.required]),
+      endDate: new FormControl('', [Validators.required]),
     });
 
     client.create(
@@ -32,8 +41,18 @@ export class PaymentComponent implements OnInit {
           console.error(err);
           return;
         }
+
         this.createHostedFields(clientInstance);
       }
+    );
+  }
+
+  filterPriorDates(d: Date | null): boolean {
+    const day = d || new Date();
+    const today = new Date();
+
+    return (
+      day.getDate() >= today.getDate() && day.getMonth() >= today.getMonth()
     );
   }
 
@@ -52,11 +71,38 @@ export class PaymentComponent implements OnInit {
     }
   }
 
+  latestBraintreeEvent;
+
+  validateForm(event?) {
+    event = event ? event : this.latestBraintreeEvent;
+    let buttonPay = document.getElementById('button-pay');
+
+    if (
+      this.isNameValidated &&
+      !this.paymentForm.get('endDate').hasError('required') &&
+      event
+    ) {
+      // Check if all fields are valid, then show submit button
+      var formValid = Object.keys(event.fields).every(function (key) {
+        return event.fields[key].isValid;
+      });
+
+      if (formValid) {
+        buttonPay.classList.add('show-button');
+      } else {
+        buttonPay.classList.remove('show-button');
+      }
+    } else {
+      buttonPay.classList.remove('show-button');
+    }
+
+    event ? (this.latestBraintreeEvent = event) : undefined;
+  }
+
   createHostedFields(clientInstance) {
     let form = document.getElementById('checkout-form');
     let cardImage = document.getElementById('card-image');
     let header = document.getElementsByClassName('card-headline')[0];
-    let buttonPay = document.getElementById('button-pay');
     hostedFields.create(
       {
         client: clientInstance,
@@ -107,23 +153,7 @@ export class PaymentComponent implements OnInit {
           return;
         }
 
-        hostedFieldsInstance.on(
-          'validityChange',
-          function (event) {
-            if (this.isNameValidated) {
-              // Check if all fields are valid, then show submit button
-              var formValid = Object.keys(event.fields).every(function (key) {
-                return event.fields[key].isValid;
-              });
-
-              if (formValid) {
-                buttonPay.classList.add('show-button');
-              } else {
-                buttonPay.classList.remove('show-button');
-              }
-            }
-          }.bind(this)
-        );
+        hostedFieldsInstance.on('validityChange', this.validateForm.bind(this));
 
         hostedFieldsInstance.on('empty', function (event) {
           header.classList.remove('header-slide');
@@ -167,13 +197,15 @@ export class PaymentComponent implements OnInit {
                 cardholderName: this.cardholderName,
               },
               function (err, payload) {
-                if (err) {
-                  console.error(err);
-                  return;
-                }
+                // if (err) {
+                //   console.error(err);
+                //   return;
+                // }
 
-                // This is where you would submit payload.nonce to your server
-                this.onCheckoutCompleted.emit(payload.nonce);
+                this.onCheckoutCompleted.emit({
+                  cardNonce: payload.nonce,
+                  returnDate: this.paymentForm.value.endDate,
+                });
               }.bind(this)
             );
           }.bind(this),

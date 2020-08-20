@@ -30,7 +30,7 @@ export class LeaseProductDisplayComponent implements OnInit {
   approveLeasingRequest() {
     this.changeLeasingRequestStatus.emit({
       leasingId: this.leasing.id,
-      status: LeasingStatusFromServer.WAITING_FOR_DELIVERY,
+      status: LeasingStatusFromServer.IN_DELIVERY,
     });
   }
 }
