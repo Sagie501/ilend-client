@@ -54,7 +54,8 @@ export class FilterService {
 
   generateFilterBySearch(value: string) {
     return (product: Product) =>
-      product.name.includes(value) || product.description.includes(value);
+      product.name.toLowerCase().includes(value.toLowerCase()) ||
+      product.description.toLowerCase().includes(value.toLowerCase());
   }
 
   generateFilterByPrice(value: PriceFilter) {

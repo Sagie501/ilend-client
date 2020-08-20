@@ -1,9 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, pluck, tap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/core/services/products/products.service';
 import { Subscription } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { clientTokenQuery } from '../../../../core/graphql/checkout.graphql';
+import { Leasing } from 'src/app/core/models/leasing.model';
+import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
 
 @Component({
   selector: 'ile-checkout',
@@ -13,13 +17,14 @@ import { Subscription } from 'rxjs';
 export class CheckoutComponent implements OnInit, OnDestroy {
   product: Product;
   subscriptions: Array<Subscription>;
+  token: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productsService: ProductsService
-  ) {}
-
-  ngOnInit(): void {
+    private productsService: ProductsService,
+    private leasingService: LeasingService,
+    private apollo: Apollo
+  ) {
     this.subscriptions = [
       this.activatedRoute.params
         .pipe(
@@ -30,7 +35,41 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         .subscribe((product: Product) => {
           this.product = product;
         }),
+      this.apollo
+        .query<any>({
+          query: clientTokenQuery,
+        })
+        .pipe(
+          pluck('data', 'clientToken'),
+          tap((token) => (this.token = token))
+        )
+        .subscribe(),
     ];
+  }
+
+  ngOnInit(): void {}
+
+  openLeaseRequest(cardNonce: string) {
+    this.leasingService
+      .openLeaseRequest(
+        this.product,
+        this.calculateTotalPrice(),
+        cardNonce,
+        new Date().getTime()
+      )
+      .subscribe((leasing) => {
+        console.log(leasing.id);
+      });
+  }
+
+  calculateTotalPrice(): number {
+    // TODO: calculate amount of date using the endDate
+    let amountOfDays = 1;
+
+    let priceWithoutFee = amountOfDays * this.product.requestedPrice;
+    let priceWithFee = priceWithoutFee * 1.1;
+
+    return priceWithFee;
   }
 
   ngOnDestroy(): void {
