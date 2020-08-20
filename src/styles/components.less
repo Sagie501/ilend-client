@@ -1,15 +1,16 @@
 .overlay {
   padding: 1.5rem;
   border-radius: 2rem;
-  background-color: @text-color;
+  background-color: var(--text-color);
   box-shadow: 0px 0px 10px rgba(#000, 0.2);
   overflow-y: auto;
 }
 
 .filter {
   border-radius: 2rem;
-  border: 2px solid @secondary-color;
-  background-color: @text-color;
+  border: 2px solid var(--secondary-color);
+  background-color: var(--text-color);
+  color: var(--dark-text-color);
   transition: all 0.2s;
 
   cursor: pointer;
@@ -29,14 +30,14 @@
   }
 
   &:hover > .arrow {
-    fill: darken(@secondary-color, 20%);
+    // fill: darken(@secondary-color, 20%);
   }
 }
 
 .headline {
   font-weight: 300;
   font-size: 2.4rem;
-  color: @primary-color;
+  color: var(--primary-color);
 }
 
 .sub-headline {
@@ -51,7 +52,7 @@
   border-collapse: separate;
   border-spacing: 0 0;
   border-color: darken(@text-color, 10%);
-  color: darken(@text-color, 50%);
+  color: var(--dark-text-color);
 
   &__header > th {
     text-align: left;
@@ -74,7 +75,7 @@
 }
 
 .mat-table {
-  background-color: @text-color;
+  background-color: var(--text-color);
 }
 
 .ellipsis {
@@ -104,7 +105,7 @@
 }
 
 .link {
-  color: @secondary-color;
+  color: var(--link-color);
   border-bottom: 1px solid transparent;
   padding-bottom: 0.2rem;
   cursor: pointer;
@@ -132,8 +133,8 @@ input[type="tel"],
 input[type="text"] {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid @text-color;
-  color: @text-color;
+  border-bottom: 1px solid var(--text-color);
+  color: var(--text-color);
   outline: none;
   padding: 1rem;
   font-size: 1.8rem;
@@ -167,4 +168,64 @@ td.mat-cell {
   padding-right: 0.5rem !important;
   padding-left: 0.5rem !important;
   font-size: 1.5rem;
+}
+
+.highcharts-point,
+.highcharts-point-hover,
+.highcharts-axis-line,
+.highcharts-grid-line {
+  stroke: var(--diagram-stroke-color) !important;
+}
+
+.highcharts-title {
+  color: var(--dark-text-color) !important;
+  fill: var(--dark-text-color) !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label,
+.mat-form-field-label,
+.mat-header-cell,
+.mat-cell,
+.mat-footer-cell,
+.mat-tab-label-content {
+  color: var(--dark-text-color) !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline,
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: var(--dark-text-color) !important;
+}
+
+.mat-ink-bar {
+  background-color: var(--secondary-color) !important;
+}
+
+.highcharts-minor-grid-line {
+  stroke-width: 0;
+}
+
+/* REMOVE GOOGLE AUTOCOMPLETE BACKGROUND */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: unset;
+  -webkit-text-fill-color: var(--dark-text-color);
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+textarea {
+  height: 2.5rem !important;
+  color: var(--dark-text-color);
+}
+
+rect.highcharts-point {
+  stroke: unset !important;
 }

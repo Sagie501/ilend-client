@@ -46,7 +46,11 @@
 /* 10TH */
 @primary-color: darken(#0b6e4f, 3%);
 @secondary-color: lighten(#190e4f, 5%);
-@tertiary-color: darken(#03012c, 2%);
+@tertiary-color: lighten(#03012c, 2%);
+
+@primary-color-dark: darken(#0b6e4f, 0%);
+@secondary-color-dark: lighten(#190e4f, 0%);
+@tertiary-color-dark: lighten(#03012c, 10%);
 
 @approve-color: darken(#1ee8b0, 10%);
 @hover-color: #fc5185;
@@ -58,3 +62,11 @@
 @offer-color: #0084ff;
 @price-color: #733ec5;
 @currency-color: #a35ad0;
+
+@text-color-dark: #3b4252;
+@dark-text-color-dark: #f5f5f5;
+
+@colors-set: {
+    --text-color: (@text-color, @text-color-dark),
+    --dark-text-color: (@text-color-dark, @dark-text-color-dark)
+};

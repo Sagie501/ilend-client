@@ -3,11 +3,22 @@
 .login-container {
   width: 100%;
   height: 100%;
-  background-color: @text-color;
+  background-color: var(--text-color);
+  color: var(--dark-text-color);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 3rem;
+  font-size: 2rem;
+
+  transition: all 0.2s;
+
+  .welcome {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+  }
 
   .login-form {
     display: flex;
@@ -21,7 +32,7 @@
 
     .sign-up-tip {
       padding: 0.7em;
-      font-size: 1.2rem;
+      font-size: 1.8rem;
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="sign-up-container">
-  <span style="width: fit-content;">Welcome to ILend!</span>
+  <span class="welcome">Welcome to ILend!</span>
   <form [formGroup]="signUpForm" class="sign-up-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>First Name</mat-label>
@@ -245,11 +245,13 @@
     </mat-form-field>
 
     <div class="login-tip">
-      Already have a user? <a routerLink="/home/login">Login</a> now!
+      Already have a user?
+      <a class="link" routerLink="/home/login">Login</a> now!
     </div>
 
     <ile-button
       [text]="'Sign Up'"
+      [isLarge]="true"
       [type]="'submit'"
       [disabled]="signUpForm.invalid"
       matTooltip="{{

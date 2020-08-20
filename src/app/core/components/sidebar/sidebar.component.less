@@ -2,7 +2,6 @@
 
 .welcome {
   height: @header-height;
-  background-color: @secondary-color;
   font-size: 1.5rem;
   font-weight: 600;
   color: darken(#fff, 8%);
@@ -23,9 +22,9 @@
     width: fit-content;
     margin-top: 0.3rem;
     font-size: 1.2rem;
-    color: @text-color;
+    color: var(--light-text-color);
     padding-bottom: 0.1rem;
-    border-bottom: 1px solid @text-color;
+    border-bottom: 1px solid var(--light-text-color);
 
     &:hover {
       color: darken(@text-color, 7%);
@@ -33,11 +32,14 @@
     }
   }
 }
+.sidebar-container {
+  background-color: var(--secondary-color);
+  transition: all 0.2s ease-in-out;
+}
 
 .sidebar {
   width: 100%;
   height: calc(100vh - 2 * @header-height);
-  background-color: @secondary-color;
   display: flex;
   flex-direction: column;
 
@@ -56,7 +58,7 @@
   .sidebar-link {
     display: flex;
     align-items: center;
-    color: @text-color;
+    color: var(--text-color);
     text-decoration: none;
     height: @sidebar-link-height;
     padding-left: 2rem;

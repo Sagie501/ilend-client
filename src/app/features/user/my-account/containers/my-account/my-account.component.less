@@ -2,13 +2,15 @@
 
 .line {
   flex: 1;
-  border-top-width: 0.2rem;
+  border-top-width: 0.1rem;
   border-top-style: solid;
-  color: rgba(68, 34, 68, 0.34);
+  color: var(--dark-text-color);
 }
 
 .my-account {
-  background-color: @text-color;
+  background-color: var(--text-color);
+  color: var(--dark-text-color);
+  transition: all 0.2s;
   height: 100%;
 }
 
@@ -27,7 +29,6 @@
 .header {
   position: absolute;
   margin-top: 2rem;
-  color: gray;
 }
 
 .user-details {
