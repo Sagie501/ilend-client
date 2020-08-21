@@ -90,13 +90,16 @@ export class ProductsService {
     categoryId: string,
     product
   ): Observable<Product> {
-    product.ownerId = ownerId;
-    product.categoryId = categoryId;
+    let newProduct = {
+      ...product,
+      ownerId,
+      categoryId,
+    };
     return this.apollo
       .mutate<any>({
         mutation: addProductMutation,
         variables: {
-          product,
+          product: newProduct,
         },
       })
       .pipe(
