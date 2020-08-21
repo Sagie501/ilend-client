@@ -1,4 +1,12 @@
-<div class="product-card">
+<div class="not-exists" *ngIf="noProduct">
+  <div class="headline">Oops...</div>
+  <div class="sub-headline">
+    We're very sorry but the product is not found.<br />
+    It maybe removed or you may hit a wrong URL, you can go back to the home
+    page <a class="link" routerLink="/home" routerLinkActive="active">here</a>.
+  </div>
+</div>
+<div class="product-card" *ngIf="product && !noProduct">
   <ile-product-view [product]="product" [width]="'75rem'"></ile-product-view>
   <!-- <span style="margin-bottom: 1rem;"
     >The price that suggested by our algorithm is: {{ suggestedPrice }}</span

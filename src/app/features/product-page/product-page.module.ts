@@ -7,8 +7,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ProductPageComponent],
@@ -19,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
-  ]
+    FormsModule,
+    RouterModule,
+  ],
 })
-export class ProductPageModule { }
+export class ProductPageModule {}

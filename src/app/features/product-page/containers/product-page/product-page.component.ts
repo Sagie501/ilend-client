@@ -36,6 +36,12 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   suggestedPrice: number;
   subscriptions: Array<Subscription>;
 
+  /**
+   * Indicates a state where the product is not available.
+   * Maybe it was deleted or the user typed bad id in the URL.
+   */
+  noProduct: boolean;
+
   productIdLoaded: Subject<string> = new Subject<string>();
 
   constructor(
@@ -60,7 +66,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
           )
         )
         .subscribe((product: Product) => {
-          if (!this.product || this.isChanged(product)) {
+          if (!product) {
+            this.noProduct = true;
+          } else if (!this.product || this.isChanged(product)) {
             this.product = product;
             this.checkIfProductInWishlist();
             this.checkIfLoggedInUserProduct();
