@@ -57,6 +57,7 @@ export class ProductsService {
         variables: {
           productId: id,
         },
+        fetchPolicy: 'network-only',
       })
       .pipe<Product>(
         map(({ data }) => {
@@ -110,13 +111,13 @@ export class ProductsService {
     categoryId: string,
     product
   ): Observable<Product> {
-    product.categoryId = categoryId;
+    let newProduct = { ...product, categoryId: categoryId };
     return this.apollo
       .mutate<any>({
         mutation: updateProductMutation,
         variables: {
           productId,
-          product,
+          product: newProduct,
         },
       })
       .pipe(
