@@ -51,7 +51,7 @@ export class LeasingService implements OnDestroy {
         variables: {
           lesseeId,
         },
-        pollInterval: 2000,
+        pollInterval: 10000,
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
@@ -65,7 +65,7 @@ export class LeasingService implements OnDestroy {
       .watchQuery<any>({
         query: getAllOnGoingRequests,
         variables: { lessorId },
-        pollInterval: 2000,
+        pollInterval: 10000,
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
@@ -79,7 +79,7 @@ export class LeasingService implements OnDestroy {
       .watchQuery<any>({
         query: getAllOpenedRequests,
         variables: { lessorId },
-        pollInterval: 2000,
+        pollInterval: 10000,
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
@@ -93,7 +93,7 @@ export class LeasingService implements OnDestroy {
       .watchQuery<any>({
         query: getAllOnGoingDeliveriesRequests,
         variables: { lesseeId },
-        pollInterval: 2000,
+        pollInterval: 10000,
       })
       .valueChanges.pipe(
         map(({ data, errors }) => {
