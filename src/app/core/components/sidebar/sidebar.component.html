@@ -55,15 +55,22 @@
         ><span>Leasing History</span></a
       >
       <a
+        matTooltip="{{
+          'You have ' + onGoingDeliveriesRequestAmount + ' ongoing deliveries.'
+        }}"
+        [matTooltipPosition]="'right'"
         class="sidebar-link"
         [ngClass]="{
           'sidebar-link__active': isActiveRoute('/user/ongoing-deliveries')
         }"
-        routerLink="/home"
+        routerLink="/user/ongoing-deliveries"
         *ngIf="loggedInUser"
         ><svg class="sidebar-link__icon train">
           <use xlink:href="assets/linearicons.svg#lnr-train"></use></svg
-        ><span>Ongoing Deliveries</span></a
+        ><span
+          >Ongoing Deliveries
+          <strong>({{ onGoingDeliveriesRequestAmount }})</strong></span
+        ></a
       >
       <a
         class="sidebar-link"

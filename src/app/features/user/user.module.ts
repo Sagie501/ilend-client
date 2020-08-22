@@ -9,6 +9,7 @@ import { WishlistModule } from './wishlist/wishlist.module';
 import { MyAccountModule } from './my-account/my-account.module';
 import { MyProductsModule } from './my-products/my-products.module';
 import { OngoingLeasingsModule } from './ongoing-leasings/ongoing-leasings.module';
+import { OngoingDeliveriesModule } from './ongoing-deliveries/ongoing-deliveries.module';
 import { OpenRequestsModule } from './open-requests/open-requests.module';
 
 @NgModule({
@@ -19,10 +20,11 @@ import { OpenRequestsModule } from './open-requests/open-requests.module';
     CommonModule,
     LeasingHistoryModule,
     OngoingLeasingsModule,
+    OngoingDeliveriesModule,
     OpenRequestsModule,
     WishlistModule,
     MyAccountModule,
-    MyProductsModule,
+    MyProductsModule
   ],
 })
 export class UserModule {}

@@ -2,6 +2,7 @@
 
 .open-requests {
   background-color: var(--text-color);
+  transition: all 0.2s;
 
   overflow-y: auto;
 
@@ -18,8 +19,9 @@
 
     &__container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(49rem, 1fr));
+      grid-template-columns: repeat(auto-fit, 49rem);
       place-content: center;
+      place-items: center;
       padding-bottom: 2rem;
 
       & > ile-lease-product-display {
