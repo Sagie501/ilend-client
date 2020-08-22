@@ -7,7 +7,7 @@ import {
 } from 'src/app/features/user/reducer/user.reducer';
 import { Leasing } from 'src/app/core/models/leasing.model';
 import { User } from 'src/app/core/models/user.model';
-import { LeasingStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
+import { LeasingStatusFromServer, DeliveryStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
 import { Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { getGreetingSentence } from '../../../../../shared/helpers/greeting-sentence.helper';
@@ -53,9 +53,15 @@ export class OpenRequestsComponent implements OnInit {
   changeLeasingRequestStatus(value: {
     leasingId: string;
     status: LeasingStatusFromServer;
+    deliveryStatus: DeliveryStatusFromServer;
   }) {
+    let deliveryStatus = value.status === LeasingStatusFromServer.IN_DELIVERY ? this.getRandomDeliveryStatus : DeliveryStatusFromServer[1];
     this.leasingService
-      .setLeaseRequestStatus(value.leasingId, value.status)
+      .setLeaseRequestStatus(value.leasingId, value.status, deliveryStatus)
       .subscribe();
   }
+
+  getRandomDeliveryStatus(){
+    return DeliveryStatusFromServer[Math.floor(Math.random()*(3-0+1)+0)];
+}
 }

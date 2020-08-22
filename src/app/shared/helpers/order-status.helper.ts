@@ -9,6 +9,16 @@ export enum LeasingStatusFromServer {
   RETURNED = 'RETURNED',
 }
 
+export enum DeliveryStatusFromServer {
+  WAITING_FOR_APPROVE = 'WAITING_FOR_APPROVE',
+  UNKNOWN = 'UNKNOWN',
+  CANCELED = 'CANCELED',
+  DONE = 'DONE',
+  IN_TRANSIT = 'IN_TRANSIT',
+  ARRIVED_IN_LOCAL_WAREHOUSE = 'ARRIVED_IN_LOCAL_WAREHOUSE',
+  DISPATCHING_FROM_LOCAL_WAREHOUSE = 'DISPATCHING_FROM_LOCAL_WAREHOUSE'
+}
+
 export enum LeasingStatusClient {
   WAITING_FOR_APPROVE = 'Waiting for Approve',
   DENIED = 'Denied',

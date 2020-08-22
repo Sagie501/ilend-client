@@ -13,7 +13,7 @@ import {
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 import { ProductsService } from '../products/products.service';
-import { LeasingStatusFromServer } from '../../../shared/helpers/order-status.helper';
+import { LeasingStatusFromServer, DeliveryStatusFromServer } from '../../../shared/helpers/order-status.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -98,7 +98,8 @@ export class LeasingService {
 
   setLeaseRequestStatus(
     leasingId: string,
-    status: LeasingStatusFromServer
+    status: LeasingStatusFromServer,
+    deliveryStatus: DeliveryStatusFromServer
   ): Observable<Leasing> {
     return this.apollo
       .mutate<any>({
@@ -106,6 +107,7 @@ export class LeasingService {
         variables: {
           leasingId,
           status,
+          deliveryStatus
         },
       })
       .pipe(
