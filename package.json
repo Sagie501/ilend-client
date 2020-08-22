@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve -o",
     "build": "ng build --prod --base-href=/ilend-client/",
-    "deploy:build": "ng build --prod --bash-href=/",
+    "deploy:build": "ng build --prod --base-href=/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
