@@ -4,7 +4,6 @@ import { Apollo } from 'apollo-angular';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getLoggedInUser } from 'src/app/features/user/reducer/user.reducer';
-import { LeasingStatusFromServer } from '../../../shared/helpers/order-status.helper';
 import {
   getAllLeasesByLesseeId,
   getAllOnGoingRequests,
@@ -18,6 +17,7 @@ import { Leasing, LeasingInput } from '../../models/leasing.model';
 import { Product } from '../../models/product.model';
 import { User } from '../../models/user.model';
 import { ProductsService } from '../products/products.service';
+import { LeasingStatusFromServer, DeliveryStatusFromServer } from '../../../shared/helpers/order-status.helper';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -119,7 +119,8 @@ export class LeasingService implements OnDestroy {
 
   setLeaseRequestStatus(
     leasingId: string,
-    status: LeasingStatusFromServer
+    status: LeasingStatusFromServer,
+    deliveryStatus: DeliveryStatusFromServer
   ): Observable<Leasing> {
     return this.apollo
       .mutate<any>({
@@ -127,6 +128,7 @@ export class LeasingService implements OnDestroy {
         variables: {
           leasingId,
           status,
+          deliveryStatus
         },
       })
       .pipe(
