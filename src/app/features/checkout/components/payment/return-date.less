@@ -1,0 +1,30 @@
+@import "../../../../../styles/styles.less";
+
+.payment {
+  display: grid;
+  padding: 6rem 0;
+  grid-template-rows: 4rem 4rem 8rem auto 8rem;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+
+  .date-range,
+  .return-date {
+    width: 25rem;
+    margin-top: 3rem;
+  }
+
+  .result {
+    height: 10rem;
+    display: flex;
+    width: 40rem;
+    text-align: center;
+    align-items: center;
+
+    &__error {
+      font-weight: 600;
+      font-size-adjust: 1.5rem;
+    }
+  }
+}

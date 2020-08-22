@@ -17,7 +17,7 @@ export class LeasingsTableComponent implements OnInit {
   public currentLeasingOpenStatusNumber = 2;
 
   public steps = [
-    { label: 'In transit', iconClass: 'ile-icon fa fa-boxes', disabled: true },
+    { label: 'In transit', iconClass: 'ile-icon fa fa-truck', disabled: true },
     {
       label: 'Local warehouse',
       iconClass: 'ile-icon fa fa-warehouse',
