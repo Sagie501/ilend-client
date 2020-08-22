@@ -7,7 +7,7 @@ import { getLoggedInUser, UserState } from '../../../reducer/user.reducer';
 import { Store } from '@ngrx/store';
 import { of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { LeasingStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
+import { LeasingStatusFromServer, DeliveryStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
 
 @Component({
   selector: 'ile-leasing-history',
@@ -24,7 +24,8 @@ export class LeasingHistoryComponent implements OnInit, OnDestroy {
   constructor(
     private leasingService: LeasingService,
     private userStore: Store<UserState>
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.subscriptions = [
@@ -57,10 +58,16 @@ export class LeasingHistoryComponent implements OnInit, OnDestroy {
   changeLeasingRequestStatus(value: {
     leasingId: string;
     status: LeasingStatusFromServer;
+    deliveryStatus: string
   }) {
+    let deliveryStatus = value.status === LeasingStatusFromServer.IN_DELIVERY ? this.getRandomDeliveryStatus() : DeliveryStatusFromServer.CANCELED;
     this.leasingService
-      .setLeaseRequestStatus(value.leasingId, value.status)
+      .setLeaseRequestStatus(value.leasingId, value.status, deliveryStatus)
       .subscribe();
+  }
+
+  getRandomDeliveryStatus() {
+    return Object.values(DeliveryStatusFromServer)[Math.floor(Math.random() * 4)];
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Leasing } from 'src/app/core/models/leasing.model';
 import { User } from 'src/app/core/models/user.model';
-import { LeasingStatusFromServer } from '../../helpers/order-status.helper';
+import { LeasingStatusFromServer, DeliveryStatusFromServer } from '../../helpers/order-status.helper';
 
 @Component({
   selector: 'ile-lease-product-display',
@@ -24,6 +24,7 @@ export class LeaseProductDisplayComponent implements OnInit {
     this.changeLeasingRequestStatus.emit({
       leasingId: this.leasing.id,
       status: LeasingStatusFromServer.DENIED,
+      deliveryStatus: DeliveryStatusFromServer.CANCELED
     });
   }
 
@@ -31,6 +32,7 @@ export class LeaseProductDisplayComponent implements OnInit {
     this.changeLeasingRequestStatus.emit({
       leasingId: this.leasing.id,
       status: LeasingStatusFromServer.IN_DELIVERY,
+      deliveryStatus: DeliveryStatusFromServer.IN_TRANSIT
     });
   }
 }
