@@ -1,7 +1,8 @@
 @import "../../../../../../styles/styles.less";
 
 .open-requests {
-  background-color: @text-color;
+  background-color: var(--text-color);
+  transition: all 0.2s;
 
   overflow-y: auto;
 
@@ -14,15 +15,13 @@
   }
 
   .requests {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     height: calc(100vh - 7rem - 9.5rem);
 
     &__container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(49rem, 1fr));
+      grid-template-columns: repeat(auto-fit, 49rem);
       place-content: center;
+      place-items: center;
       padding-bottom: 2rem;
 
       & > ile-lease-product-display {

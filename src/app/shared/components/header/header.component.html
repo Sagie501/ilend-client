@@ -2,4 +2,16 @@
   <a class="ilend" routerLink="/home"
     >ILend <span class="ilend__sub">- Pay Less, Earn More</span></a
   >
+  <div class="theme-switch-wrapper">
+    <label for="theme" class="theme-switch">
+      <input
+        type="checkbox"
+        id="theme"
+        [checked]="(theme$ | async) === themes.DARK"
+        (change)="toggleTheme()"
+      />
+      <div class="slider round"></div>
+    </label>
+    <em>Change theme!</em>
+  </div>
 </div>

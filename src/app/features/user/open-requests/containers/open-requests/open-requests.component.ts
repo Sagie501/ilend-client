@@ -46,7 +46,27 @@ export class OpenRequestsComponent implements OnInit {
           })
         )
         .subscribe((leasings) => {
-          this.leasings = leasings;
+          this.leasings = [
+            ...leasings,
+            ...leasings,
+            ...leasings,
+            ...leasings,
+            ...leasings,
+
+            ...leasings,
+
+            ...leasings,
+
+            ...leasings,
+
+            ...leasings,
+
+            ...leasings,
+
+            ...leasings,
+
+            ...leasings,
+          ];
         }),
     ];
   }

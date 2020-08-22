@@ -1,7 +1,8 @@
 @import "../../../../../styles/styles.less";
 
 .sign-up-container {
-  background-color: @text-color;
+  background-color: var(--text-color);
+  color: var(--dark-text-color);
   width: 100%;
   height: calc(100vh - 7rem);
   display: flex;
@@ -9,6 +10,12 @@
   align-items: center;
   padding: 3rem;
   overflow-y: auto;
+
+  .welcome {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+  }
 
   .sign-up-form {
     display: flex;
@@ -23,7 +30,7 @@
 
     .login-tip {
       padding: 0.7em;
-      font-size: 1.2rem;
+      font-size: 1.8rem;
     }
 
     ile-button {

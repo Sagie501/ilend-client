@@ -37,10 +37,40 @@ body {
 }
 
 ::selection {
-  background-color: @primary-color;
-  color: @text-color;
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
 }
 
 .ng-image-slider .ng-image-slider-container .main .main-inner .img-div {
   box-shadow: none !important;
+}
+
+.theme-light {
+  --text-color: @text-color;
+  --light-text-color: @text-color;
+  --dark-text-color: @dark-text-color;
+  --primary-color: @primary-color;
+  --secondary-color: @secondary-color;
+  --tertiary-color: @tertiary-color;
+  --headline-color: @text-color;
+  --currency-color: @currency-color;
+  --price-color: @price-color;
+  --diagram-stroke-color: darken(@text-color, 10%);
+  --link-color: darken(@approve-color, 5%);
+  --lease-product-display: darken(@text-color, 2%);
+}
+
+.theme-dark {
+  --text-color: @text-color-dark;
+  --light-text-color: @dark-text-color-dark;
+  --dark-text-color: @dark-text-color-dark;
+  --primary-color: @primary-color-dark;
+  --secondary-color: @secondary-color-dark;
+  --tertiary-color: @tertiary-color-dark;
+  --headline-color: @dark-text-color-dark;
+  --currency-color: @price-color;
+  --price-color: @currency-color;
+  --diagram-stroke-color: lighten(@text-color-dark, 10%);
+  --link-color: lighten(@tertiary-color-dark, 10%);
+  --lease-product-display: lighten(@text-color-dark, 2%);
 }

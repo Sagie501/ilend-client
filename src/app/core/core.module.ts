@@ -17,6 +17,8 @@ import { AdminDashboardModule } from '../features/admin-dashboard/admin-dashboar
 import { ProductsListModule } from '../features/products-list/products-list.module';
 import { ProductPageModule } from '../features/product-page/product-page.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { layoutReducer, layoutToken } from './reducers/layout.reducer';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ProductPageModule,
     AdminDashboardModule,
     MatTooltipModule,
+    StoreModule.forFeature(layoutToken, layoutReducer),
   ],
   providers: [],
 })
