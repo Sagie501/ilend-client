@@ -3,13 +3,13 @@
     <div class="headline">Wishlist</div>
     <div class="sub-headline">
       {{ getGreetingSentence() + " " + loggedInUser?.firstName }}!
-      <span *ngIf="wishlist.length > 0">
+      <span *ngIf="wishlist && wishlist.length > 0">
         You have {{ wishlist.length }} products in your wishlist.</span
       >
     </div>
   </div>
   <div class="products">
-    <div class="products-container" *ngIf="wishlist.length > 0">
+    <div class="products-container" *ngIf="wishlist && wishlist.length > 0">
       <ile-product-card
         *ngFor="let product of wishlist"
         [product]="product"
