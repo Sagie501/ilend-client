@@ -55,13 +55,13 @@ export class OpenRequestsComponent implements OnInit {
     status: LeasingStatusFromServer;
     deliveryStatus: DeliveryStatusFromServer;
   }) {
-    let deliveryStatus = value.status === LeasingStatusFromServer.IN_DELIVERY ? this.getRandomDeliveryStatus : DeliveryStatusFromServer[1];
+    let deliveryStatus = value.status === LeasingStatusFromServer.IN_DELIVERY ? this.getRandomDeliveryStatus() : DeliveryStatusFromServer[1];
     this.leasingService
       .setLeaseRequestStatus(value.leasingId, value.status, deliveryStatus)
       .subscribe();
   }
 
-  getRandomDeliveryStatus(){
-    return DeliveryStatusFromServer[Math.floor(Math.random()*(3-0+1)+0)];
-}
+  getRandomDeliveryStatus() {
+    return Object.values(DeliveryStatusFromServer)[Math.floor(Math.random() * (4) + 0)];
+  }
 }
