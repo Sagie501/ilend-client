@@ -34,7 +34,7 @@ export class LessorGuard implements CanActivate {
     | UrlTree {
     return this.userStore.select(getLoggedInUser).pipe(
       switchMap((loggedInUser) => {
-        if (loggedInUser && loggedInUser.isAdmin) {
+        if (loggedInUser) {
           if (LessorGuard.isFirstTime && this.router.url === '/') {
             LessorGuard.isFirstTime = false;
             return this.userStore.select(getUserProducts).pipe(skip(1));
