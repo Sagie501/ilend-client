@@ -132,9 +132,7 @@
 input[type="tel"],
 input[type="text"] {
   background-color: transparent;
-  border: none;
-  border-bottom: 1px solid var(--text-color);
-  color: var(--text-color);
+  color: var(--always-dark-text-color);
   outline: none;
   padding: 1rem;
   font-size: 1.8rem;
@@ -147,6 +145,10 @@ input[type="text"] {
     letter-spacing: 0.1rem;
     color: darken(@text-color, 20%);
   }
+}
+
+.mat-input-element {
+  color: var(--dark-text-color);
 }
 
 img.image {
@@ -180,6 +182,7 @@ td.mat-cell {
   stroke: var(--diagram-stroke-color) !important;
 }
 
+.mat-datepicker-toggle-default-icon,
 .highcharts-title {
   color: var(--dark-text-color) !important;
   fill: var(--dark-text-color) !important;
