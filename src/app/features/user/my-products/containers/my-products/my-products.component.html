@@ -12,6 +12,13 @@
           <br />
           Start lease your own products now!
         </span>
+        <span>
+          By now you've earned: &nbsp;
+          <ile-price
+            [price]="totalEarnings$ | async"
+            [isTotalAmount]="true"
+          ></ile-price>
+        </span>
       </div>
       <ile-button
         [text]="'Add new product'"
