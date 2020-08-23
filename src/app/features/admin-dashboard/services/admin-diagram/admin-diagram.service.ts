@@ -80,7 +80,7 @@ export class AdminDiagramService {
 
     leasings.forEach((leasing) => {
       summarizedArray[leasing.creationDate.getDate().toString()] += Math.floor(
-        leasing.total_price
+        leasing.total_price / 1.1 / 10
       );
     });
 
