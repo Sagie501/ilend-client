@@ -1,15 +1,25 @@
 <div class="checkout">
   <ile-header></ile-header>
 
+  <div class="not-exists" *ngIf="noProduct">
+    <div class="headline">Oops...</div>
+    <div class="sub-headline">
+      We're very sorry but the product is not found.<br />
+      It maybe removed or you may hit a wrong URL, you can go back to the home
+      page
+      <a class="link" routerLink="/home" routerLinkActive="active">here</a>.
+    </div>
+  </div>
+
   <ile-payment
-    *ngIf="token"
+    *ngIf="token && !noProduct"
     [token]="token"
     [result]="checkoutResult"
     (onCheckoutCompleted)="openLeaseRequest($event)"
     (returnDateChanged)="returnDateUpdated($event)"
   ></ile-payment>
 
-  <div class="product-view">
+  <div class="product-view" *ngIf="!noProduct">
     <ile-product-view
       [hidden]="!product"
       [product]="product"
