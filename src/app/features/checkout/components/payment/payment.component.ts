@@ -7,6 +7,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ile-payment',
@@ -57,7 +58,8 @@ export class PaymentComponent implements OnInit {
     const today = new Date();
 
     return (
-      day.getDate() >= today.getDate() && day.getMonth() >= today.getMonth()
+      moment(day).startOf('day').toDate().getTime() >=
+      moment().startOf('day').toDate().getTime()
     );
   }
 
@@ -202,10 +204,10 @@ export class PaymentComponent implements OnInit {
                 cardholderName: this.cardholderName,
               },
               function (err, payload) {
-                // if (err) {
-                //   console.error(err);
-                //   return;
-                // }
+                if (err) {
+                  console.error(err);
+                  return;
+                }
 
                 this.onCheckoutCompleted.emit({
                   cardNonce: payload.nonce,
