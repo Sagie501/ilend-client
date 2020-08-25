@@ -8,8 +8,8 @@ import {
 import { Leasing } from 'src/app/core/models/leasing.model';
 import { User } from 'src/app/core/models/user.model';
 import {
-  LeasingStatusFromServer,
   DeliveryStatusFromServer,
+  LeasingStatusFromServer,
 } from '../../../../../shared/helpers/order-status.helper';
 import { Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';

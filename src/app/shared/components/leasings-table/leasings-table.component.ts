@@ -47,13 +47,11 @@ export class LeasingsTableComponent implements OnInit {
       this.currentLeasingOpenStatusNumber =
         deliveryStatus === 'IN_TRANSIT'
           ? 0
-          : 'ARRIVED_IN_LOCAL_WAREHOUSE'
+          : deliveryStatus === 'ARRIVED_IN_LOCAL_WAREHOUSE'
           ? 1
           : deliveryStatus === 'DISPATCHING_FROM_LOCAL_WAREHOUSE'
           ? 2
           : 3;
-
-      this.currentLeasingOpenStatusNumber = Math.floor(Math.random() * 4);
     }
   }
 }

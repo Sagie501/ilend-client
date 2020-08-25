@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
 import { switchMap, pluck, tap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/core/services/products/products.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject, timer } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { clientTokenQuery } from '../../../../core/graphql/checkout.graphql';
 import { Leasing } from 'src/app/core/models/leasing.model';
@@ -22,6 +22,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   checkoutResult: { success: boolean; message?: string; leasingID?: string };
   returnDate: Date;
 
+  productIdLoaded: Subject<string> = new Subject<string>();
+
+  /**
+   * Indicates a state where the product is not available.
+   * Maybe it was deleted or the user typed bad id in the URL.
+   */
+  noProduct: boolean;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private productsService: ProductsService,
@@ -29,10 +37,27 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private apollo: Apollo
   ) {
     this.subscriptions = [
+      this.productIdLoaded
+        .pipe(
+          switchMap((id) =>
+            timer(0, 10000).pipe(
+              switchMap(() => {
+                return this.productsService.getProductById(id);
+              })
+            )
+          )
+        )
+        .subscribe((product: Product) => {
+          if (!product) {
+            this.noProduct = true;
+          } else if (!this.product || this.isChanged(product)) {
+            this.product = product;
+          }
+        }),
       this.activatedRoute.params
         .pipe(
-          switchMap((params: Params) => {
-            return this.productsService.getProductById(params.id);
+          tap((params: Params) => {
+            this.productIdLoaded.next(params.id);
           })
         )
         .subscribe((product: Product) => {
@@ -51,6 +76,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {}
+
+  isChanged(newProduct: Product) {
+    return (
+      newProduct.name !== this.product.name ||
+      newProduct.description !== this.product.description ||
+      newProduct.requestedPrice !== this.product.requestedPrice
+    );
+  }
 
   openLeaseRequest(payload: { cardNonce: string; returnDate: Date }) {
     this.leasingService

@@ -1,24 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.helper';
 import { User } from '../../../../../core/models/user.model';
-import { getLoggedInUser, getUserProducts, UserState } from '../../../reducer/user.reducer';
+import {
+  getLoggedInUser,
+  getUserProducts,
+  UserState,
+} from '../../../reducer/user.reducer';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Product } from '../../../../../core/models/product.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../../components/product-dialog/product-dialog.component';
-import { addNewProduct, deleteProduct, updateProduct } from '../../../actions/user.actoins';
+import {
+  addNewProduct,
+  deleteProduct,
+  updateProduct,
+} from '../../../actions/user.actoins';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileInput } from 'ngx-material-file-input';
 import { ConfirmationDialogComponent } from '../../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'ile-my-products',
   templateUrl: './my-products.component.html',
-  styleUrls: ['./my-products.component.less']
+  styleUrls: ['./my-products.component.less'],
 })
 export class MyProductsComponent implements OnInit, OnDestroy {
-
   loggedInUser: User;
   userProducts: Array<Product>;
   getGreetingSentence = getGreetingSentence;
@@ -26,8 +35,24 @@ export class MyProductsComponent implements OnInit, OnDestroy {
   productDialogRef: MatDialogRef<ProductDialogComponent>;
   deleteProductDialogRef: MatDialogRef<ConfirmationDialogComponent>;
 
-  constructor(private userStore: Store<UserState>, private dialog: MatDialog, private snackBar: MatSnackBar) {
-  }
+  constructor(
+    private userStore: Store<UserState>,
+    private leasingsService: LeasingService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
+
+  totalEarnings$: Observable<
+    string
+  > = this.leasingsService.getAllLeasingRequests().pipe(
+    // Mapping the leasings to array of the prices
+    map((leasings) => leasings.map((lease) => lease.total_price)),
+    // Summing all the prices to a one total number
+    map((prices) => prices.reduce((acc, curr) => acc + (curr ? curr : 0))),
+    // The user only see his profits without our fees
+    map((total) => (total / 1.1).toFixed(2)),
+    distinctUntilChanged()
+  );
 
   ngOnInit(): void {
     this.subscriptions = [
@@ -38,38 +63,48 @@ export class MyProductsComponent implements OnInit, OnDestroy {
         this.userProducts = userProducts;
         if (this.loggedInUser) {
           if (this.productDialogRef) {
-            this.snackBar.open(this.productDialogRef.componentInstance.isCreatingMode ? 'Your new product created!' : 'Your product has been updated!', 'OK', {
-              duration: 3000
-            });
+            this.snackBar.open(
+              this.productDialogRef.componentInstance.isCreatingMode
+                ? 'Your new product created!'
+                : 'Your product has been updated!',
+              'OK',
+              {
+                duration: 3000,
+              }
+            );
             this.productDialogRef.close();
             this.productDialogRef = null;
           } else if (this.deleteProductDialogRef) {
             this.snackBar.open('Your product has been deleted!', 'OK', {
-              duration: 3000
+              duration: 3000,
             });
             this.deleteProductDialogRef.close();
             this.deleteProductDialogRef = null;
           }
         }
-      })
+      }),
     ];
   }
 
   openNewProductDialog() {
     this.productDialogRef = this.dialog.open(ProductDialogComponent, {
-      autoFocus: false
+      autoFocus: false,
     });
 
     this.productDialogRef.componentInstance.isCreatingMode = true;
     this.subscriptions.push(
-      this.productDialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
-        let categoryId = newProduct.category.id;
-        delete newProduct.category;
+      this.productDialogRef.componentInstance.saveProductEvent.subscribe(
+        (newProduct) => {
+          let categoryId = newProduct.category.id;
+          delete newProduct.category;
 
-        this.prepareProductToSave(newProduct).then((newProduct) => {
-          this.userStore.dispatch(addNewProduct({ categoryId, product: newProduct }));
-        });
-      })
+          this.prepareProductToSave(newProduct).then((newProduct) => {
+            this.userStore.dispatch(
+              addNewProduct({ categoryId, product: newProduct })
+            );
+          });
+        }
+      )
     );
   }
 
@@ -83,20 +118,29 @@ export class MyProductsComponent implements OnInit, OnDestroy {
         description: product.description,
         requestedPrice: product.requestedPrice,
         category: product.category,
-        imageFiles: new FileInput(await this.getBlobFilesForImagesProducts(product.pictureLinks, product.name))
-      }
+        imageFiles: new FileInput(
+          await this.getBlobFilesForImagesProducts(
+            product.pictureLinks,
+            product.name
+          )
+        ),
+      },
     });
 
     this.productDialogRef.componentInstance.isCreatingMode = false;
     this.subscriptions.push(
-      this.productDialogRef.componentInstance.saveProductEvent.subscribe((newProduct) => {
-        let categoryId = newProduct.category.id;
-        delete newProduct.category;
+      this.productDialogRef.componentInstance.saveProductEvent.subscribe(
+        (newProduct) => {
+          let categoryId = newProduct.category.id;
+          delete newProduct.category;
 
-        this.prepareProductToSave(newProduct).then((newProduct) => {
-          this.userStore.dispatch(updateProduct({ productId, categoryId, product: newProduct }));
-        });
-      })
+          this.prepareProductToSave(newProduct).then((newProduct) => {
+            this.userStore.dispatch(
+              updateProduct({ productId, categoryId, product: newProduct })
+            );
+          });
+        }
+      )
     );
   }
 
@@ -124,17 +168,53 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     this.deleteProductDialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     this.deleteProductDialogRef.componentInstance.title = 'Delete product';
-    this.deleteProductDialogRef.componentInstance.content = 'Are you sure that you want to delete this product?';
+    this.deleteProductDialogRef.componentInstance.content =
+      'Are you sure that you want to delete this product?';
     this.subscriptions.push(
-      this.deleteProductDialogRef.componentInstance.approveClicked.subscribe(() => {
-        this.userStore.dispatch(deleteProduct({ productId }));
-      })
+      this.deleteProductDialogRef.componentInstance.approveClicked.subscribe(
+        () => {
+          this.userStore.dispatch(deleteProduct({ productId }));
+        }
+      )
     );
   }
 
-  getBlobFilesForImagesProducts(imagesURLS: Array<string>, productName: string): Promise<Array<File>> {
-    let special = ['zeroth', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth'];
-    let deca = ['twent', 'thirt', 'fort', 'fift', 'sixt', 'sevent', 'eight', 'ninet'];
+  getBlobFilesForImagesProducts(
+    imagesURLS: Array<string>,
+    productName: string
+  ): Promise<Array<File>> {
+    let special = [
+      'zeroth',
+      'first',
+      'second',
+      'third',
+      'fourth',
+      'fifth',
+      'sixth',
+      'seventh',
+      'eighth',
+      'ninth',
+      'tenth',
+      'eleventh',
+      'twelfth',
+      'thirteenth',
+      'fourteenth',
+      'fifteenth',
+      'sixteenth',
+      'seventeenth',
+      'eighteenth',
+      'nineteenth',
+    ];
+    let deca = [
+      'twent',
+      'thirt',
+      'fort',
+      'fift',
+      'sixt',
+      'sevent',
+      'eight',
+      'ninet',
+    ];
 
     // TODO: Move it to helper?
     function stringifyNumber(n) {
@@ -156,9 +236,13 @@ export class MyProductsComponent implements OnInit, OnDestroy {
         request.responseType = 'blob';
         request.onload = () => {
           finishedFiles++;
-          files.push(new File([request.response],
-            `${productName} ${stringifyNumber(finishedFiles)} image`,
-            { lastModified: new Date().getTime() }));
+          files.push(
+            new File(
+              [request.response],
+              `${productName} ${stringifyNumber(finishedFiles)} image`,
+              { lastModified: new Date().getTime() }
+            )
+          );
           if (finishedFiles === imagesURLS.length) {
             resolve(files);
           }

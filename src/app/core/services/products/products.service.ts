@@ -33,7 +33,8 @@ export class ProductsService {
     return this.apollo
       .watchQuery<any>({
         query: getProductsQuery,
-        fetchPolicy: 'cache-and-network',
+        pollInterval: 10000,
+        fetchPolicy: 'network-only',
       })
       .valueChanges.pipe<Array<Product>>(
         map(({ data, loading }) => {

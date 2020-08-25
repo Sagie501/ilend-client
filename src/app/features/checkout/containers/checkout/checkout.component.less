@@ -15,6 +15,28 @@
     grid-column: 1 e("/") 3;
   }
 
+  .not-exists {
+    grid-column: 1 e("/") 3;
+    grid-row: 2 e("/") 3;
+    width: 100%;
+    padding: 0 9rem;
+    height: calc(100vh - @header-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .headline {
+      font-size: 8rem;
+      margin-bottom: 2rem;
+    }
+
+    .sub-headline {
+      font-size: 2.7rem;
+    }
+  }
+
   ile-payment {
     grid-column: 2 e("/") 3;
     grid-row: 2 e("/") 3;

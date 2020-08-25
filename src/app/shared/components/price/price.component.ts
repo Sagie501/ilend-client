@@ -9,6 +9,7 @@ export class PriceComponent implements OnInit {
   @Input() price: number;
   @Input() isLarge: boolean = false;
   @Input() isSmall: boolean = false;
+  @Input() isTotalAmount: boolean = false;
 
   constructor() {}
 

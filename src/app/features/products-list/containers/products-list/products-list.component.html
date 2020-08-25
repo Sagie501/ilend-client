@@ -1,3 +1,6 @@
 <div class="products-container">
-  <ile-product-card *ngFor="let product of filteredProducts" [product]="product"></ile-product-card>
+  <ile-product-card
+    *ngFor="let product of filteredProducts$ | async; trackBy: itemTrackBy"
+    [product]="product"
+  ></ile-product-card>
 </div>

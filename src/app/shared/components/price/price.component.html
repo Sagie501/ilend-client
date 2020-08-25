@@ -3,5 +3,5 @@
   ><span class="price" [ngClass]="{ large: isLarge, small: isSmall }">{{
     price
   }}</span
-  ><span class="per-day">/day</span>
+  ><span class="per-day" *ngIf="!isTotalAmount">/day</span>
 </span>

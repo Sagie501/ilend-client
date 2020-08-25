@@ -79,8 +79,9 @@ export class AdminDiagramService {
     let summarizedArray = this.getLastSevenDays();
 
     leasings.forEach((leasing) => {
-      summarizedArray[leasing.creationDate.getDate().toString()] +=
-        leasing.total_price;
+      summarizedArray[leasing.creationDate.getDate().toString()] += Math.floor(
+        leasing.total_price / 1.1 / 10
+      );
     });
 
     return Object.values(summarizedArray);

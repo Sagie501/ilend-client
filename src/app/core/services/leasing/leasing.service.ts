@@ -12,12 +12,16 @@ import {
   openLeaseRequest,
   setLeaseRequestStatusMutation,
   getAllLeasings,
+  getAllLeasingRequests,
 } from '../../graphql/leasing.graphql';
 import { Leasing, LeasingInput } from '../../models/leasing.model';
 import { Product } from '../../models/product.model';
 import { User } from '../../models/user.model';
 import { ProductsService } from '../products/products.service';
-import { LeasingStatusFromServer, DeliveryStatusFromServer } from '../../../shared/helpers/order-status.helper';
+import {
+  LeasingStatusFromServer,
+  DeliveryStatusFromServer,
+} from '../../../shared/helpers/order-status.helper';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -117,6 +121,20 @@ export class LeasingService implements OnDestroy {
       );
   }
 
+  getAllLeasingRequests() {
+    return this.apollo
+      .watchQuery<any>({
+        query: getAllLeasingRequests,
+        variables: { lessorId: this.loggedInUser.id },
+        pollInterval: 10000,
+      })
+      .valueChanges.pipe(
+        map(({ data, errors }) => {
+          return this.mapLeasingsForClient(data.getAllLeasingRequests);
+        })
+      );
+  }
+
   setLeaseRequestStatus(
     leasingId: string,
     status: LeasingStatusFromServer,
@@ -128,7 +146,7 @@ export class LeasingService implements OnDestroy {
         variables: {
           leasingId,
           status,
-          deliveryStatus
+          deliveryStatus,
         },
       })
       .pipe(
