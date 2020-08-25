@@ -67,7 +67,8 @@ export class LeasingHistoryComponent implements OnInit, OnDestroy {
   }
 
   getRandomDeliveryStatus() {
-    return Object.values(DeliveryStatusFromServer)[Math.floor(Math.random() * 4)];
+    let deliveriesStatus = [DeliveryStatusFromServer.IN_TRANSIT, DeliveryStatusFromServer.ARRIVED_IN_LOCAL_WAREHOUSE, DeliveryStatusFromServer.DISPATCHING_FROM_LOCAL_WAREHOUSE];
+    return deliveriesStatus[Math.floor(Math.random() * 3)];
   }
 
   ngOnDestroy(): void {
