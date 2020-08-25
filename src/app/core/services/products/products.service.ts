@@ -34,7 +34,6 @@ export class ProductsService {
       .watchQuery<any>({
         query: getProductsQuery,
         pollInterval: 10000,
-        fetchPolicy: 'network-only',
       })
       .valueChanges.pipe<Array<Product>>(
         map(({ data, loading }) => {
