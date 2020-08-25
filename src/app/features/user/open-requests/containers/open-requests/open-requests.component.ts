@@ -11,7 +11,7 @@ import {
   DeliveryStatusFromServer,
   LeasingStatusFromServer,
 } from '../../../../../shared/helpers/order-status.helper';
-import { of, Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { getGreetingSentence } from '../../../../../shared/helpers/greeting-sentence.helper';
 
