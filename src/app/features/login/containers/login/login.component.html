@@ -2,8 +2,9 @@
   <span class="welcome">Welcome to ILend!</span>
   <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>Email</mat-label>
+      <mat-label class="dark">Email</mat-label>
       <input
+        class="dark"
         matInput
         required
         formControlName="email"
@@ -24,8 +25,9 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Password</mat-label>
+      <mat-label class="dark">Password</mat-label>
       <input
+        class="dark"
         matInput
         required
         formControlName="password"

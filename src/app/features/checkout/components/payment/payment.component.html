@@ -4,8 +4,9 @@
 
   <from class="date-range-form" [formGroup]="paymentForm">
     <mat-form-field class="return-date">
-      <mat-label>Choose the return date</mat-label>
+      <mat-label class="dark">Choose the return date</mat-label>
       <input
+        class="dark"
         matInput
         [matDatepicker]="picker"
         [matDatepickerFilter]="filterPriorDates"
