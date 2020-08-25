@@ -75,7 +75,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
             this.productsService
               .getProductPriceSuggestion(product.id)
               .subscribe((suggestedPrice) => {
-                this.suggestedPrice = suggestedPrice;
+                this.suggestedPrice = parseFloat(
+                  Math.floor(suggestedPrice).toFixed(2)
+                );
               });
           }
         }),
