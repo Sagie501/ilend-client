@@ -8,19 +8,39 @@
       <th>Rating</th>
       <th>Actions</th>
     </tr>
-    <tr *ngFor="let product of products" [routerLink]="['/home/products', product.id]">
+    <tr
+      *ngFor="let product of products"
+      [routerLink]="['/home/products', product.id]"
+    >
       <td class="images-cell">
-        <ile-images-slider [images]="product.pictureLinks" [imageHeight]="146"
-                           [imageWidth]="'20rem'"></ile-images-slider>
+        <ile-images-slider
+          [images]="product.pictureLinks"
+          [imageHeight]="146"
+          [imageWidth]="'20rem'"
+        ></ile-images-slider>
       </td>
       <td>{{ product.name }}</td>
-      <td class="description-cell">{{ product.description }}</td>
+      <td class="description-cell">
+        <div class="description" matTooltip="{{ product.description }}">
+          {{ product.description }}
+        </div>
+      </td>
       <td>{{ product.requestedPrice }}</td>
       <td>{{ product.rating | number: "1.0-2" }}</td>
       <td class="actions-cell">
         <div>
-          <ile-button [text]="'Edit'" (clicked)="$event.stopPropagation(); editProductEvent.emit(product.id)"></ile-button>
-          <ile-button [text]="'Delete'" (clicked)="$event.stopPropagation(); deleteProductEvent.emit(product.id)"></ile-button>
+          <ile-button
+            [text]="'Edit'"
+            (clicked)="
+              $event.stopPropagation(); editProductEvent.emit(product.id)
+            "
+          ></ile-button>
+          <ile-button
+            [text]="'Delete'"
+            (clicked)="
+              $event.stopPropagation(); deleteProductEvent.emit(product.id)
+            "
+          ></ile-button>
         </div>
       </td>
     </tr>

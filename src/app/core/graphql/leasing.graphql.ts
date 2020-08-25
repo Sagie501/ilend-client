@@ -78,8 +78,16 @@ export const getAllLeasingRequests = gql`
 `;
 
 export const setLeaseRequestStatusMutation = gql`
-  mutation setLeaseRequestStatus($leasingId: ID!, $status: LeasingStatus, $deliveryStatus: DeliveryStatus) {
-    setLeaseRequestStatus(leasingId: $leasingId, status: $status, deliveryStatus: $deliveryStatus) {
+  mutation setLeaseRequestStatus(
+    $leasingId: ID!
+    $status: LeasingStatus
+    $deliveryStatus: DeliveryStatus
+  ) {
+    setLeaseRequestStatus(
+      leasingId: $leasingId
+      status: $status
+      deliveryStatus: $deliveryStatus
+    ) {
       ...LeasingFragment
     }
   }
