@@ -6,7 +6,24 @@
     [token]="token"
     [result]="checkoutResult"
     (onCheckoutCompleted)="openLeaseRequest($event)"
+    (returnDateChanged)="returnDateUpdated($event)"
   ></ile-payment>
 
-  <ile-product-view [product]="product" [width]="'40rem'"></ile-product-view>
+  <div class="product-view">
+    <ile-product-view
+      [hidden]="!product"
+      [product]="product"
+      [width]="'40rem'"
+    ></ile-product-view>
+    <div class="prices" *ngIf="returnDate">
+      <ile-suggested-price
+        [text]="'The total price is'"
+        [suggestedPrice]="calculateTotalPrice().toFixed(2)"
+      ></ile-suggested-price>
+      <span class="sub-headline"
+        >We take a fee of 10% from the total amount.<br />In this case we're
+        taking ${{ (calculateTotalPrice() / 1.1 / 10).toFixed(2) }}</span
+      >
+    </div>
+  </div>
 </div>

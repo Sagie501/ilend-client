@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
 import { Store } from '@ngrx/store';
-import { getLoggedInUser, UserState, } from 'src/app/features/user/reducer/user.reducer';
+import {
+  getLoggedInUser,
+  UserState,
+} from 'src/app/features/user/reducer/user.reducer';
 import { Leasing } from 'src/app/core/models/leasing.model';
 import { User } from 'src/app/core/models/user.model';
-import { DeliveryStatusFromServer, LeasingStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
-import { of, Subscription } from 'rxjs';
+import {
+  LeasingStatusFromServer,
+  DeliveryStatusFromServer,
+} from '../../../../../shared/helpers/order-status.helper';
+import { Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { getGreetingSentence } from '../../../../../shared/helpers/greeting-sentence.helper';
 
@@ -23,8 +29,7 @@ export class OpenRequestsComponent implements OnInit {
   constructor(
     private leasingService: LeasingService,
     private userStore: Store<UserState>
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions = [
@@ -43,27 +48,7 @@ export class OpenRequestsComponent implements OnInit {
           })
         )
         .subscribe((leasings) => {
-          this.leasings = [
-            ...leasings,
-            ...leasings,
-            ...leasings,
-            ...leasings,
-            ...leasings,
-
-            ...leasings,
-
-            ...leasings,
-
-            ...leasings,
-
-            ...leasings,
-
-            ...leasings,
-
-            ...leasings,
-
-            ...leasings,
-          ];
+          this.leasings = leasings;
         }),
     ];
   }
@@ -73,14 +58,21 @@ export class OpenRequestsComponent implements OnInit {
     status: LeasingStatusFromServer;
     deliveryStatus: DeliveryStatusFromServer;
   }) {
-    let deliveryStatus = value.status === LeasingStatusFromServer.IN_DELIVERY ? this.getRandomDeliveryStatus() : DeliveryStatusFromServer.CANCELED;
+    let deliveryStatus =
+      value.status === LeasingStatusFromServer.IN_DELIVERY
+        ? this.getRandomDeliveryStatus()
+        : DeliveryStatusFromServer.CANCELED;
     this.leasingService
       .setLeaseRequestStatus(value.leasingId, value.status, deliveryStatus)
       .subscribe();
   }
 
   getRandomDeliveryStatus() {
-    let deliveriesStatus = [DeliveryStatusFromServer.IN_TRANSIT, DeliveryStatusFromServer.ARRIVED_IN_LOCAL_WAREHOUSE, DeliveryStatusFromServer.DISPATCHING_FROM_LOCAL_WAREHOUSE];
+    let deliveriesStatus = [
+      DeliveryStatusFromServer.IN_TRANSIT,
+      DeliveryStatusFromServer.ARRIVED_IN_LOCAL_WAREHOUSE,
+      DeliveryStatusFromServer.DISPATCHING_FROM_LOCAL_WAREHOUSE,
+    ];
     return deliveriesStatus[Math.floor(Math.random() * 3)];
   }
 }

@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SuggestedPriceComponent implements OnInit {
   @Input() suggestedPrice: number;
+  @Input() text: string;
 
   constructor() {}
 

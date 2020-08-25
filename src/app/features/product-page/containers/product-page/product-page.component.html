@@ -11,7 +11,10 @@
   <!-- <span style="margin-bottom: 1rem;"
     >The price that suggested by our algorithm is: {{ suggestedPrice }}</span
   > -->
-  <ile-suggested-price [suggestedPrice]="suggestedPrice"></ile-suggested-price>
+  <ile-suggested-price
+    [text]="'Our suggested price is'"
+    [suggestedPrice]="suggestedPrice"
+  ></ile-suggested-price>
   <ile-button
     [text]="'Lend now'"
     [isLarge]="true"

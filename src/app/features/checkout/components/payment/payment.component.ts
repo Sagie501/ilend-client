@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit {
     nonce: string;
     returnDate: Date;
   }> = new EventEmitter<{ nonce: string; returnDate: Date }>();
+  @Output() returnDateChanged: EventEmitter<Date> = new EventEmitter<Date>();
 
   public paymentForm: FormGroup;
 
@@ -45,6 +46,10 @@ export class PaymentComponent implements OnInit {
         this.createHostedFields(clientInstance);
       }
     );
+  }
+
+  updateReturnDate(returnDate: Date) {
+    this.returnDateChanged.emit(returnDate);
   }
 
   filterPriorDates(d: Date | null): boolean {

@@ -10,8 +10,10 @@
         [matDatepicker]="picker"
         [matDatepickerFilter]="filterPriorDates"
         formControlName="endDate"
-        (change)="validateForm()"
-        (dateChange)="validateForm()"
+        (change)="validateForm(); updateReturnDate(paymentForm.value.endDate)"
+        (dateChange)="
+          validateForm(); updateReturnDate(paymentForm.value.endDate)
+        "
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

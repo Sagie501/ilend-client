@@ -22,11 +22,26 @@
     overflow-y: auto;
   }
 
-  ile-product-view {
+  .product-view {
     grid-column: 1 e("/") 2;
     grid-row: 2 e("/") 3;
     align-self: center;
     justify-self: end;
     width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 15rem;
+    align-items: center;
+    justify-content: center;
+
+    .prices {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      ile-suggested-price {
+        margin-bottom: 2rem;
+      }
+    }
   }
 }

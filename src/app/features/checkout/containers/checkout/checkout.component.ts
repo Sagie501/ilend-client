@@ -8,6 +8,7 @@ import { Apollo } from 'apollo-angular';
 import { clientTokenQuery } from '../../../../core/graphql/checkout.graphql';
 import { Leasing } from 'src/app/core/models/leasing.model';
 import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ile-checkout',
@@ -19,6 +20,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription>;
   token: string;
   checkoutResult: { success: boolean; message?: string; leasingID?: string };
+  returnDate: Date;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -81,14 +83,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       );
   }
 
+  returnDateUpdated(returnDate: Date) {
+    this.returnDate = returnDate;
+  }
+
   calculateTotalPrice(): number {
-    // TODO: calculate amount of date using the endDate
-    let amountOfDays = 1;
+    if (this.returnDate) {
+      let amountOfDays = moment(this.returnDate).diff(moment(), 'days') + 1;
 
-    let priceWithoutFee = amountOfDays * this.product.requestedPrice;
-    let priceWithFee = priceWithoutFee * 1.1;
+      let priceWithoutFee = amountOfDays * this.product.requestedPrice;
+      let priceWithFee = priceWithoutFee * 1.1;
 
-    return priceWithFee;
+      return priceWithFee;
+    }
   }
 
   ngOnDestroy(): void {
