@@ -48,7 +48,11 @@ export class MyProductsComponent implements OnInit, OnDestroy {
     // Mapping the leasings to array of the prices
     map((leasings) => leasings.map((lease) => lease.total_price)),
     // Summing all the prices to a one total number
-    map((prices) => prices.reduce((acc, curr) => acc + (curr ? curr : 0))),
+    map((prices) =>
+      prices.length > 0
+        ? prices.reduce((acc, curr) => acc + (curr ? curr : 0))
+        : 0
+    ),
     // The user only see his profits without our fees
     map((total) => (total / 1.1).toFixed(2)),
     distinctUntilChanged()

@@ -2,12 +2,13 @@
   <span class="welcome">Welcome to ILend!</span>
   <form [formGroup]="signUpForm" class="sign-up-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>First Name</mat-label>
+      <mat-label class="dark">First Name</mat-label>
       <input
         required
         matInput
         formControlName="firstName"
         [errorStateMatcher]="matcher"
+        class="dark"
       />
       <mat-error *ngIf="signUpForm.get('firstName').hasError('required')">
         First name is <strong>required</strong>
@@ -15,12 +16,13 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Last Name</mat-label>
+      <mat-label class="dark">Last Name</mat-label>
       <input
         required
         matInput
         formControlName="lastName"
         [errorStateMatcher]="matcher"
+        class="dark"
       />
       <mat-error *ngIf="signUpForm.get('lastName').hasError('required')">
         Last name is <strong>required</strong>
@@ -28,13 +30,14 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Email</mat-label>
+      <mat-label class="dark">Email</mat-label>
       <input
         required
         matInput
         formControlName="email"
         [errorStateMatcher]="matcher"
         placeholder="Ex. pat@example.com"
+        class="dark"
       />
       <mat-error
         *ngIf="
@@ -50,13 +53,14 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Password</mat-label>
+      <mat-label class="dark">Password</mat-label>
       <input
         required
         matInput
         formControlName="password"
         [errorStateMatcher]="matcher"
         type="password"
+        class="dark"
       />
       <mat-error
         *ngIf="
@@ -72,13 +76,14 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Confirm Password</mat-label>
+      <mat-label class="dark">Confirm Password</mat-label>
       <input
         required
         matInput
         formControlName="confirmPassword"
         [errorStateMatcher]="matcher"
         type="password"
+        class="dark"
       />
       <mat-error
         *ngIf="
@@ -95,12 +100,13 @@
 
     <!--    TODO: Check how to format the date-->
     <mat-form-field>
-      <mat-label>Choose your birth date</mat-label>
+      <mat-label class="dark">Choose your birth date</mat-label>
       <input
         required
         matInput
         formControlName="birthDate"
         [matDatepicker]="picker"
+        class="dark"
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -110,7 +116,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Profile picture</mat-label>
+      <mat-label class="dark">Profile picture</mat-label>
       <ngx-mat-file-input
         formControlName="profilePicture"
         accept="image/*"
@@ -118,12 +124,13 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Phone number</mat-label>
+      <mat-label class="dark">Phone number</mat-label>
       <input
         required
         matInput
         formControlName="phoneNumber"
         [errorStateMatcher]="matcher"
+        class="dark"
       />
       <mat-error
         *ngIf="
@@ -139,12 +146,13 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Country</mat-label>
+      <mat-label class="dark">Country</mat-label>
       <input
         matInput
         required
         formControlName="country"
         [matAutocomplete]="countryAuto"
+        class="dark"
       />
       <mat-autocomplete #countryAuto="matAutocomplete">
         <mat-option
@@ -168,12 +176,13 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>City</mat-label>
+      <mat-label class="dark">City</mat-label>
       <input
         matInput
         required
         formControlName="city"
         [matAutocomplete]="cityAuto"
+        class="dark"
       />
       <mat-autocomplete #cityAuto="matAutocomplete">
         <mat-option
@@ -206,12 +215,13 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Street</mat-label>
+      <mat-label class="dark">Street</mat-label>
       <input
         required
         matInput
         formControlName="street"
         [errorStateMatcher]="matcher"
+        class="dark"
       />
       <mat-error *ngIf="signUpForm.get('street').hasError('required')">
         Street is <strong>required</strong>
@@ -219,13 +229,14 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Zipcode</mat-label>
+      <mat-label class="dark">Zipcode</mat-label>
       <input
         required
         matInput
         type="number"
         formControlName="zipCode"
         [errorStateMatcher]="matcher"
+        class="dark"
       />
       <mat-error *ngIf="signUpForm.get('zipCode').hasError('required')">
         Zipcode is <strong>required</strong>
@@ -233,7 +244,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Gender</mat-label>
+      <mat-label class="dark">Gender</mat-label>
       <mat-select formControlName="gender" required>
         <mat-option *ngFor="let gender of ['MALE', 'FEMALE']" [value]="gender">
           {{ gender }}

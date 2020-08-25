@@ -14,10 +14,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProductsTableComponent } from './components/products-table/products-table.component';
 import { AppRoutingModule } from '../../../app-routing.module';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [MyProductsComponent, ProductDialogComponent, ProductsTableComponent],
+  declarations: [
+    MyProductsComponent,
+    ProductDialogComponent,
+    ProductsTableComponent,
+  ],
   entryComponents: [ProductDialogComponent],
   imports: [
     CommonModule,
@@ -28,10 +32,11 @@ import { AppRoutingModule } from '../../../app-routing.module';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    MatTooltipModule,
     MaterialFileInputModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    AppRoutingModule
-  ]
+    AppRoutingModule,
+  ],
 })
-export class MyProductsModule { }
+export class MyProductsModule {}

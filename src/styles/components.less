@@ -148,7 +148,7 @@ input[type="text"] {
 }
 
 .mat-input-element {
-  color: var(--dark-text-color);
+  color: var(--always-dark-text-color);
 }
 
 img.image {
@@ -193,6 +193,17 @@ td.mat-cell {
 .mat-header-cell,
 .mat-cell,
 .mat-footer-cell,
+.mat-tab-label-content {
+  color: var(--always-dark-text-color) !important;
+}
+
+.mat-select-arrow,
+.mat-select-value,
+.mat-input-element.dark,
+mat-label.dark {
+  color: var(--dark-text-color) !important;
+}
+
 .mat-tab-label-content {
   color: var(--dark-text-color) !important;
 }
