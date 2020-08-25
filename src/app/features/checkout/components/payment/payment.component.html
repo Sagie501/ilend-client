@@ -37,7 +37,7 @@
           type="text"
           class="cardholder-name"
           placeholder="Your name"
-          (change)="validateName($event.target.value); validateForm()"
+          (keyup)="validateName($event.target.value); validateForm()"
         />
       </div>
 
