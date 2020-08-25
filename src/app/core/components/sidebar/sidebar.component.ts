@@ -1,17 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.helper';
+import {
+  logout,
+  wishlistUpdated,
+} from '../../../features/user/actions/user.actoins';
 import {
   getLoggedInUser,
-  UserState,
   getUserProducts,
+  UserState,
 } from '../../../features/user/reducer/user.reducer';
-import { Subscription } from 'rxjs';
-import { User } from '../../models/user.model';
-import { logout } from '../../../features/user/actions/user.actoins';
-import { Router } from '@angular/router';
-import { getGreetingSentence } from 'src/app/shared/helpers/greeting-sentence.helper';
 import { Product } from '../../models/product.model';
+import { User } from '../../models/user.model';
 import { LeasingService } from '../../services/leasing/leasing.service';
+import { ProductsService } from '../../services/products/products.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'ile-sidebar',
@@ -30,7 +35,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     private userStore: Store<UserState>,
     private router: Router,
-    private leasingsService: LeasingService
+    private leasingsService: LeasingService,
+    private productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +66,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
               .getAllOnGoingDeliveriesRequests(this.loggedInUser.id)
               .subscribe((leasings) => {
                 this.onGoingDeliveriesRequestAmount = leasings.length;
+              })
+          );
+          subscriptionsArray.push(
+            this.productsService
+              .getUserWishlist(this.loggedInUser.id)
+              .pipe(distinctUntilChanged())
+              .subscribe((wishlist) => {
+                this.userStore.dispatch(wishlistUpdated({ wishlist }));
               })
           );
         }

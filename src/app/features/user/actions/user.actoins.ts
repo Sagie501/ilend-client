@@ -19,6 +19,11 @@ export const loginFailed = createAction(
   props<{ message: string }>()
 );
 
+export const wishlistUpdated = createAction(
+  '[User] Wishlist updated',
+  props<{ wishlist: Product[] }>()
+);
+
 export const logout = createAction('[User] Logout');
 
 export const createNewUser = createAction(
