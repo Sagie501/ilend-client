@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { LeasingService } from 'src/app/core/services/leasing/leasing.service';
 import { Store } from '@ngrx/store';
-import { getLoggedInUser, UserState, } from 'src/app/features/user/reducer/user.reducer';
+import {
+  getLoggedInUser,
+  UserState,
+} from 'src/app/features/user/reducer/user.reducer';
 import { Leasing } from 'src/app/core/models/leasing.model';
 import { User } from 'src/app/core/models/user.model';
-<<<<<<< HEAD
 import {
   LeasingStatusFromServer,
   DeliveryStatusFromServer,
 } from '../../../../../shared/helpers/order-status.helper';
 import { Subscription, of } from 'rxjs';
-=======
-import { DeliveryStatusFromServer, LeasingStatusFromServer } from '../../../../../shared/helpers/order-status.helper';
-import { of, Subscription } from 'rxjs';
->>>>>>> 82881c8e02eb964e009012a02266fe8378b0f619
 import { switchMap } from 'rxjs/operators';
 import { getGreetingSentence } from '../../../../../shared/helpers/greeting-sentence.helper';
 
@@ -70,7 +68,11 @@ export class OpenRequestsComponent implements OnInit {
   }
 
   getRandomDeliveryStatus() {
-    let deliveriesStatus = [DeliveryStatusFromServer.IN_TRANSIT, DeliveryStatusFromServer.ARRIVED_IN_LOCAL_WAREHOUSE, DeliveryStatusFromServer.DISPATCHING_FROM_LOCAL_WAREHOUSE];
+    let deliveriesStatus = [
+      DeliveryStatusFromServer.IN_TRANSIT,
+      DeliveryStatusFromServer.ARRIVED_IN_LOCAL_WAREHOUSE,
+      DeliveryStatusFromServer.DISPATCHING_FROM_LOCAL_WAREHOUSE,
+    ];
     return deliveriesStatus[Math.floor(Math.random() * 3)];
   }
 }
