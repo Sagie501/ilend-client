@@ -31,7 +31,13 @@ import {
   updateProductSucceeded,
   updateProductFailed,
 } from '../actions/user.actoins';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  switchMap,
+  withLatestFrom,
+  take,
+} from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products/products.service';
 import { EMPTY, forkJoin, merge, of } from 'rxjs';
 import { Store, Action } from '@ngrx/store';
@@ -53,7 +59,7 @@ export class UserEffects {
       switchMap(([action, loggedInUser]) => {
         if (loggedInUser) {
           return forkJoin([
-            this.productsService.getUserWishlist(loggedInUser.id),
+            this.productsService.getUserWishlist(loggedInUser.id).pipe(take(1)),
             this.productsService.getProductsByUserId(loggedInUser.id),
           ]).pipe(
             map(([wishlist, products]) => {
@@ -74,7 +80,7 @@ export class UserEffects {
         return this.userService.login(action.email, action.password).pipe(
           switchMap((user) => {
             return forkJoin([
-              this.productsService.getUserWishlist(user.id),
+              this.productsService.getUserWishlist(user.id).pipe(take(1)),
               this.productsService.getProductsByUserId(user.id),
             ]).pipe(
               map(([wishlist, products]) => {
