@@ -34,7 +34,6 @@ export class ProductsService {
       .watchQuery<any>({
         query: getProductsQuery,
         pollInterval: 10000,
-        fetchPolicy: 'network-only',
       })
       .valueChanges.pipe<Array<Product>>(
         map(({ data, loading }) => {
@@ -148,13 +147,14 @@ export class ProductsService {
 
   getUserWishlist(userId: string): Observable<Array<Product>> {
     return this.apollo
-      .query<any>({
+      .watchQuery<any>({
         query: getUserWishlistQuery,
         variables: {
           userId,
         },
+        pollInterval: 10000,
       })
-      .pipe(
+      .valueChanges.pipe(
         map(({ data, errors }) => {
           let products = data.getUserWishList;
           products = products.map((product) => {

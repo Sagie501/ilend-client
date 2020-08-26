@@ -1,14 +1,22 @@
 import { User } from '../../../core/models/user.model';
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import {
+  createFeatureSelector,
+  createReducer,
+  createSelector,
+  on,
+} from '@ngrx/store';
 import {
   addNewProductSucceeded,
   addProductToWishlistSucceeded,
-  createNewUserSucceeded, deleteProductSucceeded,
+  createNewUserSucceeded,
+  deleteProductSucceeded,
   loginSucceeded,
   logout,
-  removeProductFromWishlistSucceeded, updateProductSucceeded,
+  removeProductFromWishlistSucceeded,
+  updateProductSucceeded,
   updateUserFavoriteCategoriesSucceeded,
-  updateUserSucceeded
+  updateUserSucceeded,
+  wishlistUpdated,
 } from '../actions/user.actoins';
 import { Product } from '../../../core/models/product.model';
 
@@ -23,7 +31,7 @@ export class UserState {
 export let initialState: UserState = {
   loggedInUser: JSON.parse(localStorage.getItem('logged-in-user')),
   userWishlist: null,
-  userProducts: null
+  userProducts: null,
 };
 
 export const userReducer = createReducer(
@@ -34,48 +42,68 @@ export const userReducer = createReducer(
       ...state,
       loggedInUser: action.user,
       userWishlist: action.wishlist,
-      userProducts: action.products
+      userProducts: action.products,
     };
   }),
-  on(updateUserSucceeded, updateUserFavoriteCategoriesSucceeded, (state, action) => {
-    localStorage.setItem('logged-in-user', JSON.stringify(action.user));
-    return {
-      ...state,
-      loggedInUser: action.user
-    };
-  }),
-  on(addProductToWishlistSucceeded, removeProductFromWishlistSucceeded, (state, action) => {
-    return {
-      ...state,
-      userWishlist: action.wishlist
-    };
-  }),
+  on(
+    updateUserSucceeded,
+    updateUserFavoriteCategoriesSucceeded,
+    (state, action) => {
+      localStorage.setItem('logged-in-user', JSON.stringify(action.user));
+      return {
+        ...state,
+        loggedInUser: action.user,
+      };
+    }
+  ),
+  on(wishlistUpdated, (state, action) => ({
+    ...state,
+    userWishlist: action.wishlist,
+  })),
+  on(
+    addProductToWishlistSucceeded,
+    removeProductFromWishlistSucceeded,
+    (state, action) => {
+      return {
+        ...state,
+        userWishlist: action.wishlist,
+      };
+    }
+  ),
   on(addNewProductSucceeded, (state, action) => {
     let newProducts = state.userProducts ? [...state.userProducts] : [];
     newProducts.push(action.product);
     return {
       ...state,
-      userProducts: newProducts
+      userProducts: newProducts,
     };
   }),
   on(updateProductSucceeded, (state, action) => {
-    let productIndex = state.userProducts.findIndex((product) => product.id === action.product.id);
+    let productIndex = state.userProducts.findIndex(
+      (product) => product.id === action.product.id
+    );
     return {
       ...state,
-      userProducts: [...state.userProducts.slice(0, productIndex), action.product, ...state.userProducts.slice(productIndex + 1)]
+      userProducts: [
+        ...state.userProducts.slice(0, productIndex),
+        action.product,
+        ...state.userProducts.slice(productIndex + 1),
+      ],
     };
   }),
   on(deleteProductSucceeded, (state, action) => {
     return {
       ...state,
-      userProducts: state.userProducts.filter(product => product.id !== action.productId)
+      userProducts: state.userProducts.filter(
+        (product) => product.id !== action.productId
+      ),
     };
   }),
   on(logout, (state, action) => {
     localStorage.removeItem('logged-in-user');
     return {
       ...state,
-      loggedInUser: null
+      loggedInUser: null,
     };
   })
 );

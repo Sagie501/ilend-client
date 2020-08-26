@@ -4,14 +4,26 @@
     <form [formGroup]="addressFormGroup" class="address-form">
       <mat-form-field>
         <mat-label>Country</mat-label>
-        <input matInput required formControlName="country" [matAutocomplete]="countryAuto">
+        <input
+          matInput
+          required
+          formControlName="country"
+          [matAutocomplete]="countryAuto"
+        />
         <mat-autocomplete #countryAuto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredCountryOptions | async" [value]="option">
-            {{option}}
+          <mat-option
+            *ngFor="let option of filteredCountryOptions | async"
+            [value]="option"
+          >
+            {{ option }}
           </mat-option>
         </mat-autocomplete>
         <mat-error
-          *ngIf="addressFormGroup.get('country').hasError('valueNotFromList') && !addressFormGroup.get('country').hasError('required')">
+          *ngIf="
+            addressFormGroup.get('country').hasError('valueNotFromList') &&
+            !addressFormGroup.get('country').hasError('required')
+          "
+        >
           You must choose country from the list
         </mat-error>
         <mat-error *ngIf="addressFormGroup.get('country').hasError('required')">
@@ -21,17 +33,35 @@
 
       <mat-form-field>
         <mat-label>City</mat-label>
-        <input matInput required formControlName="city" [matAutocomplete]="cityAuto">
+        <input
+          matInput
+          required
+          formControlName="city"
+          [matAutocomplete]="cityAuto"
+        />
         <mat-autocomplete #cityAuto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredCityOptions | async" [value]="option">
-            {{option}}
+          <mat-option
+            *ngFor="let option of filteredCityOptions | async"
+            [value]="option"
+          >
+            {{ option }}
           </mat-option>
         </mat-autocomplete>
         <mat-error
-          *ngIf="addressFormGroup.get('city').hasError('valueNotFromList') && !addressFormGroup.get('city').hasError('required') && !addressFormGroup.get('country').invalid">
+          *ngIf="
+            addressFormGroup.get('city').hasError('valueNotFromList') &&
+            !addressFormGroup.get('city').hasError('required') &&
+            !addressFormGroup.get('country').invalid
+          "
+        >
           You must choose city from the list
         </mat-error>
-        <mat-error *ngIf="addressFormGroup.get('city').hasError('required') && !addressFormGroup.get('country').invalid">
+        <mat-error
+          *ngIf="
+            addressFormGroup.get('city').hasError('required') &&
+            !addressFormGroup.get('country').invalid
+          "
+        >
           City is <strong>required</strong>
         </mat-error>
         <mat-error *ngIf="addressFormGroup.get('country').invalid">
@@ -41,7 +71,12 @@
 
       <mat-form-field>
         <mat-label>Street</mat-label>
-        <input required matInput formControlName="street" [errorStateMatcher]="matcher">
+        <input
+          required
+          matInput
+          formControlName="street"
+          [errorStateMatcher]="matcher"
+        />
         <mat-error *ngIf="addressFormGroup.get('street').hasError('required')">
           Street is <strong>required</strong>
         </mat-error>
@@ -49,17 +84,31 @@
 
       <mat-form-field>
         <mat-label>Zipcode</mat-label>
-        <input required matInput type="number" formControlName="zipCode" [errorStateMatcher]="matcher">
+        <input
+          required
+          matInput
+          type="number"
+          formControlName="zipCode"
+          [errorStateMatcher]="matcher"
+        />
         <mat-error *ngIf="addressFormGroup.get('zipCode').hasError('required')">
           Zipcode is <strong>required</strong>
         </mat-error>
       </mat-form-field>
     </form>
-    <span *ngIf="data.errorMessage" class="error-message">{{ data.errorMessage }}</span>
+    <span *ngIf="data.errorMessage" class="error-message">{{
+      data.errorMessage
+    }}</span>
   </div>
   <div mat-dialog-actions>
-    <button mat-stroked-button color="primary" (click)="changeUserEvent.emit(addressFormGroup.value)"
-            [disabled]="addressFormGroup.invalid">Change my password</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="changeUserEvent.emit(addressFormGroup.value)"
+      [disabled]="addressFormGroup.invalid"
+    >
+      Change my address
+    </button>
     <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
   </div>
 </div>

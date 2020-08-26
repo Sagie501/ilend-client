@@ -1,25 +1,24 @@
 <div class="ongoing-deliveries">
-    <div class="header">
-      <div class="headline">Ongoing deliveries</div>
-      <div class="sub-headline">
-        {{ getGreetingSentence() + " " + loggedInUser?.firstName }}!
-        <span *ngIf="leasings.length > 0">
-          You have {{ leasings.length }} ongoing deliveries.</span
-        >
-      </div>
-      <div class="sub-headline" *ngIf="!leasings || leasings.length === 0">
-        You don't have ongoing deliveries
-        <a class="link" routerLink="/user/my-products" routerLinkActive="active"
-          >here</a
-        >.
-      </div>
+  <div class="header">
+    <div class="headline">Ongoing deliveries</div>
+    <div class="sub-headline">
+      {{ getGreetingSentence() + " " + loggedInUser?.firstName }}!
+      <span *ngIf="leasings.length > 0">
+        You have {{ leasings.length }} ongoing deliveries.</span
+      >
     </div>
-  
-    <ile-leasings-table
-      *ngIf="leasings && leasings.length > 0"
-      [leasings]="leasings"
-      [leasingDirection]="'by'"
-      [isInDelivery]="true"
-    ></ile-leasings-table>
+    <div class="sub-headline" *ngIf="!leasings || leasings.length === 0">
+      You don't have ongoing deliveries
+      <a class="link" routerLink="/user/my-products" routerLinkActive="active"
+        >here</a
+      >.
+    </div>
   </div>
-  
+
+  <ile-leasings-table
+    *ngIf="leasings && leasings.length > 0"
+    [leasings]="leasings"
+    [leasingDirection]="'from'"
+    [isInDelivery]="true"
+  ></ile-leasings-table>
+</div>

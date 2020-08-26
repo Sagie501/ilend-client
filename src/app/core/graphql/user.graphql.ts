@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import { categoryFragment } from './category.graphql';
+import { productFragment } from './product.graphql';
 
 export const userFragment = gql`
   fragment UserFragment on User {

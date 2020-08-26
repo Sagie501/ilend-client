@@ -19,7 +19,7 @@
     (returnDateChanged)="returnDateUpdated($event)"
   ></ile-payment>
 
-  <div class="product-view" *ngIf="!noProduct">
+  <div class="product-view-container" *ngIf="!noProduct">
     <ile-product-view
       [hidden]="!product"
       [product]="product"
