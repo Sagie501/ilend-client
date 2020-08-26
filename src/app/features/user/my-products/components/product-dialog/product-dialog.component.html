@@ -1,10 +1,17 @@
 <div class="product-dialog">
-  <span class="header" mat-dialog-title>{{isCreatingMode ? 'Create new product!' : 'Update your product!'}}</span>
+  <span class="header" mat-dialog-title>{{
+    isCreatingMode ? "Create new product!" : "Update your product!"
+  }}</span>
   <div mat-dialog-content>
     <form [formGroup]="productFormGroup" class="product-form">
       <mat-form-field>
         <mat-label>Name</mat-label>
-        <input required matInput formControlName="name" [errorStateMatcher]="matcher">
+        <input
+          required
+          matInput
+          formControlName="name"
+          [errorStateMatcher]="matcher"
+        />
         <mat-error *ngIf="productFormGroup.get('name').hasError('required')">
           Name is <strong>required</strong>
         </mat-error>
@@ -12,17 +19,34 @@
 
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <textarea required matInput formControlName="description" [errorStateMatcher]="matcher"
-                  cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="2"></textarea>
-        <mat-error *ngIf="productFormGroup.get('description').hasError('required')">
+        <textarea
+          required
+          matInput
+          formControlName="description"
+          [errorStateMatcher]="matcher"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="2"
+        ></textarea>
+        <mat-error
+          *ngIf="productFormGroup.get('description').hasError('required')"
+        >
           Description is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Requested Price</mat-label>
-        <input required matInput formControlName="requestedPrice" [errorStateMatcher]="matcher" type="number">
-        <mat-error *ngIf="productFormGroup.get('requestedPrice').hasError('required')">
+        <input
+          required
+          matInput
+          formControlName="requestedPrice"
+          [errorStateMatcher]="matcher"
+          type="number"
+        />
+        <mat-error
+          *ngIf="productFormGroup.get('requestedPrice').hasError('required')"
+        >
           Requested price is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -31,31 +55,46 @@
         <mat-label>Category</mat-label>
         <mat-select formControlName="category" required>
           <mat-option *ngFor="let category of categories" [value]="category">
-            {{category.name}}
+            {{ category.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="productFormGroup.get('category').hasError('required')">
+        <mat-error
+          *ngIf="productFormGroup.get('category').hasError('required')"
+        >
           Category is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Product images</mat-label>
-        <ngx-mat-file-input formControlName="imageFiles" required multiple accept="image/*"
-                            [errorStateMatcher]="matcher"></ngx-mat-file-input>
-        <mat-error *ngIf="productFormGroup.get('imageFiles').hasError('required')">
+        <ngx-mat-file-input
+          formControlName="imageFiles"
+          required
+          multiple
+          accept="image/*"
+          [errorStateMatcher]="matcher"
+        ></ngx-mat-file-input>
+        <mat-error
+          *ngIf="productFormGroup.get('imageFiles').hasError('required')"
+        >
           At least one image is <strong>required</strong>
         </mat-error>
       </mat-form-field>
     </form>
-    <span *ngIf="data?.errorMessage" class="error-message">{{ data?.errorMessage }}</span>
+    <span *ngIf="data?.errorMessage" class="error-message">{{
+      data?.errorMessage
+    }}</span>
   </div>
   <div mat-dialog-actions>
     <mat-spinner [diameter]="25" *ngIf="isLoading"></mat-spinner>
-    <button mat-stroked-button color="primary"
-            (click)="isLoading = true; saveProductEvent.emit(productFormGroup.value)"
-            [disabled]="productFormGroup.invalid || isLoading" [ngStyle]="{'margin-left': isLoading ? '8px' : '0'}">
-      {{isCreatingMode ? 'Create new product' : 'Update product'}}
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="isLoading = true; saveProductEvent.emit(productFormGroup.value)"
+      [disabled]="productFormGroup.invalid || isLoading"
+      [ngStyle]="{ 'margin-left': isLoading ? '8px' : '0' }"
+    >
+      {{ isCreatingMode ? "Create new product" : "Update product" }}
     </button>
     <button mat-stroked-button color="warn" mat-dialog-close>Never mind</button>
   </div>

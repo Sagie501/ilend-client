@@ -245,7 +245,7 @@
 
     <mat-form-field>
       <mat-label class="dark">Gender</mat-label>
-      <mat-select formControlName="gender" required>
+      <mat-select class="dark" formControlName="gender" required>
         <mat-option *ngFor="let gender of ['MALE', 'FEMALE']" [value]="gender">
           {{ gender }}
         </mat-option>
